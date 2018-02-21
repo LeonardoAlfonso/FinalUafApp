@@ -1,0 +1,140 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*User Content*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+section#content article{
+    /* border: 1px solid black; */
+    margin-bottom: 80px;
+    position: relative;
+}
+
+section#content article h2{
+    position: relative;
+    margin-top: 1%;
+    text-align: justify;
+    color : #008762;
+    color : rgb(0, 135, 98);
+    font-size: 40px;
+}
+
+section#content article div#options{
+    float:right;
+    margin-top: 7.5%;
+}
+
+label.standardButton{
+    text-align: center;
+    background: #008762;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 48px;
+    padding: 5px 10px;
+}
+
+label.standardButton:hover{
+    box-shadow:  -1px 2px 1px 1px #4D4F4E;
+}
+
+section#content div#Searcher{
+    margin-top: 40px;
+}
+
+section#content div#Searcher input{
+    border-radius : 10px;
+    border: 1px solid #014C35;
+    height : 27px;
+    overflow: hidden;
+    vertical-align: top;
+    width: 90%;
+    background-color: #E5E5E5;
+    color: #014C35;
+    padding-left: 10px;
+}
+
+section#content article hr{
+
+    border: 1px solid #008762;
+    background: #008762;
+}
+
+section#content article table.tableStyle{
+    color: green;
+    text-align: center;
+    width: 92%;
+    margin: 0px auto;
+    /* margin-top: 60px; */
+    border-collapse: separate;
+    border-spacing: 5px 5px;
+}
+
+section#content article table.tableStyle th{
+    background-color: rgb(79,88,92);
+    color: #FFFFFF;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 19px;
+}
+
+section#content article table.tableStyle tr{
+    background-color: #E5E5E5;
+}
+
+section#content article table.tableStyle td{
+    color: #014C35;
+    font-size: 17px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    height: auto;
+}
+
+section#content article table.tableStyle tr:hover td{
+    background-color: #F9D885;
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*new User*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+section#content article div.topMargin{
+    margin-top: 50px;
+}
+
+section#content article label.generalLabels{
+    font-size: 18px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+    text-align: right;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+section#content article input.generalData{
+    border-radius : 10px;
+    /* border: 1px solid #014C35; */
+    height : 27px;
+    overflow: hidden;
+    vertical-align: top;
+    width: 100%;
+    background-color: #E5E5E5;
+    color: #014C35;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+section#content article div.chooseLabels{
+    font-size: 18px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+    text-align: left;
+    width: 100%;
+    margin-top: 5px;
+}
+
+section#content article .departament{
+    vertical-align: middle;
+    font-size: 15px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+}

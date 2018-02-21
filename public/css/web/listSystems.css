@@ -1,0 +1,113 @@
+
+#structure #description{
+    margin-top: 40px;
+}
+
+#structure article h2{
+    text-align: justify;
+    color : #008762;
+    color : rgb(0, 135, 98);
+    font-size: 35px;
+    margin-bottom: 22px;
+}
+
+/* #structure article#graphSystem{
+} */
+
+#structure div#piechart_3d {
+    /* position: relative; */
+    width: 90%;
+    margin-left: 5%;
+    height: 480px;
+}
+
+#structure label#system{
+    position: relative;
+    z-index: 20;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin-left: 80%;
+    bottom: 100px;
+    background : #008762;
+    background : rgba(0, 135, 98, 1);
+    padding: 10px;
+    cursor: pointer;
+}
+
+#structure label#system:hover{
+    background : #9ED140;
+    background : rgba(158, 209, 64, 1);
+    cursor:pointer;
+}
+
+#structure label#system:active{
+    background : #FFBB02;
+    background : rgba(255, 187, 2, 1);
+    cursor:pointer;
+}
+
+#structure section#MenuSystems {
+    margin-top: 125px;
+}
+
+#AccordeonMenu input{
+    display: none;
+}
+
+#AccordeonMenu label
+{
+    background : #008762;
+    background : rgba(0, 135, 98, 1);
+    font-size: 19px;
+    margin-bottom: 5px;
+    padding: 18px;
+    color: white;
+    text-align: center;
+  	display:block;
+  	width:100%;
+  	cursor:pointer;
+	}
+
+#AccordeonMenu label#backZone{
+    margin-top: 5px;
+}
+
+#AccordeonMenu ul#systemList{
+  	position:relative;
+  	height:0px;
+  	overflow:hidden;
+  	transition:height .5s;
+    font-size: 18px;
+    color: gray;
+    border:none;
+    text-align: center;
+    background: #E5E5E5;
+
+	}
+
+#AccordeonMenu ul#systemList li{
+      cursor: pointer;
+      color : #575756;
+      color : rgb(87, 87, 86);
+      padding: 2px;
+  }
+
+input#list:checked ~ ul#systemList{
+  	height:auto;
+  }
+
+  #AccordeonMenu ul#systemList li:hover{
+      color: #008762;
+  }
+
+#AccordeonMenu label:hover{
+  background : #9ED140;
+  background : rgba(158, 209, 64, 1);
+  cursor:pointer;
+}
+
+#AccordeonMenu label:active{
+  background : #FFBB02;
+  background : rgba(255, 187, 2, 1);
+  cursor:pointer;
+}

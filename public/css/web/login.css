@@ -1,0 +1,92 @@
+* {
+   margin:0;
+   padding:0;
+   list-style: none;
+   text-decoration: none;
+   font-family: 'Nunito', sans-serif;
+   box-sizing: border-box;
+}
+
+body{
+  background:url(../../images/web/loginBackground.jpg);
+  background-size:cover;
+}
+
+div.card{
+    position: relative;
+    margin-top: 15%;
+    /* min-height: 250px; */
+    background-color: #474E56;
+    padding-top: 40px;
+    padding-bottom: 10px;
+}
+
+div.titleBody{
+    background-color: #474E56;
+}
+
+div.titleBody ul li{
+    padding-top: 30px;
+}
+
+div.titleBody ul li label{
+    color:black;
+    font-size: 18px;
+}
+
+div.titleBody ul li input{
+    float: right;
+    border-radius : 10px;
+    border: 1px solid #014C35;
+    height : 27px;
+    overflow: hidden;
+    vertical-align: top;
+    background-color: white;
+    color: #014C35;
+    padding-left: 10px;
+    width: 60%;
+}
+
+input.inputs{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+div #labelWrapper{
+    margin-top: 10px;
+
+    text-align: center;
+}
+
+button.loginInput{
+  background : #008762;
+  background : rgba(0, 135, 98, 1);
+  font-size: 14px;
+  padding: 10px;
+  color: white;
+  border:none;
+}
+
+div#Forgot{
+    margin-top: -10px;
+    text-align: center;
+    /* margin-bottom: 20px; */
+}
+
+div#Forgot a{
+    color: white;
+    font-size: 14px;
+}
+
+span.help-block
+{
+    color: white;
+    font-size: 14px;
+}
+
+button.loginInput:hover{
+    cursor: pointer;
+    background: #9ED140;
+}

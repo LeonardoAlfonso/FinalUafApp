@@ -1,0 +1,130 @@
+[
+	{
+		"divipolaCod" :"05",
+		"name" : "Antioquia"
+	},
+	{
+		"divipolaCod" :"08",
+		"name" : "Atlántico"
+	},
+	{
+		"divipolaCod" :"11",
+		"name" : "Bogotá D C"
+	},
+	{
+		"divipolaCod" :"13",
+		"name" : "Bolívar"
+	},
+	{
+		"divipolaCod" :"15",
+		"name" : "Boyacá"
+	},
+	{
+		"divipolaCod" :"17",
+		"name" : "Caldas"
+	},
+	{
+		"divipolaCod" :"18",
+		"name" : "Caquetá"
+	},
+	{
+		"divipolaCod" :"19",
+		"name" : "Cauca"
+	},
+	{
+		"divipolaCod" :"20",
+		"name" : "Cesar"
+	},
+	{
+		"divipolaCod" :"23",
+		"name" : "Córdoba"
+	},
+	{
+		"divipolaCod" :"25",
+		"name" : "Cundinamarca"
+	},
+	{
+		"divipolaCod" :"27",
+		"name" : "Chocó"
+	},
+	{
+		"divipolaCod" :"41",
+		"name" : "Huila"
+	},
+	{
+		"divipolaCod" :"44",
+		"name" : "Guajira"
+	},
+	{
+		"divipolaCod" :"47",
+		"name" : "Magdalena"
+	},
+	{
+		"divipolaCod" :"50",
+		"name" : "Meta"
+	},
+	{
+		"divipolaCod" :"52",
+		"name" : "Nariño"
+	},
+	{
+		"divipolaCod" :"54",
+		"name" : "Norte de Santander"
+	},
+	{
+		"divipolaCod" :"63",
+		"name" : "Quindio"
+	},
+	{
+		"divipolaCod" :"66",
+		"name" : "Risaralda"
+	},
+	{
+		"divipolaCod" :"68",
+		"name" : "Santander"
+	},
+	{
+		"divipolaCod" :"70",
+		"name" : "Sucre"
+	},
+	{
+		"divipolaCod" :"73",
+		"name" : "Tolima"
+	},
+	{
+		"divipolaCod" :"76",
+		"name" : "Valle del Cauca"
+	},
+	{
+		"divipolaCod" :"81",
+		"name" : "Arauca"
+	},
+	{
+		"divipolaCod" :"85",
+		"name" : "Casanare"
+	},
+	{
+		"divipolaCod" :"86",
+		"name" : "Putumayo"
+	},
+	{
+		"divipolaCod" :"91",
+		"name" : "Amazonas"
+	},
+	{
+		"divipolaCod" :"94",
+		"name" : "Guainia"
+	},
+	{
+		"divipolaCod" :"95",
+		"name" : "Guaviare"
+	},
+	{
+		"divipolaCod" :"97",
+		"name" : "Vaupés"
+	},
+	{
+		"divipolaCod" :"99",
+		"name" : "Vichada"
+	}
+]

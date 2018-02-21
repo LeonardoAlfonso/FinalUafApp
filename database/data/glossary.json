@@ -1,0 +1,118 @@
+[
+  {
+      "word" : "Unidad Agrícola Familiar (UAF)",
+      "definition": "Es la empresa básica de producción agrícola, pecuaria, acuícola o forestal, cuya extensión, conforme a las condiciones agroecológicas de la zona y con tecnología adecuada, permite a la familia remunerar su trabajo y disponer de un excedente capitalizable que coadyuve a la formación de su patrimonio. La Unidad Agrícola Familiar (UAF) no requerirá normalmente para ser explotada sino del trabajo del propietario y su familia, sin perjuicio del empleo de mano de obra extraña, si la naturaleza de la producción así lo requiere."
+  },
+  {
+      "word" : "Zonas Relativamente Homogéneas",
+      "definition": "Son aquellos territorios delimitados con condiciones agrológicas, fisiográficas, ambientales y socioeconómicas similares; las cuales permiten definir para cada zona sistemas productivos y, a su vez, señalar las extensiones máximas y mínimas adjudicables de los baldíos productivos en Unidades Agrícolas Familiares con base en lineamientos de ordenamiento territorial, productivo y social."
+  },
+  {
+      "word" : "Economía campesina y agricultura familiar",
+      "definition": "Es la forma como se organizan las actividades relacionadas con la agricultura, ganadería, silvicultura, pesca, acuicultura y pastoreo, que son administradas y operadas por una familia campesina y, sobre todo, que dependen preponderantemente del trabajo familiar, tanto de mujeres como hombres. Como sistema productivo contiene a su vez, un ámbito monetario y un ámbito doméstico. Los objetivos de este sistema socioeconómico son: el autoabastecimiento, el aprovechamiento tradicional de la tierra, la transformación y agregación de valor a sus productos, la generación de excedentes comercializables, la protección de los ecosistemas, así como el reconocimiento, afirmación y dinamización de la identidad cultural del campesinado."
+  },
+  {
+      "word" : "Sistema productivo",
+      "definition": "Integración de los componentes productivos de importancia económica para el campesinado (Agrícola, Pecuario, Forestal), que tiene en cuenta la interacción de cultivos, animales, pastos, arboles maderables, frutales, los suelos, las arvenses, los insectos, los microorganismos, el clima y el hombre. Estos sistemas deben involucrar especies arbóreas nativas en las actividades productivas, de manera que ayuden a mitigar el impacto por aumento de temperatura y aporten a la regulación hídrica de la zona."
+  },
+  {
+      "word" : "Reconversión productiva agropecuaria",
+      "definition": "Define el proceso mediante el cual un productor agropecuario pasa del desarrollo de un modelo productivo A, a uno B. Generalmente aplica para la transición que realiza un productor o grupo de productores entre modelos productivos, desde un menor hacia un mayor grado de sostenibilidad ambiental. La reconversión productiva pretende mejorar la eficiencia del sistema productivo con el mínimo impacto a los recursos naturales, teniendo en cuenta los ciclos ecológicos del agro ecosistema."
+  },
+  {
+      "word" : "Tecnología adecuada",
+      "definition": "Es la tecnología más propicia que se aplica en el proceso de producción en la Zona Relativamente Homogénea. Depende de las condiciones de eficiencia productiva promedio con base en el fácil o difícil acceso a la asistencia e infraestructura en el municipio, resultando favorable desde el punto de vista ecológico y teniendo como base las características culturales de las familias pobres rurales."
+  },
+  {
+      "word" : "Sistemas agroforestales",
+      "definition": "Arreglos productivos en donde plantas leñosas perennes interactúan biológicamente en una misma área con cultivos y/o animales; el propósito fundamental es diversificar y optimizar la producción para un manejo sostenido."
+  },
+  {
+      "word" : "Arreglo agrosilvícola",
+      "definition": "Tipo de sistema agroforestal, destinados a la producción de cultivos agrícolas y forestales en un arreglo integrado."
+  },
+  {
+      "word" : "Arreglo silvopastoril",
+      "definition": "Tipo de sistema agroforestal, en donde se combinan cultivos forestales para la generación de madera, sombra y forraje, entre otros productos útiles a la actividad pecuaria, con la crianza de animales de interés zootécnico."
+  },
+  {
+      "word" : "Sistemas forestales multipropósito",
+      "definition": "Tipo de sistema agroforestal, que involucra diferentes especies leñosas perennes (forestales) para la producción de maderas, fibras y frutales, entre otros."
+  },
+  {
+      "word" : "Canasta de Costos",
+      "definition": "En el sistema productivo reporta los precios y las cantidades correspondientes a las actividades e insumos desarrollados en el proceso productivo. Este modelo considera un horizonte temporal de doce (12) años, donde los precios consignados en su interior, se expresan en valores para el año 2017. Estos son ajustados con una inflación de 3,5% para los años posteriores al primer año, correspondiente al promedio entre la inflación a largo plazo y el límite máximo de inflación estipulado por el Banco de la República."
+  },
+  {
+      "word" : "Plan de Financiación",
+      "definition": "De acuerdo al diseño sistemas productivos de la presente metodología, se asume que, un porcentaje de los costos directos del sistema productivo en el primer año, son financiados por un crédito del Banco Agrario a una tasa de interés para pequeños productores equivalente al 11,5%. De ello se desprende la cuota de pago que debe cancelarse durante 144 meses, el cual es el máximo número de periodos de amortización a los que presta la entidad bancaria. Este supuesto es una condición necesaria para aquellos sectores sociales que están en condiciones de vulnerabilidad socioeconómica y carecen del músculo financiero para desarrollar de manera autónoma este tipo de actividades."
+  },
+  {
+      "word" : "Flujo de Caja",
+      "definition": "Resume las entradas y salidas de dinero ocasionadas por el proyecto productivo. En esta herramienta financiera se supone que, de los saldos generados cada año, un 75% es reinvertido en el sistema productivo en el año inmediatamente posterior, mientras que el restante 25% constituye un ahorro."
+  },
+  {
+      "word" : "Ingreso Promedio Anual (IPA)",
+      "definition": "El Ingreso Promedio Anual por hectárea (IPA) equivale al Valor Presente Neto de los 2.5 SMMLV percibidos durante el transcurso de cada uno de los doce años de duración del modelo del proyecto productivo."
+  },
+  {
+      "word" : "Utilidad Neta Promedio Anual (UNPA)",
+      "definition": "La Utilidad Neta Promedio Anual por hectárea (UNPA) corresponde al Valor Presente Neto, que se obtiene como resultado de la diferencia entre los ingresos y egresos totales, los cuales son percibidos durante el trascurso de cada uno de los doce años que dura el modelo del proyecto productivo."
+  },
+  {
+      "word" : "Valor Presente Neto (VPN)",
+      "definition": "Es un procedimiento que trae un determinado número de flujos de caja futuros a valor presente de acuerdo a una tasa de descuento determinada. Por tanto, se considera importante tener en cuenta el valor del dinero en el tiempo, de manera que pueda evaluarse la viabilidad de un proyecto productivo. En términos generales, un proyecto de inversión es viable cuando el VPN es positivo o igual a cero; entre mayor sea su valor, mayor rentabilidad se puede esperar del proyecto."
+  },
+  {
+      "word" : "Tasa Interna de Retorno (TIR)",
+      "definition": "La TIR se define como la rentabilidad promedio a lo largo del proyecto productivo. Por tanto, la TIR es igual a la tasa con la cual se descuentan las utilidades futuras cuando el VPN es igual a cero. Para que un proyecto sea rentable, la TIR debe ser superior a la tasa de descuento, ya que en caso contrario no sería financieramente viable."
+  },
+  {
+      "word" : "Excedente capitalizable",
+      "definition": "Son los recursos económicos que, luego de la deducción de los costos de producción (incluida la remuneración de la mano de obra familiar), impuestos, costos de transacción y demás costos asociados al proceso productivo agrícola, pecuario, acuícola y/o forestal de una explotación, pueden llegar a ser ahorrados, y, o reinvertidos, en términos de activos productivos, nuevas tecnologías, capacitación u otras posibles inversiones que coadyuven a la formación o incremento del patrimonio familiar. Para efectos del cálculo de la Unidad Agrícola Familiar para titulación de baldíos, el excedente capitalizable es el equivalente mínimo a dos y medio (2,5) salarios mínimos mensuales vigentes."
+  },
+  {
+      "word" : "Conflictos de uso del suelo",
+      "definition": "Considera las diferencias irreconciliables entre la oferta y la demanda ambiental del territorio. La oferta ambiental se define en términos de las principales coberturas vegetales y los usos predominantes en el proceso de explotación y ocupación. Mientras que la demanda ambiental se entiende como la suma de los bienes, funciones y servicios provistos por los sistemas naturales, los transformados y los antrópicos."
+  },
+  {
+      "word" : "Situación de excepcionalidad",
+      "definition": "En aquellos casos en que las condiciones productivas derivadas generalmente de aspectos biofísicos del territorio, impidan que un solo sistema productivo sea representativo para toda una ZRH, debe realizarse una subdivisión al interior de dicha zona y diseñar los respectivos sistemas productivos requeridos. Las condiciones especiales, que por lo general se presentan en esta situación de excepcionalidad, están principalmente ligadas a características biofísicas presentes dentro de una determinada área con continuidad espacial. Estas características son: capacidad de uso del suelo, particularidades de relieve, entre otras variables con incidencia en estos aspectos."
+  },
+  {
+      "word" : "Ordenamiento social de la propiedad rural",
+      "definition": "La TIR se define como la rentabilidad promedio a lo largo del proyecto productivo. Por tanto, la TIR es igual a la tasa con la cual se descuentan las utilidades futuras cuando el VPN es igual a cero. Para que un proyecto sea rentable, la TIR debe ser superior a la tasa de descuento, ya que en caso contrario no sería financieramente viable."
+  },
+  {
+      "word" : "Zonas Biofísicas Homogéneas",
+      "definition": "Son aquellos territorios con patrones de homogeneidad, producto de la relación entre el sistema dinámico de la tierra, el aíre y el agua, en los que interactúan las plantas, los animales y el ser humano. Se diferencian de otro tipo de territorios dada su composición fisiográfica, climática, edafológica y ecosistémica."
+  },
+  {
+      "word" : "Remuneración de la mano de obra familiar",
+      "definition": "Es la contraprestación que un trabajador recibe en dinero o en especie, por la utilización de su mano de obra en actividades agrícolas, pecuarias, piscícolas y/o forestales, en un predio rural. Para efectos del cálculo de la Unidad Agrícola Familiar para titulación de baldíos, es la contraprestación en dinero equivalente a dos (2) salarios mínimos mensuales legales vigentes."
+  },
+  {
+      "word" : "UAF Mínima",
+      "definition": "Corresponde al área mínima requerida para las actividades productivas de una familia, y que a su vez se convierte en la empresa básica de producción agrícola, pecuaria, acuícola o forestal, cuya extensión, conforme a las condiciones agroecológicas de la zona y con tecnología adecuada, permite a la familia remunerar su trabajo y disponer de un excedente capitalizable que coadyuve a la formación de su patrimonio."
+  },
+  {
+      "word" : "UAF Máxima",
+      "definition": "Corresponde al área requerida para las actividades productivas de una familia, en un escenario en el que se estima una caída de los precios de venta de los productos agropecuarios derivados de un sistema productivo, posibilitando con esta mayor área, que siga considerándose la empresa básica de producción agrícola, pecuaria, acuícola o forestal, cuya extensión, conforme a las condiciones agroecológicas de la zona y con tecnología adecuada, permite a la familia remunerar su trabajo y disponer de un excedente capitalizable que coadyuve a la formación de su patrimonio."
+  },
+  {
+      "word" : "Factor Incremental de la UAF para Uso Sostenible – FIUS",
+      "definition": "Estrategia de conservación asociada a la UAF, creada con el objetivo de fortalecer la Estructura Ecológica de Soporte - EES en tierras potencialmente adjudicables, potenciar los servicios ecológicos de la zona, y contribuir con el cumplimiento de la función ecológica de la propiedad."
+  },
+  {
+      "word" : "Zonas Socioeconómicas Homogéneas",
+      "definition": "Son el producto de la separación y segregación del territorio respecto de su entorno, como resultado de un previo análisis con variables que sean determinantes ante la caracterización de las economías rurales determinadas por la dinámica productiva agropecuaria, la cercanía a centros poblados, la infraestructura vial, servicios básicos, la economía familiar, las dinámicas de tenencia de la tierra, así como el encadenamiento a los mercados dentro y fuera de la zona y su interrelación con el entorno socioeconómico y ambiental. Esto teniendo en cuenta que son lógicas del territorio que permiten una mayor o menor producción agropecuaria; y representan zonas sociales y económicas con similitudes y condiciones comunes para dicho propósito."
+  },
+  {
+      "word" : "Indice de Producción Agrícola y Pecuaria - IPAP",
+      "definition": "Se define como el índice que busca medir la concentración de la producción agrícola desde la diversidad en las áreas sembradas, y complementa el rastreo de la producción con la carga de especies mayores en áreas de pastos con especies menores, dando como resultado la concentración de la producción agrícola y pecuaria. En veredas donde se da la mayor producción, el índice se ve reflejado con valores más cercanos a uno, y donde la producción es cercana a cero, se entiende como un indicio de sub-explotación o de producción ganadera."
+  },
+  {
+      "word" : "Indice de Vulnerabilidad de la Producción Rural - IVPR:",
+      "definition": "Se define como el índice que mide, a partir de tres componentes—infraestructura productiva, socioeconómico y tenencia de la propiedad—la propensión de las veredas del país a la cual su producción rural sea más vulnerableante choques económicos, sociales, institucionales o de infraestructura. El IVPR tiene un valor entre 0 y 1 en donde cero (0) es “poco vulnerable” y uno (1) “muy vulnerable”."
+  }
+]

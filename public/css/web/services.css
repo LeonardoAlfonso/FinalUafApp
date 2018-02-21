@@ -1,0 +1,34 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Services*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#structure article#map{
+    margin-top: 20px;
+}
+
+#structure  .select-style{
+    position: relative;
+    margin-top: 20px;
+    border-radius : 10px;
+    border-color : #575756;
+    border-color : rgba(87, 87, 86, 1);
+    height : 41px;
+    overflow: hidden;
+    background: #f6f6f6 url(../../images/web/IconSelectBox.png) no-repeat;
+    background-position: right;
+    z-index: 2;
+}
+
+#structure .select-style select{
+    border-radius : 10px;
+    border-width : 2px;
+    border-color : #575756;
+    border-color : rgba(87, 87, 86, 1);
+    height : 41px;
+    width: 100%;
+    padding-left: 10px;
+    background: transparent;
+    appearance:none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+}

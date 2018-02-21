@@ -1,0 +1,74 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*AboutUs*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#structure #description{
+    margin-top: 40px;
+}
+
+#structure article h2{
+    text-align: justify;
+    color : #008762;
+    color : rgb(0, 135, 98);
+    font-size: 40px;
+    margin-bottom: 22px;
+}
+
+#structure article p{
+    text-align: justify;
+    font-size: 22px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+}
+
+#structure aside#Menu .buttonlist{
+    margin-top: 125px;
+}
+
+#structure aside#Menu label{
+    background : #008762;
+    background : rgba(0, 135, 98, 1);
+    font-size: 19px;
+    margin-bottom: 10px;
+    padding: 18px;
+    color: white;
+    text-align: center;
+}
+
+#structure aside#Menu label:hover{
+    background : #9ED140;
+    background : rgba(158, 209, 64, 1);
+    cursor:pointer;
+}
+
+#structure aside#Menu label:active{
+    background : #FFBB02;
+    background : rgba(255, 187, 2, 1);
+    cursor:pointer;
+}
+
+hr.sources{
+    /* border: 1px solid #C6C6C6; */
+    opacity: 0.5;
+    width: 100%;
+    background-color: red;
+    float: left;
+}
+
+#structure ol li{
+    text-align: justify;
+    font-size: 14px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+}
+
+#structure article p.miniSize{
+    text-align: justify;
+    font-size: 21px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+}
+
+#structure article p.indent{
+    text-indent: 30px;
+}

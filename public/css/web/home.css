@@ -1,0 +1,74 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Home*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#structure{
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding-bottom: 68px;
+}
+
+div#content{
+    width: auto;
+    height: auto;
+}
+
+aside#SlideContainer{
+    position: relative;
+    width: 500%;
+    animation: 30s slidy infinite;
+    display: flex;
+    max-height: 822px;
+}
+
+.slide{
+    position: relative;
+    width: 200%;
+}
+
+.slide img{
+    width: 100%;
+    height: auto;
+}
+
+ aside#SlideContainer div p{
+    color: white;
+    text-align: right;
+    display: block;
+    position: absolute;
+    bottom: 41%;
+    left: -5%;
+    width: 100%;
+}
+
+aside#SlideContainer div .signature{
+   font-size: 35px;
+}
+
+@keyframes slidy {
+    0% { left: 0%; }
+    20% { left: 0%; }
+    25% { left: -100%; }
+    45% { left: -100%; }
+    50% { left: -200%; }
+    70% { left: -200%; }
+    75% { left: -300%; }
+    95% { left: -300%; }
+    100% { left: -400%; }
+}
+
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*footer*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+footer {
+    border-top: 4px solid;
+    border-color : #FFBB02;
+    border-color : rgba(255, 187, 2, 1);
+    padding: 22px;
+    margin-top: -68px;
+    z-index: 10;
+}

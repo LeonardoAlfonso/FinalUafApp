@@ -1,0 +1,122 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Generals*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+* {
+   margin:0;
+   padding:0;
+   list-style: none;
+   text-decoration: none;
+   font-family: 'Nunito', sans-serif;
+   box-sizing: border-box;
+   color: black;
+   font-size: 14px;
+}
+
+#container {
+   /* height: 100%; */
+   width: 100%;
+   margin: 0 auto;
+   overflow: hidden;
+   position: relative;
+}
+
+section#content {
+    float: right;
+}
+
+#backImage{
+    width: 100%;
+    height: 839px;
+    position: fixed;
+    z-index: -1;
+}
+
+form#logout-form{
+    display: none;
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*SideNav*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+aside#sideBar{
+    position: fixed;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: #474E56;
+    overflow-x: hidden;
+    z-index: 1;
+}
+
+aside#sideBar figure{
+
+}
+
+aside#sideBar ul {
+    list-style: none;
+}
+
+aside#sideBar ul li.optionsMenu{
+    background: #008762;
+    color: white;
+    font-size: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 2px;
+    margin-bottom: 16px;
+}
+
+aside#sideBar ul li:hover{
+    box-shadow: inset -2px 2px 1px 1px #5F9382, -2px 2px 1px 1px #333333;
+    cursor: pointer;
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Content*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+section#content header{
+    background: #70787F;
+}
+
+section#content header ul#LogOutSection{
+    position: relative;
+    float: right;
+}
+
+section#content header ul#LogOutSection li{
+    display: inline-block;
+    vertical-align: middle;
+    /* margin-left: 3px; */
+}
+
+section#content header ul#LogOutSection li h1{
+    color: #FFFFFF;
+}
+
+section#content header ul#LogOutSection li img#closeSesion{
+    cursor: pointer;
+}
+
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Footer*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+section#content footer{
+    position: fixed;
+    background: #C1C7C3;
+    bottom: 0px;
+    right: 0px;
+    /* border: 1px solid black; */
+}
+
+section#content footer img{
+    display: block;
+    margin-left: auto;
+    margin-right: 0px;
+}

@@ -1,0 +1,158 @@
+div#modal{
+     background: rgba(0, 0, 0, 0.5);
+     color: #fff;
+     position: fixed;
+     top: -100vh;
+     left: 0;
+     height: 100vh;
+     width: 100vw;
+     z-index: 20;
+ }
+
+ input#ShowCostModal{
+     display: none;
+ }
+
+ input#ShowCostModal:checked ~ #modal {
+     top: 0;
+ }
+
+ div.modalCard{
+     position: relative;
+     top: 20%;
+     background-color: #E5E5E5;
+ }
+
+ div.modalCardtitle{
+     background-color: #E5E5E5;
+     color: #FFFFFF;
+     text-align: justify;
+     padding-left: 20px;
+     padding-right: 20px;
+     padding-top: 20px;
+ }
+
+ div.modalCardtitle p{
+     color: #474E56;
+     font-size: 30px;
+ }
+
+div.modalCard hr#ModalHr{
+    border: 1px solid #474E56;
+    background: 474E56;
+    width: 95%;
+    margin: 10px auto;
+}
+
+ div.modalCardBody{
+      position: relative;
+      background-color: #E5E5E5;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 20px;
+ }
+
+ div.modalCardBody ul{
+    padding-top: 10px;
+ }
+
+ div.modalCardBody ul li {
+      text-align: justify;
+      margin-bottom: 10px;
+ }
+
+ div.modalCardBody ul li label{
+      color: #474E56;
+      font-size: 20px;
+ }
+
+ div.modalCardBody ul li input{
+     float: right;
+     border: 1px solid #014C35;
+     height : 27px;
+     margin-bottom: 10px;
+     overflow: hidden;
+     vertical-align: top;
+     background-color: white;
+     color: #014C35;
+     padding-left: 10px;
+     width: 100%;
+ }
+
+ div.modalCard hr#ModalHrIntern{
+     border: 1px solid #474E56;
+     background: 474E56;
+     width: 100%;
+     margin: 10px auto;
+ }
+
+ div.modalCardSubtitle{
+     background-color: #E5E5E5;
+     color: #FFFFFF;
+     text-align: justify;
+ }
+
+ div.modalCardSubtitle p{
+     color: #008762;
+     font-size: 22px;
+     margin-bottom: 10px;
+ }
+
+ div.miniCard{
+    margin-bottom: 10px;
+ }
+
+ div.miniCardTitle{
+     background-color: #474E56;
+     color: #FFFFFF;
+     text-align: center;
+     padding: 5px;
+ }
+
+ div.miniCardBody{
+      color: #FFFFFF;
+      text-align: center;
+      background-color: white;
+      padding: 5px;
+      border: 1px solid #474E56;
+ }
+
+ input.miniCardInput{
+      width: 100%;
+      text-align: center;
+      border: none;
+ }
+
+ div.modalFooter{
+      background-color: #E5E5E5;
+ }
+
+ div.modalFooter label{
+      margin-left: 10px;
+ }
+
+ input#CloseCostModal{
+    display: none;
+ }
+
+label.buttonSave{
+      color: white;
+      text-align: center;
+      background: #008762;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 5px 5px;
+      float: right;
+}
+
+label.buttonClose{
+      color: white;
+      text-align: center;
+      background: #474E56;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 5px 5px;
+      float: right;
+}

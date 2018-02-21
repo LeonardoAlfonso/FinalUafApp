@@ -1,0 +1,87 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Glossary*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#structure aside#glossaryDescription{
+    margin-top: 40px;
+}
+
+#structure aside#glossaryDescription h2{
+    text-align: left;
+    color : #008762;
+    color : rgb(0, 135, 98);
+    font-size: 40px;
+    margin-bottom: 22px;
+}
+
+#structure aside#glossaryDescription p{
+    text-align: justify;
+    font-size: 19px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+}
+
+#structure #glossaryContent{
+    margin-top: 40px;
+}
+
+#structure article h3{
+    text-align: justify;
+    font-size: 22px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+}
+
+#structure article p{
+    text-align: justify;
+    font-size: 22px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+}
+
+#structure article ul#Letters li{
+/* position: relative; */
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    color : white;
+    padding: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background: green;
+    width: 35px;
+    cursor: pointer;
+}
+
+#structure article ul#Words{
+    margin-top: 50px;
+}
+
+#structure article ul#Words li{
+
+    text-align: left;
+    font-size: 21px;
+    padding-top: 10px;
+    cursor: pointer;
+    color : #575756;
+    color : rgb(87, 87, 86);
+}
+
+#structure article ul#Letters li:hover{
+    background : #9ED140;
+    background : rgba(158, 209, 64, 1);
+}
+
+#structure article ul#Letters li:active{
+    background : #FFBB02;
+    background : rgba(255, 187, 2, 1);
+}
+
+#structure article ul#Words li:hover{
+    color: black;
+}
+
+#structure article div#definition
+{
+    margin-top: 60px;
+}

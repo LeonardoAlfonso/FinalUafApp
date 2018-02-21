@@ -1,0 +1,359 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Cartographer Submenu*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+aside#sideBar ul li ul#SubMenu{
+
+    position: fixed;
+    display: none;
+    top: 80px;
+    margin-left: 270.6px;
+    /* background: #474E56; */
+    list-style-type: none;
+    text-decoration: none;
+    /* padding: 10px; */
+}
+
+aside#sideBar ul li ul#SubMenu li.subMenuItem{
+    list-style: none;
+    background: #008762;
+    color: white;
+    font-size: 18px;
+    padding: 0px 30px;
+    cursor: pointer;
+}
+
+aside#sideBar ul li:hover ul#SubMenu{
+    display: block;
+    list-style: none;
+    text-decoration: none;
+}
+
+aside#sideBar ul li:hover ul#SubMenu li{
+    display: block;
+    list-style: none;
+    text-decoration: none;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Cartographer Content*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+section#content article{
+    /* border: 1px solid black; */
+    margin-bottom: 80px;
+    position: relative;
+}
+
+section#content article h2{
+    position: relative;
+    text-align: justify;
+    color : #008762;
+    color : rgb(0, 135, 98);
+    font-size: 40px;
+    /* margin-left: -42px; */
+}
+
+section#content article div#options{
+    float:right;
+    margin-top: 10%;
+}
+
+section#content article hr{
+
+    border: 1px solid #008762;
+    background: #008762;
+}
+
+label.standardButton{
+
+    text-align: center;
+    background: #008762;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 48px;
+    padding: 5px 10px;
+
+}
+
+section#content article div#map{
+    float:right;
+    margin-top: 6%;
+}
+
+section#content article div#newMunicipality{
+    float:right;
+}
+
+section#content article div#newVillage{
+    float:right;
+}
+
+section#content article div#municipality{
+    float:right;
+    position: relative;
+    margin-top: 6%;
+    left: 50px;
+}
+
+label.standardButton:hover{
+    box-shadow:  -1px 2px 1px 1px #4D4F4E;
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Cartographer List*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+section#content article table.tableStyle{
+    color: green;
+    text-align: center;
+    width: 92%;
+    margin: 0px auto;
+    margin-top: 10px;
+    border-collapse: separate;
+    border-spacing: 5px 5px;
+}
+
+section#content article table.tableStyle th{
+    background-color: rgb(79,88,92);
+    color: #FFFFFF;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 19px;
+}
+
+section#content article table.tableStyle tr{
+    background-color: #E5E5E5;
+}
+
+section#content article table.tableStyle td{
+    color: #014C35;
+    font-size: 17px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    height: auto;
+}
+
+section#content article table.tableStyle tr:hover td{
+    background-color: #F9D885;
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Cartographer Zone*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+section#content article div#nameMapZone{
+    vertical-align: middle;
+    margin-top: 20px;
+}
+section#content article div#Municipalities{
+    vertical-align: middle;
+    margin-top: 20px;
+}
+
+section#content article div#Villages{
+    vertical-align: middle;
+    margin-top: 20px;
+}
+
+section#content article h3{
+    position: relative;
+    vertical-align: middle;
+    /* margin-top: 20px; */
+    text-align: justify;
+    color : #008762;
+    color : rgb(0, 135, 98);
+    font-size: 20px;
+}
+
+section#content div#nameMapZone input{
+    border-radius : 10px;
+    border: 1px solid #014C35;
+    height : 27px;
+    overflow: hidden;
+    vertical-align: top;
+    background-color: #E5E5E5;
+    color: #014C35;
+    padding-left: 10px;
+    width: 100%;
+}
+
+input.names{
+    border-radius : 10px;
+    border: 1px solid #575756;
+    height : 27px;
+    overflow: hidden;
+    vertical-align: top;
+    background-color: #E5E5E5;
+    color: #014C35;
+    padding-left: 10px;
+    width: 120%;
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*New Zone*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+div.card{
+    margin-top: 20px;
+    border-radius: 7px;
+    min-height: 400px;
+    background-color: #E5E5E5;
+}
+
+div.titleCard{
+    border-radius: 7px;
+    background-color: rgb(79,88,92);
+    color: #FFFFFF;
+    text-align: center;
+    padding: 5px;
+}
+
+div.titleCard p{
+  position: relative;
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
+div.titleBody{
+    background-color: #E5E5E5;
+}
+
+div.titleBody ul li{
+    padding-top: 30px;
+}
+
+div.titleBody ul li label{
+    color:black;
+    font-size: 18px;
+}
+
+div.titleBody ul li input{
+    float: right;
+    border-radius : 10px;
+    border: 1px solid #014C35;
+    height : 27px;
+    overflow: hidden;
+    vertical-align: top;
+    background-color: white;
+    color: #014C35;
+    padding-left: 10px;
+    width: 60%;
+}
+
+label.formButton{
+
+    text-align: center;
+    background: #008762;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Table*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+div.cardHeader{
+    margin-top: 30px;
+    text-align: right;
+}
+
+div.cardHeader input{
+    float: right;
+    border-radius : 10px;
+    border: 1px solid #014C35;
+    height : 27px;
+    overflow: hidden;
+    vertical-align: top;
+    background-color: white;
+    color: #014C35;
+    padding-left: 10px;
+    width: 100%;
+}
+
+table.tableForm{
+    padding-top: 30px;
+    width: 100%;
+}
+
+table.tableForm td{
+  position: relative;
+    text-align: justify;
+    color:black;
+    font-size: 18px;
+    float: top;
+    /* border: 1px solid black; */
+    line-height: 5px;
+}
+
+table.tableForm img:hover{
+    cursor: pointer;
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Indicadores*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+section#content article div.topMargin{
+    margin-top: 50px;
+}
+
+section#content article label.generalLabels{
+    font-size: 18px;
+    color : #575756;
+    color : rgb(87, 87, 86);
+    text-align: right;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+section#content article input.indicatorsData{
+    border-radius : 10px;
+    /* border: 1px solid #014C35; */
+    height : 27px;
+    overflow: hidden;
+    vertical-align: top;
+    width: 100%;
+    background-color: #E5E5E5;
+    color: #014C35;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+article table.miniTable{
+    color: green;
+    text-align: center;
+    width: 92%;
+    margin: 0px auto;
+    margin-top: 10px;
+    border-collapse: separate;
+    border-spacing: 5px 5px;
+}
+
+table.miniTable th{
+    background-color: rgb(79,88,92);
+    color: #FFFFFF;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 19px;
+}
+
+ table.miniTable tr{
+    background: #EFEFEF;
+}
+
+table.tableStyle td{
+    color: #014C35;
+    font-size: 17px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    height: auto;
+}
+
+ table.miniTable tr:hover td{
+    background-color: #F9D885;
+}
