@@ -21,3 +21,25 @@ function getSystem(id)
               }
           });
   };
+
+  function getCharacteristics(id)
+  {
+          var newRoute = routeCharacteristics.replace('parameter',id);
+          console.log(newRoute);
+
+          $.ajax({
+                url: newRoute,
+                headers: {'X-CSRF-TOKEN':token},
+                type: 'GET',
+                datatype: 'json',
+                success:function(data)
+                {
+                    var characteristics = data.html;
+                    $("#ModalBody").html(characteristics);
+                },
+                error:function(data)
+                {
+                    alert('mal');
+                }
+            });
+    };

@@ -13,7 +13,7 @@ $factory->define(App\Models\Cost::class, function (Faker $faker) {
         'subGroup' => $faker->word,
         'unitaryCost' => $faker->randomNumber(),
         'quantity' => $faker->randomNumber(),
-        'period' => $faker->randomNumber(),
+        'period' => $faker->randomNumber($nbDigits = 2, $strict = false),
         'idSystem' => $faker->randomElement($system)
     ];
 });

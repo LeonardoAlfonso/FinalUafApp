@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Zone;
 use App\Models\System;
+use App\Models\Entry;
+use App\Models\Cost;
 
 class systemController extends Controller
 {
@@ -48,9 +50,19 @@ class systemController extends Controller
 
       public function getSystem($idSystem)
       {
-          $system = System::find($idSystem);
-          $products = $system->Entries()->get();
-          $characteristics = $products->Characteristics()->get();
+          if(is_numeric($idSystem))
+          {
+              $system = System::find($idSystem);
+              $products = Entry::with('Characteristics')->where('idSystem',$idSystem)->get();
+          }
+          else
+          {
+              $system = System::where('nameSystem',$idSystem)->first();
+              $products = Entry::with('Characteristics')->where('idSystem',$system->idSystem)->get();
+          }
+
+          $zone = $system->Zone()->first();
+          $departament = $zone->Departament()->first();
 
           $requestCrumb = Request::create(
                   '', 'GET', array(
@@ -60,9 +72,36 @@ class systemController extends Controller
                       'System' => $system->nameSystem,
                   ));
 
+          $elements = $this->showCrumb($requestCrumb);
+
           return view ('web.system')
+                      ->with('elements',$elements)
                       ->with('system',$system)
-                      ->with('products',$products)
-                      ->with('characteristics',$characteristics);
+                      ->with('products',$products);
       }
+
+      public function getCharacteristicsEntry(Request $request, $idEntry)
+      {
+            $entries = Entry::with('Characteristics')->where('idEntry',$idEntry)->first();
+
+            if($request->ajax())
+            {
+                $view = view('web.partials.system.charactetisticsList')
+                            ->with('entries',$entries);
+                $newView = $view->render();
+                return response()->json(['html'=>$newView]);
+                // return response()->json(["mensaje"=>"Hola"]);
+            }
+      }
+
+      public function getCosts($idSystem)
+      {
+            $cost = Cost::where([
+                          ['idSystem','=',$idSystem],
+                          ['period','=','0'],
+              ])->get();
+          dd($cost);
+      }
+
+
 }

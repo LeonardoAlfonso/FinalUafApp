@@ -23,7 +23,7 @@ class System extends Model
         return $this->hasMany('App\Models\Entry', 'idSystem', 'idSystem');
     }
 
-    public function Costos()
+    public function Costs()
     {
         return $this->hasMany('App\Models\Cost', 'idSystem', 'idSystem');
     }

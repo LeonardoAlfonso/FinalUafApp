@@ -19,19 +19,6 @@
     margin-top: 40px;
 }
 
-.crumbs{
-    position: relative;
-    color: red;
-    font-size: 20px;
-    z-index: 10;
-    padding-left: 82px;
-    color: #014C35;
-    font-weight: lighter;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    background: #F6F6F6;
-}
-
 /*////////////////////////////////////////////MENU//////////////////////////////////////////////////*/
 
 #AccordeonMenu input{
@@ -176,7 +163,6 @@ input#graphics:checked ~ ul#economicGraphics{
      left: 0;
      height: 100vh;
      width: 100vw;
-     z-index: 20;
  }
 
 #ShowModal, #CloseModal{

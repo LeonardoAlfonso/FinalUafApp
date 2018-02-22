@@ -39,7 +39,7 @@ class Controller extends BaseController
 
         if($request->has('System'))
         {
-            $systemCrumb = $request->ListSystem;
+            $systemCrumb = $request->System;
             $this->crumbCollection->put('System', $systemCrumb);
         }
 

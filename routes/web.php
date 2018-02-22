@@ -40,6 +40,9 @@ Route::get('/zone/prevZone/{name}', 'WebControllers\zoneController@getPrevZone')
 Route::get('/listSystem/{idZone}', 'WebControllers\systemController@getListSystem')->name('listSystem');
 Route::get('/changeSystem/{idSystem}', 'WebControllers\systemController@changeSystem')->name('changeSystem');
 Route::get('/System/{idSystem}', 'WebControllers\systemController@getSystem')->name('system');
+Route::get('/System/Entry/{idEntry}', 'WebControllers\systemController@getCharacteristicsEntry')->name('entryCharacteristics');
+Route::get('/System/Cost/{idSystem}', 'WebControllers\systemController@getCosts')->name('systemCost');
+//localhost/uafApp/public/System/Cost/1331
 
 //Routes for admin
 Route::get('/admin', 'AppControllers\adminController@getAdminView')->middleware('auth')->name('admin');

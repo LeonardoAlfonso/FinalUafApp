@@ -4,10 +4,14 @@
     <link rel="stylesheet" href="{{ asset('css/web/system.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="{{ asset('js/web/graphicProfile.js') }}"></script>
+    <script type="text/javascript">
+        var routeCharacteristics = '{{ route('entryCharacteristics', ['idEntry' => 'parameter']) }}';
+    </script>
+    <script type="text/javascript" src="{{ asset('js/web/system.js') }}"></script>
 @stop
 
 @section('navigatorBar')
-
+    @include('web.partials.zone.crumbs')
 @stop
 
 @section('viewContent')
@@ -25,7 +29,10 @@
       <div class="col-xl-3"></div>
       <div id="AccordeonMenu" class="col-xl-9">
 
-        <label class="col-xl-12">Productos</label>
+        <a href="{{ route('system', ['idSystem' => $system->idSystem]) }}">
+          <label class="col-xl-12">Productos</label>
+        </a>
+
         <label class="col-xl-12">Costos del sistema productivo</label>
 
         <input type="checkbox" id="graphics">

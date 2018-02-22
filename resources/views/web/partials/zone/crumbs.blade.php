@@ -22,8 +22,8 @@
             <li> · </li>
         @endif
         @if($key === 'System')
-            <a href="{{ route('listSystem', ['idZone' => $element]) }}">
-              <li class="crumbs" name="{{ $element }}">Listado Sistemas</li>
+            <a href="{{ route('system', ['idSystem' => $element]) }}">
+              <li class="crumbs" name="{{ $element }}">{{ $element }}</li>
               </a>
             <li> · </li>
         @endif

@@ -14,7 +14,7 @@ $factory->define(App\Models\Entry::class, function (Faker $faker) {
         'priceSource' => $faker->word,
         'datePriceSource' => $faker->word,
         'quantity' => $faker->randomNumber(),
-        'period' => $faker->randomNumber(),
+        'period' => $faker->randomNumber($nbDigits = 2, $strict = false),
         'integralIndicator' => $faker->boolean(),
         'idSystem' => $faker->randomElement($system)
     ];
