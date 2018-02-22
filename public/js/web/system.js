@@ -10,7 +10,6 @@ function getSystem(id)
               datatype: 'json',
               success:function(data)
               {
-                  console.log(data);
                   var system = data.html;
                   $("#description").html(system);
                   $.getScript(assetGraphics);
@@ -56,9 +55,31 @@ function getSystem(id)
                   datatype: 'json',
                   success:function(data)
                   {
-                      console.log(data);
                       var costs = data.html;
                       $("#SystemContent").html(costs);
+                  },
+                  error:function(data)
+                  {
+                      alert('mal');
+                  }
+              });
+      };
+
+    function getIndicators(id)
+    {
+            var newRoute = routeIndicators.replace('parameter',id);
+            console.log(newRoute);
+
+            $.ajax({
+                  url: newRoute,
+                  headers: {'X-CSRF-TOKEN':token},
+                  type: 'GET',
+                  datatype: 'json',
+                  success:function(data)
+                  {
+                      console.log(data);
+                      var indicators = data.html;
+                      $("#SystemContent").html(indicators);
                   },
                   error:function(data)
                   {

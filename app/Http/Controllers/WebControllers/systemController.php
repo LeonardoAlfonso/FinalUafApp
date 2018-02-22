@@ -32,7 +32,8 @@ class systemController extends Controller
           return view('web.listProductiveSystems')
                       ->with('elements',$elements)
                       ->with('first',$first)
-                      ->with('systems',$systems);
+                      ->with('systems',$systems)
+                      ->with('nameZone', $zone->nameZone);
       }
 
       public function changeSystem(Request $request, $idSystem)
@@ -77,7 +78,8 @@ class systemController extends Controller
           return view ('web.system')
                       ->with('elements',$elements)
                       ->with('system',$system)
-                      ->with('products',$products);
+                      ->with('products',$products)
+                      ->with('idZone',$zone->idZone);
       }
 
       public function getCharacteristicsEntry(Request $request, $idEntry)
@@ -115,14 +117,19 @@ class systemController extends Controller
 
       }
 
-      public function getIndicators($idSystem)
+      public function getIndicators(Request $request, $idSystem)
       {
-          dd($idSystem);
-          $system = System::with('Indicators')->find($idSystem);
-          dd($system);
-          $view = view('web.partials.system.indicatorsUAF')
-                      ->with('system',$system);
-          // $phone = User::find(1)->phone;
+            $system = System::with('Indicators')->where('idSystem',$idSystem)->first();
+
+            if($request->ajax())
+            {
+                $view = view('web.partials.system.indicatorsUAF')
+                            ->with('system',$system);
+                $newView = $view->render();
+                return response()->json(['html'=>$newView]);
+                // return response()->json(["mensaje"=>"Hola"]);
+            }
+
       }
 
 

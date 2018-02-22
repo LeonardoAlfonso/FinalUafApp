@@ -7,6 +7,7 @@
     <script type="text/javascript">
         var routeCharacteristics = '{{ route('entryCharacteristics', ['idEntry' => 'parameter']) }}';
         var routeCosts = '{{ route('systemCost', ['idSystem' => 'parameter']) }}';
+        var routeIndicators = '{{ route('systemIndicators', ['idSystem' => 'parameter']) }}';
     </script>
     <script type="text/javascript" src="{{ asset('js/web/system.js') }}"></script>
 @stop
@@ -46,8 +47,10 @@
           <li>Gráfico 1</li>
         </ul>
 
-        <label class="col-xl-12">Tamaño UAF</label>
-        <label class="col-xl-12">Ir a Sistemas Productivos</label>
+        <label id="{{ $system->idSystem }}" class="col-xl-12"  onclick="getIndicators(this.id)">Tamaño UAF</label>
+        <a href="{{ route('listSystem', ['idZone' => $idZone]) }}">
+            <label class="col-xl-12">Ir a Sistemas Productivos</label>
+        </a>
 
       </div>
     </aside>

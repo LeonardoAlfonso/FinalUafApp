@@ -20,4 +20,4 @@
       <div class="col-xl-4"></div>
 
   </div>
-  @endisset
+  @endif

@@ -36,8 +36,9 @@
     <label for="list" class="col-xl-12">Sistemas Productivos</label>
 
         @include('web.partials.listSystems.systems')
-
-    <label id="backZone" class="col-xl-12">Ir a la Zona</label>
+    <a href="{{ route('prevZone', ['name' => $nameZone]) }}">
+        <label id="backZone" class="col-xl-12">Ir a la Zona</label>
+    </a>
 
   </div>
 

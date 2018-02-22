@@ -38,7 +38,8 @@ class zoneController extends Controller
                       ->with('zone',$zone)
                       ->with('characteristics',$characteristics)
                       ->with('municipalities',$municipalities)
-                      ->with('option', $this->option);
+                      ->with('option', $this->option)
+                      ->with('departamentName', $departament->departamentName);
       }
 
       public function getClimaticElements(Request $request, $id)
@@ -80,7 +81,6 @@ class zoneController extends Controller
               return response()->json(['html'=>$newView]);
             // return response()->json(["mensaje"=>"hola"]);
           }
-
       }
 
       public function getPrevZone($name)
@@ -112,6 +112,7 @@ class zoneController extends Controller
                       ->with('zone',$zone)
                       ->with('characteristics',$characteristics)
                       ->with('municipalities',$municipalities)
-                      ->with('option', $this->option);
+                      ->with('option', $this->option)
+                      ->with('departamentName', $departament->departamentName);
       }
 }

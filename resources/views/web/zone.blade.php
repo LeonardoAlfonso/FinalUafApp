@@ -42,7 +42,11 @@
           <label for="" class="col-xl-12">Sistemas Productivos</label>
         </a>
     </li>
-    <li class="col-xl-12"><label for="" class="col-xl-12">Regresar a Departameto</label></li>
+    <li class="col-xl-12">
+      <a href="{{ route('prevDepartament', ['name' => $departamentName]) }}">
+          <label for="" class="col-xl-12">Regresar a Departameto</label>
+      </a>
+    </li>
   </ul>
   <div class="col-xl-3"></div>
 

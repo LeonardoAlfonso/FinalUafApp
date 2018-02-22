@@ -14,10 +14,6 @@
           <th></th>
         </tr>
       </thead>
-      protected $table = "costs";
-      protected $fillable = ['detail','group','subGroup','unitaryCost',
-                              'quantity','period','idSystem'];
-      protected $primaryKey = 'idCost';
       <tbody>
           @foreach($costs as $cost)
             <tr>
