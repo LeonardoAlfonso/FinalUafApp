@@ -94,13 +94,35 @@ class systemController extends Controller
             }
       }
 
-      public function getCosts($idSystem)
+      public function getCosts(Request $request, $idSystem)
       {
-            $cost = Cost::where([
-                          ['idSystem','=',$idSystem],
-                          ['period','=','0'],
-              ])->get();
-          dd($cost);
+            // $cost = Cost::where([
+            //               ['idSystem','=',$idSystem],
+            //               ['period','=','0'],
+            //   ])->get();
+            $costs = Cost::where('idSystem',$idSystem)->get();
+            $totalCost = $costs->sum('total');
+
+            if($request->ajax())
+            {
+                $view = view('web.partials.system.initialCosts')
+                            ->with('costs',$costs)
+                            ->with('totalCost',$totalCost);
+                $newView = $view->render();
+                return response()->json(['html'=>$newView]);
+                // return response()->json(["mensaje"=>"Hola"]);
+            }
+
+      }
+
+      public function getIndicators($idSystem)
+      {
+          dd($idSystem);
+          $system = System::with('Indicators')->find($idSystem);
+          dd($system);
+          $view = view('web.partials.system.indicatorsUAF')
+                      ->with('system',$system);
+          // $phone = User::find(1)->phone;
       }
 
 

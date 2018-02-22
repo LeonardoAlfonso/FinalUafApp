@@ -1,5 +1,3 @@
-<article class="col-xl-10">
-
   <div class="col-xl-12">
     <h4><b>Costos de establecimiento</b></h4>
   </div>
@@ -16,31 +14,27 @@
           <th></th>
         </tr>
       </thead>
+      protected $table = "costs";
+      protected $fillable = ['detail','group','subGroup','unitaryCost',
+                              'quantity','period','idSystem'];
+      protected $primaryKey = 'idCost';
       <tbody>
-        <tr>
-          <td class="cell">Dato 1</td>
-          <td class="cell">Dato 2</td>
-          <td class="cell">Dato 3</td>
-          <td class="cell">Dato 4</td>
-          <td class="cell">$25.035.631,00</td>
-        </tr>
-        <tr>
-          <td>Dato 1</td>
-          <td>Dato 2</td>
-          <td>Dato 3</td>
-          <td>Dato 4</td>
-          <td>Dato 5</td>
-        </tr>
-        <tr>
-          <td>Dato 1</td>
-          <td>Dato 2</td>
-          <td>Dato 3</td>
-          <td>Dato 4</td>
-          <td>Dato 5</td>
-        </tr>
+          @foreach($costs as $cost)
+            <tr>
+                <td class="cell">{{ $cost->detail }}</td>
+                <td class="cell">{{ $cost->unitaryCost }}</td>
+                <td class="cell">{{ $cost->quantity }}</td>
+                <td class="cell">{{ $cost->unitaryCost }}</td>
+                <td class="cell">{{ $cost->total }}</td>
+            </tr>
+          @endforeach
+            <tr>
+                <td class="cell"></td>
+                <td class="cell"></td>
+                <td class="cell"></td>
+                <td class="cell"><b>Total</b></td>
+                <td class="cell">{{ $totalCost }}</td>
+            </tr>
       </tbody>
     </table>
   </div>
-
-</article>
-<div class="col-xl-1"></div>

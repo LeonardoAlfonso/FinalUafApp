@@ -13,10 +13,6 @@ class CreateSystemTable extends Migration
                 $table->increments('idSystem');
                 $table->string('nameSystem');
                 $table->string('autor');
-                $table->double('uafMinimum',12,2)->nullable();
-                $table->double('uafMaximum',12,2)->nullable();
-                $table->double('uafIntegralMinimum',12,2)->nullable();
-                $table->double('uafIntegralMaximum',12,2)->nullable();
                 $table->double('jornalValue')->nullable();
                 $table->timestamps();
 

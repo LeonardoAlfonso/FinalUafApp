@@ -9,7 +9,7 @@ class Entry extends Model
   //Attibutes
     protected $table = "entries";
     protected $fillable = ['name','unitaryPrice','measureUnity','priceSource',
-                            'datePriceSource','quantity','period','integralIndicator','idSystem'];
+                            'datePriceSource','quantity','period','integralIndicator','total','idSystem'];
     protected $primaryKey = 'idEntry';
 
     //Relations

@@ -8,8 +8,7 @@ class System extends Model
 {
     //Attibutes
       protected $table = "systems";
-      protected $fillable = ['nameSystem','autor','uafMinimum','uafMaximum',
-                              'uafIntegralMinimum','uafIntegralMaximum','jornalValue','idZone'];
+      protected $fillable = ['nameSystem','autor','jornalValue','idZone'];
       protected $primaryKey = 'idSystem';
 
     //Relations
@@ -26,5 +25,10 @@ class System extends Model
     public function Costs()
     {
         return $this->hasMany('App\Models\Cost', 'idSystem', 'idSystem');
+    }
+
+    public function Indicators()
+    {
+        return $this->hasMany('App\Models\SystemIndicator', 'idSystem', 'idSystem');
     }
 }

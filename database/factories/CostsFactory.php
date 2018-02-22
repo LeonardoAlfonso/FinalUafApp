@@ -14,6 +14,7 @@ $factory->define(App\Models\Cost::class, function (Faker $faker) {
         'unitaryCost' => $faker->randomNumber(),
         'quantity' => $faker->randomNumber(),
         'period' => $faker->randomNumber($nbDigits = 2, $strict = false),
+        'total' => $faker->randomNumber(),
         'idSystem' => $faker->randomElement($system)
     ];
 });

@@ -1,0 +1,30 @@
+[
+	{
+		"name" :"uafMinimum",
+		"value" : "0"
+	},
+	{
+		"name" :"uafMaximum",
+		"value" : "0"
+	},
+	{
+		"name" :"uafIntegralMinimum",
+		"value" : "0"
+	},
+	{
+		"name" :"uafIntegralMaximum",
+		"value" : "0"
+	},
+	{
+		"name" :"VPN",
+		"value" : "0"
+	},
+	{
+		"name" :"TIR",
+		"value" : "0"
+	},
+	{
+		"name" :"FIUS",
+		"value" : "0"
+	}
+]

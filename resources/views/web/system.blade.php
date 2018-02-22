@@ -6,6 +6,7 @@
     <script type="text/javascript" src="{{ asset('js/web/graphicProfile.js') }}"></script>
     <script type="text/javascript">
         var routeCharacteristics = '{{ route('entryCharacteristics', ['idEntry' => 'parameter']) }}';
+        var routeCosts = '{{ route('systemCost', ['idSystem' => 'parameter']) }}';
     </script>
     <script type="text/javascript" src="{{ asset('js/web/system.js') }}"></script>
 @stop
@@ -33,7 +34,7 @@
           <label class="col-xl-12">Productos</label>
         </a>
 
-        <label class="col-xl-12">Costos del sistema productivo</label>
+        <label id="{{ $system->idSystem }}" class="col-xl-12" onclick="getCosts(this.id)">Costos del sistema productivo</label>
 
         <input type="checkbox" id="graphics">
         <label for="graphics" class="col-xl-12">Indicadores Financieros</label>
@@ -54,8 +55,10 @@
     <div id="systemContent" class="col-xl-9">
 
       <div class="col-xl-1"></div>
-          @include('web.partials.system.products')
-
+      <article id="SystemContent" class="col-xl-10">
+            @include('web.partials.system.products')
+      </article>
+      <div class="col-xl-1"></div>
     </div>
   </div>
 

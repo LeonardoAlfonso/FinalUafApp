@@ -18,6 +18,7 @@ class CreateCostsTable extends Migration
                 $table->double('unitaryCost');
                 $table->integer('quantity')->nullable();
                 $table->integer('period')->nullable();
+                $table->double('total');
                 $table->timestamps();
 
                 $table->integer('idSystem')->unsigned()->nullable();

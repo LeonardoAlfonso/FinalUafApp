@@ -19,6 +19,7 @@ class CreateEntriesTable extends Migration
               $table->integer('quantity')->nullable();
               $table->integer('period')->nullable();
               $table->boolean('integralIndicator')->nullable();
+              $table->double('total');
               $table->timestamps();
 
               $table->integer('idSystem')->unsigned()->nullable();

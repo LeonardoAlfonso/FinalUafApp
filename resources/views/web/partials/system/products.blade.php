@@ -1,4 +1,3 @@
-<article class="col-xl-10">
   <div class="col-xl-12">
     <h4><b>Productos</b></h4>
   </div>
@@ -29,6 +28,3 @@
       </tbody>
     </table>
   </div>
-
-</article>
-<div class="col-xl-1"></div>

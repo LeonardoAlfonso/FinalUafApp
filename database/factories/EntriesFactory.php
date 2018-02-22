@@ -16,6 +16,7 @@ $factory->define(App\Models\Entry::class, function (Faker $faker) {
         'quantity' => $faker->randomNumber(),
         'period' => $faker->randomNumber($nbDigits = 2, $strict = false),
         'integralIndicator' => $faker->boolean(),
+        'total' => $faker->randomNumber(),
         'idSystem' => $faker->randomElement($system)
     ];
 });

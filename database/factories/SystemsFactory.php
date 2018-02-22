@@ -10,10 +10,6 @@ $factory->define(App\Models\System::class, function (Faker $faker) {
     return [
         'nameSystem' => $faker->name,
         'autor' => $faker->name,
-        'uafMinimum' => $faker->randomNumber(),
-        'uafMaximum' => $faker->randomNumber(),
-        'uafIntegralMinimum' => $faker->randomNumber(),
-        'uafIntegralMaximum' => $faker->randomNumber(),
         'jornalValue' => $faker->randomNumber(),
         'idZone' => $faker->randomElement($zone)
     ];

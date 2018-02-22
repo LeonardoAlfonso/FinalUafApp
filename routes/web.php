@@ -42,7 +42,9 @@ Route::get('/changeSystem/{idSystem}', 'WebControllers\systemController@changeSy
 Route::get('/System/{idSystem}', 'WebControllers\systemController@getSystem')->name('system');
 Route::get('/System/Entry/{idEntry}', 'WebControllers\systemController@getCharacteristicsEntry')->name('entryCharacteristics');
 Route::get('/System/Cost/{idSystem}', 'WebControllers\systemController@getCosts')->name('systemCost');
-//localhost/uafApp/public/System/Cost/1331
+Route::get('/System/Indicators/{idSystem}', 'WebControllers\systemController@getIndicators')->name('systemIndicators');
+
+//localhost/uafApp/public/System/Indicators/339
 
 //Routes for admin
 Route::get('/admin', 'AppControllers\adminController@getAdminView')->middleware('auth')->name('admin');
