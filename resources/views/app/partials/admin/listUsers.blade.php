@@ -52,14 +52,28 @@
       </tr>
     </thead>
     <tbody>
+      @foreach($users as $user)
       <tr>
-        <td>Pepito Perez</td>
-        <td>pepito@pepito.com</td>
-        <td>Admin</td>
-        <td>19-18-52</td>
-        <td><img src="images/app/editIcon.png"></td>
-        <td><img src="images/app/deleteIcon.png"></td>
+        <td>{{ $user->name }}</td>
+        <td>{{ $user->email }}</td>
+        <td>{{ $user->role }}</td>
+        <td>{{ $user->role }}</td>
+        <td>
+          <div id="{{ $user->id }}">
+            <img src="images/app/editIcon.png">
+          </div>
+        </td>
+        <td>
+          <div id="{{ $user->id }}">
+            <img src="images/app/deleteIcon.png">
+          </div>
+        </td>
       </tr>
+      @endforeach
     </tbody>
   </table>
+  <div class="paginator">
+      {{ $users->links() }}
+  </div>
+
 </div>

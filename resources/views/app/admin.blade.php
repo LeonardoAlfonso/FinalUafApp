@@ -7,10 +7,10 @@
 @section('menuOptions')
     <ul class="col-xl-12">
       <a href="{{ route('admin') }}"><li id="users" class="optionsMenu">Usuarios</li></a>
-      <a href="{{ route('userIndicators') }}"><li id="indicators" class="optionsMenu">Indicadores</li></a>
+      <a href="{{ route('editIndicators') }}"><li id="indicators" class="optionsMenu">Indicadores</li></a>
     </ul>
 @stop
 
 @section('form')
-    @include('app.partials.admin.listUsers')
+      @include('app.partials.admin.listUsers')
 @stop

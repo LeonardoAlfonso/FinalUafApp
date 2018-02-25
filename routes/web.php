@@ -44,17 +44,32 @@ Route::get('/System/Entry/{idEntry}', 'WebControllers\systemController@getCharac
 Route::get('/System/Cost/{idSystem}', 'WebControllers\systemController@getCosts')->name('systemCost');
 Route::get('/System/Indicators/{idSystem}', 'WebControllers\systemController@getIndicators')->name('systemIndicators');
 
+//Routes for adminController
+Route::get('/admin', 'AppControllers\adminController@getListUsers')->middleware('auth')->name('admin');
+Route::get('/admin/newUser', 'AppControllers\adminController@getNewUser')->middleware('auth')->name('newUser');
+Route::get('/admin/editUser/{idUser}', 'AppControllers\adminController@getEditUser')->middleware('auth')->name('editUser');
+Route::get('/admin/editIndicators', 'AppControllers\adminController@getEditIndicators')->middleware('auth')->name('editIndicators');
+Route::post('/admin/saveUser', 'AppControllers\adminController@saveUser')->name('saveUser');
+Route::post('/admin/saveIndicators', 'AppControllers\adminController@saveUser')->name('saveIndicators');
+
+
+
+
+
+
+
+
 //localhost/uafApp/public/System/Indicators/339
 
 //Routes for admin
-Route::get('/admin', 'AppControllers\adminController@getAdminView')->middleware('auth')->name('admin');
+
 Route::get('/indicators', function () {
     return view('app.replics.admin.indicators');
 })->name('userIndicators');
 
-Route::get('/newUser', function () {
-    return view('app.replics.admin.adminNewUser');
-})->name('newUser');
+// Route::get('/newUser', function () {
+//     return view('app.replics.admin.adminNewUser');
+// })->name('newUser');
 
 Route::get('expert', function () {
     return view('app.expert');
