@@ -15,7 +15,7 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-            <a href="{{ route('newUser') }}"><label id="addUser" class="standardButton">Añadir Usuario</label></a>
+            <a href="{{ route('getUser', ['id' => 'null']) }}"><label id="addUser" class="standardButton">Añadir Usuario</label></a>
           </div>
         </div>
         <div class="col-xl-1"></div>
@@ -54,26 +54,26 @@
     <tbody>
       @foreach($users as $user)
       <tr>
-        <td>{{ $user->name }}</td>
+        <td>{{ $user->firstName }} {{ $user->lastName }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->role }}</td>
-        <td>{{ $user->role }}</td>
+        <td>{{ $user->created_at }}</td>
         <td>
-          <div id="{{ $user->id }}">
-            <img src="images/app/editIcon.png">
-          </div>
+          <a href="{{ route('getUser', ['id' => $user->idUser ]) }}">
+            <img src="{{ asset('images/app/editIcon.png') }}">
+          </a>
         </td>
         <td>
-          <div id="{{ $user->id }}">
-            <img src="images/app/deleteIcon.png">
-          </div>
+          <a href="{{ route('getUser', ['id' => $user->idUser ]) }}">
+            <img src="{{ asset('images/app/deleteIcon.png') }}">
+          </a>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
-  <div class="paginator">
-      {{ $users->links() }}
+  <div class="col-xl-12">
+        {{ $users->links('app.templates.paginator') }}
   </div>
 
 </div>

@@ -8,8 +8,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        $systems = System::all();
-
         $this->call([
             GlossaryTableSeeder::class,
             DepartamentsTableSeeder::class,
@@ -24,6 +22,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Models\CharacteristicEntry::class,1500)->create();
         factory(App\Models\Cost::class,1500)->create();
         factory(App\Models\SystemIndicator::class,1500)->create();
+        factory(App\Models\UserDepartament::class,1000)->create();
 
     }
 

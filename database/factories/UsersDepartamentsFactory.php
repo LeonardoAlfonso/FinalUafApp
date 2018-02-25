@@ -1,6 +1,8 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\User;
+use App\Models\Departament;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +15,14 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Models\UserDepartament::class, function (Faker $faker) {
+
+  $departaments = Departament::all()->pluck('idDepartament')->toArray();
+  $users = User::all()->pluck('idUser')->toArray();
+
     return [
-        'firstName' => $faker->name,
-        'lastName' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'role' => $faker->randomElement(array('admin','expert','cartographer')),
-        'remember_token' => str_random(10),
+        'idDepartament' => $faker->randomElement($departaments),
+        'idUser' => $faker->randomElement($users),
+
     ];
 });

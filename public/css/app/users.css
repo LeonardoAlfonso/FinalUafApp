@@ -31,6 +31,16 @@ label.standardButton{
     padding: 5px 10px;
 }
 
+button.saveInput{
+  background : #008762;
+  background : rgba(0, 135, 98, 1);
+  font-size: 18px;
+  padding: 5px 10px;
+  color: white;
+  border:none;
+  cursor: pointer;
+}
+
 label.standardButton:hover{
     box-shadow:  -1px 2px 1px 1px #4D4F4E;
 }
@@ -53,6 +63,7 @@ section#content div#Searcher input{
 
 section#content article hr{
 
+    margin-top: 10px;
     border: 1px solid #008762;
     background: #008762;
 }
@@ -129,7 +140,7 @@ section#content article div.chooseLabels{
     color : rgb(87, 87, 86);
     text-align: left;
     width: 100%;
-    margin-top: 5px;
+    margin: 15px 0px;
 }
 
 section#content article .departament{
@@ -137,4 +148,13 @@ section#content article .departament{
     font-size: 15px;
     color : #575756;
     color : rgb(87, 87, 86);
+}
+
+section#content article .departament label{
+    cursor: pointer;
+}
+
+/* ////////Errores//////// */
+span.error{
+    color: red;
 }

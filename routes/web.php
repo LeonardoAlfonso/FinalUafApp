@@ -46,8 +46,7 @@ Route::get('/System/Indicators/{idSystem}', 'WebControllers\systemController@get
 
 //Routes for adminController
 Route::get('/admin', 'AppControllers\adminController@getListUsers')->middleware('auth')->name('admin');
-Route::get('/admin/newUser', 'AppControllers\adminController@getNewUser')->middleware('auth')->name('newUser');
-Route::get('/admin/editUser/{idUser}', 'AppControllers\adminController@getEditUser')->middleware('auth')->name('editUser');
+Route::get('/admin/newUser/{id}', 'AppControllers\adminController@getUser')->middleware('auth')->name('getUser');
 Route::get('/admin/editIndicators', 'AppControllers\adminController@getEditIndicators')->middleware('auth')->name('editIndicators');
 Route::post('/admin/saveUser', 'AppControllers\adminController@saveUser')->name('saveUser');
 Route::post('/admin/saveIndicators', 'AppControllers\adminController@saveUser')->name('saveIndicators');

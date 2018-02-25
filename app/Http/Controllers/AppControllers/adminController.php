@@ -3,16 +3,78 @@
 namespace App\Http\Controllers\AppControllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
+use App\Logic\CreationUser\UserTools;
+use App\Models\Departament;
 use App\User;
+use Validator;
 
 class adminController extends Controller
 {
     public function getListUsers()
     {
         $users = User::paginate(10);
+        $option = 'listUser';
+        $roles = array('admin','expert','cartographer');
 
         return view('app.admin')
-                  ->with('users', $users);
+                  ->with('users', $users)
+                  ->with('option',$option);
+    }
+
+    public function getUser($id)
+    {
+
+        if($id == 'null')
+        {
+            $user = new User();
+            $option = 'newUser';
+        }
+        else
+        {
+            $user = User::find($id);
+            $option = 'editUser';
+        }
+
+          $roles = array('admin','expert','cartographer');
+          $departaments = Departament::all();
+
+
+        foreach ($departaments as $departament)
+        {
+              if(!is_null($departament->users->find($id)))
+              {
+                  $departament->setIscheckAttribute(true);
+              }
+              else
+              {
+                  $departament->setIscheckAttribute(false);
+              }
+        }
+
+        $departaments = $departaments->chunk(3);
+
+        return view('app.admin')
+                  ->with('user', $user)
+                  ->with('option',$option)
+                  ->with('roles', $roles)
+                  ->with('departaments', $departaments);
+    }
+
+    public function saveUser(Request $request)
+    {
+          $createUser = new UserTools();
+          $validations = $createUser->validationData($request);
+
+            if($validations->fails())
+            {
+                return redirect()->back()->withErrors($validations);
+            }
+
+          $createUser->createUser($request);
+
+          return redirect()->route('admin');
     }
 }

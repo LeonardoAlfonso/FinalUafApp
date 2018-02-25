@@ -12,8 +12,8 @@
     <title>ANT Administración</title>
     <link href="https://fonts.googleapis.com/css?family=Lato|Nunito" rel="stylesheet" type='text/css'>
 
-    <link rel="stylesheet" href="css/ColumnsStyle.css">
-    <link rel="stylesheet" href="css/app/systemConfiguration.css">
+    <link rel="stylesheet" href="{{ asset('css/ColumnsStyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app/systemConfiguration.css') }}">
 
     @yield('links')
 </head>
@@ -24,7 +24,7 @@
 
     <aside id="sideBar" class="col-xl-2">
         <figure class="col-xl-12">
-          <img src="images/app/LogoAnt.png" alt="">
+          <img src="{{ asset('images/app/LogoAnt.png') }}" alt="">
         </figure>
 
         @yield('menuOptions')
@@ -41,25 +41,33 @@
                 <div class="col-xl-8"></div>
                 <div class="col-xl-3">
                   <ul id="LogOutSection">
-                    <li><img src="images/app/userIcon.png"></li>
+
+                    <li><img src="{{ asset('images/app/userIcon.png') }}"></li>
                     <li id="UserName" ><h1> Nombre Usuario </h1></li>
-                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                            <img id="closeSesion" src="images/app/LogOut.png">
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                    <li>
+                      <div id="closeSesion">
+                          <img src="{{ asset('images/app/LogOut.png') }}">
+
+                          <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                  document.getElementById('logout-form').submit();">
+                                  <div id="wrapperLogOut">
+                              <label for="" id="logOut">Logout</label>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  @csrf
+                              </form>
+                              </div>
+                           </a>
+
+                      </div>
                     </li>
+
                   </ul>
                 </div>
                 <div class="col-xl-1">
             </div>
           </div>
 
-          <div id="wrapperLogOut">
-              <label for="" id="logOut">Logout</label>
-          </div>
+
 
 
           <!-- <div class="col-xl-12">
@@ -92,7 +100,7 @@
         </header>
 
         <div class="row">
-          <img id="backImage" src="images/app/background.jpg" alt="">
+          <img id="backImage" src="{{ asset('images/app/background.jpg') }}" alt="">
           <article class="col-xl-12">
               @yield('form')
           </article>
@@ -100,7 +108,7 @@
 
       <div class="row">
         <footer class="col-xl-12">
-              <img src="images/app/LogoJaveriana.png">
+              <img src="{{ asset('images/app/LogoJaveriana.png') }}">
         </footer>
       </div>
 

@@ -1,5 +1,5 @@
 @extends('app.templates.appTemplate')
-    <link rel="stylesheet" href="css/app/users.css">
+    <link rel="stylesheet" href="{{ asset('css/app/users.css') }}">
 @section('links')
 
 @stop
@@ -12,5 +12,11 @@
 @stop
 
 @section('form')
+  @if($option === 'listUser')
       @include('app.partials.admin.listUsers')
+  @elseif($option === 'indicators')
+      @include('app.partials.admin.editIndicators')
+  @else
+      @include('app.partials.admin.configUser')
+  @endif
 @stop
