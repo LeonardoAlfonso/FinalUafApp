@@ -12,7 +12,7 @@ use Validator;
 
 class UserTools
 {
-    public function validationData(Request $request)
+    public function validationNewUser(Request $request)
     {
           $input = $request->all();
           $rules = [
@@ -33,17 +33,40 @@ class UserTools
           return Validator::make($input, $rules, $messages);
     }
 
-    public function createUser($request)
+    public function validationEditUser(Request $request)
     {
-          $user = new User();
+          $input = $request->all();
+          $rules = [
+            'firstName' => 'required|max:20',
+            'lastName' => 'required|max:20',
+            'email' => 'required|email',
+            'role' => 'required',
+          ];
+          $messages = [
+            'required' => 'Campo Obligatorio',
+            'max' => 'El campo no puede superar los 20 caracteres',
+            'email' => 'Correo Incorrecto',
+          ];
 
+          return Validator::make($input, $rules, $messages);
+    }
+
+    public function createUser(Request $request)
+    {
             //Atributes
+              if(!is_null($request->idUser))
+              {
+                  $user = User::find($request->idUser);
+              }
+              else
+              {
+                  $user = new User();
+              }
+
               $user->firstName = $request->firstName;
               $user->lastName = $request->lastName;
               $user->email = $request->email;
-              $user->password = $request->password;
               $user->role = $request->role;
-              $user->remember_token = str_random(10);
 
           $user->save();
 
@@ -64,5 +87,19 @@ class UserTools
                     $userDepartamentRelation->save();
                 }
           }
+    }
+
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+        $usersDepartaments = UserDepartament::where('idUser',$id)->get();
+        // dd($usersDepartaments);
+
+        foreach ($usersDepartaments as $userDepartament)
+        {
+            // dd($userDepartament);
+            $userDepartament->where('idUser',$id)->delete();
+        }
+        $user->delete();
     }
 }

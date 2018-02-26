@@ -6,7 +6,9 @@
     <div class="col-xl-6">
       <div class="col-xl-12">
 
-        <div class="col-xl-1"></div>
+        <div class="col-xl-1">
+                  <input type="hidden" name="idUser" value="{{ $user->idUser }}">
+        </div>
         <div class="col-xl-5">
             @if($option === 'newUser')
               <h2>Nuevo Usuario</h2>

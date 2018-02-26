@@ -66,7 +66,15 @@ class adminController extends Controller
     public function saveUser(Request $request)
     {
           $createUser = new UserTools();
-          $validations = $createUser->validationData($request);
+
+          if(is_null($request->idUser))
+          {
+              $validations = $createUser->validationNewUser($request);
+          }
+          else
+          {
+              $validations = $createUser->validationEditUser($request);
+          }
 
             if($validations->fails())
             {
@@ -76,5 +84,12 @@ class adminController extends Controller
           $createUser->createUser($request);
 
           return redirect()->route('admin');
+    }
+
+    public function deleteUser($id)
+    {
+        $createUser = new UserTools();
+        $createUser->deleteUser($id);
+        return redirect()->route('admin');
     }
 }

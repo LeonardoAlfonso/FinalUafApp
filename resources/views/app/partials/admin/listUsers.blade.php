@@ -64,7 +64,7 @@
           </a>
         </td>
         <td>
-          <a href="{{ route('getUser', ['id' => $user->idUser ]) }}">
+          <a href="{{ route('userDelete', ['id' => $user->idUser ]) }}">
             <img src="{{ asset('images/app/deleteIcon.png') }}">
           </a>
         </td>

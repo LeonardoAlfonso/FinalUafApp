@@ -50,6 +50,7 @@ Route::get('/admin/newUser/{id}', 'AppControllers\adminController@getUser')->mid
 Route::get('/admin/editIndicators', 'AppControllers\adminController@getEditIndicators')->middleware('auth')->name('editIndicators');
 Route::post('/admin/saveUser', 'AppControllers\adminController@saveUser')->name('saveUser');
 Route::post('/admin/saveIndicators', 'AppControllers\adminController@saveUser')->name('saveIndicators');
+Route::get('/admin/deleteUser/{id}', 'AppControllers\adminController@deleteUser')->name('userDelete');
 
 
 
