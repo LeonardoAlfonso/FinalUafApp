@@ -39,6 +39,7 @@ button.saveInput{
   color: white;
   border:none;
   cursor: pointer;
+  float: right;
 }
 
 label.standardButton:hover{

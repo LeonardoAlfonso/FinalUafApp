@@ -1,5 +1,4 @@
 
-
 <form class="formRegister" action="{{ route('saveUser') }}" method="post">
   {{ csrf_field() }}
   <div class="col-xl-12">

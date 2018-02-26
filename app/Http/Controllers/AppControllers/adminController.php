@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use App\Logic\CreationUser\UserTools;
+use App\Logic\UafParameters\UafParametersTools;
 use App\Models\Departament;
+use App\Models\UafParameter;
 use App\User;
 use Validator;
 
@@ -90,6 +92,31 @@ class adminController extends Controller
     {
         $createUser = new UserTools();
         $createUser->deleteUser($id);
+        return redirect()->route('admin');
+    }
+
+    public function getEditIndicators()
+    {
+        $option = 'indicators';
+        $parameters = UafParameter::all();
+        return view('app.admin')
+                    ->with('parameters', $parameters)
+                    ->with('option',$option);
+    }
+
+    public function saveIndicators(Request $request)
+    {
+
+        $editParameters = new UafParametersTools();
+        $validations = $editParameters->validationParameters($request);
+
+        if($validations->fails())
+        {
+            return redirect()->back()->withErrors($validations);
+        }
+
+        $editParameters->saveIndicators($request);
+
         return redirect()->route('admin');
     }
 }
