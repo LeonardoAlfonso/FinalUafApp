@@ -42,12 +42,14 @@ class cartographerController extends Controller
         return view('app.cartographer')
                   ->with('departaments', $departaments)
                   ->with('zones', $zones)
-                  ->with('option', $option);
+                  ->with('option', $option)
+                  ->with('selectDepartament', $idDepartament);
     }
 
     public function getZone($idZone, $idDepartament)
     {
         //Objects and Resources
+
           $idUser = Auth::user()->idUser;
           $departaments = User::find($idUser)->departaments;
           $tools = new ZoneTools();
@@ -65,11 +67,20 @@ class cartographerController extends Controller
           $indicatorFile = json_decode($indicatorFile);
 
         //Actions
-          $token = $tools->createRelations($characteristicsFile, $indicatorFile);
-
-        //New Assignments
-          $characteristics = CharacteristicZone::where('rememberToken',$token)->get();
-          $indicators = IndicatorZone::where('rememberToken',$token)->get();
+          if($idZone == 'null')
+          {
+              $zone = new Zone();
+              $token = $tools->createRelations($characteristicsFile, $indicatorFile);
+              $characteristics = CharacteristicZone::where('rememberToken',$token)->get();
+              $indicators = IndicatorZone::where('rememberToken',$token)->get();
+          }
+          else
+          {
+              $zone = Zone::find($idZone);
+              $characteristics = $zone->Characteristics;
+              $indicators = $zone->Indicators;
+              $token = $indicators->first()->rememberToken;
+          }
 
           return view('app.cartographer')
                     ->with('departaments', $departaments)
@@ -77,7 +88,8 @@ class cartographerController extends Controller
                     ->with('characteristics', $characteristics)
                     ->with('indicators', $indicators)
                     ->with('token', $token)
-                    ->with('idDepartament', $idDepartament);
+                    ->with('idDepartament', $idDepartament)
+                    ->with('zone', $zone);
     }
 
     public function saveZone(Request $request)
@@ -86,5 +98,12 @@ class cartographerController extends Controller
         $tools->createZone($request);
 
         return redirect()->route('listZones',['idDepartament' => $request->idDepartament]);
+    }
+
+    public function deleteZone($idZone)
+    {
+        $zone = Zone::find($idZone);
+        $zone->delete();
+        return redirect()->route('cartographer');
     }
 }

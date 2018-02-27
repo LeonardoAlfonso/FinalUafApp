@@ -15,7 +15,7 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-            <a href="{{ route('getZone', ['idZone' => 'null', 'idDepartament' =>  $departament->idDepartament ]) }}">
+            <a href="{{ route('getZone', ['idZone' => 'null', 'idDepartament' =>  $selectDepartament ]) }}">
                 <label id="newZone" class="standardButton">Nueva Zona</label>
             </a>
           </div>
@@ -44,7 +44,7 @@
 
   <div class="col-xl-12">
     <div class="col-xl-12">
-      <table class="tableStyle"> <!-- Ciclo de la tabla -->
+      <table class="tableStyle">
         <thead>
           <tr>
             <th>Nombre Zona</th>
@@ -60,8 +60,8 @@
               <td>{{ $zone->nameZone }}</td>
               <td>{{ $zone->autor }}</td>
               <td>{{ $zone->created_at }}</td>
-              <td><a href="#"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
-              <td><a href="#"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
+              <td><a href="{{ route('getZone', ['idZone' => $zone->idZone, 'idDepartament' =>  $selectDepartament ]) }}"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
+              <td><a href="{{ route('zoneDelete', ['idZone' => $zone->idZone]) }}"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
             </tr>
           @endforeach
         </tbody>

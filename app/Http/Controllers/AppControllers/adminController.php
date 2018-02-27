@@ -88,10 +88,10 @@ class adminController extends Controller
           return redirect()->route('admin');
     }
 
-    public function deleteUser($id)
+    public function deleteUser($idUser)
     {
         $createUser = new UserTools();
-        $createUser->deleteUser($id);
+        $createUser->deleteUser($idUser);
         return redirect()->route('admin');
     }
 

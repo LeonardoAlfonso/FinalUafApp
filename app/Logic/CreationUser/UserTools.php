@@ -89,17 +89,18 @@ class UserTools
           }
     }
 
-    public function deleteUser($id)
+    public function deleteUser($idUser)
     {
-        $user = User::find($id);
-        $usersDepartaments = UserDepartament::where('idUser',$id)->get();
+        $user = User::find($idUser);
+        $usersDepartaments = UserDepartament::where('idUser',$idUser)->get();
         // dd($usersDepartaments);
 
         foreach ($usersDepartaments as $userDepartament)
         {
             // dd($userDepartament);
-            $userDepartament->where('idUser',$id)->delete();
+            $userDepartament->where('idUser',$idUser)->delete();
         }
+        
         $user->delete();
     }
 }

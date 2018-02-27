@@ -9,6 +9,7 @@
             <h2>Nueva Zona</h2>
             <input type="hidden" name="tokenZone" value="{{ $token }}">
             <input type="hidden" name="idDepartament" value="{{ $idDepartament }}">
+            <input type="hidden" name="idZone" value="{{ $zone->idZone }}">
         </div>
         <div class="col-xl-4"></div>
 
@@ -44,7 +45,7 @@
             <h3>Nombre</h3>
         </div>
         <div class="col-xl-7">
-            <input type="text" name="nameZone" value="">
+            <input type="text" name="nameZone" value="{{ $zone->nameZone }}">
         </div>
         <div class="col-xl-1"></div>
 
@@ -86,7 +87,7 @@
                   @foreach($characteristics as $characteristic)
                     <li>
                       <label>{{ $characteristic->nameCharacteristic}}</label>
-                      <input type="text" name="{{ $characteristic->nameCharacteristic}}" value="{{ $characteristic->valueCharacteristic}}">
+                      <input type="text" name="{{ $characteristic->showCharacteristic }}" value="{{ $characteristic->valueCharacteristic}}">
                     </li>
                   @endforeach
                 </ul>
@@ -116,7 +117,7 @@
                     @foreach($indicators as $indicator)
                       <li>
                         <label>{{ $indicator->nameIndicator }}</label>
-                        <input type="text" name="{{ $indicator->nameIndicator }}" value="{{ $indicator->valueIndicator }}">
+                        <input type="text" name="{{ $indicator->showIndicator }}" value="{{ $indicator->valueIndicator }}">
                       </li>
                     @endforeach
                   </ul>
