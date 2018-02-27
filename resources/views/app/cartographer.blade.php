@@ -1,5 +1,5 @@
 @extends('app.templates.appTemplate')
-    <link rel="stylesheet" href="css/app/cartographer.css">
+    <link rel="stylesheet" href="{{ asset('css/app/cartographer.css') }}">
 @section('links')
 
 @stop
@@ -8,13 +8,22 @@
     <ul class="col-xl-12">
       <li class="optionsMenu">Departamentos
         <ul id="SubMenu">
-          <li class="subMenuItem">Amazonas</li>
-          <li class="subMenuItem">Casanare</li>
+          @foreach($departaments as $departament)
+            <a href="{{ route('listZones',['idDepartament' => $departament->idDepartament]) }}">
+              <li class="subMenuItem">{{ $departament->departamentName }}</li>
+            </a>
+          @endforeach
         </ul>
       </li>
     </ul>
 @stop
 
 @section('form')
-    @include('app.partials.cartographer.newMunicipality')
+  @if($option === 'listZones')
+      @include('app.partials.cartographer.listZones')
+  @elseif($option === 'configZone')
+      @include('app.partials.cartographer.configZone')
+  @else
+
+  @endif
 @stop

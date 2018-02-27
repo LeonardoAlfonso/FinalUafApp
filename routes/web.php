@@ -52,6 +52,11 @@ Route::post('/admin/saveUser', 'AppControllers\adminController@saveUser')->name(
 Route::post('/admin/saveIndicators', 'AppControllers\adminController@saveIndicators')->name('saveIndicators');
 Route::get('/admin/deleteUser/{id}', 'AppControllers\adminController@deleteUser')->name('userDelete');
 
+//Routes for cartographerController
+Route::get('/cartographer', 'AppControllers\cartographerController@cartographerPanel')->middleware('auth')->name('cartographer');
+Route::get('/cartographer/{idDepartament}', 'AppControllers\cartographerController@getListZones')->name('listZones');
+Route::get('/cartographer/zone/{idZone}/departament/{idDepartament}', 'AppControllers\cartographerController@getZone')->name('getZone');
+Route::post('/cartographer/saveZone', 'AppControllers\cartographerController@saveZone')->name('saveZone');
 
 
 
@@ -63,21 +68,21 @@ Route::get('/admin/deleteUser/{id}', 'AppControllers\adminController@deleteUser'
 
 //Routes for admin
 
-Route::get('/indicators', function () {
-    return view('app.replics.admin.indicators');
-})->name('userIndicators');
-
-// Route::get('/newUser', function () {
-//     return view('app.replics.admin.adminNewUser');
-// })->name('newUser');
-
-Route::get('expert', function () {
-    return view('app.expert');
-});
-
-Route::get('systemList', function () {
-    return view('web.listProductiveSystems');
-});
+// Route::get('/indicators', function () {
+//     return view('app.replics.admin.indicators');
+// })->name('userIndicators');
+//
+// // Route::get('/newUser', function () {
+// //     return view('app.replics.admin.adminNewUser');
+// // })->name('newUser');
+//
+// Route::get('expert', function () {
+//     return view('app.expert');
+// });
+//
+// Route::get('systemList', function () {
+//     return view('web.listProductiveSystems');
+// });
 
 // Route::get('system', function () {
 //     return view('web.system');
@@ -87,9 +92,9 @@ Route::get('systemList', function () {
 
 // Route::get('/services/zones/{name}', 'WebControllers\servicesController@getZones')->name('test');
 
-Route::get('/cartographer', function () {
-    return view('cartographer');
-})->name('cartographerView');
+// Route::get('/cartographer', function () {
+//     return view('cartographer');
+// })->name('cartographerView');
 
 
 

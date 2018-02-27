@@ -1,3 +1,5 @@
+<form class="formRegister" action="{{ route('saveZone') }}" method="post">
+  {{ csrf_field() }}
 <div class="col-xl-12">
   <div class="col-xl-6">
       <div class="col-xl-12">
@@ -5,6 +7,8 @@
         <div class="col-xl-1"></div>
         <div class="col-xl-7">
             <h2>Nueva Zona</h2>
+            <input type="hidden" name="tokenZone" value="{{ $token }}">
+            <input type="hidden" name="idDepartament" value="{{ $idDepartament }}">
         </div>
         <div class="col-xl-4"></div>
 
@@ -15,7 +19,13 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-              <label id="saveZone" class="standardButton">Guardar</label>
+
+            <div id="labelWrapper">
+              <button type="submit" class="saveInput">
+                  Guardar
+              </button>
+            </div>
+
           </div>
         </div>
         <div class="col-xl-1"></div>
@@ -34,7 +44,7 @@
             <h3>Nombre</h3>
         </div>
         <div class="col-xl-7">
-            <input type="text" name="" value="">
+            <input type="text" name="nameZone" value="">
         </div>
         <div class="col-xl-1"></div>
 
@@ -73,22 +83,12 @@
               <div class="col-xl-2"></div>
               <div class="col-xl-8">
                 <ul>
-                  <li>
-                    <label>Zona Climática:</label>
-                    <input type="text" name="" value="">
-                  </li>
-                  <li>
-                    <label>Temperatura:</label>
-                    <input type="text" name="" value="">
-                  </li>
-                  <li>
-                    <label>Precipitación:</label>
-                    <input type="text" name="" value="">
-                  </li>
-                  <li>
-                    <label>Altura:</label>
-                    <input type="text" name="" value="">
-                  </li>
+                  @foreach($characteristics as $characteristic)
+                    <li>
+                      <label>{{ $characteristic->nameCharacteristic}}</label>
+                      <input type="text" name="{{ $characteristic->nameCharacteristic}}" value="{{ $characteristic->valueCharacteristic}}">
+                    </li>
+                  @endforeach
                 </ul>
               </div>
               <div class="col-xl-2"></div>
@@ -110,24 +110,18 @@
               <div class="col-xl-2"></div>
               <div class="col-xl-12">
 
-                <div class="col-xl-2"></div>
-                <div class="col-xl-8">
+                <div class="col-xl-0"></div>
+                <div class="col-xl-11">
                   <ul>
-                    <li>
-                      <label>Índice de Vulnerabilidad Productiva Rural - IVPR</label>
-                      <input type="text" name="" value="">
-                    </li>
-                    <li>
-                      <label>Índice de Producción Agropecuaria - IPAP</label>
-                      <input type="text" name="" value="">
-                    </li>
-                    <li>
-                      <label>Índice de vulnerabilidad social - IPS</label>
-                      <input type="text" name="" value="">
-                    </li>
+                    @foreach($indicators as $indicator)
+                      <li>
+                        <label>{{ $indicator->nameIndicator }}</label>
+                        <input type="text" name="{{ $indicator->nameIndicator }}" value="{{ $indicator->valueIndicator }}">
+                      </li>
+                    @endforeach
                   </ul>
                 </div>
-                <div class="col-xl-2"></div>
+                <div class="col-xl-1"></div>
 
               </div>
             </div>
@@ -138,3 +132,4 @@
     </div>
 
   </div>
+  </form>

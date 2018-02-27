@@ -8,7 +8,7 @@ class IndicatorZone extends Model
 {
   //Atributes
     protected $table = "indicatorsZones";
-    protected $fillable = ['nameIndicator','valueIndicator','idZone'];
+    protected $fillable = ['nameIndicator','valueIndicator','rememberToken','idZone'];
     protected $primaryKey = 'idIndicator';
 
   //Relations

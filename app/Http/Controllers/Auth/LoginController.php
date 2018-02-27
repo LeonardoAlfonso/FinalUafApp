@@ -26,7 +26,7 @@ class LoginController extends Controller
             return route('expertView');
         }
         elseif ( Auth::user()->role === 'cartographer' ) {
-            return route('cartographerView');
+            return route('cartographer');
         }
     }
 

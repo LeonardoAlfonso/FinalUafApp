@@ -77,6 +77,17 @@ label.standardButton{
 
 }
 
+button.saveInput{
+  background : #008762;
+  background : rgba(0, 135, 98, 1);
+  font-size: 18px;
+  padding: 5px 10px;
+  color: white;
+  border:none;
+  cursor: pointer;
+  float: right;
+}
+
 section#content article div#map{
     float:right;
     margin-top: 6%;
@@ -98,6 +109,10 @@ section#content article div#municipality{
 }
 
 label.standardButton:hover{
+    box-shadow:  -1px 2px 1px 1px #4D4F4E;
+}
+
+button.saveInput:hover{
     box-shadow:  -1px 2px 1px 1px #4D4F4E;
 }
 
@@ -226,6 +241,7 @@ div.titleBody ul li{
 }
 
 div.titleBody ul li label{
+    margin-left: 30px;
     color:black;
     font-size: 18px;
 }
@@ -240,7 +256,7 @@ div.titleBody ul li input{
     background-color: white;
     color: #014C35;
     padding-left: 10px;
-    width: 60%;
+    /* width: 60%; */
 }
 
 label.formButton{

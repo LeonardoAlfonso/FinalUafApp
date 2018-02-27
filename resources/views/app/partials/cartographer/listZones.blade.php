@@ -4,7 +4,7 @@
 
         <div class="col-xl-1"></div>
         <div class="col-xl-7">
-            <h2>ZRH - Departamento</h2>
+            <h2>ZRH</h2>
         </div>
         <div class="col-xl-4"></div>
 
@@ -15,7 +15,9 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-              <label id="newZone" class="standardButton">Nueva Zona</label>
+            <a href="{{ route('getZone', ['idZone' => 'null', 'idDepartament' =>  $departament->idDepartament ]) }}">
+                <label id="newZone" class="standardButton">Nueva Zona</label>
+            </a>
           </div>
         </div>
         <div class="col-xl-1"></div>
@@ -53,13 +55,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>ZRH 1</td>
-            <td>Pepito Perez</td>
-            <td>19-18-52</td>
-            <td><a href="#"><img src="images/app/editIcon.png"></a></td>
-            <td><a href="#"><img src="images/app/deleteIcon.png"></a></td>
-          </tr>
+           @foreach($zones as $zone)
+            <tr>
+              <td>{{ $zone->nameZone }}</td>
+              <td>{{ $zone->autor }}</td>
+              <td>{{ $zone->created_at }}</td>
+              <td><a href="#"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
+              <td><a href="#"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
+            </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
