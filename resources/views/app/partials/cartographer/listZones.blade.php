@@ -4,7 +4,7 @@
 
         <div class="col-xl-1"></div>
         <div class="col-xl-7">
-            <h2>ZRH</h2>
+            <h2>ZRH - {{ $selectDepartament->departamentName }}</h2>
         </div>
         <div class="col-xl-4"></div>
 
@@ -15,7 +15,7 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-            <a href="{{ route('getZone', ['idZone' => 'null', 'idDepartament' =>  $selectDepartament ]) }}">
+            <a href="{{ route('getZone', ['idZone' => 'null', 'idDepartament' =>  $selectDepartament->idDepartament ]) }}">
                 <label id="newZone" class="standardButton">Nueva Zona</label>
             </a>
           </div>

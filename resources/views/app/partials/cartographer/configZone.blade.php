@@ -1,4 +1,4 @@
-<form class="formRegister" action="{{ route('saveZone') }}" method="post">
+<form class="formRegister" action="{{ route('saveZone') }}" method="post" enctype="multipart/form-data">
   {{ csrf_field() }}
 <div class="col-xl-12">
   <div class="col-xl-6">
@@ -62,7 +62,8 @@
           </div>
           <div class="col-xl-4">
             <div id="map">
-                <label id="addMap" class="standardButton">Añadir Mapa Zona</label>
+                <label for="fileControl" id="addMap" class="standardButton">Añadir Mapa Zona</label>
+                <input type="file" id="fileControl" name="miniMapFile" value="">
             </div>
           </div>
           <div class="col-xl-1"></div>

@@ -15,7 +15,9 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-              <label id="newSystem" class="standardButton">Nuevo Sistema</label>
+            <a href="{{ route('getZone', ['idZone' => 'null', 'idDepartament' =>  $selectZone ]) }}">
+                <label id="newSystem" class="standardButton">Nuevo Sistema</label>
+            </a>
           </div>
         </div>
         <div class="col-xl-1"></div>
@@ -28,31 +30,31 @@
   <div class="col-xl-12">
     <div class="col-xl-6">
       <div id="Filters" class="col-xl-12">
-
-        <div class="col-xl-1"></div>
-        <div class="col-xl-5">
-          <div class="select-style">
-            <select id="optionsDepartament" class="select">
-              <option selected="selected">Departamento</option>
-              <option>Amazonas</option>
-              <option>Casanare</option>
-              <option>Cundinamarca</option>
-              <option>Caqueta</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-xl-1"></div>
-        <div class="col-xl-5">
-          <div class="select-style">
-            <select id="optionsDepartament" class="select">
-              <option selected="selected">Zona</option>
-              <option>Zona 1</option>
-              <option>Zona 1</option>
-              <option>Zona 1</option>
-              <option>Zona 1</option>
-            </select>
-          </div>
-        </div>
+        <form class="row" action="{{ route('systemList') }}" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+            <div class="col-xl-1"></div>
+            <div class="col-xl-5">
+              <div class="select-style-expert">
+                <select id="optionsDepartament" name="Departament" class="select">
+                  <option disabled selected hidden>Escoger departamento..</option>
+                    @foreach($departaments as $departament)
+                      <option name="Departament">{{ $departament->departamentName }}</option>
+                    @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="col-xl-1"></div>
+            <div class="col-xl-5">
+              <div class="select-style-expert">
+                <select id="optionsZones" name="Zone" class="select" onchange="this.form.submit()">
+                    <option disabled selected hidden>Escoger zona..</option>
+                  @if($option === 'List')
+                      @include('app.partials.expert.tableList')
+                  @endif
+                </select>
+              </div>
+            </div>
+         </form>
       </div>
     </div>
     <div class="col-xl-6"></div>
@@ -60,25 +62,8 @@
 
   <div class="col-xl-12">
     <div class="col-xl-12">
-      <table class="tableStyle"> <!-- Ciclo de la tabla -->
-        <thead>
-          <tr>
-            <th>Nombre Sistema</th>
-            <th>Autor</th>
-            <th>Publicación</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Sistema X</td>
-            <td>Pepito Perez</td>
-            <td>19-18-42</td>
-            <td><a href="#"><img src="images/app/editIcon.png"></a></td>
-            <td><a href="#"><img src="images/app/deleteIcon.png"></a></td>
-          </tr>
-        </tbody>
-      </table>
+        @if($option === 'List')
+            @include('app.partials.expert.tableList')
+        @endif
     </div>
   </div>

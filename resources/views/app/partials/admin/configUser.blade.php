@@ -6,6 +6,7 @@
       <div class="col-xl-12">
 
         <div class="col-xl-1">
+            <input type="hidden" name="idUser" value="{{ $user->idUser }}">
         </div>
         <div class="col-xl-5">
             @if($option === 'newUser')
@@ -137,7 +138,11 @@
 
               <div class="select-style">
                 <select id="optionsRoles" class="select" name="role">
+                  @if($option === 'editUser')
+                    <option>{{ $user->role }}</option>
+                  @else
                     <option disabled selected hidden>Escoger Rol...</option>
+                  @endif
                     @foreach($roles as $role)
                         <option>{{ $role }}</option>
                     @endforeach

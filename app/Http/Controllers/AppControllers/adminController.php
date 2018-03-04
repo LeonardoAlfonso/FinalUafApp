@@ -69,6 +69,7 @@ class adminController extends Controller
     {
           $createUser = new UserTools();
 
+
           if(is_null($request->idUser))
           {
               $validations = $createUser->validationNewUser($request);

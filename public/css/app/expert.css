@@ -41,7 +41,7 @@ label.standardButton:hover{
     box-shadow: -1px 2px 1px 1px #4D4F4E;
 }
 
-div.select-style{
+div.select-style-expert{
     position: relative;
     margin-top: 30px;
     border-radius : 10px;
@@ -54,7 +54,7 @@ div.select-style{
     z-index: 2;
 }
 
-select.select{
+.select-style-expert select{
     border-radius : 10px;
     border-width : 2px;
     border-color : #575756;

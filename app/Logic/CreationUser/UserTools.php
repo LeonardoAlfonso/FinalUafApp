@@ -61,6 +61,7 @@ class UserTools
               else
               {
                   $user = new User();
+                    $user->password = $request->password;
               }
 
               $user->firstName = $request->firstName;
@@ -100,7 +101,7 @@ class UserTools
             // dd($userDepartament);
             $userDepartament->where('idUser',$idUser)->delete();
         }
-        
+
         $user->delete();
     }
 }

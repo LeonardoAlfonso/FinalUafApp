@@ -35,6 +35,7 @@ class cartographerController extends Controller
         $idUser = Auth::user()->idUser;
         $departaments = User::find($idUser)->departaments;
         $departaments = $departaments->sortBy('departamentName');
+        $selectDepartament = $departaments->first();
 
         $zones = Zone::where('idDepartament', $idDepartament)->get();
         $option = 'listZones';
@@ -43,13 +44,12 @@ class cartographerController extends Controller
                   ->with('departaments', $departaments)
                   ->with('zones', $zones)
                   ->with('option', $option)
-                  ->with('selectDepartament', $idDepartament);
+                  ->with('selectDepartament', $selectDepartament);
     }
 
     public function getZone($idZone, $idDepartament)
     {
         //Objects and Resources
-
           $idUser = Auth::user()->idUser;
           $departaments = User::find($idUser)->departaments;
           $tools = new ZoneTools();

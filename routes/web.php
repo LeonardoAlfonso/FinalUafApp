@@ -50,15 +50,20 @@ Route::get('/admin/newUser/{id}', 'AppControllers\adminController@getUser')->mid
 Route::get('/admin/editIndicators', 'AppControllers\adminController@getEditIndicators')->middleware('auth')->name('editIndicators');
 Route::post('/admin/saveUser', 'AppControllers\adminController@saveUser')->name('saveUser');
 Route::post('/admin/saveIndicators', 'AppControllers\adminController@saveIndicators')->name('saveIndicators');
-Route::get('/admin/deleteUser/{id}', 'AppControllers\adminController@deleteUser')->name('userDelete');
+Route::get('/admin/deleteUser/{idUser}', 'AppControllers\adminController@deleteUser')->name('userDelete');
 
 //Routes for cartographerController
 Route::get('/cartographer', 'AppControllers\cartographerController@cartographerPanel')->middleware('auth')->name('cartographer');
 Route::get('/cartographer/{idDepartament}', 'AppControllers\cartographerController@getListZones')->name('listZones');
 Route::get('/cartographer/zone/{idZone}/departament/{idDepartament}', 'AppControllers\cartographerController@getZone')->name('getZone');
 Route::post('/cartographer/saveZone', 'AppControllers\cartographerController@saveZone')->name('saveZone');
+Route::get('/cartographer/deleteZone/{idZone}', 'AppControllers\cartographerController@deleteZone')->name('zoneDelete');
 
-
+//Routes for systemController
+Route::get('/expert', 'AppControllers\systemController@expertPanel')->middleware('auth')->name('expert');
+Route::get('/expert/{nameDepartament}', 'AppControllers\systemController@getZonesList')->name('zonesList');
+Route::post('/expert/listSystem', 'AppControllers\systemController@getSystemList')->name('systemList');
+Route::post('/expert/system/{idZone}', 'AppControllers\systemController@getSystem')->name('getSystem');
 
 
 

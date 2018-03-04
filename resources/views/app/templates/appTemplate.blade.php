@@ -14,12 +14,13 @@
 
     <link rel="stylesheet" href="{{ asset('css/ColumnsStyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app/systemConfiguration.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     @yield('links')
 </head>
 
 <body>
-
+  <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
   <div class="container">
 
     <aside id="sideBar" class="col-xl-2">

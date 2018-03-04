@@ -18,10 +18,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     @yield('links')
-    <!--<link rel="stylesheet" href="css/web/aboutUs.css">
-    <link rel="stylesheet" href="css/web/glossary.css">
-    <link rel="stylesheet" href="css/web/Services.css">
-    <link rel="stylesheet" href="css/web/Zone.css"> -->
 
 </head>
 

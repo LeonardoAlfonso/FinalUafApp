@@ -5,6 +5,7 @@ namespace App\Logic\CreationZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Logic\CreationZone\ZoneTools;
 use App\Models\CharacteristicZone;
 use App\Models\IndicatorZone;
@@ -74,6 +75,7 @@ class ZoneTools
             $characteristics = CharacteristicZone::where('rememberToken', $request->tokenZone)->get();
             $indicators = IndicatorZone::where('rememberToken', $request->tokenZone)->get();
 
+
         foreach ($characteristics as $characteristic)
         {
             foreach ($this->characteristicsFileGlobal as $keyCharacteristic)
@@ -101,10 +103,21 @@ class ZoneTools
                 }
             }
 
-
             $indicator->idZone = $zone->idZone;
             $indicator->save();
         }
+
+        $this->saveMiniMap($request->file('miniMapFile'));
     }
 
+
+    //Functions Aux:
+    protected function saveMiniMap($file)
+    {
+
+        $name = $file->getClientOriginalName();
+        Storage::disk('local')->putFile($name , new \Illuminate\Http\File($file));
+        dd($name);
+
+    }
 }
