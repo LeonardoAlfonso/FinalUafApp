@@ -3,11 +3,9 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
   var data = google.visualization.arrayToDataTable([
     ['Task', 'Hours per Day'],
-    ['Work',     11],
-    ['Eat',      2],
-    ['Commute',  2],
-    ['Watch TV', 2],
-    ['Sleep',    7]
+    ['FIUS',     11],
+    ['Subsistema AgroForestal',      2],
+    ['Subsistema Pecuario',  2]
   ]);
 
   var options = {
