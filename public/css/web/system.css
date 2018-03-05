@@ -155,7 +155,7 @@ input#graphics:checked ~ ul#economicGraphics{
     height: 480px;
 }
 
-#structure div#modal{
+#structure div#costModal{
      background: rgba(0, 0, 0, 0.5);
      color: #fff;
      position: fixed;

@@ -1,3 +1,5 @@
+<form class="formRegister" action="{{ route('saveSystem') }}" method="post" enctype="multipart/form-data">
+  {{ csrf_field() }}
 <div class="col-xl-12">
   <div class="col-xl-6">
       <div class="col-xl-12">
@@ -20,9 +22,9 @@
           </div>
         </div>
         <div class="col-xl-2">
-          <div id="save">
-              <label id="saveSystem" class="standardButton">Guardar</label>
-          </div>
+          <button type="submit" class="saveInput">
+              Guardar
+          </button>
         </div>
         <div class="col-xl-1"></div>
 
@@ -44,7 +46,7 @@
                         <label for="">Nombre</label>
                     </div>
                     <div class="systemInput col-xl-8">
-                        <input type="text" name="" value="">
+                        <input type="text" name="nameSystem" value="">
                     </div>
                 </div>
               </div>
@@ -57,7 +59,7 @@
                         <label for="">Autor</label>
                     </div>
                     <div class="systemInput col-xl-8">
-                        <input type="text" name="" value="">
+                        <input type="text" name="authorSystem" value="">
                     </div>
                 </div>
               </div>
@@ -70,12 +72,13 @@
                         <label for="">Valor Jornal</label>
                     </div>
                     <div class="systemInput col-xl-8">
-                        <input type="text" name="" value="">
+                        <input type="text" name="jornalSystem" value="">
                     </div>
                 </div>
               </div>
             </div>
         </div>
+          </form>
         <div class="col-xl-6">
           <div class="col-xl-12">
             <div class="col-xl-2"></div>
@@ -95,7 +98,7 @@
         </div>
         <div class="col-xl-4"></div>
         <div class="col-xl-3 ButtonTable">
-            <input id="ShowCostModal" class="inputModal" name="modal" type="radio">
+            <input id="ShowCostModal" class="inputModal" name="costModal" type="radio">
             <label for="ShowCostModal" class="systemComponents">Nuevo Costo</label>
             @include('app.partials.expert.modals.costModal')
         <div class="col-xl-1"></div>
@@ -118,8 +121,8 @@
               <td>Sistema X</td>
               <td>Pepito Perez</td>
               <td>19-18-42</td>
-              <td><a href="#"><img src="images/app/editIcon.png"></a></td>
-              <td><a href="#"><img src="images/app/deleteIcon.png"></a></td>
+              <td><a href="#"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
+              <td><a href="#"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
             </tr>
           </tbody>
         </table>
@@ -153,14 +156,14 @@
               <td>Sistema X</td>
               <td>Pepito Perez</td>
               <td>19-18-42</td>
-              <td><a href="#"><img src="images/app/editIcon.png"></a></td>
-              <td><a href="#"><img src="images/app/deleteIcon.png"></a></td>
+              <td><a href="#"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
+              <td><a href="#"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
             </tr>
           </tbody>
         </table>
       </div>
+    </div>
 
-  </div>
   <div class="col-xl-2">
 
     <div class="col-xl-12">
@@ -277,8 +280,7 @@
       <div class="col-xl-3"></div>
     </div>
 
-
-
+</div>
 </div>
 
 <div class="col-xl-12">

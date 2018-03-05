@@ -5,7 +5,9 @@ namespace App\Http\Controllers\AppControllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Logic\CreateSystem\SystemTools;
 use App\Models\Departament;
+use App\Models\UafParameter;
 use App\Models\Zone;
 use App\User;
 
@@ -13,7 +15,6 @@ class systemController extends Controller
 {
     public function expertPanel()
     {
-
         $idUser = Auth::user()->idUser;
         $departaments = User::find($idUser)->departaments;
         $departaments = $departaments->sortBy('departamentName');
@@ -50,7 +51,6 @@ class systemController extends Controller
         $selectZone = Zone::where('idDepartament', $idDepartament)->where('nameZone', $request->Zone)->first();
         $systems = $selectZone->Systems()->get();
         $option = 'List';
-        $selectZone = Zone::where('idDepartament', $idDepartament)->get();
 
         return view('app.expert')
                   ->with('departaments', $departaments)
@@ -60,10 +60,31 @@ class systemController extends Controller
                   ->with('selectZone', $selectZone->idZone);
     }
 
-    public function getSystem()
+    public function getSystem($idZone)
     {
+          $tokenSystem = str_random(10);
+          // dd($idZone);
           $option = 'configSystem';
           return view('app.expert')
-                  ->with('option', $option);
+                  ->with('option', $option)
+                  ->with('tokenSystem', $tokenSystem);
+    }
+
+    public function saveSystem(Request $request)
+    {
+        dd($request);
+    }
+
+    public function storageCost(Request $request)
+    {
+        $systemTools = new SystemTools();
+        $systemTools->saveCost($request);
+
+        //http://localhost/uafApp/public/expert/system/cost/saveCost
+
+      if($request->ajax())
+      {
+          return response()->json(['mensaje'=> 'ok']);
+      }
     }
 }

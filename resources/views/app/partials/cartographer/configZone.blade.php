@@ -22,7 +22,7 @@
           <div id="options">
 
             <div id="labelWrapper">
-              <button type="submit" class="saveInput">
+              <button type="submit" class="saveInput" name="saveZone">
                   Guardar
               </button>
             </div>
@@ -57,7 +57,9 @@
           <div class="col-xl-3"></div>
           <div class="col-xl-4">
             <div id="municipality">
-                <label id="addMunicipality" class="standardButton">Añadir Municipio</label>
+              <button type="submit" class="saveInput" name="addMunicipality">
+                  Añadir Municipio
+              </button>
             </div>
           </div>
           <div class="col-xl-4">

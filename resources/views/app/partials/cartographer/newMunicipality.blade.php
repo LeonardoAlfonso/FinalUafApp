@@ -15,7 +15,9 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
+            <a href="{{ route('backZone') }}">
               <label id="saveZone" class="standardButton">Guardar</label>
+            </a>
           </div>
         </div>
         <div class="col-xl-1"></div>
@@ -34,11 +36,11 @@
             <h3>Municipio:</h3>
         </div>
         <div class="col-xl-4">
-            <input class="names" type="text" name="" value="">
+            <input id="nameMunicipality" class="names" type="text" name="" value="">
         </div>
         <div class="col-xl-4">
           <div id="newMunicipality">
-              <label id="addMunicipality" class="standardButton">Añadir Municipio</label>
+              <label id="addMunicipality" class="standardButton" onclick="saveMunicipality()">Añadir Municipio</label>
           </div>
         </div>
         <div class="col-xl-1"></div>
@@ -50,15 +52,15 @@
 
           <div class="col-xl-1"></div>
           <div class="col-xl-2">
-              <h3>Vereda:</h3>
+              <!-- <h3>Vereda:</h3> -->
           </div>
           <div class="col-xl-4">
-              <input class="names" type="text" name="" value="">
+              <!-- <input class="names" type="text" name="" value=""> -->
           </div>
           <div class="col-xl-4">
-            <div id="newVillage">
+            <!-- <div id="newVillage">
                 <label id="addVillage" class="standardButton">Añadir Vereda</label>
-            </div>
+            </div> -->
           </div>
           <div class="col-xl-1"></div>
 
@@ -75,19 +77,8 @@
             <div class="titleCard col-xl-12">
                 <p>Municipios</p>
             </div>
-            <div class="titleBody col-xl-12">
-              <table class="miniTable"> <!-- Ciclo de la tabla -->
-                <tbody>
-                  <tr>
-                    <td>Mesitas</td>
-                    <td style="width:10%"><a href="#"><img src="images/app/deleteIcon.png"></a></td>
-                  </tr>
-                  <tr>
-                    <td>facatativa</td>
-                    <td><a href="#"><img src="images/app/deleteIcon.png"></a></td>
-                  </tr>
-                </tbody>
-              </table>
+            <div id="tableMunicipalities" class="titleBody col-xl-12">
+                @include('app.partials.cartographer.tableMunicipality')
             </div>
         </div>
         <div class="col-xl-1"></div>
@@ -98,63 +89,16 @@
       <div class="col-xl-12">
 
         <div class="col-xl-1"></div>
-        <div class="col-xl-10 card">
+        <!-- <div class="col-xl-10 card">
             <div class="titleCard col-xl-12">
                 <p>Veredas</p>
             </div>
             <div class="titleBody col-xl-12">
               <div class="col-xl-2"></div>
-              <div class="col-xl-12">
-
-                <table>
-                  <table class="minitable"> <!-- Ciclo de la tabla -->
-                    <tbody>
-                      <tr>
-                        <td>Mesitas del Colegio</td>
-                        <td style="width:10%"><a href="#"><img src="images/app/deleteIcon.png"></a></td>
-                      </tr>
-                      <tr>
-                        <td>Mesitas del Colegio</td>
-                        <td><a href="#"><img src="images/app/deleteIcon.png"></a></td>
-                      </tr>
-                      <tr>
-                        <td>Mesitas del Colegio</td>
-                        <td><a href="#"><img src="images/app/deleteIcon.png"></a></td>
-                      </tr>
-                      <tr>
-                        <td>Mesitas del Colegio</td>
-                        <td><a href="#"><img src="images/app/deleteIcon.png"></a></td>
-                      </tr>
-                      <tr>
-                        <td>Mesitas del Colegio</td>
-                        <td><a href="#"><img src="images/app/deleteIcon.png"></a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </table>
-
-                <!-- <div class="col-xl-2"></div>
-                <div class="col-xl-8">
-                  <ul>
-                    <li>
-                      <label>Índice de Vulnerabilidad Productiva Rural - IVPR</label>
-                      <input type="text" name="" value="">
-                    </li>
-                    <li>
-                      <label>Índice de Producción Agropecuaria - IPAP</label>
-                      <input type="text" name="" value="">
-                    </li>
-                    <li>
-                      <label>Índice de vulnerabilidad social - IPS</label>
-                      <input type="text" name="" value="">
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-xl-2"></div> -->
-
+              <div id="Villages" class="col-xl-12">
               </div>
             </div>
-        </div>
+        </div> -->
         <div class="col-xl-1"></div>
 
       </div>

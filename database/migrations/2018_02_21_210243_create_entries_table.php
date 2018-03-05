@@ -20,6 +20,7 @@ class CreateEntriesTable extends Migration
               $table->integer('period')->nullable();
               $table->boolean('integralIndicator')->nullable();
               $table->double('total');
+              $table->string('rememberToken',20);
               $table->timestamps();
 
               $table->integer('idSystem')->unsigned()->nullable();

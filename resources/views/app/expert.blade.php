@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="{{ asset('css/app/modals.css') }}">
   <script type="text/javascript">
       var routeZonesList = '{{ route('zonesList', ['nameDepartament' => 'parameter']) }}';
+      var routeStorageCost = '{{ route('storageCost') }}';
   </script>
   <script type="text/javascript" src="{{ asset('js/app/systemApp.js') }}"></script>
 @stop
@@ -23,7 +24,7 @@
   @elseif($option === 'configSystem')
     @include('app.partials.expert.newSystem')
   @else
-    @include('app.partials.expert.newSystem')
+    @include('app.partials.expert.listSystems')
   @endif
 
 @stop

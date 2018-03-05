@@ -78,14 +78,13 @@ label.standardButton{
 }
 
 button.saveInput{
-  background : #008762;
-  background : rgba(0, 135, 98, 1);
-  font-size: 18px;
-  padding: 5px 10px;
+  text-align: center;
+  background: #008762;
   color: white;
-  border:none;
+  font-size: 18px;
   cursor: pointer;
-  float: right;
+  margin-left: 48px;
+  padding: 5px 10px;
 }
 
 section#content article div#map{
@@ -109,7 +108,7 @@ section#content article div#newVillage{
 section#content article div#municipality{
     float:right;
     position: relative;
-    margin-top: 6%;
+    margin-top: 4%;
     left: 50px;
 }
 

@@ -19,6 +19,7 @@ class CreateCostsTable extends Migration
                 $table->integer('quantity')->nullable();
                 $table->integer('period')->nullable();
                 $table->double('total');
+                $table->string('rememberToken',20);
                 $table->timestamps();
 
                 $table->integer('idSystem')->unsigned()->nullable();

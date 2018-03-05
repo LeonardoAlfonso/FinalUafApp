@@ -1,11 +1,12 @@
-<div id="modal" class="col-xl-12">
-
+<input id="CloseCostModal" class="inputModal" name="costModal" type="radio">
+<div id="costModal" class="col-xl-12">
+  <form id="newCost">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+    <input type="hidden" name="tokenSystem" value="{{ $tokenSystem }}">
     <div class="col-xl-4"></div>
     <div class="col-xl-4 modalCard">
         <div class="modalCardtitle col-xl-12">
             <p>Nuevo Costo</p>
-            <!-- <input id="CloseModal" class="inputModal" name="modal" type="radio">
-            <label for="CloseModal"><img src="images/web/closeIcon.png" alt=""></label> -->
         </div>
 
         <div class="col-xl-12">
@@ -36,19 +37,19 @@
           <div class="col-xl-6">
             <ul>
               <li>
-                <input type="text" name="" value="">
+                <input type="text" name="detail" value="">
               </li>
               <li>
-                <input type="text" name="" value="">
+                <input type="text" name="group" value="">
               </li>
               <li>
-                <input type="text" name="" value="">
+                <input type="text" name="subGroup" value="">
               </li>
               <li>
-                <input type="text" name="" value="">
+                <input type="text" name="unitaryCost" value="">
               </li>
               <li>
-                <input type="text" name="" value="">
+                <input type="text" name="quantity0" value="">
               </li>
             </ul>
           </div>
@@ -62,36 +63,36 @@
           </div>
 
           <div class="col-xl-12">
-              <div class="col-xl-4">
-                <div class="col-xl-12 miniCard">
-                    <div class="col-xl-2"></div>
-                    <div class="col-xl-8">
 
-                      <div class="col-xl-12 miniCardTitle">
-                          Año 1
-                      </div>
-                      <div class="col-xl-12 miniCardBody">
-                          <input class="miniCardInput"type="text" name="" value="5">
-                      </div>
+
+            @for($i = 1; $i <= 12; $i++)
+                  <div class="col-xl-4">
+                    <div class="col-xl-12 miniCard">
+                        <div class="col-xl-2"></div>
+                        <div class="col-xl-8">
+
+                          <div class="col-xl-12 miniCardTitle">
+                              Año {{ $i }}
+                          </div>
+                          <div class="col-xl-12 miniCardBody">
+                              <input class="miniCardInput"type="text" name="quantity{{ $i }}" value="5">
+                          </div>
+                        </div>
+                        <div class="col-xl-2"></div>
                     </div>
-                    <div class="col-xl-2"></div>
-                </div>
+                  </div>
+              @endfor
 
-              </div>
+
           </div>
 
           <div class="col-xl-12 modalFooter">
-              <input id="CloseCostModal" class="inputModal" name="modal" type="radio">
-              <label for="CloseCostModal" class="buttonSave">Guardar</label>
+              <label for="CloseCostModal" class="buttonSave" onclick="saveCost()">Guardar</label>
               <label for="CloseCostModal" class="buttonClose">Cerrar</label>
           </div>
 
         </div>
-
-
-
-
     </div>
     <div class="col-xl-4"></div>
-
+</form>
 </div>

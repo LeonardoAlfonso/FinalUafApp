@@ -9,7 +9,7 @@ class Cost extends Model
     //Attibutes
       protected $table = "costs";
       protected $fillable = ['detail','group','subGroup','unitaryCost',
-                              'quantity','period','total','idSystem'];
+                              'quantity','period','total', 'rememberToken', 'idSystem'];
       protected $primaryKey = 'idCost';
 
       //Relations

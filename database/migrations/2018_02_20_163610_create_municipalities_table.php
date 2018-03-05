@@ -13,7 +13,8 @@ class CreateMunicipalitiesTable extends Migration
 
           Schema::create('municipalities', function (Blueprint $table) {
               $table->increments('idMunicipality');
-              $table->string('name',50);
+              $table->string('nameMunicipality',50);
+              $table->string('rememberToken',20);
               $table->timestamps();
 
               $table->integer('idZone')->unsigned()->nullable();

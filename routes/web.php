@@ -58,16 +58,21 @@ Route::get('/cartographer/{idDepartament}', 'AppControllers\cartographerControll
 Route::get('/cartographer/zone/{idZone}/departament/{idDepartament}', 'AppControllers\cartographerController@getZone')->name('getZone');
 Route::post('/cartographer/saveZone', 'AppControllers\cartographerController@saveZone')->name('saveZone');
 Route::get('/cartographer/deleteZone/{idZone}', 'AppControllers\cartographerController@deleteZone')->name('zoneDelete');
+Route::get('/cartographer/Municipality/Config/Admin', 'AppControllers\cartographerController@getMunicipality')->name('municipality');
+Route::get('/cartographer/zone/back', 'AppControllers\cartographerController@returnMunicipalityZone')->name('backZone');
+  //ajax
+  Route::get('/cartographer/saveMunicipality/{nameMunicipality}', 'AppControllers\cartographerController@saveMunicipality')->name('saveMunicipality');
+  Route::get('/cartographer/deleteMunicipality/{idMunicipality}', 'AppControllers\cartographerController@deleteMunicipality')->name('deleteMunicipality');
+
 
 //Routes for systemController
 Route::get('/expert', 'AppControllers\systemController@expertPanel')->middleware('auth')->name('expert');
 Route::get('/expert/{nameDepartament}', 'AppControllers\systemController@getZonesList')->name('zonesList');
 Route::post('/expert/listSystem', 'AppControllers\systemController@getSystemList')->name('systemList');
-Route::post('/expert/system/{idZone}', 'AppControllers\systemController@getSystem')->name('getSystem');
+Route::get('/expert/system/{idZone}', 'AppControllers\systemController@getSystem')->name('getSystem');
 
-
-
-
+Route::post('/expert/saveSystem', 'AppControllers\systemController@saveSystem')->name('saveSystem');
+Route::post('/expert/system/cost/saveCost', 'AppControllers\systemController@storageCost')->name('storageCost');
 
 //localhost/uafApp/public/System/Indicators/339
 

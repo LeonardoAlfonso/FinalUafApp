@@ -15,7 +15,7 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-            <a href="{{ route('getZone', ['idZone' => 'null', 'idDepartament' =>  $selectZone ]) }}">
+            <a href="{{ route('getSystem', ['idZone' => $selectZone ]) }}">
                 <label id="newSystem" class="standardButton">Nuevo Sistema</label>
             </a>
           </div>
@@ -48,9 +48,6 @@
               <div class="select-style-expert">
                 <select id="optionsZones" name="Zone" class="select" onchange="this.form.submit()">
                     <option disabled selected hidden>Escoger zona..</option>
-                  @if($option === 'List')
-                      @include('app.partials.expert.tableList')
-                  @endif
                 </select>
               </div>
             </div>

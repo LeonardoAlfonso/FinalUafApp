@@ -37,7 +37,22 @@ label.standardButton{
     padding: 5px 10px;
 }
 
+button.saveInput{
+  background : #008762;
+  background : rgba(0, 135, 98, 1);
+  font-size: 18px;
+  padding: 5px 10px;
+  color: white;
+  border:none;
+  cursor: pointer;
+  float: right;
+}
+
 label.standardButton:hover{
+    box-shadow: -1px 2px 1px 1px #4D4F4E;
+}
+
+button.saveInput:hover{
     box-shadow: -1px 2px 1px 1px #4D4F4E;
 }
 

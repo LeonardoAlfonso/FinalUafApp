@@ -1,4 +1,4 @@
-div#modal{
+div#costModal{
      background: rgba(0, 0, 0, 0.5);
      color: #fff;
      position: fixed;
@@ -13,7 +13,7 @@ div#modal{
      display: none;
  }
 
- input#ShowCostModal:checked ~ #modal {
+ input#ShowCostModal:checked ~ #costModal {
      top: 0;
  }
 
@@ -133,6 +133,10 @@ div.modalCard hr#ModalHr{
 
  input#CloseCostModal{
     display: none;
+ }
+
+ input#CloseCostModal:checked ~ #costModal {
+     top: -100vh;
  }
 
 label.buttonSave{

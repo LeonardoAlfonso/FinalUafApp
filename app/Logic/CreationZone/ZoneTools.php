@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Logic\CreationZone\ZoneTools;
 use App\Models\CharacteristicZone;
 use App\Models\IndicatorZone;
+use App\Models\Municipality;
 use App\Models\Zone;
 use Validator;
 
@@ -59,10 +60,16 @@ class ZoneTools
             if(is_null($request->idZone))
             {
                 $zone = new Zone();
+                $municipalities = Municipality::with('Villages')->where('rememberToken', $request->tokenZone)->get();
+                $characteristics = CharacteristicZone::where('rememberToken', $request->tokenZone)->get();
+                $indicators = IndicatorZone::where('rememberToken', $request->tokenZone)->get();
             }
             else
             {
                 $zone = Zone::find($request->idZone);
+                $municipalities = Municipality::with('Villages')->where('idZone', $request->idZone)->get();
+                $characteristics = CharacteristicZone::where('idZone', $request->idZone)->get();
+                $indicators = IndicatorZone::where('idZone', $request->idZone)->get();
             }
 
           //Atributes
@@ -71,10 +78,6 @@ class ZoneTools
             $zone->miniMapPath = $request->nameZone;
             $zone->idDepartament = $request->idDepartament;
             $zone->save();
-
-            $characteristics = CharacteristicZone::where('rememberToken', $request->tokenZone)->get();
-            $indicators = IndicatorZone::where('rememberToken', $request->tokenZone)->get();
-
 
         foreach ($characteristics as $characteristic)
         {
@@ -107,17 +110,55 @@ class ZoneTools
             $indicator->save();
         }
 
-        $this->saveMiniMap($request->file('miniMapFile'));
+        foreach ($municipalities as $municipality)
+        {
+            $municipality->idZone = $zone->idZone;
+            $municipality->save();
+        }
+
+        // $this->saveMiniMap($request);
     }
 
+    public function updateZoneSession($session)
+    {
+        $characteristics = CharacteristicZone::where('rememberToken', array_get($session, 'tokenZone'))->get();
+        $indicators = IndicatorZone::where('rememberToken', array_get($session, 'tokenZone'))->get();
+
+        foreach ($characteristics as $characteristic)
+        {
+            foreach ($session as $key => $value)
+            {
+                if($characteristic->showCharacteristic == $key)
+                {
+                    $characteristic->valueCharacteristic = $value;
+                }
+            }
+
+            $characteristic->save();
+        }
+
+        foreach ($indicators as $indicator)
+        {
+            foreach ($session as $key => $value)
+            {
+                if($indicator->showIndicator == $key)
+                {
+                    $indicator->valueIndicator = $value;
+                }
+            }
+
+            $indicator->save();
+        }
+    }
 
     //Functions Aux:
-    protected function saveMiniMap($file)
+    protected function saveMiniMap($request)
     {
-
+        $file = $request->file('miniMapFile');
         $name = $file->getClientOriginalName();
-        Storage::disk('local')->putFile($name , new \Illuminate\Http\File($file));
-        dd($name);
+        $test = $request->miniMapFile->storeAs('Map', $name, 'local');
 
     }
+
+
 }
