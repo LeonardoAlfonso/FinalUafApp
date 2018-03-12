@@ -57,8 +57,8 @@ class cartographerController extends Controller
           $tools = new ZoneTools();
 
         //Assignments
-          $characteristicsPath = database_path('data\characteristicsZones.json');
-          $indicatorsPath = database_path('data\indicatorsZones.json');
+          $characteristicsPath = database_path('data/characteristicsZones.json');
+          $indicatorsPath = database_path('data/indicatorsZones.json');
 
           $characteristicsFile = File::get($characteristicsPath);
           $indicatorFile = File::get($indicatorsPath);
