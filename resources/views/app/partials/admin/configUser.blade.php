@@ -27,7 +27,7 @@
           <div id="options">
 
             <div id="labelWrapper">
-              <button type="submit" class="saveInput">
+              <button id="SaveChangesUser"type="submit" class="saveInput">
                   Guardar
               </button>
             </div>

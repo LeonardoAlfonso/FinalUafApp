@@ -1,7 +1,8 @@
 @extends('app.templates.appTemplate')
-    <link rel="stylesheet" href="{{ asset('css/app/users.css') }}">
-@section('links')
 
+@section('links')
+    <link rel="stylesheet" href="{{ asset('css/app/users.css') }}">
+    <script type="text/javascript" src="{{ asset('js/app/administrator.js') }}"></script>
 @stop
 
 @section('menuOptions')

@@ -2,41 +2,36 @@
 	{
 		"name" :"Inflacion",
 		"show" : "Inflacion",
-		"value" : "0"
+		"value" : "3.5"
 	},
 	{
 		"name" :"SMMLV",
 		"show" : "SMMLV",
-		"value" : "0"
+		"value" : "737717"
 	},
 	{
 		"name" :"TasaDescuento",
 		"show" : "Tasa de descuento",
-		"value" : "0"
+		"value" : "9.597"
 	},
 	{
 		"name" :"TasaEfectiva",
 		"show" : "Tasa Efectiva",
-		"value" : "0"
+		"value" : "11.5"
 	},
 	{
 		"name" :"PeriodosFinanciacion",
 		"show" : "Número Periodos Plan Financiación",
-		"value" : "0"
-	},
-	{
-		"name" :"PeriodoReinversion",
-		"show" : "Periodo de reinversión",
-		"value" : "0"
+		"value" : "144"
 	},
 	{
 		"name" :"PorcentajeReinversión",
 		"show" : "Porcentaje de reinversión",
-		"value" : "0"
+		"value" : "75"
 	},
 	{
 		"name" :"IVP",
 		"show" : "IVP",
-		"value" : "0"
+		"value" : "6.44"
 	}
 ]

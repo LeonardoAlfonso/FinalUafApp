@@ -1,12 +1,12 @@
 @extends('app.templates.appTemplate')
+
+@section('links')
     <link rel="stylesheet" href="{{ asset('css/app/cartographer.css') }}">
     <script type="text/javascript">
         var routeSaveMunicipality = '{{ route('saveMunicipality', ['' => 'parameter']) }}';
         var routedeleteMunicipality = '{{ route('deleteMunicipality', ['' => 'parameter']) }}';
     </script>
     <script type="text/javascript" src="{{ asset('js/app/municipality.js') }}"></script>
-@section('links')
-
 @stop
 
 @section('menuOptions')

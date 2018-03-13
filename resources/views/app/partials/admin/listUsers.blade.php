@@ -63,7 +63,7 @@
             <img src="{{ asset('images/app/editIcon.png') }}">
           </a>
         </td>
-        <td>
+        <td id="deleteUserJS">
           <a href="{{ route('userDelete', ['id' => $user->idUser ]) }}">
             <img src="{{ asset('images/app/deleteIcon.png') }}">
           </a>

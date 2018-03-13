@@ -13,11 +13,7 @@
     <div class="col-xl-9">
       <h2><b>Glosario</b></h2>
       <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            El glosario contiene la descripción de los términos que se han usado en el modelamiento productivo y el cálculo de UAF.
       </p>
     </div>
   </aside>
