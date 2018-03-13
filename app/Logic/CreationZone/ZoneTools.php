@@ -20,8 +20,8 @@ class ZoneTools
 
     public function __construct()
     {
-        $this->characteristicsFileGlobal = json_decode(File::get(database_path('data\characteristicsZones.json')));
-        $this->indicatorFileGlobal = json_decode(File::get(database_path('data\indicatorsZones.json')));
+        $this->characteristicsFileGlobal = json_decode(Storage::disk('public')->get('characteristicsZones.json'));
+        $this->indicatorFileGlobal = json_decode(Storage::disk('public')->get('indicatorsZones.json'));
     }
 
 
