@@ -1,7 +1,7 @@
 @extends('web.templates.webTemplate')
 
 @section('links')
-    <link rel="stylesheet" href="css/web/glossary.css">
+    <link rel="stylesheet" href="{{ asset('css/web/glossary.css') }}">
     @include('web.scripts.glossaryJs')
 @stop
 

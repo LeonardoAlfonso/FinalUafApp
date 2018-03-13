@@ -1,7 +1,7 @@
 @extends('web.templates.webTemplate')
 
 @section('links')
-    <link rel="stylesheet" href="css/web/Home.css">
+    <link rel="stylesheet" href="{{ asset('css/web/Home.css') }}">
 @stop
 
 @section('viewContent')
