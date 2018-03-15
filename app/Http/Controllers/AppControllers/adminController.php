@@ -68,8 +68,7 @@ class adminController extends Controller
     public function saveUser(Request $request)
     {
           $createUser = new UserTools();
-
-
+          
           if(is_null($request->idUser))
           {
               $validations = $createUser->validationNewUser($request);
@@ -81,7 +80,7 @@ class adminController extends Controller
 
             if($validations->fails())
             {
-                return redirect()->back()->withErrors($validations);
+                return redirect()->back()->withInput($request->input())->withErrors($validations);
             }
 
           $createUser->createUser($request);
