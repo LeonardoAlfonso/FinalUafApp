@@ -16,8 +16,8 @@ class UserTools
     {
           $input = $request->all();
           $rules = [
-            'firstName' => 'required|max:20',
-            'lastName' => 'required|max:20',
+            'firstName' => 'required|digits_between:6,40',
+            'lastName' => 'required|digits_between:6,40',
             'email' => 'required|email',
             'password' => 'required',
             'confirmPassword' => 'required|same:password',
@@ -25,9 +25,9 @@ class UserTools
           ];
           $messages = [
             'required' => 'Campo Obligatorio',
-            'max' => 'El campo no puede superar los 20 caracteres',
             'email' => 'Correo Incorrecto',
             'same' => 'Las contraseñas no coinciden',
+            'digits_between' => 'El campo debe tener entre 6 y 20 caracteres'
           ];
 
           return Validator::make($input, $rules, $messages);
@@ -37,15 +37,15 @@ class UserTools
     {
           $input = $request->all();
           $rules = [
-            'firstName' => 'required|max:20',
-            'lastName' => 'required|max:20',
+            'firstName' => 'required|digits_between:6,40',
+            'lastName' => 'required|digits_between:6,40',
             'email' => 'required|email',
             'role' => 'required',
           ];
           $messages = [
             'required' => 'Campo Obligatorio',
-            'max' => 'El campo no puede superar los 20 caracteres',
             'email' => 'Correo Incorrecto',
+            'digits_between' => 'El campo debe tener entre 6 y 20 caracteres'
           ];
 
           return Validator::make($input, $rules, $messages);

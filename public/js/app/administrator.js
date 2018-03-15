@@ -8,8 +8,4 @@ $(document).ready(function(){
                 }  
         });
 
-        $('#SaveChangesUser').click(function(){
-                alert("Cambios Guardados");
-            });
-
     });

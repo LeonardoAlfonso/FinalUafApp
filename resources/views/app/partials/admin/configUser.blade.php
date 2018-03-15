@@ -139,7 +139,7 @@
               <div class="select-style">
                 <select id="optionsRoles" class="select" name="role">
                   @if($option === 'editUser')
-                    <option>{{ $user->role }}</option>
+                    <option disabled selected hidden>{{ $user->role }}</option>
                   @else
                     <option disabled selected hidden>Escoger Rol...</option>
                   @endif

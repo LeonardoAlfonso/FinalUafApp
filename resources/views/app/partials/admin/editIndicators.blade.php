@@ -20,7 +20,7 @@
 
         <div id="options">
           <div id="labelWrapper">
-            <button type="submit" class="saveInput">
+            <button id="SaveIndicators" type="submit" class="saveInput">
                 Guardar
             </button>
           </div>
@@ -45,7 +45,13 @@
               <label class="generalLabels">{{ $parameter->showParameter }}</label>
           </div>
           <div class="col-xl-8">
-              <input type="text" class="generalData" name="{{ $parameter->idParameter }}" value="{{ $parameter->valueParameter }}">
+              @if($parameter->showParameter == 'Inflacion')
+                <input type="text" class="generalData" name="{{ $parameter->idParameter }}" 
+                        value="{{ $parameter->valueParameter }}" disabled>
+              @else
+                <input type="text" class="generalData" name="{{ $parameter->idParameter }}" 
+                          value="{{ $parameter->valueParameter }}">
+              @endif
               @if($errors->has($parameter->idParameter))
                 <strong>
                   <span class="error">
