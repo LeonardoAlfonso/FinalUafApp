@@ -42,8 +42,6 @@
 
     <hr/>
 
-
-
   <div class="col-xl-12">
       <div class="col-xl-2"></div>
       <div class="col-xl-8">
@@ -138,13 +136,15 @@
 
               <div class="select-style">
                 <select id="optionsRoles" class="select" name="role">
-                  @if($option === 'editUser')
-                    <option disabled selected hidden>{{ $user->role }}</option>
-                  @else
+                  @if(empty($user->role))
                     <option disabled selected hidden>Escoger Rol...</option>
+                  @else
+                    <option selected>{{ $user->role }}</option>
                   @endif
                     @foreach($roles as $role)
+                      @if($role !== $user->role)
                         <option>{{ $role }}</option>
+                      @endif
                     @endforeach
                 </select>
                 @if($errors->has('role'))

@@ -45,9 +45,9 @@ Route::get('/System/Cost/{idSystem}', 'WebControllers\systemController@getCosts'
 Route::get('/System/Indicators/{idSystem}', 'WebControllers\systemController@getIndicators')->name('systemIndicators');
 
 //Routes for adminController
-Route::get('/admin', 'AppControllers\adminController@getListUsers')->middleware('auth')->name('admin');
+Route::get('/admin/search/{searchWord?}', 'AppControllers\adminController@getListUsers')->middleware('auth')->name('admin');
 Route::get('/admin/newUser/{id}', 'AppControllers\adminController@getUser')->middleware('auth')->name('getUser');
-Route::get('/admin/editIndicators', 'AppControllers\adminController@getEditIndicators')->middleware('auth')->name('editIndicators');
+Route::get('/admin/editIndicators', 'AppControllers\adminController@getEditIndicators')->name('editIndicators');
 Route::post('/admin/saveUser', 'AppControllers\adminController@saveUser')->name('saveUser');
 Route::post('/admin/saveIndicators', 'AppControllers\adminController@saveIndicators')->name('saveIndicators');
 Route::get('/admin/deleteUser/{idUser}', 'AppControllers\adminController@deleteUser')->name('userDelete');
@@ -73,6 +73,8 @@ Route::get('/expert/system/{idZone}', 'AppControllers\systemController@getSystem
 
 Route::post('/expert/saveSystem', 'AppControllers\systemController@saveSystem')->name('saveSystem');
 Route::post('/expert/system/cost/saveCost', 'AppControllers\systemController@storageCost')->name('storageCost');
+
+Route::get('/expert/deleteCost/cost/operation/{idCost}','AppControllers\systemController@deleteCost')->name('costDelete');
 
 //localhost/uafApp/public/System/Indicators/339
 

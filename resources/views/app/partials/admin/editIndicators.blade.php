@@ -47,7 +47,7 @@
           <div class="col-xl-8">
               @if($parameter->showParameter == 'Inflacion')
                 <input type="text" class="generalData" name="{{ $parameter->idParameter }}" 
-                        value="{{ $parameter->valueParameter }}" disabled>
+                        value="{{ $parameter->valueParameter }}" readonly= "readonly">
               @else
                 <input type="text" class="generalData" name="{{ $parameter->idParameter }}" 
                           value="{{ $parameter->valueParameter }}">

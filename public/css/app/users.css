@@ -159,3 +159,7 @@ section#content article .departament label{
 span.error{
     color: red;
 }
+
+#IconSearcWord:hover{
+    cursor: pointer;
+}

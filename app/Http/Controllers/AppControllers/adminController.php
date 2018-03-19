@@ -5,25 +5,59 @@ namespace App\Http\Controllers\AppControllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use App\Logic\CreationUser\UserTools;
 use App\Logic\UafParameters\UafParametersTools;
 use App\Models\Departament;
 use App\Models\UafParameter;
 use App\User;
+use Session;
 use Validator;
 
 class adminController extends Controller
 {
-    public function getListUsers()
+    public function getListUsers(Request $request, $searchWord = "")
     {
-        $users = User::paginate(10);
+        $usersIndex = collect();
+        $users = "";
+
+        if(empty($searchWord))
+        {
+            $users = User::paginate(10);
+        }
+        else
+        {
+            $allUsers = User::all();
+            foreach($allUsers as $user)
+            {
+                // dd($user->full_name);
+                if(strpos($user->full_name, $searchWord) !== false)
+                {
+                    $usersIndex->prepend($user->idUser);
+                }
+            }
+            
+            $users = User::whereIn('idUser',$usersIndex)->paginate(10);
+        }
+
         $option = 'listUser';
+
         $roles = array('admin','expert','cartographer');
 
-        return view('app.admin')
-                  ->with('users', $users)
-                  ->with('option',$option);
+        if($request->ajax())
+        {
+            $view = view('app.partials.admin.tableUsers')
+                    ->with('users', $users);
+            return response()->json(["html"=>$view->render()]);
+        }
+        else
+        {
+            $view = view('app.admin')
+                        ->with('users', $users)
+                        ->with('option',$option);
+            return $view;
+        }
     }
 
     public function getUser($id)
@@ -80,12 +114,16 @@ class adminController extends Controller
 
             if($validations->fails())
             {
-                return redirect()->back()->withInput($request->input())->withErrors($validations);
+                return $createUser->createUserView($request, $validations);
             }
+            else
+            {
+                $createUser->createUser($request);
 
-          $createUser->createUser($request);
-
-          return redirect()->route('admin');
+                Session::flash('Message','Usuario Guardado');
+      
+                return redirect()->route('admin');
+            }
     }
 
     public function deleteUser($idUser)
@@ -95,28 +133,51 @@ class adminController extends Controller
         return redirect()->route('admin');
     }
 
-    public function getEditIndicators()
+    public function getEditIndicators(Request $request, $validations = "")
     {
         $option = 'indicators';
-        $parameters = UafParameter::all();
-        return view('app.admin')
+        
+        if(!empty($request->all()))
+        {
+            $parameters = UafParameter::all();
+            $index = 1;
+
+                foreach ($parameters as $parameter)
+                {
+                    $parameter->valueParameter = $request->$index;
+                    $index++;
+                }
+        }
+        else
+        {
+            $parameters = UafParameter::all();
+        }
+
+        
+
+        $view = view('app.admin')
                     ->with('parameters', $parameters)
-                    ->with('option',$option);
+                    ->with('option',$option)
+                    ->withErrors($validations);
+        return $view;
     }
 
     public function saveIndicators(Request $request)
     {
-
         $editParameters = new UafParametersTools();
         $validations = $editParameters->validationParameters($request);
 
         if($validations->fails())
         {
-            return redirect()->back()->withErrors($validations);
+            return $this->getEditIndicators($request, $validations);
         }
+        else
+        {
+            $editParameters->saveIndicators($request);
 
-        $editParameters->saveIndicators($request);
-
-        return redirect()->route('admin');
+            Session::flash('Message','Indicadores Actualizados');
+    
+            return redirect()->route('admin');
+        }
     }
 }

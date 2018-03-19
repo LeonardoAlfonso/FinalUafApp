@@ -109,24 +109,32 @@
         <table class="tableStyle">
           <thead>
             <tr>
-              <th>Nombre Sistema</th>
-              <th>Autor</th>
-              <th>Publicación</th>
+              <th>Detalle</th>
+              <th>Grupo</th>
+              <th>Subgrupo</th>
+              <th>C. Unitario</th>
+              <th>Año 0</th>
+              <th>Año 1</th>
+              <th>Año 2</th>
+              <th>Año 3</th>
+              <th>Año 4</th>
+              <th>Año 5</th>
+              <th>Año 6</th>
+              <th>Año 7</th>
+              <th>Año 8</th>
+              <th>Año 9</th>
+              <th>Año 10</th>
+              <th>Año 11</th>
+              <th>Año 12</th>
               <th></th>
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Sistema X</td>
-              <td>Pepito Perez</td>
-              <td>19-18-42</td>
-              <td><a href="#"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
-              <td><a href="#"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
-            </tr>
+          <tbody id="BodyCostTable">
           </tbody>
         </table>
       </div>
+
 
       <div class="col-xl-12">
         <div class="col-xl-1"></div>

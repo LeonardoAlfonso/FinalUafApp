@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Logic\CreateSystem\SystemTools;
 use App\Models\Departament;
+use App\Models\Virtuals\CostVirtual;
 use App\Models\UafParameter;
 use App\Models\Zone;
+use App\Models\Cost;
 use App\User;
 
 class systemController extends Controller
@@ -65,9 +67,11 @@ class systemController extends Controller
           $tokenSystem = str_random(10);
           // dd($idZone);
           $option = 'configSystem';
+          $listCost = new CostVirtual();
           return view('app.expert')
                   ->with('option', $option)
-                  ->with('tokenSystem', $tokenSystem);
+                  ->with('tokenSystem', $tokenSystem)
+                  ->with('listCost', $listCost);
     }
 
     public function saveSystem(Request $request)
@@ -79,12 +83,39 @@ class systemController extends Controller
     {
         $systemTools = new SystemTools();
         $systemTools->saveCost($request);
-
-        //http://localhost/uafApp/public/expert/system/cost/saveCost
+        $table = $systemTools->showCosts($request->input('tokenSystem'));
 
       if($request->ajax())
       {
-          return response()->json(['mensaje'=> 'ok']);
+            $view = view('app.partials.expert.tableCosts')
+                        ->with('listCost', $table);
+            $newView = $view->render();
+            return response()->json(["html"=>$newView]);
       }
+    }
+
+    // public function deleteCost($id)
+    public function deleteCost(Request $request, $id)
+    {
+        $systemTools = new SystemTools();
+        $cost = Cost::find($id);
+        $token = $cost->rememberToken;
+        $detail = $cost->detail;
+        $cost = Cost::where('detail', $detail)->where('rememberToken', $token)->get();
+
+        foreach($cost as $deleteCost)
+        {
+            $deleteCost->delete();
+        }
+
+        $table = $systemTools->showCosts($token);
+
+        if($request->ajax())
+        {
+              $view = view('app.partials.expert.tableCosts')
+                          ->with('listCost', $table);
+              $newView = $view->render();
+              return response()->json(["html"=>$newView]);
+        }
     }
 }

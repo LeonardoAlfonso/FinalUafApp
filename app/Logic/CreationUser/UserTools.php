@@ -17,18 +17,22 @@ class UserTools
           $input = $request->all();
           $rules = [
             'firstName' => 'required|min:6|max:40',
-            'lastName' => 'required|min:6|max:40',
+            'lastName' => 'required|min:6|max:40', 
             'email' => 'required|email',
-            'password' => 'required',
-            'confirmPassword' => 'required|same:password',
-            'role' => 'required',
+            'password' => array('required', 
+                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ])/',
+                    'between:8,15')
           ];
+            
+
           $messages = [
             'required' => 'Campo Obligatorio',
             'email' => 'Correo Incorrecto',
             'same' => 'Las contraseñas no coinciden',
             'min' => 'El campo debe contener mínimo 6 caracteres',
             'max' => 'El campo debe contener máximo 40 caracteres',
+            'between' => 'La contraseña debe contener entre 8 y 15 dígitos',
+            'regex' => 'La constraseña debe contener l'
           ];
 
           return Validator::make($input, $rules, $messages);
@@ -105,5 +109,52 @@ class UserTools
         }
 
         $user->delete();
+    }
+
+    public function createUserView(Request $request, $validations = "")
+    {
+        $user = new User;  
+            $user->idUser = $request->idUser;
+            $user->firstName = $request->firstName;
+            $user->lastName = $request->lastName;
+            $user->email = $request->email;
+            $user->role = $request->role;
+
+        $option = empty($request->idUser) ? 'newUser' : 'editUser';
+
+        $roles = array('admin','expert','cartographer');
+
+        $departaments = Departament::all();
+        $index = 1;
+
+            foreach ($departaments as $departament)
+            {
+                $inputRequest = "Departament".$index;
+
+                if(empty($request->$inputRequest))
+                {
+                    $departament->setIscheckAttribute(false);
+                }
+                else
+                {
+                    $departament->setIscheckAttribute(true);
+                }
+
+                $index++;
+            }
+
+        $departaments = $departaments->chunk(3);
+
+        return view('app.admin')
+                  ->with('user', $user)
+                  ->with('option',$option)
+                  ->with('roles', $roles)
+                  ->with('departaments', $departaments)
+                  ->withErrors($validations);
+    }
+
+    public function searcher()
+    {
+        
     }
 }

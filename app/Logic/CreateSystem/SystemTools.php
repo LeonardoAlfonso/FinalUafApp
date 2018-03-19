@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Logic\CreateSystem\SystemTools;
 use App\Models\Cost;
 use App\Models\UafParameter;
+use App\Models\Virtuals\CostVirtual;
 use Validator;
 
 class SystemTools
@@ -17,7 +18,7 @@ class SystemTools
         {
             $cost = new Cost();
             $quantity = 'quantity'.$i;
-            //   //Attributes
+              //Attributes
                 $cost->detail = $request->input('detail');
                 $cost->group = $request->input('group');
                 $cost->subGroup = $request->input('subGroup');
@@ -25,7 +26,7 @@ class SystemTools
                 $cost->period = $i;
 
                 $cost->rememberToken = $request->input('tokenSystem');
-            //
+
               if($i == 0 || $i == 1)
               {
                   $cost->unitaryCost = $request->input('unitaryCost');
@@ -37,9 +38,41 @@ class SystemTools
               }
 
               $cost->total = $cost->unitaryCost * $cost->quantity;
-            //
+
             $cost->save();
+        }        
+    }
+
+    public function showCosts($token)
+    {
+        
+        $costs = Cost::select('detail')->where('rememberToken', $token)->distinct('detail')->get();
+        $listCosts = array();
+
+        if($costs->count() > 0)
+        {
+            foreach($costs as $cost)
+            {
+                $newCost = new CostVirtual;
+                $completeCost = Cost::where('detail',$cost->detail)->where('period',0)->first();
+    
+                    $newCost->id = $completeCost->idCost;
+                    $newCost->detail = $completeCost->detail;
+                    $newCost->group = $completeCost->group;
+                    $newCost->subGroup = $completeCost->subGroup;
+                    $newCost->unitaryCost = $completeCost->unitaryCost;
+    
+                for($i=0; $i <= 12; $i++)
+                {
+                    $quantityPeriod = 'quantity'.$i;
+                    $auxCost = Cost::where('detail', $cost->detail)->where('period',$i)->first();
+                    $newCost->$quantityPeriod = $auxCost->quantity;
+                }
+    
+                $listCosts = array_merge($listCosts, array($newCost));
+            }
         }
+        return $listCosts;
     }
 
     ////////////////////////////Auxiliars////////////////////////////////

@@ -2,6 +2,9 @@
 
 @section('links')
     <link rel="stylesheet" href="{{ asset('css/app/users.css') }}">
+    <script type="text/javascript">
+        var routeSearchWord = '{{ route('admin', ['' => 'parameter']) }}';
+    </script>
     <script type="text/javascript" src="{{ asset('js/app/administrator.js') }}"></script>
 @stop
 

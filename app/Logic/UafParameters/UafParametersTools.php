@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Logic\UafParameters\UafParametersTools;
+use App\Rules\Percentage;
 use App\Models\Departament;
 use App\Models\UserDepartament;
 use App\Models\UafParameter;
@@ -25,20 +26,36 @@ class UafParametersTools
     public function validationParameters(Request $request)
     {
           $input = $request->all();
-
+          $currentNewRules = array();
           $rules = array('0'=> '');
 
           for ($i=1; $i < count($input); $i++)
           {
               $j = $i -1;
-              $unitaryArray = array($i => $this->uafParameters[$j]->rules);
-              $rules = array_merge($rules, $unitaryArray);
+              $objectRule = explode('|', $this->uafParameters[$j]->rules);
+
+                foreach($objectRule as $currentRule)
+                {
+                    if($currentRule == 'Percentage')
+                    {
+                        $newRule = array(new Percentage);
+                    }
+                    else
+                    {
+                        $newRule = array($currentRule);
+                    } 
+                    
+                    $currentNewRules = array_merge($currentNewRules, $newRule);
+                }
+
+                $rules = array_merge($rules, array($i => $currentNewRules));
+                $currentNewRules = array();
           }
 
           $messages = [
             'required' => 'Campo Obligatorio',
             'numeric' => 'El campo debe ser numérico',
-            'digits_between' => 'El campo es un porcentaje y debe estar entre 0 y 100'
+            'max' => 'No puede escribir más de 20 dígitos',
           ];
           
           return Validator::make($input, $rules, $messages);
@@ -47,8 +64,6 @@ class UafParametersTools
     public function saveIndicators(Request $request)
     {
           $index = 1;
-
-          dd($request);
 
           $parameters = UafParameter::all();
 

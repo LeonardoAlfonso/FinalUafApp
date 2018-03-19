@@ -6,6 +6,7 @@
   <script type="text/javascript">
       var routeZonesList = '{{ route('zonesList', ['nameDepartament' => 'parameter']) }}';
       var routeStorageCost = '{{ route('storageCost') }}';
+      var routeDeleteCost = '{{ route('costDelete', ['idCost' => 'parameter'])  }}';
   </script>
   <script type="text/javascript" src="{{ asset('js/app/systemApp.js') }}"></script>
 @stop

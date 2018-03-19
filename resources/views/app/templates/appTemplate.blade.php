@@ -68,36 +68,6 @@
             </div>
           </div>
 
-
-
-
-          <!-- <div class="col-xl-12">
-            <div class="col-xl-6"></div>
-            <div class="col-xl-6">
-              <div class="col-xl-12">
-
-                  <div class="col-xl-8"></div>
-                  <div class="col-xl-3">
-                    <ul id="LogOutSection">
-                      <li><img src="images/app/userIcon.png"></li>
-                      <li id="UserName" ><h1> Nombre Usuario </h1></li>
-                      <li><img id="closeSesion" src="images/app/LogOut.png"></li>
-                    </ul>
-                  </div>
-                  <div class="col-xl-1"></div>
-
-              </div>
-            </div>
-          </div> -->
-
-
-
-          <!-- <div class="col-xl-10"></div>
-          <ul id="LogOutSection" class="col-xl-2">
-            <li><img src="images/app/userIcon.png"></li>
-            <li id="UserName" ><h1> Nombre Usuario </h1></li>
-            <li><img src="images/app/LogOut.png"></li>
-          </ul> -->
         </header>
 
         <div class="row">
