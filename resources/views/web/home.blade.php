@@ -10,28 +10,29 @@
   <aside id="SlideContainer"class="col-xl-12">
     <div class="slide">
         <img src="{{ asset('images/web/Slide1.jpg') }}" alt>
-        <p><span class="signature">“Con la paz se abren todas las puertas para que la tierra <br/>
-          comience a ser el principal motor de desarrollo en el país”</span><br/>
-          <i>MIGUEL SAMPER, Director de la Agencia Nacional de Tierras</i></p>
+        <p><span class="signature">"La UAF es una figura que sirve para ordenar el territorio <br/> permitiendo el acceso a tierras en condiciones de dignidad y equidad social, <br/> 
+        para los campesinos que no tienen o tienen muy poca tierra."</span></p>
+
     </div>
     <div id="Slide2" class="slide">
         <img src="{{ asset('images/web/Slide2.jpg') }}" alt>
-        <p><span class="signature">Trabajamos para que el uso agrario<br/>
-          sea ambientalmente sostenible</span></p>
+        <p><span class="signature">"Los objetivos de la reforma agraria integral con enfoque territorial <br/> se encaminan al logro y realización de los derechos <br/> 
+        de la población rural y su permanencia en el territorio."</span></p>
     </div>
     <div class="slide">
         <img src="{{ asset('images/web/Slide3.jpg') }}" alt>
-        <p>texto</p>
+        <p><span class="signature">"El campo es un escenario de inclusión <br/> 
+        que reconoce la diversidad social, productiva y <br/> 
+        ecológica del territorio"</span></p>
     </div>
     <div class="slide">
         <img src="{{ asset('images/web/Slide2.jpg') }}" alt>
-        <p>texto</p>
+        <p><span class="signature">"El ordenamiento social, productivo y ambiental del territorio contribuye <br/> a la creación de condiciones dignas para la redistribución equitativa de la tierra <br/> y el cierre de la brecha entre en el campo y la ciudad"</span></p>
     </div>
     <div class="slide">
         <img src="{{ asset('images/web/Slide1.jpg') }}" alt>
-        <p><span class="signature">“Con la paz se abren todas las puertas para que la tierra <br/>
-          comience a ser el principal motor de desarrollo en el país”</span><br/>
-          <i>MIGUEL SAMPER, Director de la Agencia Nacional de Tierras</i></p>
+        <p><span class="signature">"La UAF es una figura que sirve para ordenar el territorio <br/> permitiendo el acceso a tierras en condiciones de dignidad y equidad social, <br/> 
+        para los campesinos que no tienen o tienen muy poca tierra."</span></p>
     </div>
   </aside>
 

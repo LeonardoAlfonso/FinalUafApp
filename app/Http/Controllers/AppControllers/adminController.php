@@ -153,8 +153,6 @@ class adminController extends Controller
             $parameters = UafParameter::all();
         }
 
-        
-
         $view = view('app.admin')
                     ->with('parameters', $parameters)
                     ->with('option',$option)

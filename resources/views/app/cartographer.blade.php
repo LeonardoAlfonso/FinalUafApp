@@ -7,6 +7,7 @@
         var routedeleteMunicipality = '{{ route('deleteMunicipality', ['' => 'parameter']) }}';
     </script>
     <script type="text/javascript" src="{{ asset('js/app/municipality.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app/cartographer.js') }}"></script>
 @stop
 
 @section('menuOptions')

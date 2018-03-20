@@ -56,7 +56,7 @@ section#content article h2{
 
 section#content article div#options{
     float:right;
-    margin-top: 10%;
+    margin-top: 7%;
 }
 
 section#content article hr{
@@ -74,7 +74,6 @@ label.standardButton{
     cursor: pointer;
     margin-left: 48px;
     padding: 5px 10px;
-
 }
 
 button.saveInput{
@@ -87,6 +86,31 @@ button.saveInput{
   padding: 5px 10px;
 }
 
+div.wrapperOptions{
+    float:right;
+    margin-top: 2%;
+}
+
+input#fileControl, button#addMunicipality, button#saveZone
+{
+    display: none;
+}
+
+ .zoneButtons{
+    float: right;
+    text-align: center;
+    background: #008762;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 62px;
+    padding: 5px 10px;
+}
+
+label#addZone{
+    margin-right: 0px;
+}
+
 section#content article div#map{
     float:right;
     margin-top: 6%;
@@ -95,6 +119,31 @@ section#content article div#map{
 input#fileControl
 {
     display: none;
+}
+
+.ClimaticSelectStyle{
+
+    float: right;
+    border-radius : 10px;
+    height : 27px;
+    width: 44%;
+    vertical-align: top;
+    background: #FFFFFF url(../../images/web/IconSelectBox.png) no-repeat;
+    color: #014C35;
+    background-position: right;
+}
+
+
+.ClimaticSelectStyle select{
+    border-radius : 10px;
+    border: 1px solid #014C35;
+    height : 27px;
+    padding-left: 10px;
+    width: 100%;
+    background: transparent;
+    appearance:none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
 }
 
 section#content article div#newMunicipality{
@@ -120,6 +169,9 @@ button.saveInput:hover{
     box-shadow:  -1px 2px 1px 1px #4D4F4E;
 }
 
+.zoneButtons:hover{
+    box-shadow:  -1px 2px 1px 1px #4D4F4E;
+}
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*Cartographer List*/
@@ -242,6 +294,19 @@ div.titleBody{
 
 div.titleBody ul li{
     padding-top: 30px;
+}
+
+div.cardFooter
+{
+    position: absolute;
+    bottom: 0px;
+    padding: 20px;
+}
+
+div.cardFooter p
+{
+    color: black;
+    font-size: 14px;
 }
 
 div.titleBody ul li label{
@@ -376,4 +441,17 @@ table.tableStyle td{
 
  table.miniTable tr:hover td{
     background-color: #F9D885;
+}
+
+.errorMessage
+{
+    color: red;
+    float: right;
+}
+
+.errorImage
+{
+    color: red;
+    float: right;
+    margin-right: 62px;
 }

@@ -20,13 +20,8 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-
-            <div id="labelWrapper">
-              <button type="submit" class="saveInput" name="saveZone">
-                  Guardar
-              </button>
-            </div>
-
+              <label id="addZone" for="saveZone" class="zoneButtons">Guardar</label>
+              <button id="saveZone" name="saveZone" type="submit"></button>            
           </div>
         </div>
         <div class="col-xl-1"></div>
@@ -46,6 +41,15 @@
         </div>
         <div class="col-xl-7">
             <input type="text" name="nameZone" value="{{ $zone->nameZone }}">
+            @if($errors->has('nameZone'))
+              <div class="col-xl-12">
+                  <strong>
+                      <span class="errorMessage">
+                            {{ $errors->first('nameZone') }}
+                      </span>
+                  </strong>
+              </div>
+            @endif
         </div>
         <div class="col-xl-1"></div>
 
@@ -55,18 +59,22 @@
       <div class="col-xl-12">
 
           <div class="col-xl-3"></div>
-          <div class="col-xl-4">
-            <div id="municipality">
-              <button type="submit" class="saveInput" name="addMunicipality">
-                  Añadir Municipio
-              </button>
-            </div>
+          <div class="col-xl-4 wrapperOptions">
+              <label for="addMunicipality" class="zoneButtons">Añadir Municipio</label>
+              <button id="addMunicipality" name="addMunicipality" type="submit"></button>
           </div>
-          <div class="col-xl-4">
-            <div id="map">
-                <label for="fileControl" id="addMap" class="standardButton">Añadir Mapa Zona</label>
-                <input type="file" id="fileControl" name="miniMapFile" value="">
-            </div>
+          <div class="col-xl-4 wrapperOptions">
+              <label id="addMap" for="fileControl" class="zoneButtons">Añadir Mapa Zona</label>
+                @if($errors->has('miniMapFile'))
+                  <div class="col-xl-12">
+                      <strong>
+                          <span class="errorImage">
+                                {{ $errors->first('miniMapFile') }}
+                          </span>
+                      </strong>
+                  </div>
+                @endif
+              <input type="file" id="fileControl" name="miniMapFile" value="">
           </div>
           <div class="col-xl-1"></div>
 
@@ -89,8 +97,38 @@
                 <ul>
                   @foreach($characteristics as $characteristic)
                     <li>
-                      <label>{{ $characteristic->nameCharacteristic}}</label>
-                      <input type="text" name="{{ $characteristic->showCharacteristic }}" value="{{ $characteristic->valueCharacteristic}}">
+                      <label>{{ $characteristic->showCharacteristic }}</label>
+                      @if($characteristic->nameCharacteristic == 'ZonaClimatica')
+                          <div class="ClimaticSelectStyle">
+                            <select id="climaticOptions" name="{{ $characteristic->nameCharacteristic }}">
+                                <option disabled selected hidden>Escoger Categoría...</option>
+                                <option>DC</option>
+                                <option>D</option>
+                                <option>E</option>
+                                <option>R</option>
+                            </select>
+                          </div>
+                          @if($errors->has($characteristic->nameCharacteristic))
+                          <div class="col-xl-12">
+                              <strong>
+                                  <span class="errorMessage">
+                                        {{ $errors->first($characteristic->nameCharacteristic) }}
+                                  </span>
+                              </strong>
+                          </div>
+                        @endif
+                      @else
+                        <input type="text" name="{{ $characteristic->nameCharacteristic }}" value="{{ $characteristic->valueCharacteristic}}">
+                        @if($errors->has($characteristic->nameCharacteristic))
+                          <div class="col-xl-12">
+                              <strong>
+                                  <span class="errorMessage">
+                                        {{ $errors->first($characteristic->nameCharacteristic) }}
+                                  </span>
+                              </strong>
+                          </div>
+                        @endif
+                      @endif
                     </li>
                   @endforeach
                 </ul>
@@ -119,8 +157,30 @@
                   <ul>
                     @foreach($indicators as $indicator)
                       <li>
-                        <label>{{ $indicator->nameIndicator }}</label>
-                        <input type="text" name="{{ $indicator->showIndicator }}" value="{{ $indicator->valueIndicator }}">
+                        <label style="padding-left:20%">{{ $indicator->showIndicator }}</label>
+                          @if($indicator->showIndicator == 'IVPR')
+                            <input type="text" id="{{ $indicator->showIndicator }}" name="{{ $indicator->showIndicator }}" value="{{ $indicator->valueIndicator }}" readonly= "readonly">
+                              @if($errors->has($indicator->showIndicator))
+                                <div class="col-xl-12">
+                                    <strong>
+                                        <span class="errorMessage">
+                                              {{ $errors->first($indicator->showIndicator) }}
+                                        </span>
+                                    </strong>
+                                </div>
+                              @endif
+                          @else
+                            <input type="text" id="{{ $indicator->showIndicator }}" name="{{ $indicator->showIndicator }}" value="{{ $indicator->valueIndicator }}">
+                            @if($errors->has($indicator->showIndicator))
+                                <div class="col-xl-12">
+                                    <strong>
+                                        <span class="errorMessage">
+                                              {{ $errors->first($indicator->showIndicator) }}
+                                        </span>
+                                    </strong>
+                                </div>
+                              @endif
+                          @endif
                       </li>
                     @endforeach
                   </ul>
@@ -128,6 +188,16 @@
                 <div class="col-xl-1"></div>
 
               </div>
+            </div>
+
+            <div class="col-xl-12">
+              <div class="col-xl-1"></div>
+              <div class="col-xl-10 cardFooter">
+                @foreach($indicators as $indicator)
+                  <p>* {{ $indicator->nameIndicator }}</p>
+                @endforeach
+              </div>
+              <div class="col-xl-1"></div>
             </div>
         </div>
         <div class="col-xl-1"></div>

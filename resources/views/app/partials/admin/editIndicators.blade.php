@@ -38,7 +38,6 @@
     <div class="col-xl-8 topMargin">
 
 
-
       @foreach($parameters as $parameter)
         <div class="col-xl-12">
           <div class="col-xl-4">

@@ -5,12 +5,14 @@ namespace App\Logic\CreationZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Logic\CreationZone\ZoneTools;
 use App\Models\CharacteristicZone;
 use App\Models\IndicatorZone;
 use App\Models\Municipality;
 use App\Models\Zone;
+use App\User;
 use Validator;
 
 class ZoneTools
@@ -57,65 +59,75 @@ class ZoneTools
 
     public function createZone(Request $request)
     {
-            if(is_null($request->idZone))
+            $validations = $this->validateZone($request);
+
+            if($validations->fails())
             {
-                $zone = new Zone();
-                $municipalities = Municipality::with('Villages')->where('rememberToken', $request->tokenZone)->get();
-                $characteristics = CharacteristicZone::where('rememberToken', $request->tokenZone)->get();
-                $indicators = IndicatorZone::where('rememberToken', $request->tokenZone)->get();
+                return $validations;
             }
             else
             {
-                $zone = Zone::find($request->idZone);
-                $municipalities = Municipality::with('Villages')->where('idZone', $request->idZone)->get();
-                $characteristics = CharacteristicZone::where('idZone', $request->idZone)->get();
-                $indicators = IndicatorZone::where('idZone', $request->idZone)->get();
-            }
-
-          //Atributes
-            $zone->nameZone = $request->nameZone;
-            $zone->autor = $request->nameZone;
-            $zone->miniMapPath = $request->nameZone;
-            $zone->idDepartament = $request->idDepartament;
-            $zone->save();
-
-        foreach ($characteristics as $characteristic)
-        {
-            foreach ($this->characteristicsFileGlobal as $keyCharacteristic)
-            {
-                if($characteristic->showCharacteristic == $keyCharacteristic->show)
+                if(is_null($request->idZone))
                 {
-                    $nameParameter = $keyCharacteristic->show;
-                    $characteristic->valueCharacteristic = $request->$nameParameter;
+                    $zone = new Zone();
+                    $municipalities = Municipality::with('Villages')->where('rememberToken', $request->tokenZone)->get();
+                    $characteristics = CharacteristicZone::where('rememberToken', $request->tokenZone)->get();
+                    $indicators = IndicatorZone::where('rememberToken', $request->tokenZone)->get();
                 }
-            }
-
-            $characteristic->idZone = $zone->idZone;
-            $characteristic->save();
-        }
-
-
-        foreach ($indicators as $indicator)
-        {
-            foreach ($this->indicatorFileGlobal as $keyindicator)
-            {
-                if($indicator->showIndicator == $keyindicator->show)
+                else
                 {
-                    $nameParameter = $keyindicator->show;
-                    $indicator->valueIndicator = $request->$nameParameter;
+                    $zone = Zone::find($request->idZone);
+                    $municipalities = Municipality::with('Villages')->where('idZone', $request->idZone)->get();
+                    $characteristics = CharacteristicZone::where('idZone', $request->idZone)->get();
+                    $indicators = IndicatorZone::where('idZone', $request->idZone)->get();
                 }
+
+                    //Atributes
+                        $zone->nameZone = $request->nameZone;
+                        $zone->autor = $request->nameZone;
+                        $zone->miniMapPath = $request->nameZone;
+                        $zone->idDepartament = $request->idDepartament;
+                        $zone->save();
+
+                    foreach ($characteristics as $characteristic)
+                    {
+                        foreach ($this->characteristicsFileGlobal as $keyCharacteristic)
+                        {
+                            if($characteristic->showCharacteristic == $keyCharacteristic->name)
+                            {
+                                $nameParameter = $keyCharacteristic->name;
+                                $characteristic->valueCharacteristic = $request->$nameParameter;
+                            }
+                        }
+
+                        $characteristic->idZone = $zone->idZone;
+                        $characteristic->save();
+                    }
+
+
+                    foreach ($indicators as $indicator)
+                    {
+                        foreach ($this->indicatorFileGlobal as $keyindicator)
+                        {
+                            if($indicator->showIndicator == $keyindicator->show)
+                            {
+                                $nameParameter = $keyindicator->show;
+                                $indicator->valueIndicator = $request->$nameParameter;
+                            }
+                        }
+
+                        $indicator->idZone = $zone->idZone;
+                        $indicator->save();
+                    }
+
+                    foreach ($municipalities as $municipality)
+                    {
+                        $municipality->idZone = $zone->idZone;
+                        $municipality->save();
+                    }
+
+                    return $validations;
             }
-
-            $indicator->idZone = $zone->idZone;
-            $indicator->save();
-        }
-
-        foreach ($municipalities as $municipality)
-        {
-            $municipality->idZone = $zone->idZone;
-            $municipality->save();
-        }
-
         // $this->saveMiniMap($request);
     }
 
@@ -158,6 +170,100 @@ class ZoneTools
         $name = $file->getClientOriginalName();
         $test = $request->miniMapFile->storeAs('Map', $name, 'local');
 
+    }
+
+    protected function validateZone(Request $request)
+    {
+        $input = $request->all();
+        $finalInput = array();
+
+        $currentNewRules = array();
+        $rules = array();
+
+        foreach($this->indicatorFileGlobal as $currentIndicator)
+        {
+            $indicatorsRules = explode('|', $currentIndicator->rules);
+
+            foreach($indicatorsRules as $currentRule)
+            {
+                $newRule = array($currentRule);
+                $currentNewRules = array_merge($currentNewRules, $newRule);
+            }
+
+            $rules = array_merge($rules, array($currentIndicator->show => $currentNewRules));
+            $currentNewRules = array();
+        }
+
+        foreach($this->characteristicsFileGlobal as $currentCharacteristic)
+        {
+
+            $characteristicsRules = explode('|', $currentCharacteristic->rules);
+
+            foreach($characteristicsRules as $currentRule)
+            {
+                $newRule = array($currentRule);
+                $currentNewRules = array_merge($currentNewRules, $newRule);
+            }
+
+            $rules = array_merge($rules, array($currentCharacteristic->name => $currentNewRules));
+            $currentNewRules = array();
+        }
+
+        //Extra Rules
+        $rules = array_merge($rules, array('miniMapFile' => array('required','image','max:1024')));
+        $rules = array_merge($rules, array('nameZone' => array('required','max:40')));
+
+        $messages = [
+          'required' => 'Campo Obligatorio',
+          'image' => 'Debe ser imagen (png, jpg)',
+          'max'=>[
+                'file' => 'Peso Máximo: 1MB',
+                'string' => 'El campo debe tener máximo 40 caracteres'
+          ],
+        ];
+
+        return Validator::make($input, $rules, $messages);
+    }
+
+    public function createZoneView(Request $request, $validations = "")
+    {
+        $user = Auth::user();
+        $departaments = User::find($user->idUser)->departaments;
+        $idDepartament = $request->idDepartament;
+        $option = 'configZone';
+        $token = $request->token;
+
+        $zone = new Zone;
+            $zone->idZone = $request->idZone;
+            $zone->nameZone = $request->nameZone;
+            $zone->idDepartament = $idDepartament;
+
+        $characteristics = CharacteristicZone::where('idZone', '28')->orderBy('nameCharacteristic','desc')->get();
+        $indicators = IndicatorZone::where('idZone', '28')->orderBy('showIndicator','asc')->get();
+
+        foreach($characteristics as $characteristic)
+        {
+            $parameter = $characteristic->nameCharacteristic;
+            $characteristic->valueCharacteristic = $request->$parameter;
+        }
+
+        foreach($indicators as $indicator)
+        {
+            $parameter = $indicator->showIndicator;
+            $indicator->valueIndicator = $request->$parameter;
+        }
+
+        $view = view('app.cartographer')
+                    ->with('departaments', $departaments)
+                    ->with('option', $option)
+                    ->with('characteristics', $characteristics)
+                    ->with('indicators', $indicators)
+                    ->with('token', $token)
+                    ->with('idDepartament', $idDepartament)
+                    ->with('zone', $zone)
+                    ->withErrors($validations);
+    
+        return $view;
     }
 
 

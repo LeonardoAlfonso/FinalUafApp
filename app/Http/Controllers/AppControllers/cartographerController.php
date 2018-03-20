@@ -75,7 +75,7 @@ class cartographerController extends Controller
           }
           else
           {
-              $zone = Zone::find($idZone);
+              $zone = Zone::find('28');
               $characteristics = $zone->Characteristics;
               $indicators = $zone->Indicators;
               $token = $indicators->first()->rememberToken;
@@ -96,8 +96,16 @@ class cartographerController extends Controller
         if(isset($_POST['saveZone']))
         {
             $tools = new ZoneTools();
-            $tools->createZone($request);
-            return redirect()->route('listZones',['idDepartament' => $request->idDepartament]);
+            $validations = $tools->createZone($request);
+
+            if($validations->fails())
+            {
+                return $tools->createZoneView($request, $validations);                
+            }
+            else
+            {
+                return redirect()->route('listZones',['idDepartament' => $request->idDepartament]);
+            }  
         }
         else if(isset($_POST['addMunicipality']))
         {
