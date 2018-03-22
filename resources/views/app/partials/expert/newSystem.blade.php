@@ -143,33 +143,43 @@
         </div>
         <div class="col-xl-4"></div>
         <div class="col-xl-3 ButtonTable">
-            <label class="systemComponents">Nuevo Ingreso</label>
+            <input id="ShowEntryModal" class="inputModal" name="entryModal" type="radio">
+            <label for="ShowEntryModal" class="systemComponents">Nuevo Ingreso</label>
+            @include('app.partials.expert.modals.entryModal')
         <div class="col-xl-1"></div>
         </div>
       </div>
 
-      <div class="col-xl-12">
-        <table class="tableStyle">
-          <thead>
-            <tr>
-              <th>Nombre Sistema</th>
-              <th>Autor</th>
-              <th>Publicación</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Sistema X</td>
-              <td>Pepito Perez</td>
-              <td>19-18-42</td>
-              <td><a href="#"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
-              <td><a href="#"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="col-xl-12">
+          <table class="tableStyle">
+            <thead>
+              <tr>
+                <th>Concepto</th>
+                <th>Unidad Medida</th>
+                <th>Fuente Precio</th>
+                <th>Fecha Fuente</th>
+                <th>Precio Unitario</th>
+                <th>Año 1</th>
+                <th>Año 2</th>
+                <th>Año 3</th>
+                <th>Año 4</th>
+                <th>Año 5</th>
+                <th>Año 6</th>
+                <th>Año 7</th>
+                <th>Año 8</th>
+                <th>Año 9</th>
+                <th>Año 10</th>
+                <th>Año 11</th>
+                <th>Año 12</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="BodyEntryTable">
+            </tbody>
+          </table>
+        </div>
+
     </div>
 
   <div class="col-xl-2">

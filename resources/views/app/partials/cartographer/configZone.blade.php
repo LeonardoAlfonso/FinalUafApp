@@ -102,10 +102,9 @@
                           <div class="ClimaticSelectStyle">
                             <select id="climaticOptions" name="{{ $characteristic->nameCharacteristic }}">
                                 <option disabled selected hidden>Escoger Categoría...</option>
-                                <option>DC</option>
-                                <option>D</option>
-                                <option>E</option>
-                                <option>R</option>
+                                  @foreach($climaticOptions as $climaticOption)
+                                    <option>{{ $climaticOption }}</option>
+                                  @endforeach
                             </select>
                           </div>
                           @if($errors->has($characteristic->nameCharacteristic))

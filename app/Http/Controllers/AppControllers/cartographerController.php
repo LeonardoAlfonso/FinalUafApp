@@ -81,6 +81,8 @@ class cartographerController extends Controller
               $token = $indicators->first()->rememberToken;
           }
 
+          $climaticOptions = array('Cálido','Templado','Frio','Paramuno');
+
           return view('app.cartographer')
                     ->with('departaments', $departaments)
                     ->with('option', $option)
@@ -88,7 +90,8 @@ class cartographerController extends Controller
                     ->with('indicators', $indicators)
                     ->with('token', $token)
                     ->with('idDepartament', $idDepartament)
-                    ->with('zone', $zone);
+                    ->with('zone', $zone)
+                    ->with('climaticOptions', $climaticOptions);
     }
 
     public function saveZone(Request $request)

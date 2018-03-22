@@ -1,4 +1,4 @@
-div#costModal{
+div.systemModal{
      background: rgba(0, 0, 0, 0.5);
      color: #fff;
      position: fixed;
@@ -13,9 +13,17 @@ div#costModal{
      display: none;
  }
 
+ input#ShowEntryModal{
+    display: none;
+}
+
  input#ShowCostModal:checked ~ #costModal {
      top: 0;
  }
+
+input#ShowEntryModal:checked ~ #entryModal {
+    top: 0;
+}
 
  div.modalCard{
      position: relative;
@@ -135,9 +143,17 @@ div.modalCard hr#ModalHr{
     display: none;
  }
 
+ input#CloseEntryModal{
+    display: none;
+ }
+
  input#CloseCostModal:checked ~ #costModal {
      top: -100vh;
  }
+
+ input#CloseEntryModal:checked ~ #entryModal {
+    top: -100vh;
+}
 
 label.buttonSave{
       color: white;
@@ -151,12 +167,39 @@ label.buttonSave{
 }
 
 label.buttonClose{
-      color: white;
-      text-align: center;
-      background: #474E56;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      padding: 5px 5px;
-      float: right;
+    color: white;
+    text-align: center;
+    background: #474E56;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 5px;
+    float: right;
 }
+
+div.modalSelect{
+
+    border-radius : 3px;
+    width: 100%;
+    border-color : #575756;
+    border-color : rgba(87, 87, 86, 1);
+    overflow: hidden;
+    background: #ffffff url(../../images/web/IconSelectBox.png) no-repeat;
+    background-position: right;
+    height : 27px;
+}
+
+.modalSelect select{
+    border-radius : 3px;
+    border-width : 1px;
+    border-color : #575756;
+    border-color : rgba(87, 87, 86, 1);
+    height : 27px;
+    width: 100%;
+    padding-left: 10px;
+    background: transparent;
+    appearance:none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+}
+

@@ -11,6 +11,7 @@ use App\Models\Virtuals\CostVirtual;
 use App\Models\UafParameter;
 use App\Models\Zone;
 use App\Models\Cost;
+use App\Models\Entry;
 use App\User;
 
 class systemController extends Controller
@@ -64,14 +65,31 @@ class systemController extends Controller
 
     public function getSystem($idZone)
     {
-          $tokenSystem = str_random(10);
+        $systemTools = new SystemTools();
+        $tokenSystem = str_random(10);
+        $optionsGroup = $systemTools->getGroup();
           // dd($idZone);
           $option = 'configSystem';
           $listCost = new CostVirtual();
           return view('app.expert')
                   ->with('option', $option)
                   ->with('tokenSystem', $tokenSystem)
-                  ->with('listCost', $listCost);
+                  ->with('listCost', $listCost)
+                  ->with('optionsGroup',$optionsGroup);
+    }
+
+    public function getSubGroup(Request $request, $group)
+    {
+        $systemTools = new SystemTools();
+        $optionsSubGroup = $systemTools->getSubGroup($group);
+
+        if($request->ajax())
+        {
+            $view = view('app.partials.expert.modals.subGroupsCost')
+                        ->with('optionsSubGroup', $optionsSubGroup);
+            $newview = $view->render();
+            return response()->json(["html" => $newview]);
+        }
     }
 
     public function saveSystem(Request $request)
@@ -116,6 +134,47 @@ class systemController extends Controller
                           ->with('listCost', $table);
               $newView = $view->render();
               return response()->json(["html"=>$newView]);
+        }
+    }
+
+    public function storageEntry(Request $request)
+    {
+        $systemTools = new SystemTools();
+        $systemTools->saveEntry($request);
+        // $table = $systemTools->showEntries("gwpzcO54wN");
+        
+        $table = $systemTools->showEntries($request->input('tokenSystem'));
+
+      if($request->ajax())
+      {
+            $view = view('app.partials.expert.tableEntries')
+                        ->with('listEntries', $table);
+            $newView = $view->render();
+            return response()->json(["html"=>$newView ]);
+      }
+    }
+
+    public function deleteEntry(Request $request, $id)
+    {
+        $systemTools = new SystemTools();
+        $entry = Entry::find($id);
+        $token = $entry->rememberToken;
+        $name = $entry->name;
+        $entry = Entry::where('name', $name)->where('rememberToken', $token)->get();
+
+        foreach($entry as $deleteEntry)
+        {
+            $deleteEntry->delete();
+        }
+
+        $table = $systemTools->showEntries($token);
+
+        if($request->ajax())
+        {
+            $view = view('app.partials.expert.tableEntries')
+                        ->with('listEntries', $table);
+            $newView = $view->render();
+            return response()->json(["html"=>$newView ]);
         }
     }
 }

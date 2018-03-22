@@ -7,6 +7,9 @@
       var routeZonesList = '{{ route('zonesList', ['nameDepartament' => 'parameter']) }}';
       var routeStorageCost = '{{ route('storageCost') }}';
       var routeDeleteCost = '{{ route('costDelete', ['idCost' => 'parameter'])  }}';
+      var routeSubGroup = '{{ route('getSubGroup', ['group' => 'parameter'])  }}';
+      var routeStorageEntry = '{{ route('storageEntry') }}';
+      var routeDeleteEntry = '{{ route('entryDelete', ['idEntry' => 'parameter'])  }}';
   </script>
   <script type="text/javascript" src="{{ asset('js/app/systemApp.js') }}"></script>
 @stop

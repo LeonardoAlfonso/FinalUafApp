@@ -1,6 +1,6 @@
-<input id="CloseCostModal" class="inputModal" name="costModal" type="radio">
-<div id="costModal" class="col-xl-12 systemModal">
-  <form id="newCost">
+<input id="CloseEntryModal" class="inputModal" name="entryModal" type="radio">
+<div id="entryModal" class="col-xl-12 systemModal">
+  <form id="newEntry">
     <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
     <input type="hidden" name="tokenSystem" value="{{ $tokenSystem }}">
     <div class="col-xl-4"></div>
@@ -17,49 +17,38 @@
           <div class="col-xl-6">
             <ul>
               <li>
-                <label>Detalle</label>
+                <label>Concepto</label>
               </li>
               <li>
-                <label>Grupo Costo</label>
+                <label>Unidad Medida</label>
               </li>
               <li>
-                <label>Subgrupo Costo</label>
+                <label>Fuente Precio</label>
               </li>
               <li>
-                <label>Costo Unitario</label>
+                <label>Fecha Fuente</label>
               </li>
               <li>
-                <label>Cantidad para establecimiento</label>
+                <label>Precio Unitario</label>
               </li>
             </ul>
           </div>
           <div class="col-xl-6">
             <ul>
               <li>
-                <input type="text" name="detail" value="" placeholder="Concepto del costo">
+                <input type="text" name="concept" value="" placeholder="Nombre del Producto">
               </li>
               <li>
-                <div class="modalSelect">
-                  <select id="listGroup" name="listGroup">
-                    <option disabled selected hidden>Escoger Grupo..</option>
-                    @foreach($optionsGroup as $optionGroup)
-                      <option>{{ $optionGroup }}</option>
-                    @endforeach
-                  </select>
-                </div>
+                <input type="text" name="measureUnity" value="" placeholder="KG, Lb, unidad..."> 
               </li>
               <li>
-              <div class="modalSelect">
-                  <select id="listSubGroup" name="listSubGroup">
-                    <option disabled selected hidden>Escoger SubGrupo..</option>
-                  </select>
-                </div>
+                <input type="text" name="source" value=""> 
               </li>
               <li>
-                <input type="text" name="unitaryCost" value="">
+                <input type="text" name="sourceDate" value="">
               </li>
               <li>
-                <input type="text" name="quantity0" value="" placeholder="Valor año 0">
+                <input type="text" name="unitaryPrice" value="" placeholder="Precio Unitario">
               </li>
             </ul>
           </div>
@@ -95,8 +84,8 @@
           </div>
 
           <div class="col-xl-12 modalFooter">
-              <label for="CloseCostModal" class="buttonSave" onclick="saveCost()">Guardar</label>
-              <label for="CloseCostModal" class="buttonClose">Cerrar</label>
+              <label for="CloseEntryModal" class="buttonSave" onclick="saveEntry()">Guardar</label>
+              <label for="CloseEntryModal" class="buttonClose">Cerrar</label>
           </div>
 
         </div>
