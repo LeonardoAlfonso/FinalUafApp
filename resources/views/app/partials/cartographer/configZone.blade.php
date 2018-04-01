@@ -12,7 +12,7 @@
             <h2>{{ $zone->nameZone }} - {{ $currentDepartament->departamentName }}</h2>
           @endif
             
-            
+            <input type="hidden" id="fileState" name="fileState" value="{{ $zone->file_name }}">
             <input type="hidden" name="idDepartament" value="{{ $currentDepartament->idDepartament }}">
             <input type="hidden" name="idZone" value="{{ $zone->idZone }}">
         </div>
@@ -69,12 +69,25 @@
               <button id="addMunicipality" name="addMunicipality" type="submit"></button>
           </div>
           <div class="col-xl-4 wrapperOptions">
-              <label id="addMap" for="fileControl" class="zoneButtons">Añadir Mapa Zona</label>
+              @if(empty($zone->file_name))
+                <label id="addMap" for="fileControl" class="zoneButtons">Añadir Mapa Zona</label>
+              @else
+                <label id="addMap" for="fileControl" class="zoneButtons">{{ $zone->file_name }}</label>
+              @endif   
                 @if($errors->has('miniMapFile'))
                   <div class="col-xl-12">
                       <strong>
                           <span class="errorImage">
                                 {{ $errors->first('miniMapFile') }}
+                          </span>
+                      </strong>
+                  </div>
+                @endif
+                @if($errors->has('fileState'))
+                  <div class="col-xl-12">
+                      <strong>
+                          <span class="errorImage">
+                                {{ $errors->first('fileState') }}
                           </span>
                       </strong>
                   </div>

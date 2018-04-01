@@ -11,6 +11,13 @@ class Zone extends Model
       protected $fillable = ['nameZone','autor','miniMapPath','idDepartament'];
       protected $primaryKey = 'idZone';
 
+      public function getFileNameAttribute()
+      {
+          $minimap = $this->miniMapPath;
+          $minimapName = substr($minimap, strripos($minimap, "/") + 1);
+          return $minimapName;
+      }
+
   //Relations
       public function Departament()
       {

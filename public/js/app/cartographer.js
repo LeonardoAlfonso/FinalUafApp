@@ -5,6 +5,7 @@ $(document).ready(function(){
         var parent = $(this).val().split("\\");
         var name = parent[parent.length-1];
         $("#addMap").html(name);
+        $("#fileState").val(name);
     });
     
     $("#IPAP").click(function() {

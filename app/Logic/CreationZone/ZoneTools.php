@@ -83,7 +83,8 @@ class ZoneTools
         }
 
         //Extra Rules
-        $rules = array_merge($rules, array('miniMapFile' => array('required','image','max:1024')));
+        $rules = array_merge($rules, array('fileState' => array('required')));
+        $rules = array_merge($rules, array('miniMapFile' => array('image','max:1024')));
         $rules = array_merge($rules, array('nameZone' => array('required','max:40')));
 
         $messages = [
@@ -110,9 +111,14 @@ class ZoneTools
                 
             $zone->nameZone = $request->nameZone;
             $zone->autor = Auth::user()->full_name;
-            $zone->miniMapPath = Storage::putFileAs(
-                    'miniMaps', $request->file('miniMapFile'), $request->nameZone.".png"
-                );
+
+                if(!empty($request->file('miniMapFile')))
+                {
+                    $zone->miniMapPath = url(Storage::putFileAs(
+                        'miniMaps', $request->file('miniMapFile'), $request->nameZone.".png"
+                    ));
+                }
+
             $zone->idDepartament = $request->idDepartament;
 
         $zone->save();
@@ -141,7 +147,6 @@ class ZoneTools
                 $newIndicator->idZone = $zone->idZone;
             $newIndicator->save();
         }
-
     }
 
     public function  reconstructItemsInvert($input, $items)

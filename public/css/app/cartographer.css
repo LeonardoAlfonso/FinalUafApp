@@ -116,11 +116,6 @@ section#content article div#map{
     margin-top: 6%;
 }
 
-input#fileControl
-{
-    display: none;
-}
-
 .ClimaticSelectStyle{
 
     float: right;

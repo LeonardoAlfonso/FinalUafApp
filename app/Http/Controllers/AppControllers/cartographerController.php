@@ -112,6 +112,7 @@ class cartographerController extends Controller
                     ->with('climaticOptions', $climaticOptions)
                     ->withErrors($validations);
 
+        // dd($zone->miniMapPath);
          return $view;
     }
 
