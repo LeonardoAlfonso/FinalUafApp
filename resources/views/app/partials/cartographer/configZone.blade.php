@@ -6,9 +6,14 @@
 
         <div class="col-xl-1"></div>
         <div class="col-xl-7">
-            <h2>Nueva Zona</h2>
-            <input type="hidden" name="tokenZone" value="{{ $token }}">
-            <input type="hidden" name="idDepartament" value="{{ $idDepartament }}">
+          @if(empty($zone->nameZone))
+            <h2>Nueva Zona - {{ $currentDepartament->departamentName }}</h2>
+          @else
+            <h2>{{ $zone->nameZone }} - {{ $currentDepartament->departamentName }}</h2>
+          @endif
+            
+            
+            <input type="hidden" name="idDepartament" value="{{ $currentDepartament->idDepartament }}">
             <input type="hidden" name="idZone" value="{{ $zone->idZone }}">
         </div>
         <div class="col-xl-4"></div>
@@ -92,47 +97,7 @@
                 <p>Elementos Climáticos</p>
             </div>
             <div class="titleBody col-xl-12">
-              <div class="col-xl-2"></div>
-              <div class="col-xl-8">
-                <ul>
-                  @foreach($characteristics as $characteristic)
-                    <li>
-                      <label>{{ $characteristic->showCharacteristic }}</label>
-                      @if($characteristic->nameCharacteristic == 'ZonaClimatica')
-                          <div class="ClimaticSelectStyle">
-                            <select id="climaticOptions" name="{{ $characteristic->nameCharacteristic }}">
-                                <option disabled selected hidden>Escoger Categoría...</option>
-                                  @foreach($climaticOptions as $climaticOption)
-                                    <option>{{ $climaticOption }}</option>
-                                  @endforeach
-                            </select>
-                          </div>
-                          @if($errors->has($characteristic->nameCharacteristic))
-                          <div class="col-xl-12">
-                              <strong>
-                                  <span class="errorMessage">
-                                        {{ $errors->first($characteristic->nameCharacteristic) }}
-                                  </span>
-                              </strong>
-                          </div>
-                        @endif
-                      @else
-                        <input type="text" name="{{ $characteristic->nameCharacteristic }}" value="{{ $characteristic->valueCharacteristic}}">
-                        @if($errors->has($characteristic->nameCharacteristic))
-                          <div class="col-xl-12">
-                              <strong>
-                                  <span class="errorMessage">
-                                        {{ $errors->first($characteristic->nameCharacteristic) }}
-                                  </span>
-                              </strong>
-                          </div>
-                        @endif
-                      @endif
-                    </li>
-                  @endforeach
-                </ul>
-              </div>
-              <div class="col-xl-2"></div>
+              @include('app.partials.cartographer.characteristicsCard')
             </div>
         </div>
         <div class="col-xl-1"></div>
@@ -148,52 +113,14 @@
                 <p>Características Socioeconómicas</p>
             </div>
             <div class="titleBody col-xl-12">
-              <div class="col-xl-2"></div>
-              <div class="col-xl-12">
-
-                <div class="col-xl-0"></div>
-                <div class="col-xl-11">
-                  <ul>
-                    @foreach($indicators as $indicator)
-                      <li>
-                        <label style="padding-left:20%">{{ $indicator->showIndicator }}</label>
-                          @if($indicator->showIndicator == 'IVPR')
-                            <input type="text" id="{{ $indicator->showIndicator }}" name="{{ $indicator->showIndicator }}" value="{{ $indicator->valueIndicator }}" readonly= "readonly">
-                              @if($errors->has($indicator->showIndicator))
-                                <div class="col-xl-12">
-                                    <strong>
-                                        <span class="errorMessage">
-                                              {{ $errors->first($indicator->showIndicator) }}
-                                        </span>
-                                    </strong>
-                                </div>
-                              @endif
-                          @else
-                            <input type="text" id="{{ $indicator->showIndicator }}" name="{{ $indicator->showIndicator }}" value="{{ $indicator->valueIndicator }}">
-                            @if($errors->has($indicator->showIndicator))
-                                <div class="col-xl-12">
-                                    <strong>
-                                        <span class="errorMessage">
-                                              {{ $errors->first($indicator->showIndicator) }}
-                                        </span>
-                                    </strong>
-                                </div>
-                              @endif
-                          @endif
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-                <div class="col-xl-1"></div>
-
-              </div>
+              @include('app.partials.cartographer.indicatorsCard')
             </div>
 
             <div class="col-xl-12">
               <div class="col-xl-1"></div>
               <div class="col-xl-10 cardFooter">
                 @foreach($indicators as $indicator)
-                  <p>* {{ $indicator->nameIndicator }}</p>
+                  <p>* {{ $indicator->name }}</p>
                 @endforeach
               </div>
               <div class="col-xl-1"></div>

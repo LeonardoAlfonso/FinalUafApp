@@ -18,6 +18,15 @@ use App\User;
 
 class cartographerController extends Controller
 {
+    protected $characteristicsFileGlobal = "";
+    protected $indicatorsFileGlobal = "";
+
+    public function __construct()
+    {
+        $this->characteristicsFileGlobal = json_decode(Storage::disk('public')->get('characteristicsZones.json'));
+        $this->indicatorsFileGlobal = json_decode(Storage::disk('public')->get('indicatorsZones.json'));
+    }
+
     public function cartographerPanel()
     {
         $idUser = Auth::user()->idUser;
@@ -37,61 +46,73 @@ class cartographerController extends Controller
         $idUser = Auth::user()->idUser;
         $departaments = User::find($idUser)->departaments;
         $departaments = $departaments->sortBy('departamentName');
-        $selectDepartament = $departaments->first();
+        $currentDepartament = Departament::with('Zones')->where('idDepartament',$idDepartament)->first();
 
-        $zones = Zone::where('idDepartament', $idDepartament)->get();
         $option = 'listZones';
 
         return view('app.cartographer')
                   ->with('departaments', $departaments)
-                  ->with('zones', $zones)
-                  ->with('option', $option)
-                  ->with('selectDepartament', $selectDepartament);
+                  ->with('currentDepartament', $currentDepartament)
+                  ->with('option', $option);
     }
 
-    public function getZone($idZone, $idDepartament)
+    public function getZone(Request $request, $idDepartament, $idZone = NULL, $validations = NULL)
     {
         //Objects and Resources
+          $tools = new ZoneTools();
           $idUser = Auth::user()->idUser;
           $departaments = User::find($idUser)->departaments;
-          $tools = new ZoneTools();
+          $currentDepartament = Departament::find($idDepartament);
 
         //Assignments
-          $characteristicsFile = Storage::disk('public')->get('characteristicsZones.json');
-          $indicatorFile = Storage::disk('public')->get('indicatorsZones.json');
-
+          $climaticOptions = array('Cálido','Templado','Frio','Paramuno');
           $option = 'configZone';
-        //Transformations
-          $characteristicsFile = json_decode($characteristicsFile);
-          $indicatorFile = json_decode($indicatorFile);
 
         //Actions
-          if($idZone == 'null')
-          {
-              $zone = new Zone();
-              $token = $tools->createRelations($characteristicsFile, $indicatorFile);
-              $characteristics = CharacteristicZone::where('rememberToken',$token)->get();
-              $indicators = IndicatorZone::where('rememberToken',$token)->get();
-          }
-          else
-          {
-              $zone = Zone::find('28');
-              $characteristics = $zone->Characteristics;
-              $indicators = $zone->Indicators;
-              $token = $indicators->first()->rememberToken;
-          }
+        if(!is_null($idZone))
+        {    
+            $zone = Zone::find($idZone);
 
-          $climaticOptions = array('Cálido','Templado','Frio','Paramuno');
+            if(empty($request->input()))
+            {
+                $characteristics = $tools->reconstructItemsInvert($zone->Characteristics, $this->characteristicsFileGlobal);
+                $indicators = $tools->reconstructItemsInvert($zone->Indicators, $this->indicatorsFileGlobal);
+            }
+            else
+            {
+                $characteristics = $tools->reconstructItems($request->input(), $this->characteristicsFileGlobal);
+                $indicators = $tools->reconstructItems($request->input(), $this->indicatorsFileGlobal);
+                $zone->nameZone = $request->nameZone;
+            }
+        }
+        else
+        {
+            $zone = new Zone();
 
-          return view('app.cartographer')
+            if(empty($request->input()))
+            {
+                $characteristics = $this->characteristicsFileGlobal;
+                $indicators = $this->indicatorsFileGlobal;
+            }
+            else
+            {
+                $characteristics = $tools->reconstructItems($request->input(), $this->characteristicsFileGlobal);
+                $indicators = $tools->reconstructItems($request->input(), $this->indicatorsFileGlobal);
+                $zone->nameZone = $request->nameZone;
+            }
+        }
+
+        $view = view('app.cartographer')
                     ->with('departaments', $departaments)
                     ->with('option', $option)
                     ->with('characteristics', $characteristics)
                     ->with('indicators', $indicators)
-                    ->with('token', $token)
-                    ->with('idDepartament', $idDepartament)
+                    ->with('currentDepartament', $currentDepartament)
                     ->with('zone', $zone)
-                    ->with('climaticOptions', $climaticOptions);
+                    ->with('climaticOptions', $climaticOptions)
+                    ->withErrors($validations);
+
+         return $view;
     }
 
     public function saveZone(Request $request)
@@ -99,14 +120,16 @@ class cartographerController extends Controller
         if(isset($_POST['saveZone']))
         {
             $tools = new ZoneTools();
-            $validations = $tools->createZone($request);
+            $validations = $tools->validateZone($request);
 
             if($validations->fails())
             {
-                return $tools->createZoneView($request, $validations);                
+               $view = $this->getZone($request, $request->idDepartament , $request->idZone, $validations);                
+               return $view;
             }
             else
             {
+                $tools->createUpdateZone($request);
                 return redirect()->route('listZones',['idDepartament' => $request->idDepartament]);
             }  
         }

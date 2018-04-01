@@ -16,7 +16,6 @@ class CreateIndicatorsZonesTable extends Migration
             $table->string('nameIndicator',100);
             $table->string('valueIndicator',100);
             $table->string('showIndicator');
-            $table->string('rememberToken',20);
             $table->timestamps();
 
             $table->integer('idZone')->unsigned()->nullable();

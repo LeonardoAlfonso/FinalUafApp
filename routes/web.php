@@ -55,7 +55,7 @@ Route::get('/admin/deleteUser/{idUser}', 'AppControllers\adminController@deleteU
 //Routes for cartographerController
 Route::get('/cartographer', 'AppControllers\cartographerController@cartographerPanel')->middleware('auth')->name('cartographer');
 Route::get('/cartographer/{idDepartament}', 'AppControllers\cartographerController@getListZones')->name('listZones');
-Route::get('/cartographer/zone/{idZone}/departament/{idDepartament}', 'AppControllers\cartographerController@getZone')->name('getZone');
+Route::get('/cartographer/departament/{idDepartament}/zone/{idZone?}', 'AppControllers\cartographerController@getZone')->name('getZone');
 Route::post('/cartographer/saveZone', 'AppControllers\cartographerController@saveZone')->name('saveZone');
 Route::get('/cartographer/deleteZone/{idZone}', 'AppControllers\cartographerController@deleteZone')->name('zoneDelete');
 Route::get('/cartographer/Municipality/Config/Admin', 'AppControllers\cartographerController@getMunicipality')->name('municipality');

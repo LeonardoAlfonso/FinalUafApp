@@ -5,7 +5,10 @@ $(document).ready(function(){
         var parent = $(this).val().split("\\");
         var name = parent[parent.length-1];
         $("#addMap").html(name);
-
+    });
+    
+    $("#IPAP").click(function() {
+        $("#IPAP").val('');
     });
 
     $("#IPAP").keyup(function(event) {
@@ -15,6 +18,10 @@ $(document).ready(function(){
         $("#IVPR").val(IVPR);
 
         console.log(IVPR);
+    });
+
+    $("#IPS").click(function() {
+        $("#IPS").val('');
     });
 
     $("#IPS").keyup(function(event) {

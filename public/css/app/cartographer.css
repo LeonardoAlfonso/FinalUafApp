@@ -126,7 +126,7 @@ input#fileControl
     float: right;
     border-radius : 10px;
     height : 27px;
-    width: 44%;
+    width: 110%;
     vertical-align: top;
     background: #FFFFFF url(../../images/web/IconSelectBox.png) no-repeat;
     color: #014C35;
@@ -292,8 +292,16 @@ div.titleBody{
     background-color: #E5E5E5;
 }
 
-div.titleBody ul li{
+div.titleBody ul li.items{
     padding-top: 30px;
+}
+
+.socieconomics {
+    margin-bottom: 26px;
+}
+
+.climatics{
+    margin-top: 26px;
 }
 
 div.cardFooter

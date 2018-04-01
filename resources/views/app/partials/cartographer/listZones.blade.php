@@ -4,7 +4,7 @@
 
         <div class="col-xl-1"></div>
         <div class="col-xl-7">
-            <h2>ZRH - {{ $selectDepartament->departamentName }}</h2>
+            <h2>ZRH - {{ $currentDepartament->departamentName }}</h2>
         </div>
         <div class="col-xl-4"></div>
 
@@ -15,7 +15,7 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-            <a href="{{ route('getZone', ['idZone' => 'null', 'idDepartament' =>  $selectDepartament->idDepartament ]) }}">
+            <a href="{{ route('getZone', ['idZone' => '', 'idDepartament' =>  $currentDepartament->idDepartament ]) }}">
                 <label id="newZone" class="standardButton">Nueva Zona</label>
             </a>
           </div>
@@ -55,12 +55,12 @@
           </tr>
         </thead>
         <tbody>
-           @foreach($zones as $zone)
+           @foreach($currentDepartament->zones as $zone)
             <tr>
               <td>{{ $zone->nameZone }}</td>
               <td>{{ $zone->autor }}</td>
               <td>{{ $zone->created_at }}</td>
-              <td><a href="{{ route('getZone', ['idZone' => $zone->idZone, 'idDepartament' =>  $selectDepartament ]) }}"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
+              <td><a href="{{ route('getZone', ['idZone' => $zone->idZone, 'idDepartament' =>  $currentDepartament->idDepartament ]) }}"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
               <td><a href="{{ route('zoneDelete', ['idZone' => $zone->idZone]) }}"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
             </tr>
           @endforeach

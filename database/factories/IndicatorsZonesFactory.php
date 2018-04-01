@@ -11,6 +11,7 @@ $factory->define(App\Models\IndicatorZone::class, function (Faker $faker) {
         return [
             'nameIndicator' => $faker->name,
             'valueIndicator' => $faker->name,
-            'idZone' => $faker->randomElement($zone),
+            'showIndicator' => $faker->name,
+            'idZone' => $faker->randomElement($idZone),
         ];
 });

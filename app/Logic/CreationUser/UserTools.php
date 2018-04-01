@@ -32,7 +32,7 @@ class UserTools
             'min' => 'El campo debe contener mínimo 6 caracteres',
             'max' => 'El campo debe contener máximo 40 caracteres',
             'between' => 'La contraseña debe contener entre 8 y 15 dígitos',
-            'regex' => 'La constraseña debe contener l'
+            'regex' => 'La contraseña debe contener l'
           ];
 
           return Validator::make($input, $rules, $messages);
@@ -151,10 +151,5 @@ class UserTools
                   ->with('roles', $roles)
                   ->with('departaments', $departaments)
                   ->withErrors($validations);
-    }
-
-    public function searcher()
-    {
-        
     }
 }

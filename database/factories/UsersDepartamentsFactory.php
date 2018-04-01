@@ -23,6 +23,5 @@ $factory->define(App\Models\UserDepartament::class, function (Faker $faker) {
     return [
         'idDepartament' => $faker->randomElement($departaments),
         'idUser' => $faker->randomElement($users),
-
     ];
 });

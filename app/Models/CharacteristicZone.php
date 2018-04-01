@@ -8,7 +8,7 @@ class CharacteristicZone extends Model
 {
   //Atributes
     protected $table = "characteristicsZones";
-    protected $fillable = ['nameCharacteristic','valueCharacteristic', 'showCharacteristic', 'rememberToken','idZone'];
+    protected $fillable = ['nameCharacteristic','valueCharacteristic', 'showCharacteristic', 'idZone'];
     protected $primaryKey = 'idCharacteristic';
 
   //Relations

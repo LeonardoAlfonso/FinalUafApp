@@ -15,7 +15,6 @@ class CreateCharacteristicsZonesTable extends Migration
               $table->string('nameCharacteristic',100);
               $table->string('valueCharacteristic',100);
               $table->string('showCharacteristic');
-              $table->string('rememberToken',20);
               $table->timestamps();
 
               $table->integer('idZone')->unsigned()->nullable();
