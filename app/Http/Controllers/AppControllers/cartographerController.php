@@ -30,7 +30,6 @@ class cartographerController extends Controller
     public function cartographerPanel(Request $request)
     {
         $request->session()->forget('sessionZone');
-        $request->session()->forget('idsMunicipalities');
         $request->session()->forget('lastList');
 
         $idUser = Auth::user()->idUser;
@@ -48,7 +47,6 @@ class cartographerController extends Controller
     public function getListZones(Request $request, $idDepartament)
     {
         $request->session()->forget('sessionZone');
-        $request->session()->forget('idsMunicipalities');
         $request->session()->forget('lastList');
 
         $idUser = Auth::user()->idUser;
@@ -97,16 +95,24 @@ class cartographerController extends Controller
         {
             $zone = new Zone();
 
-            if(empty($request->input()))
-            {
-                $characteristics = $this->characteristicsFileGlobal;
-                $indicators = $this->indicatorsFileGlobal;
-            }
-            else
+            if(!empty($request->input()))
             {
                 $characteristics = $tools->reconstructItems($request->input(), $this->characteristicsFileGlobal);
                 $indicators = $tools->reconstructItems($request->input(), $this->indicatorsFileGlobal);
                 $zone->nameZone = $request->nameZone;
+
+            }
+            else if($request->session()->has('sessionZone'))
+            {
+                $input = $request->session()->get('sessionZone');
+                $characteristics = $tools->reconstructItems($input, $this->characteristicsFileGlobal);
+                $indicators = $tools->reconstructItems($input, $this->indicatorsFileGlobal);
+                $zone->nameZone = array_get($input, 'nameZone');    
+            }
+            else
+            {
+                $characteristics = $this->characteristicsFileGlobal;
+                $indicators = $this->indicatorsFileGlobal;
             }
         }
 
@@ -145,6 +151,7 @@ class cartographerController extends Controller
         else if(isset($_POST['addMunicipality']))
         {
             $sessionZone = $request->all();
+            unset($sessionZone['miniMapFile']);
             $request->session()->put('sessionZone', $sessionZone);
             return redirect()->route('municipality');
         }
@@ -180,6 +187,7 @@ class cartographerController extends Controller
             $tools = new ZoneTools();
             $listMunicipalities = Municipality::where('idDepartament', $currentDepartament->idDepartament)->get();
         //Actions
+        
         if(!is_null($currentZone->idZone))
         {
             
@@ -206,42 +214,6 @@ class cartographerController extends Controller
                   ->with('listMunicipalities', $listMunicipalities)
                   ->with('currentDepartament', $currentDepartament)
                   ->with('currentZone', $currentZone);
-    }
-
-    public function returnMunicipalityZone(Request $request)
-    {
-        $idUser = Auth::user()->idUser;
-        $departaments = User::find($idUser)->departaments;
-        $departaments = $departaments->sortBy('departamentName');
-
-        $option = 'configZone';
-        $session = $request->session()->get('sessionZone');
-        $token = array_get($session, 'tokenZone');
-        $idDepartament = array_get($session, 'idDepartament');
-        $idZone = array_get($session, 'idZone');
-
-        $characteristics = CharacteristicZone::where('rememberToken',$token)->get();
-        $indicators = IndicatorZone::where('rememberToken',$token)->get();
-
-        if(is_null($idZone))
-        {
-            $zone = new Zone();
-        }
-        else
-        {
-            $zone = Zone::find($idZone);
-        }
-
-        $zone->nameZone = array_get($session, 'nameZone');
-
-        return view('app.cartographer')
-                ->with('departaments', $departaments)
-                ->with('option', $option)
-                ->with('characteristics', $characteristics)
-                ->with('indicators', $indicators)
-                ->with('token', $token)
-                ->with('idDepartament', $idDepartament)
-                ->with('zone', $zone);
     }
 
     public function saveMunicipality(Request $request, $nameMunicipality)
@@ -274,28 +246,77 @@ class cartographerController extends Controller
     public function deleteMunicipality(Request $request, $idMunicipality)
     {
         $session = $request->session()->get('sessionZone');
-        $municipality = Municipality::find($idMunicipality);
-        $idZone = array_get($session, 'idZone');
-        // dd($municipality);
-        $municipality->delete();
+        $tools = new ZoneTools();
 
-        if(is_null($idZone))
+        if(!is_null(array_get($session, 'idZone')))
         {
-            $municipalities = Municipality::with('Villages')->where('rememberToken', array_get($session, 'tokenZone'))->get();
+
         }
         else
         {
-            $municipalities = Municipality::with('Villages')->where('idZone', $idZone)->get();
+            $listMunicipalities = Municipality::where('idDepartament', array_get($session, 'idDepartament'))->get();
+           
+            $list = $request->session()->get('lastList');
+            // dd($list);
+            $list = array_diff($list->toArray(), array($idMunicipality));  
+            $request->session()->put('lastList', collect($list));
+
+            $listMunicipalities = $tools->getIds($listMunicipalities)->diff($list);
+            $listMunicipalities = Municipality::whereIn('idMunicipality', $listMunicipalities->all())->get();
+            
+            $municipalities = Municipality::with('Villages')->whereIn('idMunicipality', $list)->get();
         }
 
         if($request->ajax())
         {
-            $view = view('app.partials.cartographer.tableMunicipality')
+            $viewTable = view('app.partials.cartographer.tableMunicipality')
                         ->with('municipalities', $municipalities);
-            $newView = $view->render();
-            return response()->json(["html"=>$newView]);
+
+            $viewList = view('app.partials.cartographer.listMunicipalities')
+                        ->with('listMunicipalities', $listMunicipalities);
+
+            $newViewTable = $viewTable->render();
+            $newViewList = $viewList->render();
+
+            return response()->json(["viewTable"=>$newViewTable, "viewList" => $newViewList]);
         }
 
     }
+
+    // public function returnMunicipalityZone(Request $request)
+    // {
+    //     $idUser = Auth::user()->idUser;
+    //     $departaments = User::find($idUser)->departaments;
+    //     $departaments = $departaments->sortBy('departamentName');
+
+    //     $option = 'configZone';
+    //     $session = $request->session()->get('sessionZone');
+    //     $token = array_get($session, 'tokenZone');
+    //     $idDepartament = array_get($session, 'idDepartament');
+    //     $idZone = array_get($session, 'idZone');
+
+    //     $characteristics = CharacteristicZone::where('rememberToken',$token)->get();
+    //     $indicators = IndicatorZone::where('rememberToken',$token)->get();
+
+    //     if(is_null($idZone))
+    //     {
+    //         $zone = new Zone();
+    //     }
+    //     else
+    //     {
+    //         $zone = Zone::find($idZone);
+    //     }
+
+    //     $zone->nameZone = array_get($session, 'nameZone');
+
+    //     return view('app.cartographer')
+    //             ->with('departaments', $departaments)
+    //             ->with('option', $option)
+    //             ->with('characteristics', $characteristics)
+    //             ->with('indicators', $indicators)
+    //             ->with('token', $token)
+    //             ->with('idDepartament', $idDepartament)
+    //             ->with('zone', $zone);
+    // }
 
 }

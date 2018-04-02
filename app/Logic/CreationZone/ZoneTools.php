@@ -148,6 +148,20 @@ class ZoneTools
                 $newIndicator->idZone = $zone->idZone;
             $newIndicator->save();
         }
+
+        if($request->session()->has('lastList'))
+        {
+            $municipalities = $request->session()->get('lastList');
+
+            foreach($municipalities as $municipality)
+            {
+                $zoneMunicipality = new ZoneMunicipality();
+                    $zoneMunicipality->idMunicipality = $municipality;
+                    $zoneMunicipality->idZone = $zone->idZone;
+                
+                $zoneMunicipality->save();
+            }    
+        }
     }
 
     public function  reconstructItemsInvert($input, $items)
@@ -181,9 +195,9 @@ class ZoneTools
 
         if(empty($idZone))
         {
-            if ($request->session()->has('idsMunicipalities')) 
+            if ($request->session()->has('lastList')) 
             {
-                $municipalities = $request->session()->get('idsMunicipalities');
+                $municipalities = $request->session()->get('lastList');
             }
             else
             {
@@ -191,7 +205,7 @@ class ZoneTools
             }
 
             $municipalities->push($Municipality->idMunicipality);
-            $request->session()->put('idsMunicipalities', $municipalities);
+            $request->session()->put('lastList', $municipalities);
             return Municipality::with('Villages')->whereIn('idMunicipality', $municipalities)->get();
         }
         else

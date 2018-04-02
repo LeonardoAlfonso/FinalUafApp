@@ -13,7 +13,6 @@ function saveMunicipality()
               success:function(data)
               {
                   console.log(data);
-                  var table = data.html;
                   $("#tableMunicipalities").html(data.viewTable);
                   $("#ClimaticSelectStyle").html(data.viewList);
               },
@@ -36,8 +35,9 @@ function deleteMunicipality(id)
               datatype: 'json',
               success:function(data)
               {
-                  var table = data.html;
-                  $("#tableMunicipalities").html(table);
+                    console.log(data);
+                    $("#tableMunicipalities").html(data.viewTable);
+                    $("#ClimaticSelectStyle").html(data.viewList);
               },
               error:function(data)
               {
