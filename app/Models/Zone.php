@@ -41,6 +41,6 @@ class Zone extends Model
 
       public function Municipalities()
       {
-          return $this->belongsToMany('App\Models\Municipalites', 'zonesMunicipalities', 'idZone', 'idMunicipality');
+          return $this->belongsToMany('App\Models\Municipality', 'zonesMunicipalities', 'idZone', 'idMunicipality');
       }
 }

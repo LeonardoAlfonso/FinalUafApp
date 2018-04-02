@@ -14,11 +14,11 @@ class CreateZonesMunicipalities extends Migration
             Schema::create('zonesMunicipalities', function (Blueprint $table) {
 
                 $table->integer('idMunicipality')->unsigned()->nullable();
-                $table->foreign('idMunicipality')->references('idMunicipality')->on('municipalities');
+                $table->foreign('idMunicipality')->references('idMunicipality')->on('municipalities')->onDelete('cascade');;
                 $table->timestamps();
 
                 $table->integer('idZone')->unsigned()->nullable();
-                $table->foreign('idZone')->references('idZone')->on('zones');
+                $table->foreign('idZone')->references('idZone')->on('zones')->onDelete('cascade');;
         });
         }
     }

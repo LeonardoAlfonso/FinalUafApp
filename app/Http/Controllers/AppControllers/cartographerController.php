@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Logic\CreationZone\ZoneTools;
 use App\Models\Departament;
 use App\Models\CharacteristicZone;
+use App\Models\ZoneMunicipality;
 use App\Models\IndicatorZone;
 use App\Models\Zone;
 use App\Models\Municipality;
@@ -157,11 +158,11 @@ class cartographerController extends Controller
         }
     }
 
-    public function deleteZone($idZone)
+    public function deleteZone($idZone, $idDepartament)
     {
         $zone = Zone::find($idZone);
         $zone->delete();
-        return redirect()->route('cartographer');
+        return redirect()->route('listZones', ['idDepartament' => $idDepartament]);
     }
 
     public function getMunicipality(Request $request)
@@ -180,7 +181,7 @@ class cartographerController extends Controller
                 else
                 {
                     $currentZone = new Zone();
-                }         
+                }                     
 
             $option = 'Municipalities';
             $municipalitiesZone = collect([]);
@@ -190,8 +191,9 @@ class cartographerController extends Controller
         
         if(!is_null($currentZone->idZone))
         {
-            
-            $municipalitiesZone = Zone::find($currentZone->idZone)->Municipalities->with('Villages')->get();
+            $municipalitiesZone = Zone::find($currentZone->idZone)->Municipalities;
+            $municipalitiesZone = $tools->getIds($municipalitiesZone);
+            $municipalitiesZone = Municipality::with('Villages')->whereIn('idMunicipality', $municipalitiesZone)->get();
             $listMunicipalities = $tools->getIds($listMunicipalities)->diff($tools->getIds($municipalitiesZone));
             $listMunicipalities = Municipality::whereIn('idMunicipality', $listMunicipalities->all())->get();
         }
@@ -218,6 +220,7 @@ class cartographerController extends Controller
 
     public function saveMunicipality(Request $request, $nameMunicipality)
     {
+        
         $tools = new ZoneTools();
         $municipalities = $tools->saveAjaxMunicipality($request,$nameMunicipality);
         $session = $request->session()->get('sessionZone');
@@ -246,16 +249,24 @@ class cartographerController extends Controller
     public function deleteMunicipality(Request $request, $idMunicipality)
     {
         $session = $request->session()->get('sessionZone');
+        $idZone = array_get($session, 'idZone');
         $tools = new ZoneTools();
+        $listMunicipalities = Municipality::where('idDepartament', array_get($session, 'idDepartament'))->get();
 
-        if(!is_null(array_get($session, 'idZone')))
+        if(!is_null($idZone))
         {
-
+            $municipalities = Zone::find($idZone)->Municipalities;
+            // dd($municipalities);
+            $zoneMunicipality = ZoneMunicipality::where([
+                ['idZone', '=', $idZone],
+                ['idMunicipality', '=', $idMunicipality],
+            ])->delete();
+            $municipalities = Zone::find($idZone)->Municipalities;
+            $municipalities = $tools->getIds($municipalities);
+            $municipalities = Municipality::with('Villages')->whereIn('idMunicipality', $municipalities)->get();
         }
         else
         {
-            $listMunicipalities = Municipality::where('idDepartament', array_get($session, 'idDepartament'))->get();
-           
             $list = $request->session()->get('lastList');
             // dd($list);
             $list = array_diff($list->toArray(), array($idMunicipality));  

@@ -57,7 +57,7 @@ Route::get('/cartographer', 'AppControllers\cartographerController@cartographerP
 Route::get('/cartographer/{idDepartament}', 'AppControllers\cartographerController@getListZones')->name('listZones');
 Route::get('/cartographer/departament/{idDepartament}/zone/{idZone?}/{validations?}', 'AppControllers\cartographerController@getZone')->name('getZone');
 Route::post('/cartographer/saveZone', 'AppControllers\cartographerController@saveZone')->name('saveZone');
-Route::get('/cartographer/deleteZone/{idZone}', 'AppControllers\cartographerController@deleteZone')->name('zoneDelete');
+Route::get('/cartographer/deleteZone/{idZone}/{idDepartament}', 'AppControllers\cartographerController@deleteZone')->name('zoneDelete');
 Route::get('/cartographer/Municipality/Config/Admin', 'AppControllers\cartographerController@getMunicipality')->name('municipality');
 Route::get('/cartographer/zone/back', 'AppControllers\cartographerController@returnMunicipalityZone')->name('backZone');
   //ajax

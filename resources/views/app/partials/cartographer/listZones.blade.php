@@ -61,7 +61,7 @@
               <td>{{ $zone->autor }}</td>
               <td>{{ $zone->created_at }}</td>
               <td><a href="{{ route('getZone', ['idZone' => $zone->idZone, 'idDepartament' =>  $currentDepartament->idDepartament ]) }}"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
-              <td><a href="{{ route('zoneDelete', ['idZone' => $zone->idZone]) }}"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
+              <td><a href="{{ route('zoneDelete', ['idZone' => $zone->idZone, 'idDepartament' =>  $currentDepartament->idDepartament]) }}"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
             </tr>
           @endforeach
         </tbody>

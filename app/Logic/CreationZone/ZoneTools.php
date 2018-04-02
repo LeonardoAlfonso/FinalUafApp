@@ -149,7 +149,7 @@ class ZoneTools
             $newIndicator->save();
         }
 
-        if($request->session()->has('lastList'))
+        if($request->session()->has('lastList') && empty($request->idZone))
         {
             $municipalities = $request->session()->get('lastList');
 
@@ -210,9 +210,15 @@ class ZoneTools
         }
         else
         {
-            $zoneMunicipalityRelation->idZone = $idZone;
-            $zoneMunicipalityRelation->save();
-            return Zone::find($idZone)->Municipalities->with('Villages')->get();
+            $zoneMunicipality = new ZoneMunicipality();
+                $zoneMunicipality->idMunicipality = $Municipality->idMunicipality;
+                $zoneMunicipality->idZone = $idZone;
+            $zoneMunicipality->save();
+
+            $municipalitiesZone = Zone::find($idZone)->Municipalities;
+            $municipalitiesZone = $this->getIds($municipalitiesZone);
+            $municipalitiesZone = Municipality::with('Villages')->whereIn('idMunicipality', $municipalitiesZone)->get();
+            return $municipalitiesZone;
         }
     }
 
