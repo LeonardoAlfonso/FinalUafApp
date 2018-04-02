@@ -14,11 +14,10 @@ class CreateMunicipalitiesTable extends Migration
           Schema::create('municipalities', function (Blueprint $table) {
               $table->increments('idMunicipality');
               $table->string('nameMunicipality',50);
-              $table->string('rememberToken',20);
               $table->timestamps();
 
-              $table->integer('idZone')->unsigned()->nullable();
-              $table->foreign('idZone')->references('idZone')->on('zones')->onDelete('cascade');
+              $table->integer('idDepartament')->unsigned()->nullable();
+              $table->foreign('idDepartament')->references('idDepartament')->on('departaments')->onDelete('cascade');
           });
         }
     }

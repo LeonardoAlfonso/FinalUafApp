@@ -23,6 +23,11 @@ class Departament extends Model
         return $this->belongsToMany('App\User', 'usersDepartaments', 'idDepartament', 'idUser');
     }
 
+    public function Municipalities()
+    {
+        return $this->hasMany('App\Models\Municipality', 'idDepartament', 'idDepartament');
+    }
+
     //Functions
     public function getIsCheckAttribute()
     {

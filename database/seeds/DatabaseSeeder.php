@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             GlossaryTableSeeder::class,
             DepartamentsTableSeeder::class,
             UafParametersTable::class,
+            MunicipalitiesTableSeeder::class,
         ]);
         factory(App\User::class,50)->create();
         // factory(App\Models\Zone::class,160)->create();

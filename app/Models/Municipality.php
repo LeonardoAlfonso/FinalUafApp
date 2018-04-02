@@ -8,17 +8,22 @@ class Municipality extends Model
 {
     //Attributes
       protected $table = "municipalities";
-      protected $fillable = ['nameMunicipality', 'rememberToken', 'idZone'];
+      protected $fillable = ['nameMunicipality', 'idDepartament'];
       protected $primaryKey = 'idMunicipality';
 
       //Relations
-      public function Zone()
+      public function Departament()
       {
-          return $this->belongsTo('App\Models\Zone', 'idZone', 'idZone');
+          return $this->belongsTo('App\Models\Departament', 'idDepartament', 'idDepartament');
       }
 
       public function Villages()
       {
           return $this->hasMany('App\Models\Village', 'idMunicipality', 'idMunicipality');
+      }
+
+      public function Zones()
+      {
+          return $this->belongsToMany('App\Models\Zones', 'zonesMunicipalities', 'idMunicipality', 'idZone');
       }
 }

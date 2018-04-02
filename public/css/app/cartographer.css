@@ -265,7 +265,7 @@ input.names{
 div.card{
     margin-top: 20px;
     border-radius: 7px;
-    min-height: 400px;
+    height: 400px;
     background-color: #E5E5E5;
 }
 
@@ -285,6 +285,8 @@ div.titleCard p{
 
 div.titleBody{
     background-color: #E5E5E5;
+    overflow-y: scroll;
+    max-height: 400px;
 }
 
 div.titleBody ul li.items{
@@ -458,3 +460,8 @@ table.tableStyle td{
     float: right;
     margin-right: 62px;
 }
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*Indicadores*/
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+

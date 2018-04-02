@@ -1,6 +1,7 @@
 function saveMunicipality()
 {
         var name = $('#nameMunicipality').val();
+        console.log(name);
         var newRoute = routeSaveMunicipality.replace('parameter', name);
         console.log(newRoute);
 
@@ -11,8 +12,10 @@ function saveMunicipality()
               datatype: 'json',
               success:function(data)
               {
+                  console.log(data);
                   var table = data.html;
-                  $("#tableMunicipalities").html(table);
+                  $("#tableMunicipalities").html(data.viewTable);
+                  $("#ClimaticSelectStyle").html(data.viewList);
               },
               error:function(data)
               {

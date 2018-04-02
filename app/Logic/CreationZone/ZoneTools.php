@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Logic\CreationZone\ZoneTools;
 use App\Models\CharacteristicZone;
+use App\Models\ZoneMunicipality;
 use App\Models\IndicatorZone;
 use App\Models\Municipality;
 use App\Models\Zone;
@@ -169,6 +170,104 @@ class ZoneTools
 
         return $items;
     }
+
+    public function saveAjaxMunicipality(Request $request, $nameMunicipality)
+    {
+        $session = $request->session()->get('sessionZone');
+        $idDepartament = array_get($session, 'idDepartament');
+        $idZone = array_get($session, 'idZone');
+        $Municipality = Municipality::where('idDepartament',$idDepartament)
+                                      ->where('nameMunicipality',$nameMunicipality)->first();
+
+        if(empty($idZone))
+        {
+            if ($request->session()->has('idsMunicipalities')) 
+            {
+                $municipalities = $request->session()->get('idsMunicipalities');
+            }
+            else
+            {
+                $municipalities = collect([]);
+            }
+
+            $municipalities->push($Municipality->idMunicipality);
+            $request->session()->put('idsMunicipalities', $municipalities);
+            return Municipality::with('Villages')->whereIn('idMunicipality', $municipalities)->get();
+        }
+        else
+        {
+            $zoneMunicipalityRelation->idZone = $idZone;
+            $zoneMunicipalityRelation->save();
+            return Zone::find($idZone)->Municipalities->with('Villages')->get();
+        }
+    }
+
+    public function getIds($items)
+    {
+        $idsItems = collect([]);
+
+        foreach($items as $item)
+        {
+            $idsItems->push($item->idMunicipality);
+        }
+
+        return $idsItems;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // public function updateZoneSession($session)
+    // {
+    //     $characteristics = CharacteristicZone::where('rememberToken', array_get($session, 'tokenZone'))->get();
+    //     $indicators = IndicatorZone::where('rememberToken', array_get($session, 'tokenZone'))->get();
+
+    //     foreach ($characteristics as $characteristic)
+    //     {
+    //         foreach ($session as $key => $value)
+    //         {
+    //             if($characteristic->showCharacteristic == $key)
+    //             {
+    //                 $characteristic->valueCharacteristic = $value;
+    //             }
+    //         }
+
+    //         $characteristic->save();
+    //     }
+
+    //     foreach ($indicators as $indicator)
+    //     {
+    //         foreach ($session as $key => $value)
+    //         {
+    //             if($indicator->showIndicator == $key)
+    //             {
+    //                 $indicator->valueIndicator = $value;
+    //             }
+    //         }
+
+    //         $indicator->save();
+    //     }
+    // }
+
 
 
 

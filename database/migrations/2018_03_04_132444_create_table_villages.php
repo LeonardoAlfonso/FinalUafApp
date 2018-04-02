@@ -13,7 +13,6 @@ class CreateTableVillages extends Migration
           Schema::create('villages', function (Blueprint $table) {
               $table->increments('idVillage');
               $table->string('namevillage',50);
-              $table->string('rememberToken',20);
               $table->timestamps();
 
               $table->integer('idMunicipality')->unsigned()->nullable();

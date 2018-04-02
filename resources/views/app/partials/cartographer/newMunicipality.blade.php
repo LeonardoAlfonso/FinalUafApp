@@ -15,8 +15,8 @@
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
           <div id="options">
-            <a href="{{ route('backZone') }}">
-              <label id="saveZone" class="standardButton">Guardar</label>
+            <a href="{{ route('getZone', ['idZone' => $currentZone->idZone, 'idDepartament' => $currentDepartament->idDepartament, 'validations' => '' ]) }}">
+              <label id="saveZone" class="standardButton">Volver</label>
             </a>
           </div>
         </div>
@@ -36,7 +36,9 @@
             <h3>Municipio:</h3>
         </div>
         <div class="col-xl-4">
-            <input id="nameMunicipality" class="names" type="text" name="" value="">
+          <div id="ClimaticSelectStyle" class="ClimaticSelectStyle">
+            @include('app.partials.cartographer.listMunicipalities')
+          </div>
         </div>
         <div class="col-xl-4">
           <div id="newMunicipality">

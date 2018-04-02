@@ -29,11 +29,6 @@ class Zone extends Model
           return $this->hasMany('App\Models\CharacteristicZone', 'idZone', 'idZone');
       }
 
-      public function Municipalities()
-      {
-          return $this->hasMany('App\Models\Municipality', 'idZone', 'idZone');
-      }
-
       public function Indicators()
       {
           return $this->hasMany('App\Models\IndicatorZone', 'idZone', 'idZone');
@@ -42,5 +37,10 @@ class Zone extends Model
       public function Systems()
       {
           return $this->hasMany('App\Models\System', 'idZone', 'idZone');
+      }
+
+      public function Municipalities()
+      {
+          return $this->belongsToMany('App\Models\Municipalites', 'zonesMunicipalities', 'idZone', 'idMunicipality');
       }
 }
