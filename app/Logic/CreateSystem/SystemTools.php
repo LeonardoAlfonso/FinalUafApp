@@ -106,27 +106,33 @@ class SystemTools
         $virtualEntries = $request->session()->get('entries');
         $efectiveRate = UafParameter::where('nameParameter', 'TasaEfectiva')->first();
         $efectiveRate = $efectiveRate->valueParameter/ 100;
+        $IVP = UafParameter::where('nameParameter', 'IVP')->first();
+        $IVP = $IVP->valueParameter/ 100;
         $nominalRate = pow((1+$efectiveRate),(1/12)) -1;
         $creditPeriods = UafParameter::where('nameParameter', 'PeriodosFinanciacion')->first();
         $creditPeriods = $creditPeriods->valueParameter;
+        $costs = collect([]);
+        $entries = collect([]);
+        $futureEntries = collect([]);
+        
 
-                if($request->session()->has('realCosts'))
-                {
-                    $costs = $request->session()->get('realCosts');
-                }
-                else
-                {
-                    $costs = collect([]);
-                }
+                // if($request->session()->has('realCosts'))
+                // {
+                //     $costs = $request->session()->get('realCosts');
+                // }
+                // else
+                // {
+                //     $costs = collect([]);
+                // }
 
-                if($request->session()->has('realEntries'))
-                {
-                    $entries = $request->session()->get('realEntries');
-                }
-                else
-                {
-                    $entries = collect([]);
-                }//803.90151479069
+                // if($request->session()->has('realEntries'))
+                // {
+                //     $entries = $request->session()->get('realEntries');
+                // }
+                // else
+                // {
+                //     $entries = collect([]);
+                // }//803.90151479069
 
         $virtualCosts->each(function($item, $key) use($costs, $request){
 
@@ -180,11 +186,12 @@ class SystemTools
                 $request->session()->put('realCosts', $costs);
         }
 
-        $virtualEntries->each(function($item, $key) use($entries, $request){
+        $virtualEntries->each(function($item, $key) use($entries, $futureEntries, $request, $IVP){
             
             for($i=1; $i<=12; $i++)
             {
                 $entry = new Entry();
+                $futureEntry = new Entry();
                 $quantity = 'quantity'.$i;
 
                     $entry->name = $item->name;
@@ -195,20 +202,33 @@ class SystemTools
                     $entry->quantity = $item->$quantity;
                     $entry->period = $i;
 
+                    $futureEntry->name = $item->name;
+                    $futureEntry->measureUnity = $item->measureUnity;
+                    $futureEntry->priceSource = $item->priceSource;
+                    $futureEntry->datePriceSource = $item->datePriceSource;
+                    $futureEntry->integralIndicator = "0";
+                    $futureEntry->quantity = $item->$quantity;
+                    $futureEntry->period = $i;
+
                     if($i == 1)
                     {
                         $entry->unitaryPrice = $item->unitaryPrice;
+                        $futureEntry->unitaryPrice = $item->unitaryPrice/(1+$IVP);
                     }
                     else
                     {
                         $initialEntry = $item->unitaryPrice;
                         $entry->unitaryPrice = $this->calculateUnitaryEntry($initialEntry, $i);
+                        $futureEntry->unitaryPrice = $entry->unitaryPrice/(1+$IVP);
                     }
                 
                     $entry->total = $entry->unitaryPrice * $entry->quantity;
+                    $futureEntry->total = $futureEntry->unitaryPrice * $futureEntry->quantity;
 
                 $entries->push($entry);
+                $futureEntries->push($futureEntry);
                 $request->session()->put('realEntries', $entries);
+                $request->session()->put('futureEntries', $futureEntries);
             }
         });
     }
@@ -261,7 +281,9 @@ class SystemTools
     {
         $costs = $request->session()->get('realCosts');
         $entries = $request->session()->get('realEntries');
+        $futureEntries = $request->session()->get('futureEntries');
         $utilities = collect([]);
+        $futureUtilities = collect([]);
 
         for($i=0; $i <= 12; $i++)
         {
@@ -270,11 +292,19 @@ class SystemTools
                 $utility->entries = $entries->where('period', $i)->sum('total');;
                 $utility->utility = $utility->entries - $utility->egress;
                 $utility->period = $i;
+
+            $futureUtility = new Utility();
+                $futureUtility->egress = $costs->where('period', $i)->sum('total');
+                $futureUtility->entries = $futureEntries->where('period', $i)->sum('total');;
+                $futureUtility->utility = $futureUtility->entries - $futureUtility->egress;
+                $futureUtility->period = $i;
             
             $utilities->push($utility);
-            $request->session()->put('utilities', $utilities);
-        }
+            $futureUtilities->push($futureUtility);
 
+            $request->session()->put('utilities', $utilities);
+            $request->session()->put('futureUtilities', $futureUtilities);
+        }
     }
 
     public function calculateVPN(Request $request)
@@ -302,32 +332,84 @@ class SystemTools
         return $VPN;
     }
 
-    // public function calculateTIR(Request $request, $accuracy = 0.01)
-    // {
-    //     $utilities = $request->session()->get('utilities');
-    //     $discountRate = UafParameter::where('nameParameter', 'TasaDescuento')->first();
-    //     $discountRate = $discountRate->valueParameter/100;
+    public function calculateTIR(Request $request, $guess = 0.1)
+    {
+        $utilities = $request->session()->get('utilities');
+        $x1 = 0;
+        $x2 = $guess;
+        $f1 = 0;
+        $f2 = 0;
+        $f = 0;
+        $rtb = 0;
+        $dx = 0;
 
-    //     $count = 0;
-    //     $vpn = 1;
+        $utilities->each(function($item, $key) use($x1, &$f1){
+            $f1 = $f1 + ($item->utility)/pow((1+$x1),($key));
+        });
 
-    //     while(abs($vpn) > $accuracy)
-    //     {
-    //         $vpn = 0;        
+        $utilities->each(function($item, $key) use($x2, &$f2){
+            $f2 = $f2 + ($item->utility)/pow((1+$x2),($key));
+        });
 
-    //         $utilities->each(function($item, $key) use(&$vpn, &$discountRate, &$count){
-    //                 $vpn = $vpn + ($item->utility)/pow((1+$discountRate),($key));
-    //         });
+        for($i=0; $i<128; ++$i)
+        {
+            if (($f1 * $f2) < 0.0) 
+            {
+                break;
+            }
+
+            if (abs($f1) < abs($f2)) 
+            {
+                $x1 += 1.6 * ($x1 - $x2);
+                    $utilities->each(function($item, $key) use($x1, &$f1){
+                        $f1 = $f1 + ($item->utility)/pow((1+$x1),($key));
+                    });
+            } 
+            else 
+            {
+                $x2 += 1.6 * ($x2 - $x1);
+                $utilities->each(function($item, $key) use($x2, &$f2){
+                    $f2 = $f2 + ($item->utility)/pow((1+$x2),($key));
+                });
+            }
+        }
+
+        $utilities->each(function($item, $key) use($x1, &$f){
+            $f = $f + ($item->utility)/pow((1+$x1),($key));
+        });
+
+        if ($f < 0.0) 
+        {
+            $rtb = $x1;
+            $dx = $x2 - $x1;
+        } 
+        else 
+        {
+            $rtb = $x2;
+            $dx = $x1 - $x2;
+        }
+
+        for ($i = 0; $i < 128; ++$i) 
+        {
+            $dx *= 0.5;
+            $x_mid = $rtb + $dx;
+            $f_mid = 0;
             
-    //         if(abs($vpn) > $accuracy)
-    //         {
-    //             $discountRate = $discountRate + 0.01;
-    //         }
-    //     }
-    //     dd($discountRate);
+            $utilities->each(function($item, $key) use($x_mid, &$f_mid){
+                $f_mid = $f_mid + ($item->utility)/pow((1+$x_mid),($key));
+            });            
 
-    //     return $discountRate * 100;
-    // }
+            if ($f_mid <= 0.0) 
+            {
+                $rtb = $x_mid;
+            }
+
+            if ((abs($f_mid) < 1.0e-08) || (abs($dx) < 1.0e-08)) 
+            {
+                return $x_mid * 100;
+            }
+        }
+    }
 
     public function calculateIPA(Request $request)
     {
@@ -353,6 +435,24 @@ class SystemTools
         $UNPA = 0;
 
         $utilities->each(function($item, $key) use(&$UNPA, $discountRate){
+            if($key > 0)
+            {
+                $UNPA = $UNPA + ($item->utility)/pow((1+$discountRate),($key));
+            }      
+        });
+
+        return $UNPA;
+    }
+
+    public function calculateUNPAMax(Request $request)
+    {
+        $discountRate = UafParameter::where('nameParameter', 'TasaDescuento')->first();
+        $discountRate = $discountRate->valueParameter/100;
+        $futureUtilities = $request->session()->get('futureUtilities');
+        
+        $UNPA = 0;
+
+        $futureUtilities->each(function($item, $key) use(&$UNPA, $discountRate){
             if($key > 0)
             {
                 $UNPA = $UNPA + ($item->utility)/pow((1+$discountRate),($key));
@@ -474,84 +574,7 @@ class SystemTools
         $request->session()->forget('indicators');
     }
 
-    public function calculateTIR(Request $request, $guess = 0.1)
-    {
-        $utilities = $request->session()->get('utilities');
-        $x1 = 0;
-        $x2 = $guess;
-        $f1 = 0;
-        $f2 = 0;
-        $f = 0;
-        $rtb = 0;
-        $dx = 0;
 
-        $utilities->each(function($item, $key) use($x1, &$f1){
-            $f1 = $f1 + ($item->utility)/pow((1+$x1),($key));
-        });
-
-        $utilities->each(function($item, $key) use($x2, &$f2){
-            $f2 = $f2 + ($item->utility)/pow((1+$x2),($key));
-        });
-
-        for($i=0; $i<128; ++$i)
-        {
-            if (($f1 * $f2) < 0.0) 
-            {
-                break;
-            }
-
-            if (abs($f1) < abs($f2)) 
-            {
-                $x1 += 1.6 * ($x1 - $x2);
-                    $utilities->each(function($item, $key) use($x1, &$f1){
-                        $f1 = $f1 + ($item->utility)/pow((1+$x1),($key));
-                    });
-            } 
-            else 
-            {
-                $x2 += 1.6 * ($x2 - $x1);
-                $utilities->each(function($item, $key) use($x2, &$f2){
-                    $f2 = $f2 + ($item->utility)/pow((1+$x2),($key));
-                });
-            }
-        }
-
-        $utilities->each(function($item, $key) use($x1, &$f){
-            $f = $f + ($item->utility)/pow((1+$x1),($key));
-        });
-
-        if ($f < 0.0) 
-        {
-            $rtb = $x1;
-            $dx = $x2 - $x1;
-        } 
-        else 
-        {
-            $rtb = $x2;
-            $dx = $x1 - $x2;
-        }
-
-        for ($i = 0; $i < 128; ++$i) 
-        {
-            $dx *= 0.5;
-            $x_mid = $rtb + $dx;
-            $f_mid = 0;
-            
-            $utilities->each(function($item, $key) use($x_mid, &$f_mid){
-                $f_mid = $f_mid + ($item->utility)/pow((1+$x_mid),($key));
-            });            
-
-            if ($f_mid <= 0.0) 
-            {
-                $rtb = $x_mid;
-            }
-
-            if ((abs($f_mid) < 1.0e-08) || (abs($dx) < 1.0e-08)) 
-            {
-                return $x_mid * 100;
-            }
-        }
-    }
 
 
     

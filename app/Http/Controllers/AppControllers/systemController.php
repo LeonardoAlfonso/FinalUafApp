@@ -76,6 +76,7 @@ class systemController extends Controller
     {
         $zone = Zone::find($idZone);
         $system = is_null($idSystem) ? new System(): System::find($idSystem);
+            $system->autor = Auth::user()->full_name;
 
         $systemTools = new SystemTools();
         $optionsGroup = $systemTools->getGroup();
@@ -199,7 +200,9 @@ class systemController extends Controller
         $systemTools->calculateUNPA($request);
         $systemTools->createUpdateIndicator($request, "UAFM", 
                         $systemTools->calculateIPA($request)/$systemTools->calculateUNPA($request));
-
+        $systemTools->createUpdateIndicator($request, "UAFX", 
+                        $systemTools->calculateIPA($request)/$systemTools->calculateUNPAMax($request));
+                        
         $indicators = $request->session()->get('indicators');
 
         if($request->ajax())
@@ -217,6 +220,42 @@ class systemController extends Controller
 
     public function saveSystem(Request $request)
     {
-        dd($request);
+        $system = new System();
+            $system->nameSystem = $request->nameSystem;
+            $system->autor = $request->authorSystem;
+            $system->jornalValue = $request->jornalSystem;
+            $system->idZone = NULL;
+
+        $system->save();
+
+        //Save Costs
+        $costs = $request->session()->get('realCosts');
+        $costs->each(function($item, $key) use($system){
+            $item->idSystem = $system->idSystem;
+            $item->save();
+        });
+
+        //Save Entries
+        $entries = $request->session()->get('realEntries');
+        $entries->each(function($item, $key) use($system){
+            $item->idSystem = $system->idSystem;
+            $item->save();
+        });
+
+        //Save Entries
+        $utilities = $request->session()->get('utilities');
+        $utilities->each(function($item, $key) use($system){
+            $item->idSystem = $system->idSystem;
+            $item->save();
+        });
+
+        //Save Indicators
+        $indicators = $request->session()->get('indicators');
+        $indicators->each(function($item, $key) use($system){
+            $item->idSystem = $system->idSystem;
+            $item->save();
+        });
+
+        dd($system->idSystem);
     }
 }

@@ -20,7 +20,7 @@ class CreateTableUtilities extends Migration
                 $table->integer('idSystem')->unsigned()->nullable();
   
             //Llaves
-              $table->foreign('idSystem')->references('idSystem')->on('system')->onDelete('cascade');
+              $table->foreign('idSystem')->references('idSystem')->on('systems')->onDelete('cascade');
             });
         }
     }
