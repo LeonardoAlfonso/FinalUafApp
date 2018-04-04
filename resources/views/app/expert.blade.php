@@ -10,6 +10,7 @@
       var routeSubGroup = '{{ route('getSubGroup', ['group' => 'parameter'])  }}';
       var routeStorageEntry = '{{ route('storageEntry') }}';
       var routeDeleteEntry = '{{ route('entryDelete', ['idEntry' => 'parameter'])  }}';
+      var routeCalculateIndicators = '{{ route('calculateIndicators') }}';
   </script>
   <script type="text/javascript" src="{{ asset('js/app/systemApp.js') }}"></script>
 @stop

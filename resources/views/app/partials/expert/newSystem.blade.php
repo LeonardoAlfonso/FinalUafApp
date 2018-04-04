@@ -18,7 +18,7 @@
         <div class="col-xl-3"></div>
         <div class="col-xl-6">
           <div id="calculate">
-              <label id="calculateIndicators" class="standardButton">Calcular Indicadores</label>
+              <label id="calculateIndicators" class="standardButton" onclick="calculateIndicators()">Calcular Indicadores</label>
           </div>
         </div>
         <div class="col-xl-2">
@@ -46,7 +46,7 @@
                         <label for="">Nombre</label>
                     </div>
                     <div class="systemInput col-xl-8">
-                        <input type="text" name="nameSystem" value="">
+                        <input type="text" name="nameSystem" value="{{ $system->nameSystem }}">
                     </div>
                 </div>
               </div>
@@ -59,7 +59,7 @@
                         <label for="">Autor</label>
                     </div>
                     <div class="systemInput col-xl-8">
-                        <input type="text" name="authorSystem" value="">
+                        <input type="text" name="authorSystem" value="{{ $system->autor }}">
                     </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@
                         <label for="">Valor Jornal</label>
                     </div>
                     <div class="systemInput col-xl-8">
-                        <input type="text" name="jornalSystem" value="">
+                        <input type="text" name="jornalSystem" value="{{ $system->jornalValue }}">
                     </div>
                 </div>
               </div>
@@ -181,124 +181,9 @@
         </div>
 
     </div>
-
-  <div class="col-xl-2">
-
-    <div class="col-xl-12">
-      <div class="col-xl-9 card">
-          <div class="titleCard col-xl-12">
-              <p>FIUS</p>
-          </div>
-          <div class="titleBody col-xl-12">
-            <div class="col-xl-2"></div>
-            <div class="col-xl-8">
-              <ul>
-                <li>
-                  <label>53.6</label>
-                </li>
-              </ul>
-            </div>
-          </div>
-      </div>
-      <div class="col-xl-3"></div>
+    <div id="systemIndicators" class="col-xl-2">
+      @include('app.partials.expert.systemIndicators')
     </div>
-
-    <div class="col-xl-12">
-      <div class="col-xl-9 card">
-          <div class="titleCard col-xl-12">
-              <p>FIUS</p>
-          </div>
-          <div class="titleBody col-xl-12">
-            <div class="col-xl-2"></div>
-            <div class="col-xl-8">
-              <ul>
-                <li>
-                  <label>53.6</label>
-                </li>
-              </ul>
-            </div>
-          </div>
-      </div>
-      <div class="col-xl-3"></div>
-    </div>
-
-    <div class="col-xl-12">
-      <div class="col-xl-9 card">
-          <div class="titleCard col-xl-12">
-              <p>FIUS</p>
-          </div>
-          <div class="titleBody col-xl-12">
-            <div class="col-xl-2"></div>
-            <div class="col-xl-8">
-              <ul>
-                <li>
-                  <label>53.6</label>
-                </li>
-              </ul>
-            </div>
-          </div>
-      </div>
-      <div class="col-xl-3"></div>
-    </div>
-
-    <div class="col-xl-12">
-      <div class="col-xl-9 card">
-          <div class="titleCard col-xl-12">
-              <p>FIUS</p>
-          </div>
-          <div class="titleBody col-xl-12">
-            <div class="col-xl-2"></div>
-            <div class="col-xl-8">
-              <ul>
-                <li>
-                  <label>53.6</label>
-                </li>
-              </ul>
-            </div>
-          </div>
-      </div>
-      <div class="col-xl-3"></div>
-    </div>
-
-    <div class="col-xl-12">
-      <div class="col-xl-9 card">
-          <div class="titleCard col-xl-12">
-              <p>FIUS</p>
-          </div>
-          <div class="titleBody col-xl-12">
-            <div class="col-xl-2"></div>
-            <div class="col-xl-8">
-              <ul>
-                <li>
-                  <label>53.6</label>
-                </li>
-              </ul>
-            </div>
-          </div>
-      </div>
-      <div class="col-xl-3"></div>
-    </div>
-
-    <div class="col-xl-12">
-      <div class="col-xl-9 card">
-          <div class="titleCard col-xl-12">
-              <p>FIUS</p>
-          </div>
-          <div class="titleBody col-xl-12">
-            <div class="col-xl-2"></div>
-            <div class="col-xl-8">
-              <ul>
-                <li>
-                  <label>53.6</label>
-                </li>
-              </ul>
-            </div>
-          </div>
-      </div>
-      <div class="col-xl-3"></div>
-    </div>
-
-</div>
 </div>
 
 <div class="col-xl-12">

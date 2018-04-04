@@ -31,4 +31,9 @@ class System extends Model
     {
         return $this->hasMany('App\Models\SystemIndicator', 'idSystem', 'idSystem');
     }
+
+    public function Utilities()
+    {
+        return $this->belongsTo('App\Models\Utility', 'idSystem', 'idSystem');
+    }
 }

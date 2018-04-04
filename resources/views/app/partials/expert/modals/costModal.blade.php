@@ -2,7 +2,6 @@
 <div id="costModal" class="col-xl-12 systemModal">
   <form id="newCost">
     <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
-    <input type="hidden" name="tokenSystem" value="{{ $tokenSystem }}">
     <div class="col-xl-4"></div>
     <div class="col-xl-4 modalCard">
         <div class="modalCardtitle col-xl-12">

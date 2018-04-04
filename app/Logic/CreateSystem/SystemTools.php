@@ -6,78 +6,359 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Collection;
 use App\Logic\CreateSystem\SystemTools;
 use App\Models\Cost;
 use App\Models\Entry;
+use App\Models\Utility;
 use App\Models\UafParameter;
 use App\Models\Virtuals\CostVirtual;
 use App\Models\Virtuals\EntryVirtual;
+use App\Models\SystemIndicator;
 use Validator;
 
 class SystemTools
 {
-    public function saveCost($request)
+
+    public function showCosts(Request $request)
     {
-        for($i=0; $i<=12; $i++)
+        if($request->session()->has('costs'))
         {
-            $cost = new Cost();
-            $quantity = 'quantity'.$i;
-              //Attributes
-                $cost->detail = $request->input('detail');
-                $cost->group = $request->input('listGroup');
-                $cost->subGroup = $request->input('listSubGroup');
-                $cost->quantity = $request->input($quantity);
-                $cost->period = $i;
+            $costs = $request->session()->get('costs');
+        }
+        else
+        {
+            $costs = collect([]);
+        }
 
-                $cost->rememberToken = $request->input('tokenSystem');
+        $index = $costs->count();
 
-              if($i == 0 || $i == 1)
-              {
-                  $cost->unitaryCost = $request->input('unitaryCost');
-              }
-              else
-              {
-                  $initialCost = $request->input('unitaryCost');
-                  $cost->unitaryCost = $this->calculateUnitaryCost($initialCost, $i);
-              }
+        $newCost = new CostVirtual;
+            $newCost->id = $index;
+            $newCost->detail = $request->input('detail');
+            $newCost->group = $request->input('listGroup');
+            $newCost->subGroup = $request->input('listSubGroup');
+            $newCost->unitaryCost = $request->input('unitaryCost');
 
-              $cost->total = $cost->unitaryCost * $cost->quantity;
+            $newCost->quantity0 = $request->input('quantity0');
+            $newCost->quantity1 = $request->input('quantity1');
+            $newCost->quantity2 = $request->input('quantity2');
+            $newCost->quantity3 = $request->input('quantity3');
+            $newCost->quantity4 = $request->input('quantity4');
+            $newCost->quantity5 = $request->input('quantity5');
+            $newCost->quantity6 = $request->input('quantity6');
+            $newCost->quantity7 = $request->input('quantity7');
+            $newCost->quantity8 = $request->input('quantity8');
+            $newCost->quantity9 = $request->input('quantity9');
+            $newCost->quantity10 = $request->input('quantity10');
+            $newCost->quantity11 = $request->input('quantity11');
+            $newCost->quantity12 = $request->input('quantity12');
+    
+        $costs->push($newCost);
+        $request->session()->put('costs', $costs);
 
-            $cost->save();
-        }        
+        return $costs;
     }
 
-    public function showCosts($token)
+    public function showEntries(Request $request)
     {
-        
-        $costs = Cost::select('detail')->where('rememberToken', $token)->distinct('detail')->get();
-        $listCosts = array();
-
-        if($costs->count() > 0)
+        if($request->session()->has('entries'))
         {
-            foreach($costs as $cost)
-            {
-                $newCost = new CostVirtual;
-                $completeCost = Cost::where('detail',$cost->detail)->where('period',0)->first();
+            $entries = $request->session()->get('entries');
+        }
+        else
+        {
+            $entries = collect([]);
+        }
+
+        $index = $entries->count();
+
+        $newEntry = new EntryVirtual;
+            $newEntry->id = $index;
+            $newEntry->name = $request->input('concept');
+            $newEntry->unitaryPrice = $request->input('unitaryPrice');
+            $newEntry->measureUnity = $request->input('measureUnity');
+            $newEntry->priceSource = $request->input('source');
+            $newEntry->datePriceSource = $request->input('sourceDate');
+
+            $newEntry->quantity1 = $request->input('quantity1');
+            $newEntry->quantity2 = $request->input('quantity2');
+            $newEntry->quantity3 = $request->input('quantity3');
+            $newEntry->quantity4 = $request->input('quantity4');
+            $newEntry->quantity5 = $request->input('quantity5');
+            $newEntry->quantity6 = $request->input('quantity6');
+            $newEntry->quantity7 = $request->input('quantity7');
+            $newEntry->quantity8 = $request->input('quantity8');
+            $newEntry->quantity9 = $request->input('quantity9');
+            $newEntry->quantity10 = $request->input('quantity10');
+            $newEntry->quantity11 = $request->input('quantity11');
+            $newEntry->quantity12 = $request->input('quantity12');
     
-                    $newCost->id = $completeCost->idCost;
-                    $newCost->detail = $completeCost->detail;
-                    $newCost->group = $completeCost->group;
-                    $newCost->subGroup = $completeCost->subGroup;
-                    $newCost->unitaryCost = $completeCost->unitaryCost;
-    
-                for($i=0; $i <= 12; $i++)
+        $entries->push($newEntry);
+        $request->session()->put('entries', $entries);
+
+        return $entries;
+    }
+
+    public function reconstructItems(Request $request)
+    {
+        $virtualCosts = $request->session()->get('costs');
+        $virtualEntries = $request->session()->get('entries');
+        $efectiveRate = UafParameter::where('nameParameter', 'TasaEfectiva')->first();
+        $efectiveRate = $efectiveRate->valueParameter/ 100;
+        $nominalRate = pow((1+$efectiveRate),(1/12)) -1;
+        $creditPeriods = UafParameter::where('nameParameter', 'PeriodosFinanciacion')->first();
+        $creditPeriods = $creditPeriods->valueParameter;
+
+                if($request->session()->has('realCosts'))
                 {
-                    $quantityPeriod = 'quantity'.$i;
-                    $auxCost = Cost::where('detail', $cost->detail)->where('period',$i)->first();
-                    $newCost->$quantityPeriod = $auxCost->quantity;
+                    $costs = $request->session()->get('realCosts');
                 }
+                else
+                {
+                    $costs = collect([]);
+                }
+
+                if($request->session()->has('realEntries'))
+                {
+                    $entries = $request->session()->get('realEntries');
+                }
+                else
+                {
+                    $entries = collect([]);
+                }//803.90151479069
+
+        $virtualCosts->each(function($item, $key) use($costs, $request){
+
+            for($i=0; $i<=12; $i++)
+            {
+                $cost = new Cost();
+                $quantity = 'quantity'.$i;
+
+                    $cost->detail = $item->detail;         
+                    $cost->group = "$item->group";                    
+                    $cost->subGroup = $item->subGroup;                    
+                    $cost->quantity = $item->$quantity;
+                    $cost->period = $i;
+                   
+
+                    if($i == 0 || $i == 1)
+                    {
+                        $cost->unitaryCost = $item->unitaryCost;
+                    }
+                    else
+                    {
+                        $initialCost = $item->unitaryCost;
+                        $cost->unitaryCost = $this->calculateUnitaryCost($initialCost, $i);
+                    }
+                   
+                    $cost->total = $cost->unitaryCost * $cost->quantity;
+                    
+                $costs->push($cost);
+                $request->session()->put('realCosts', $costs);
+            }
+        });
     
-                $listCosts = array_merge($listCosts, array($newCost));
+        $establishmentCost = $costs->where('period', 0)->sum('total');
+        $mensualPayment = ($establishmentCost * $nominalRate) /
+                          (1 - pow((1 + $nominalRate), ($creditPeriods * (-1))));
+                          
+        for($i=1; $i<=12; $i++)
+        {
+            $financialCost = new Cost();
+            $quantity = 'quantity'.$i;
+
+                $financialCost->detail = "Crédito";
+                $financialCost->group = "Financiero";
+                $financialCost->subGroup = "Financiero";
+                $financialCost->quantity = "12";
+                $financialCost->period = $i;
+                $financialCost->unitaryCost = $mensualPayment;
+                $financialCost->total = $financialCost->unitaryCost * $financialCost->quantity;
+
+                $costs->push($financialCost);
+                $request->session()->put('realCosts', $costs);
+        }
+
+        $virtualEntries->each(function($item, $key) use($entries, $request){
+            
+            for($i=1; $i<=12; $i++)
+            {
+                $entry = new Entry();
+                $quantity = 'quantity'.$i;
+
+                    $entry->name = $item->name;
+                    $entry->measureUnity = $item->measureUnity;
+                    $entry->priceSource = $item->priceSource;
+                    $entry->datePriceSource = $item->datePriceSource;
+                    $entry->integralIndicator = "0";
+                    $entry->quantity = $item->$quantity;
+                    $entry->period = $i;
+
+                    if($i == 1)
+                    {
+                        $entry->unitaryPrice = $item->unitaryPrice;
+                    }
+                    else
+                    {
+                        $initialEntry = $item->unitaryPrice;
+                        $entry->unitaryPrice = $this->calculateUnitaryEntry($initialEntry, $i);
+                    }
+                
+                    $entry->total = $entry->unitaryPrice * $entry->quantity;
+
+                $entries->push($entry);
+                $request->session()->put('realEntries', $entries);
+            }
+        });
+    }
+    
+    public function calculateSalaries(Request $request)
+    {
+        if(!$request->session()->has('SMMLV'))
+        {
+            $SMMVL = UafParameter::where('nameParameter', 'SMMLV')->first();
+            $SMMVL = $SMMVL->valueParameter;
+
+            $inflation = UafParameter::where('showParameter', 'Inflacion')->first();
+            $inflationFactor = 1 + ($inflation->valueParameter/100);
+
+            $discountRate = UafParameter::where('nameParameter', 'TasaDescuento')->first();
+            $discountRate = $discountRate->valueParameter/100;
+            
+            $salaries = collect([]);
+            $salaries->put(0,$SMMVL);
+
+            $anualSalaries = collect([]);
+            $anualSalaries25 = collect([]);
+            $anualSalaries25VPN = collect([]);
+
+
+            for($i = 1; $i < 12; $i++)
+            {
+                $salary = $salaries->get($i-1)*($inflationFactor);
+                $salaries->put($i,$salary);
+            }
+
+            $salaries->each(function($item, $key) use($anualSalaries, $anualSalaries25, 
+                                                        $anualSalaries25VPN, $discountRate){
+                $anualSalary = $item*12;
+                $anualSalary25 = $anualSalary*2.5;
+                $anualSalary25VPN = $anualSalary25/pow((1+$discountRate),($key+1));
+
+                $anualSalaries->push($anualSalary);
+                $anualSalaries25->push($anualSalary25);
+                $anualSalaries25VPN->push($anualSalary25VPN);
+            });
+
+            $request->session()->put('anualSalaries', $anualSalaries);
+            $request->session()->put('anualSalaries25', $anualSalaries25);
+            $request->session()->put('anualSalary25VPN', $anualSalaries25VPN);
+        }
+    }
+
+    public function calculateUtilities(Request $request)
+    {
+        $costs = $request->session()->get('realCosts');
+        $entries = $request->session()->get('realEntries');
+        $utilities = collect([]);
+
+        for($i=0; $i <= 12; $i++)
+        {
+            $utility = new Utility();
+                $utility->egress = $costs->where('period', $i)->sum('total');
+                $utility->entries = $entries->where('period', $i)->sum('total');;
+                $utility->utility = $utility->entries - $utility->egress;
+                $utility->period = $i+1;
+            
+            $utilities->push($utility);
+            $request->session()->put('utilities', $utilities);
+        }
+
+    }
+
+    public function calculateVPN(Request $request)
+    {
+        $discountRate = UafParameter::where('nameParameter', 'TasaDescuento')->first();
+        $discountRate = $discountRate->valueParameter/100;
+        $utilities = $request->session()->get('utilities');
+        
+        $VPN = 0;
+
+        $utilities->each(function($item, $key) use(&$VPN, $discountRate){
+            if($key > 0)
+            {
+                $VPN = $VPN + ($item->utility)/pow((1+$discountRate),($key));
+            }      
+        });
+
+        return $VPN + $utilities->where('period', 0)->get('utility');
+    }
+
+    public function calculateTIR(Request $request, $accuracy = 0.001)
+    {
+        $utilities = $request->session()->get('utilities');
+        $discountRate = UafParameter::where('nameParameter', 'TasaDescuento')->first();
+        $discountRate = $discountRate->valueParameter/100;
+
+        $count = 0;
+        $vpn = 1;
+
+        while(abs($vpn) > $accuracy)
+        {
+            $vpn = 0;        
+
+            $utilities->each(function($item, $key) use(&$vpn, &$discountRate, &$count){
+                    $vpn = $vpn + ($item->utility)/pow((1+$discountRate),($key));
+            });
+            
+            if(abs($vpn) > $accuracy)
+            {
+                $discountRate = $discountRate + 0.001;
             }
         }
-        return $listCosts;
+
+        return $discountRate * 100;
     }
+
+    public function calculateIPA(Request $request)
+    {
+        $discountRate = UafParameter::where('nameParameter', 'TasaDescuento')->first();
+        $discountRate = $discountRate->valueParameter/100;
+
+        $anualSalaries25 = $request->session()->get('anualSalaries25');
+
+        $IPA;
+
+        $anualSalaries25->each(function($item, $key) use(&$IPA, $discountRate){
+                $IPA = $IPA + ($item)/pow((1+$discountRate),($key+1));    
+        });
+
+        // return $IPA;
+    }
+
+    public function calculateUNPA(Request $request)
+    {
+        $discountRate = UafParameter::where('nameParameter', 'TasaDescuento')->first();
+        $discountRate = $discountRate->valueParameter/100;
+        $utilities = $request->session()->get('utilities');
+        
+        $UNPA = 0;
+
+        $utilities->each(function($item, $key) use(&$UNPA, $discountRate){
+            if($key > 0)
+            {
+                $UNPA = $UNPA + ($item->utility)/pow((1+$discountRate),($key));
+            }      
+        });
+
+
+        // return $UNPA;
+    }
+
+
+
+
 
     ////////////////////////////Auxiliars////////////////////////////////
     private function calculateUnitaryCost($initialCost, $period)
@@ -86,12 +367,26 @@ class SystemTools
         $inflation = 1 + ($inflation->valueParameter/100);
         $unitaryCost = $initialCost;
 
-        for($i = 0; $i < $period; $i++)
+        for($i = 1; $i < $period; $i++)
         {
             $unitaryCost*=$inflation;
         }
 
         return $unitaryCost;
+    }
+
+    private function calculateUnitaryEntry($initialEntry, $period)
+    {
+        $inflation = UafParameter::where('showParameter', 'Inflacion')->first();
+        $inflation = 1 + ($inflation->valueParameter/100);
+        $unitaryEntry = $initialEntry;
+
+        for($i = 1; $i < $period; $i++)
+        {
+            $unitaryEntry*=$inflation;
+        }
+
+        return $unitaryEntry;
     }
 
     public function getGroup()
@@ -125,6 +420,120 @@ class SystemTools
 
        return $optionsSubGroup;
     }
+
+    public function createUpdateIndicator(Request $request, $name = "", $value = "")
+    {
+        $indicatorList = "";
+        if(!$request->session()->has('indicators'))
+        {
+            $list = json_decode(Storage::disk('public')->get('indicatorsSystems.json'));
+            $indicatorList = Collection::wrap($list);
+            $indicators = collect([]);
+
+            $indicatorList->each(function($item, $key) use($indicators, $request){
+                $newIndicator = new SystemIndicator();
+                    $newIndicator->nameIndicator = $item->name;
+                    $newIndicator->showIndicator = $item->show;
+                    $newIndicator->valueIndicator = $item->value;
+        
+                    $indicators->push($newIndicator);
+                    $request->session()->put('indicators',$indicators);
+            });
+        }
+        else
+        {
+            $indicators = $request->session()->get('indicators');
+
+            $indicators->each(function($item, $key) use($name, $value){
+                if($item->nameIndicator == $name)
+                {
+                    $item->valueIndicator = $value;
+                }
+            });
+
+            $request->session()->put('indicators',$indicators);
+        }
+    }
+
+    public function forgetSession($request)
+    {
+        $request->session()->forget('costs');
+        $request->session()->forget('entries');
+        $request->session()->forget('realCosts');
+        $request->session()->forget('realEntries');
+        $request->session()->forget('utilities');
+        $request->session()->forget('anualSalaries');
+        $request->session()->forget('anualSalaries25');
+        $request->session()->forget('anualSalary25VPN');
+        $request->session()->forget('indicators');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function saveCost(Request $request)
+    {
+        if($request->session()->has('costs'))
+        {
+            $costs = $request->session()->get('costs');
+        }
+        else
+        {
+            $costs = collect([]);
+        }
+
+        for($i=0; $i<=12; $i++)
+        {
+            $cost = new Cost();
+            $quantity = 'quantity'.$i;
+              //Attributes
+                $cost->detail = $request->input('detail');
+                $cost->group = $request->input('listGroup');
+                $cost->subGroup = $request->input('listSubGroup');
+                $cost->quantity = $request->input($quantity);
+                $cost->period = $i;
+
+              if($i == 0 || $i == 1)
+              {
+                  $cost->unitaryCost = $request->input('unitaryCost');
+              }
+              else
+              {
+                  $initialCost = $request->input('unitaryCost');
+                  $cost->unitaryCost = $this->calculateUnitaryCost($initialCost, $i);
+              }
+
+              $cost->total = $cost->unitaryCost * $cost->quantity;
+              $costs->push($cost);
+        }        
+
+        $request->session()->put('costs', $costs);
+    }
+
+
+
+
+
+
 
 /*-/////////Entries//////////////////*/
     public function saveEntry($request)
@@ -163,21 +572,9 @@ class SystemTools
         }        
     }
 
-    private function calculateUnitaryEntry($initialEntry, $period)
-    {
-        $inflation = UafParameter::where('showParameter', 'Inflacion')->first();
-        $inflation = 1 + ($inflation->valueParameter/100);
-        $unitaryEntry = $initialEntry;
 
-        for($i = 0; $i < $period; $i++)
-        {
-            $unitaryEntry*=$inflation;
-        }
 
-        return $unitaryEntry;
-    }
-
-    public function showEntries($token)
+    public function showEntries2($token)
     {
         $entries = Entry::select('name')->where('rememberToken', $token)->distinct('name')->get();
         $listEntries = array();

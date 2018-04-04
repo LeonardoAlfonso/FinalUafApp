@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 // Routes for homeController
 Route::get('/home', 'WebControllers\homeController@getHome')->name('home');
 
@@ -69,13 +58,14 @@ Route::get('/cartographer/zone/back', 'AppControllers\cartographerController@ret
 Route::get('/expert', 'AppControllers\systemController@expertPanel')->middleware('auth')->name('expert');
 Route::get('/expert/{nameDepartament}', 'AppControllers\systemController@getZonesList')->name('zonesList');
 Route::post('/expert/listSystem', 'AppControllers\systemController@getSystemList')->name('systemList');
-Route::get('/expert/system/{idZone}', 'AppControllers\systemController@getSystem')->name('getSystem');
+Route::get('/expert/system/{idZone}/{idSystem?}', 'AppControllers\systemController@getSystem')->name('getSystem');
 Route::post('/expert/saveSystem', 'AppControllers\systemController@saveSystem')->name('saveSystem');
 Route::post('/expert/system/cost/saveCost', 'AppControllers\systemController@storageCost')->name('storageCost');
 Route::get('/expert/deleteCost/cost/operation/{idCost}','AppControllers\systemController@deleteCost')->name('costDelete');
 Route::get('/expert/subGroup/{group}','AppControllers\systemController@getSubGroup')->name('getSubGroup');
 Route::post('/expert/system/entry/saveEntry', 'AppControllers\systemController@storageEntry')->name('storageEntry');
 Route::get('/expert/deleteEntry/entry/operation/{idEntry}','AppControllers\systemController@deleteEntry')->name('entryDelete');
+Route::get('/expert/calculate/Indicators','AppControllers\systemController@calculateIndicators')->name('calculateIndicators');
 
 
 //localhost/uafApp/public/System/Indicators/339

@@ -8,7 +8,7 @@ class SystemIndicator extends Model
 {
     //Attibutes
       protected $table = "systemIndicators";
-      protected $fillable = ['nameIndicator','valueIndicator','idSystem'];
+      protected $fillable = ['nameIndicator','showIndicator','valueIndicator','idSystem'];
       protected $primaryKey = 'idIndicator';
 
       //Relations

@@ -13,7 +13,6 @@ $(document).ready(function(){
               datatype: 'json',
               success:function(data)
               {
-                  console.log(data);
                   var zones = data.html;
                   $("#optionsZones").html(zones);
               },
@@ -22,12 +21,7 @@ $(document).ready(function(){
                   alert('mal');
               }
           });
-
     });
-
-});
-
-$(document).ready(function(){
 
     $('#listGroup').change(function(){
 
@@ -44,7 +38,6 @@ $(document).ready(function(){
             datatype: 'json',
             success:function(data)
             {
-                console.log(data);
                 var zones = data.html;
                 $("#listSubGroup").html(zones);
             },
@@ -70,7 +63,6 @@ function saveCost(){
           data: request,
           success:function(data)
           {
-                console.log(data);
                 var costs = data.html;
                 $("#BodyCostTable").html(costs);
           },
@@ -122,7 +114,6 @@ function saveEntry(){
             data: request,
             success:function(data)
             {
-                console.log(data);
                 var entries = data.html;
                 $("#BodyEntryTable").html(entries);
             },
@@ -147,6 +138,36 @@ function deleteEntry(id){
           {
                 var entries = data.html;
                 $("#BodyEntryTable").html(entries);
+          },
+          error:function(data)
+          {
+              alert('mal');
+          }
+      });
+};
+
+function detectZone(idzone){
+    
+    if(idzone == null){
+        alert("Elija una zona para crear un sistema");
+        event.preventDefault();
+    }
+}
+
+function calculateIndicators(){
+
+    console.log(routeCalculateIndicators);
+    
+    $.ajax({
+          url: routeCalculateIndicators,
+          headers: {'X-CSRF-TOKEN': token},
+          type: 'GET',
+          datatype: 'json',
+          success:function(data)
+          {
+                console.log(data);
+                var indicators = data.html;
+                $("#systemIndicators").html(indicators);
           },
           error:function(data)
           {

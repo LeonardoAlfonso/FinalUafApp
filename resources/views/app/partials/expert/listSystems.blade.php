@@ -14,9 +14,9 @@
     <div class="col-xl-12">
         <div class="col-xl-8"></div>
         <div class="col-xl-3">
-          <div id="options">
-            <a href="{{ route('getSystem', ['idZone' => $selectZone ]) }}">
-                <label id="newSystem" class="standardButton">Nuevo Sistema</label>
+        <div id="options">
+            <a href="{{ route('getSystem', ['idZone' => $selectZone, 'idSystem' => '' ]) }}">
+                <label id="newSystem" class="standardButton" onclick="detectZone({{ $selectZone }})">Nuevo Sistema</label>
             </a>
           </div>
         </div>

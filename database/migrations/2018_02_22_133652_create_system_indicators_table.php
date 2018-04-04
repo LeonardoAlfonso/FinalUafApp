@@ -13,6 +13,7 @@ class CreateSystemIndicatorsTable extends Migration
             Schema::create('systemIndicators', function (Blueprint $table) {
                 $table->increments('idIndicator');
                 $table->string('nameIndicator');
+                $table->double('showIndicator');
                 $table->double('valueIndicator');
                 $table->timestamps();
 

@@ -91,16 +91,16 @@
       <div class="col-xl-12">
 
         <div class="col-xl-1"></div>
-        <!-- <div class="col-xl-10 card">
-            <div class="titleCard col-xl-12">
-                <p>Veredas</p>
-            </div>
-            <div class="titleBody col-xl-12">
-              <div class="col-xl-2"></div>
-              <div id="Villages" class="col-xl-12">
+          <!-- <div class="col-xl-10 card">
+              <div class="titleCard col-xl-12">
+                  <p>Veredas</p>
               </div>
-            </div>
-        </div> -->
+              <div class="titleBody col-xl-12">
+                <div class="col-xl-2"></div>
+                <div id="Villages" class="col-xl-12">
+                </div>
+              </div>
+          </div> -->
         <div class="col-xl-1"></div>
 
       </div>
