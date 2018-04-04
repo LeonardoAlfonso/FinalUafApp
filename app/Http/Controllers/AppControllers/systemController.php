@@ -181,6 +181,10 @@ class systemController extends Controller
 
     public function calculateIndicators(Request $request)
     {
+        $request->session()->forget('realCosts');
+        $request->session()->forget('realEntries');
+        $request->session()->forget('utilities');
+
         $systemTools = new SystemTools();
 
         // $systemTools->createIndicator($request, , );
@@ -188,10 +192,13 @@ class systemController extends Controller
         $systemTools->reconstructItems($request);
         $systemTools->calculateSalaries($request);
         $systemTools->calculateUtilities($request);
+        // dd($systemTools->calculateTIR($request));
         $systemTools->createUpdateIndicator($request, "VPN", $systemTools->calculateVPN($request));
         $systemTools->createUpdateIndicator($request, "TIR", $systemTools->calculateTIR($request));
         $systemTools->calculateIPA($request);
         $systemTools->calculateUNPA($request);
+        $systemTools->createUpdateIndicator($request, "UAFM", 
+                        $systemTools->calculateIPA($request)/$systemTools->calculateUNPA($request));
 
         $indicators = $request->session()->get('indicators');
 
