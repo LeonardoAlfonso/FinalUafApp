@@ -1,12 +1,13 @@
 <form class="formRegister" action="{{ route('saveSystem') }}" method="post" enctype="multipart/form-data">
   {{ csrf_field() }}
+  <input type="hidden" name="idZone" value="{{ $zone->idZone }}">
 <div class="col-xl-12">
   <div class="col-xl-6">
       <div class="col-xl-12">
 
         <div class="col-xl-1"></div>
         <div class="col-xl-9">
-            <h2>Nuevo Sistema Productivo</h2>
+            <h2>Nuevo Sistema Productivo - {{ $zone->nameZone }}</h2>
         </div>
         <div class="col-xl-2"></div>
 
@@ -131,6 +132,7 @@
             </tr>
           </thead>
           <tbody id="BodyCostTable">
+            @include('app.partials.expert.tableCosts')
           </tbody>
         </table>
       </div>
@@ -176,6 +178,7 @@
               </tr>
             </thead>
             <tbody id="BodyEntryTable">
+              @include('app.partials.expert.tableEntries')
             </tbody>
           </table>
         </div>

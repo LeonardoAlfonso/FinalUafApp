@@ -13,8 +13,10 @@ $(document).ready(function(){
               datatype: 'json',
               success:function(data)
               {
-                  var zones = data.html;
+                  var zones = data.list;
+                  var table = data.table;
                   $("#optionsZones").html(zones);
+                  $("#tableListSystems").html(table);
               },
               error:function(data)
               {
@@ -53,6 +55,9 @@ $(document).ready(function(){
 function saveCost(){
     var request = $("#newCost").serializeArray();
     var token = $("#token").val();
+    var input = document.getElementById("CloseCostModal" );
+    input.checked = true;
+    
     console.log(request);
 
     $.ajax({
@@ -175,5 +180,4 @@ function calculateIndicators(){
           }
       });
 };
-
 

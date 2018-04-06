@@ -35,7 +35,7 @@
           <div class="col-xl-6">
             <ul>
               <li>
-                <input type="text" name="detail" value="" placeholder="Concepto del costo">
+                <input type="text" name="detail" value="{{ $modalCost->detail }}" placeholder="Concepto del costo">
               </li>
               <li>
                 <div class="modalSelect">
@@ -55,10 +55,10 @@
                 </div>
               </li>
               <li>
-                <input type="text" name="unitaryCost" value="">
+                <input type="text" name="unitaryCost" value="{{ $modalCost->unitaryCost }}" placeholder="Costo unitario actual">
               </li>
               <li>
-                <input type="text" name="quantity0" value="" placeholder="Valor año 0">
+                <input type="text" name="quantity0" value="{{ $modalCost->quantity0 }}" placeholder="Valor año 0">
               </li>
             </ul>
           </div>
@@ -84,7 +84,8 @@
                               Año {{ $i }}
                           </div>
                           <div class="col-xl-12 miniCardBody">
-                              <input class="miniCardInput"type="text" placeholder="0" name="quantity{{ $i }}">
+                            @php $quantity = 'quantity'.$i @endphp
+                              <input class="miniCardInput"type="text" placeholder="0" value="{{ $modalCost->$quantity }}" name="quantity{{ $i }}">
                           </div>
                         </div>
                         <div class="col-xl-2"></div>

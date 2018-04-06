@@ -3,6 +3,7 @@
 namespace App\Logic\CreateSystem;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -12,13 +13,36 @@ use App\Models\Cost;
 use App\Models\Entry;
 use App\Models\Utility;
 use App\Models\UafParameter;
+use App\Models\Zone;
 use App\Models\Virtuals\CostVirtual;
 use App\Models\Virtuals\EntryVirtual;
 use App\Models\SystemIndicator;
+use App\User;
 use Validator;
 
 class SystemTools
 {
+    public function getSystemList(Request $request, $idZone)
+    {
+        $this->forgetSession($request);
+        $idUser = Auth::user()->idUser;
+        $departaments = User::find($idUser)->departaments;
+        $option = 'List';
+        $selectZone = Zone::where('idZone', $idZone)->first();
+        $selectDepartament = $selectZone->Departament()->first();  
+        $zones = $selectDepartament->zones()->get();
+        $systems = $selectZone->Systems()->get();
+
+        $view = view('app.expert')
+                  ->with('departaments', $departaments)
+                  ->with('option', $option)
+                  ->with('zones', $zones)
+                  ->with('systems', $systems)
+                  ->with('selectZone', $selectZone)
+                  ->with('selectDepartament', $selectDepartament);
+
+        return $view;
+    }
 
     public function showCosts(Request $request)
     {
@@ -115,25 +139,6 @@ class SystemTools
         $entries = collect([]);
         $futureEntries = collect([]);
         
-
-                // if($request->session()->has('realCosts'))
-                // {
-                //     $costs = $request->session()->get('realCosts');
-                // }
-                // else
-                // {
-                //     $costs = collect([]);
-                // }
-
-                // if($request->session()->has('realEntries'))
-                // {
-                //     $entries = $request->session()->get('realEntries');
-                // }
-                // else
-                // {
-                //     $entries = collect([]);
-                // }//803.90151479069
-
         $virtualCosts->each(function($item, $key) use($costs, $request){
 
             for($i=0; $i<=12; $i++)

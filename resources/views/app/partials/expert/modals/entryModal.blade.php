@@ -35,19 +35,19 @@
           <div class="col-xl-6">
             <ul>
               <li>
-                <input type="text" name="concept" value="" placeholder="Nombre del Producto">
+                <input type="text" name="concept" value="{{ $modalEntry->name }}" placeholder="Nombre del Producto">
               </li>
               <li>
-                <input type="text" name="measureUnity" value="" placeholder="KG, Lb, unidad..."> 
+                <input type="text" name="measureUnity" value="{{ $modalEntry->measureUnity }}" placeholder="KG, Lb, unidad..."> 
               </li>
               <li>
-                <input type="text" name="source" value=""> 
+                <input type="text" name="source" value="{{ $modalEntry->priceSource }}"> 
               </li>
               <li>
-                <input type="text" name="sourceDate" value="">
+                <input type="text" name="sourceDate" value="{{ $modalEntry->datePriceSource }}">
               </li>
               <li>
-                <input type="text" name="unitaryPrice" value="" placeholder="Precio Unitario">
+                <input type="text" name="unitaryPrice" value="{{ $modalEntry->unitaryPrice }}" placeholder="Precio Unitario">
               </li>
             </ul>
           </div>
@@ -73,7 +73,8 @@
                               Año {{ $i }}
                           </div>
                           <div class="col-xl-12 miniCardBody">
-                              <input class="miniCardInput"type="text" placeholder="0" name="quantity{{ $i }}">
+                            @php $quantity = 'quantity'.$i @endphp
+                              <input class="miniCardInput"type="text" placeholder="0" value="{{ $modalEntry->$quantity }}" name="quantity{{ $i }}">
                           </div>
                         </div>
                         <div class="col-xl-2"></div>

@@ -11,6 +11,7 @@
       var routeStorageEntry = '{{ route('storageEntry') }}';
       var routeDeleteEntry = '{{ route('entryDelete', ['idEntry' => 'parameter'])  }}';
       var routeCalculateIndicators = '{{ route('calculateIndicators') }}';
+      var routeDeleteSystem = '{{ route('systemDelete', ['idSystem' => 'parameter'])  }}';
   </script>
   <script type="text/javascript" src="{{ asset('js/app/systemApp.js') }}"></script>
 @stop

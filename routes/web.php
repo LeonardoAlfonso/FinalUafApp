@@ -57,7 +57,7 @@ Route::get('/cartographer/zone/back', 'AppControllers\cartographerController@ret
 //Routes for systemController
 Route::get('/expert', 'AppControllers\systemController@expertPanel')->middleware('auth')->name('expert');
 Route::get('/expert/{nameDepartament}', 'AppControllers\systemController@getZonesList')->name('zonesList');
-Route::post('/expert/listSystem', 'AppControllers\systemController@getSystemList')->name('systemList');
+Route::post('/expert/listSystem/', 'AppControllers\systemController@getSystemList')->name('systemList');
 Route::get('/expert/system/{idZone}/{idSystem?}', 'AppControllers\systemController@getSystem')->name('getSystem');
 Route::post('/expert/saveSystem', 'AppControllers\systemController@saveSystem')->name('saveSystem');
 Route::post('/expert/system/cost/saveCost', 'AppControllers\systemController@storageCost')->name('storageCost');
@@ -66,6 +66,7 @@ Route::get('/expert/subGroup/{group}','AppControllers\systemController@getSubGro
 Route::post('/expert/system/entry/saveEntry', 'AppControllers\systemController@storageEntry')->name('storageEntry');
 Route::get('/expert/deleteEntry/entry/operation/{idEntry}','AppControllers\systemController@deleteEntry')->name('entryDelete');
 Route::get('/expert/calculate/Indicators','AppControllers\systemController@calculateIndicators')->name('calculateIndicators');
+Route::get('/expert/deleteSystem/system/operation/{idSystem}','AppControllers\systemController@deleteSystem')->name('systemDelete');
 
 
 //localhost/uafApp/public/System/Indicators/339

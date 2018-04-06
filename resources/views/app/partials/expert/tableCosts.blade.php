@@ -1,4 +1,4 @@
-@foreach($listCost as $cost)
+@foreach($listCosts as $cost)
     <tr>
         <td>{{ $cost->detail }}</td>
         <td>{{ $cost->group }}</td>

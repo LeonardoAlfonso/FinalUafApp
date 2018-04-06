@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Logic\CreateSystem\SystemTools;
+use App\Http\Controllers\AppControllers\systemController;
 use App\Models\Departament;
 use App\Models\Virtuals\CostVirtual;
+use App\Models\Virtuals\EntryVirtual;
 use App\Models\UafParameter;
 use App\Models\Zone;
 use App\Models\Cost;
@@ -25,14 +27,19 @@ class systemController extends Controller
         $systemTools->forgetSession($request);
         $idUser = Auth::user()->idUser;
         $departaments = User::find($idUser)->departaments;
-        $departaments = $departaments->sortBy('departamentName');
+        // $departaments = $departaments->orderBy('departamentName');
+        $zones = collect([]);
         $option = '';
-        $selectZone = 'null';
+        $idZone = $request->has('idZone') ? $request->idZone: Null;
+        $selectZone = is_null($idZone) ? new Zone(): Zone::with('Departament')->where('idZone',$idZone)->first(); 
+        $selectDepartament = empty($selectZone) ? new Departament(): $selectZone->Departament; 
 
         return view('app.expert')
                   ->with('departaments', $departaments)
+                  ->with('zones', $zones)
                   ->with('option', $option)
-                  ->with('selectZone', $selectZone);
+                  ->with('selectZone', $selectZone)
+                  ->with('selectDepartament', $selectDepartament);
     }
 
     public function getZonesList(Request $request, $nameDepartament)
@@ -41,35 +48,32 @@ class systemController extends Controller
         $systemTools->forgetSession($request);
         $departament = Departament::where('departamentName', $nameDepartament)->first();
         $zones = $departament->zones()->get();
+        $selectZone = new Zone();
+        $systems = collect([]);
 
         //Ajax Handler
         if($request->ajax())
         {
-            $view = view('app.partials.expert.optionsZones')->with('zones',$zones);
-            // return response()->json(["mensaje"=>"Hola"]);
-            $newZones = $view->render();
-            return response()->json(['html'=>$newZones]);
+            $list = view('app.partials.expert.optionsZones')
+                    ->with('zones',$zones)
+                    ->with('selectZone', $selectZone);
+            $table = view('app.partials.expert.tableListSystems')
+                    ->with('option',"")
+                    ->with('zones',$zones)
+                    ->with('systems', $systems);
+
+            $newList = $list->render();
+            $newTable = $table->render();
+            return response()->json(['list'=>$newList, 'table'=>$newTable ]);
         }
     }
 
     public function getSystemList(Request $request)
     {
         $systemTools = new SystemTools();
-        $systemTools->forgetSession($request);
-        $idDepartament = Departament::where('departamentName', $request->Departament)->first()->idDepartament;
-        $idUser = Auth::user()->idUser;
-        $departaments = User::find($idUser)->departaments;
-        $zones = Zone::where('idDepartament', $idDepartament)->get();
-        $selectZone = Zone::where('idDepartament', $idDepartament)->where('nameZone', $request->Zone)->first();
-        $systems = $selectZone->Systems()->get();
-        $option = 'List';
+        $idZone = Zone::where('nameZone', $request->Zone)->first()->idZone;
 
-        return view('app.expert')
-                  ->with('departaments', $departaments)
-                  ->with('option', $option)
-                  ->with('zones', $zones)
-                  ->with('systems', $systems)
-                  ->with('selectZone', $selectZone->idZone);
+        return $systemTools->getSystemList($request, $idZone);
     }
 
     public function getSystem(Request $request, $idZone, $idSystem = NULL)
@@ -83,15 +87,23 @@ class systemController extends Controller
         $systemTools->createUpdateIndicator($request);
         $indicators = $request->session()->get('indicators');
 
-          $option = 'configSystem';
-          $listCost = new CostVirtual();
+        $option = 'configSystem';
+        $modalCost = new CostVirtual();
+        $modalEntry = new EntryVirtual();
+
+        $listCosts = collect([]);
+        $listEntries = collect([]);
+
           return view('app.expert')
                   ->with('option', $option)
-                  ->with('listCost', $listCost)
                   ->with('optionsGroup',$optionsGroup)
                   ->with('system', $system)
                   ->with('zone', $zone)
-                  ->with('indicators',$indicators);
+                  ->with('indicators',$indicators)
+                  ->with('modalCost', $modalCost)
+                  ->with('modalEntry',$modalEntry)
+                  ->with('listCosts',$listCosts)
+                  ->with('listEntries',$listEntries);
     }
 
     public function getSubGroup(Request $request, $group)
@@ -116,7 +128,7 @@ class systemController extends Controller
       if($request->ajax())
       {
             $view = view('app.partials.expert.tableCosts')
-                        ->with('listCost', $table);
+                        ->with('listCosts', $table);
             $newView = $view->render();
             return response()->json(["html"=>$newView]);
       }
@@ -138,7 +150,7 @@ class systemController extends Controller
         if($request->ajax())
         {
               $view = view('app.partials.expert.tableCosts')
-                          ->with('listCost', $costs);
+                          ->with('listCosts', $costs);
               $newView = $view->render();
               return response()->json(["html"=>$newView]);
         }
@@ -215,16 +227,14 @@ class systemController extends Controller
         }
     }
     
-
-
-
     public function saveSystem(Request $request)
     {
+        $systemTools = new SystemTools();
         $system = new System();
             $system->nameSystem = $request->nameSystem;
             $system->autor = $request->authorSystem;
             $system->jornalValue = $request->jornalSystem;
-            $system->idZone = NULL;
+            $system->idZone = $request->idZone;
 
         $system->save();
 
@@ -256,6 +266,16 @@ class systemController extends Controller
             $item->save();
         });
 
-        dd($system->idSystem);
+        return $systemTools->getSystemList($request, $system->idZone);
+    }
+
+    public function deleteSystem(Request $request, $idSystem)
+    {
+        $systemTools = new SystemTools();
+        $system = System::find($idSystem);
+        $idZone = $system->idZone;
+        $system->delete();
+        
+        return $systemTools->getSystemList($request, $idZone);
     }
 }

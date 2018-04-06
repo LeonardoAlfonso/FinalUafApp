@@ -36,7 +36,11 @@
             <div class="col-xl-5">
               <div class="select-style-expert">
                 <select id="optionsDepartament" name="Departament" class="select">
-                  <option disabled selected hidden>Escoger departamento..</option>
+                    @if(empty($selectDepartament))
+                            <option disabled selected hidden>Escoger departamento..</option>
+                        @else
+                            <option selected hidden>{{ $selectDepartament->departamentName }}</option>
+                    @endif
                     @foreach($departaments as $departament)
                       <option name="Departament">{{ $departament->departamentName }}</option>
                     @endforeach
@@ -47,7 +51,7 @@
             <div class="col-xl-5">
               <div class="select-style-expert">
                 <select id="optionsZones" name="Zone" class="select" onchange="this.form.submit()">
-                    <option disabled selected hidden>Escoger zona..</option>
+                      @include('app.partials.expert.optionsZones')
                 </select>
               </div>
             </div>
@@ -56,11 +60,7 @@
     </div>
     <div class="col-xl-6"></div>
   </div>
-
+    @include('app.partials.expert.tableListSystems')
   <div class="col-xl-12">
-    <div class="col-xl-12">
-        @if($option === 'List')
-            @include('app.partials.expert.tableList')
-        @endif
-    </div>
+
   </div>
