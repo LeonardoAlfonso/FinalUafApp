@@ -1,6 +1,7 @@
 <form class="formRegister" action="{{ route('saveSystem') }}" method="post" enctype="multipart/form-data">
   {{ csrf_field() }}
   <input type="hidden" name="idZone" value="{{ $zone->idZone }}">
+  <input type="hidden" name="idSystem" value="{{ $system->idSystem }}">
 <div class="col-xl-12">
   <div class="col-xl-6">
       <div class="col-xl-12">
@@ -98,12 +99,18 @@
             <label class="nameComponents"for="">Costos Sistema</label>
         </div>
         <div class="col-xl-4"></div>
-        <div class="col-xl-3 ButtonTable">
+        <div id="costForm" class="col-xl-3 ButtonTable">
             <input id="ShowCostModal" class="inputModal" name="costModal" type="radio">
             <label for="ShowCostModal" class="systemComponents">Nuevo Costo</label>
-            @include('app.partials.expert.modals.costModal')
-        <div class="col-xl-1"></div>
+            <input id="CloseCostModal" class="inputModal" name="costModal" type="radio">  
+
+            <div id="costModal" class="col-xl-12 systemModal">        
+                    @include('app.partials.expert.modals.costModal')  
+            </div>
+
+              
         </div>
+        <div class="col-xl-1"></div>
       </div>
 
       <div class="col-xl-12">

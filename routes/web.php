@@ -60,7 +60,7 @@ Route::get('/expert/{nameDepartament}', 'AppControllers\systemController@getZone
 Route::post('/expert/listSystem/', 'AppControllers\systemController@getSystemList')->name('systemList');
 Route::get('/expert/system/{idZone}/{idSystem?}', 'AppControllers\systemController@getSystem')->name('getSystem');
 Route::post('/expert/saveSystem', 'AppControllers\systemController@saveSystem')->name('saveSystem');
-Route::post('/expert/system/cost/saveCost', 'AppControllers\systemController@storageCost')->name('storageCost');
+Route::get('/expert/system/cost/operation/saveCost', 'AppControllers\systemController@storageCost')->name('storageCost');
 Route::get('/expert/deleteCost/cost/operation/{idCost}','AppControllers\systemController@deleteCost')->name('costDelete');
 Route::get('/expert/subGroup/{group}','AppControllers\systemController@getSubGroup')->name('getSubGroup');
 Route::post('/expert/system/entry/saveEntry', 'AppControllers\systemController@storageEntry')->name('storageEntry');
@@ -68,6 +68,8 @@ Route::get('/expert/deleteEntry/entry/operation/{idEntry}','AppControllers\syste
 Route::get('/expert/calculate/Indicators','AppControllers\systemController@calculateIndicators')->name('calculateIndicators');
 Route::get('/expert/deleteSystem/system/operation/{idSystem}','AppControllers\systemController@deleteSystem')->name('systemDelete');
 
+
+Route::get('test/modal','AppControllers\systemController@getTest')->name('getTest');
 
 //localhost/uafApp/public/System/Indicators/339
 

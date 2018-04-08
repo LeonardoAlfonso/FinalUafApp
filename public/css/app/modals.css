@@ -9,13 +9,16 @@ div.systemModal{
      z-index: 20;
  }
 
- input#ShowCostModal{
+ /* input#ShowCostModal{
      display: none;
- }
+ } */
 
- input#ShowEntryModal{
+ input#ShowEntryModal { 
     display: none;
 }
+
+/* input#ShowEntryModal, { */
+
 
  input#ShowCostModal:checked ~ #costModal {
      top: 0;
@@ -27,7 +30,6 @@ input#ShowEntryModal:checked ~ #entryModal {
 
  div.modalCard{
      position: relative;
-     top: 20%;
      background-color: #E5E5E5;
  }
 
@@ -139,9 +141,9 @@ div.modalCard hr#ModalHr{
       margin-left: 10px;
  }
 
- input#CloseCostModal{
+ /* input#CloseCostModal{
     display: none;
- }
+ } */
 
  input#CloseEntryModal{
     display: none;
@@ -150,6 +152,10 @@ div.modalCard hr#ModalHr{
  input#CloseCostModal:checked ~ #costModal {
      top: -100vh;
  }
+
+input#SaveCostModal:checked ~ #costModal {
+    top: -100vh;
+}
 
  input#CloseEntryModal:checked ~ #entryModal {
     top: -100vh;

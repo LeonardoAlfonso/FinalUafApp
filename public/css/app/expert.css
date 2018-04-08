@@ -7,6 +7,16 @@ section#content article{
     position: relative;
 }
 
+button#SaveCost{
+    display:none;
+}
+
+.errorMessage
+{
+    color: red;
+    float: right;
+}
+
 section#content article h2{
     position: relative;
     text-align: justify;

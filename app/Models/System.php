@@ -22,9 +22,25 @@ class System extends Model
         return $this->hasMany('App\Models\Entry', 'idSystem', 'idSystem');
     }
 
+    public function deleteEntries()
+    {
+        $entries = $this->hasMany('App\Models\Entry', 'idSystem', 'idSystem');
+        $entries->each(function($item, $key){
+            $item->delete();
+        });
+    }
+
     public function Costs()
     {
         return $this->hasMany('App\Models\Cost', 'idSystem', 'idSystem');
+    }
+
+    public function deleteCosts()
+    {
+        $costs = $this->hasMany('App\Models\Cost', 'idSystem', 'idSystem');
+        $costs->each(function($item, $key){
+            $item->delete();
+        });
     }
 
     public function Indicators()
@@ -32,8 +48,24 @@ class System extends Model
         return $this->hasMany('App\Models\SystemIndicator', 'idSystem', 'idSystem');
     }
 
+    public function deleteIndicators()
+    {
+        $indicators = $this->hasMany('App\Models\SystemIndicator', 'idSystem', 'idSystem');;
+        $indicators->each(function($item, $key){
+            $item->delete();
+        });
+    }
+
     public function Utilities()
     {
         return $this->belongsTo('App\Models\Utility', 'idSystem', 'idSystem');
+    }
+
+    public function deleteUtilities()
+    {
+        $utilities = $this->belongsTo('App\Models\Utility', 'idSystem', 'idSystem');
+        $utilities->each(function($item, $key){
+            $item->delete();
+        });
     }
 }

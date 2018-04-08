@@ -30,7 +30,6 @@ $(document).ready(function(){
         var group = $(this).val();
         var test = group.split(" ");
         var newRoute = routeSubGroup.replace('parameter',test[0]);
-        // var newRoute = routeSubGroup.replace('parameter',group.split(" ")[0]);
         console.log(newRoute);
 
         $.ajax({
@@ -50,39 +49,56 @@ $(document).ready(function(){
         });
     });
 
+
 });
 
 function saveCost(){
     var request = $("#newCost").serializeArray();
+    var test = $("#detailTest").val();
     var token = $("#token").val();
-    var input = document.getElementById("CloseCostModal" );
-    input.checked = true;
-    
+    var inputClose = document.getElementById("CloseCostModal");
+    var inputShow = document.getElementById("ShowCostModal");
+
     console.log(request);
+    console.log(test);
 
     $.ajax({
-          url: routeStorageCost,
-          headers: {'X-CSRF-TOKEN': token},
-          type: 'POST',
-          datatype: 'json',
-          data: request,
-          success:function(data)
-          {
-                var costs = data.html;
-                $("#BodyCostTable").html(costs);
-          },
-          error:function(data)
-          {
-              alert('mal');
-          }
-      });
+        url: routeStorageCost,
+        headers: {'X-CSRF-TOKEN': token},
+        type: 'GET',
+        datatype: 'json',
+        data: request,
+        success:function(data)
+        {   
+            var modalCost = data.modal;
+            var tableCost = data.table;
+            $("#costModal").html(modalCost);
+            
+            if(data.validation)
+            {
+                inputClose.checked = false;
+                inputShow.checked = true;        
+            }
+            else
+            {
+                inputClose.checked = true;
+                inputShow.checked = false;
+                $("#BodyCostTable").html(tableCost);
+            }
+              
+        },
+        error:function(data)
+        {
+            alert('mal');
+        }
+    });
 };
 
 function deleteCost(id){
 
     var newRoute = routeDeleteCost.replace('parameter',id);
     console.log(newRoute);
-    
+
     $.ajax({
           url: newRoute,
           headers: {'X-CSRF-TOKEN': token},
@@ -133,7 +149,7 @@ function deleteEntry(id){
 
     var newRoute = routeDeleteEntry.replace('parameter',id);
     console.log(newRoute);
-    
+
     $.ajax({
           url: newRoute,
           headers: {'X-CSRF-TOKEN': token},
@@ -152,7 +168,7 @@ function deleteEntry(id){
 };
 
 function detectZone(idzone){
-    
+
     if(idzone == null){
         alert("Elija una zona para crear un sistema");
         event.preventDefault();
@@ -162,7 +178,7 @@ function detectZone(idzone){
 function calculateIndicators(){
 
     console.log(routeCalculateIndicators);
-    
+
     $.ajax({
           url: routeCalculateIndicators,
           headers: {'X-CSRF-TOKEN': token},

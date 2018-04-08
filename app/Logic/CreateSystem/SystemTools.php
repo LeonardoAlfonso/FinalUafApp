@@ -57,7 +57,10 @@ class SystemTools
 
         $index = $costs->count();
 
+        $optionsGroup = $this->getGroup();
+
         $newCost = new CostVirtual;
+        $cleanCost = new CostVirtual();
             $newCost->id = $index;
             $newCost->detail = $request->input('detail');
             $newCost->group = $request->input('listGroup');
@@ -77,11 +80,63 @@ class SystemTools
             $newCost->quantity10 = $request->input('quantity10');
             $newCost->quantity11 = $request->input('quantity11');
             $newCost->quantity12 = $request->input('quantity12');
-    
-        $costs->push($newCost);
-        $request->session()->put('costs', $costs);
+           
+            $cleanCost->id = "";
+            $cleanCost->detail = "";
+            $cleanCost->group = NULL;
+            $cleanCost->subGroup = NULL;
+            $cleanCost->unitaryCost = "";
 
-        return $costs;
+            $cleanCost->quantity0 = "";
+            $cleanCost->quantity1 = "";
+            $cleanCost->quantity2 = "";
+            $cleanCost->quantity3 = "";
+            $cleanCost->quantity4 = "";
+            $cleanCost->quantity5 = "";
+            $cleanCost->quantity6 = "";
+            $cleanCost->quantity7 = "";
+            $cleanCost->quantity8 = "";
+            $cleanCost->quantity9 = "";
+            $cleanCost->quantity10 = "";
+            $cleanCost->quantity11 = "";
+            $cleanCost->quantity12 = "";
+
+        $validations = $this->validateCost($newCost);  
+
+        if($validations->fails())
+        {
+            $optionsSubGroup = $this->getSubGroup($newCost->group);
+            $modalView = view('app.partials.expert.modals.costModal')
+                            ->with('modalCost', $newCost)
+                            ->with('optionsGroup', $optionsGroup)
+                            ->with('optionsSubGroup',$optionsSubGroup)
+                            ->withErrors($validations);
+            $modalCostView = $modalView->render();
+            
+            return collect(['modal' => $modalCostView, 'table' => "", 
+                            'validation' => $validations->fails()]);
+        }
+        else
+        {
+            $optionsSubGroup = $this->getSubGroup($cleanCost->group);
+            $costs->push($newCost);
+            $request->session()->put('costs', $costs);
+
+            $tableView = view('app.partials.expert.tableCosts')
+                            ->with('listCosts',$costs);
+
+            $tableCostsView = $tableView->render();
+
+            $modalView = view('app.partials.expert.modals.costModal')
+                            ->with('modalCost', $cleanCost)
+                            ->with('optionsGroup', $optionsGroup)
+                            ->with('optionsSubGroup',$optionsSubGroup)
+                            ->withErrors($validations);
+            $modalCostView = $modalView->render();
+
+            return collect(['modal' => $modalCostView, 'table' => $tableCostsView, 
+                            'validation' => $validations->fails()]);
+        }
     }
 
     public function showEntries(Request $request)
@@ -579,6 +634,91 @@ class SystemTools
         $request->session()->forget('indicators');
     }
 
+    public function loadCost(Request $request, $system)
+    {
+        $costs = $system->Costs()->get();
+        $partialCosts = $costs->groupBy('detail');
+        $partialCosts->forget('Crédito');
+        $index = 0;
+
+        $partialCosts->each(function($item, $key) use(&$cost, &$index, &$costs, &$request) {
+
+            $cost = new CostVirtual();
+
+            if($request->session()->has('costs'))
+            {
+                $costs = $request->session()->get('costs');
+            }
+            else
+            {
+                $costs = collect([]);
+            }
+            
+            $item->each(function($item, $key) use($index, &$cost){
+                
+                $quantity = 'quantity'.$key;
+
+                if($key == 0)
+                {
+                    $cost->id = $index;
+                    $cost->detail = $item->detail;
+                    $cost->group = $item->group;
+                    $cost->subGroup = $item->subGroup;
+                    $cost->unitaryCost = $item->unitaryCost;
+                }
+
+                $cost->$quantity = $item->quantity;
+            });
+
+            $index++;
+            $costs->push($cost);  
+            $request->session()->put('costs', $costs);
+            // dd($request->session()->get('costs'));
+        });
+
+        return $costs;
+    }
+
+    public function validateCost($newCost)
+    {
+        $input = $newCost->toArray();
+
+        $rules = [
+            'detail' => 'required|min:6|max:40',
+            'group' => 'required', 
+            'subGroup' => 'required', 
+            'unitaryCost' => 'numeric|max:999999999', 
+            'quantity0' => 'numeric|max:999999999', 
+            'quantity1' => 'numeric|max:999999999', 
+            'quantity2' => 'numeric|max:999999999', 
+            'quantity3' => 'numeric|max:999999999', 
+            'quantity4' => 'numeric|max:999999999', 
+            'quantity5' => 'numeric|max:999999999', 
+            'quantity6' => 'numeric|max:999999999', 
+            'quantity7' => 'numeric|max:999999999', 
+            'quantity8' => 'numeric|max:999999999', 
+            'quantity9' => 'numeric|max:999999999', 
+            'quantity10' => 'numeric|max:999999999', 
+            'quantity11' => 'numeric|max:999999999', 
+            'quantity12' => 'numeric|max:999999999', 
+
+          ];
+
+        $messages = [
+            'required' => 'Campo Obligatorio',
+            'numeric' => 'Campo Numérico',
+            'max'=>[
+                    'string' => 'El campo debe tener máximo 40 caracteres',
+                    'numeric' => 'Excede el valor permitido'
+            ],
+            'min'=>[
+                    'string' => 'El campo debe tener mínimo 6 caracteres'
+            ]
+        ];
+
+        return Validator::make($input, $rules, $messages);
+
+    }
 
 
 
