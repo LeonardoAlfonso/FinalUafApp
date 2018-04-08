@@ -84,6 +84,7 @@ class systemController extends Controller
 
         $systemTools = new SystemTools();
         $optionsGroup = $systemTools->getGroup();
+        $optionsSubGroup = collect([]);
         $systemTools->createUpdateIndicator($request);
         $indicators = $request->session()->get('indicators');
 
@@ -91,12 +92,13 @@ class systemController extends Controller
         $modalCost = new CostVirtual();
         $modalEntry = new EntryVirtual();
 
-        $listCosts = collect([]);
+        $listCosts = is_null($idSystem) ? collect([]) : $systemTools->loadCost($request, $system);
         $listEntries = collect([]);
 
           return view('app.expert')
                   ->with('option', $option)
                   ->with('optionsGroup',$optionsGroup)
+                  ->with('optionsSubGroup', $optionsSubGroup)
                   ->with('system', $system)
                   ->with('zone', $zone)
                   ->with('indicators',$indicators)
@@ -110,10 +112,12 @@ class systemController extends Controller
     {
         $systemTools = new SystemTools();
         $optionsSubGroup = $systemTools->getSubGroup($group);
+        $modalCost = new CostVirtual();
 
         if($request->ajax())
         {
             $view = view('app.partials.expert.modals.subGroupsCost')
+                        ->with('modalCost', $modalCost)
                         ->with('optionsSubGroup', $optionsSubGroup);
             $newview = $view->render();
             return response()->json(["html" => $newview]);
@@ -123,14 +127,15 @@ class systemController extends Controller
     public function storageCost(Request $request)
     {
         $systemTools = new SystemTools();
+
         $table = $systemTools->showCosts($request);
+        $modal = $table->get('modal');
+        $tableView = $table->get('table');
 
       if($request->ajax())
       {
-            $view = view('app.partials.expert.tableCosts')
-                        ->with('listCosts', $table);
-            $newView = $view->render();
-            return response()->json(["html"=>$newView]);
+            return response()->json(["modal"=>$modal, "table" => $tableView,  
+                                    "validation"=>$table->get('validation')]);
       }
     }
 
@@ -230,15 +235,16 @@ class systemController extends Controller
     public function saveSystem(Request $request)
     {
         $systemTools = new SystemTools();
-        $system = new System();
+        $system = is_null($request->idSystem) ? new System(): System::find($request->idSystem); 
             $system->nameSystem = $request->nameSystem;
             $system->autor = $request->authorSystem;
             $system->jornalValue = $request->jornalSystem;
             $system->idZone = $request->idZone;
-
+    
         $system->save();
 
         //Save Costs
+        $system->deleteCosts();
         $costs = $request->session()->get('realCosts');
         $costs->each(function($item, $key) use($system){
             $item->idSystem = $system->idSystem;
@@ -246,13 +252,15 @@ class systemController extends Controller
         });
 
         //Save Entries
+        $system->deleteEntries();
         $entries = $request->session()->get('realEntries');
         $entries->each(function($item, $key) use($system){
             $item->idSystem = $system->idSystem;
             $item->save();
         });
 
-        //Save Entries
+        //Save Utilities
+        $system->deleteUtilities();
         $utilities = $request->session()->get('utilities');
         $utilities->each(function($item, $key) use($system){
             $item->idSystem = $system->idSystem;
@@ -260,6 +268,7 @@ class systemController extends Controller
         });
 
         //Save Indicators
+        $system->deleteIndicators();
         $indicators = $request->session()->get('indicators');
         $indicators->each(function($item, $key) use($system){
             $item->idSystem = $system->idSystem;
@@ -277,5 +286,47 @@ class systemController extends Controller
         $system->delete();
         
         return $systemTools->getSystemList($request, $idZone);
+    }
+
+    public function getTest()
+    {
+
+        $systemTools = new SystemTools();
+
+        $newCost = new CostVirtual;
+            $newCost->id = NULL;
+            $newCost->detail = "2";
+            $newCost->group = NULL;
+            $newCost->subGroup = NULL;
+            $newCost->unitaryCost = "98";
+
+            $newCost->quantity0 = NULL;
+            $newCost->quantity1 = NULL;
+            $newCost->quantity2 = NULL;
+            $newCost->quantity3 = NULL;
+            $newCost->quantity4 = NULL;
+            $newCost->quantity5 = NULL;
+            $newCost->quantity6 = NULL;
+            $newCost->quantity7 = NULL;
+            $newCost->quantity8 = "popo";
+            $newCost->quantity9 = "so";
+            $newCost->quantity10 = "98";
+            $newCost->quantity11 = NULL;
+            $newCost->quantity12 = 88;
+
+            $validations = $systemTools->validateCost($newCost);
+            $optionsGroup = $systemTools->getGroup();
+            $optionsSubGroup = $systemTools->getSubGroup($newCost->group);
+            dd($optionsSubGroup);
+
+            $modalView = view('app.partials.expert.modals.costModal')
+                            ->with('modalCost', $newCost)
+                            ->with('optionsGroup', $optionsGroup)
+                            ->with('optionsSubGroup', $optionsSubGroup)
+                            ->withErrors($validations);
+            $modalCostView = $modalView->render();
+
+            dd($modalCostView);
+                        
     }
 }
