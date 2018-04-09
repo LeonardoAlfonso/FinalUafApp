@@ -112,27 +112,47 @@ function deleteCost(id){
       });
 };
 
-function saveEntry(){
-    var request = $("#newEntry").serializeArray();
+function saveCost(){
+    var request = $("#newCost").serializeArray();
+    var test = $("#detailTest").val();
     var token = $("#token").val();
-    console.log(request);
+    var inputClose = document.getElementById("CloseCostModal");
+    var inputShow = document.getElementById("ShowCostModal");
 
-        $.ajax({
-            url: routeStorageEntry,
-            headers: {'X-CSRF-TOKEN': token},
-            type: 'POST',
-            datatype: 'json',
-            data: request,
-            success:function(data)
+    console.log(request);
+    console.log(test);
+
+    $.ajax({
+        url: routeStorageCost,
+        headers: {'X-CSRF-TOKEN': token},
+        type: 'GET',
+        datatype: 'json',
+        data: request,
+        success:function(data)
+        {   
+            console.log(data);
+            var modalCost = data.modal;
+            var tableCost = data.table;
+            $("#costModal").html(modalCost);
+            
+            if(data.validation)
             {
-                var entries = data.html;
-                $("#BodyEntryTable").html(entries);
-            },
-            error:function(data)
-            {
-                alert('mal');
+                inputClose.checked = false;
+                inputShow.checked = true;        
             }
-        });
+            else
+            {
+                inputClose.checked = true;
+                inputShow.checked = false;
+                $("#BodyCostTable").html(tableCost);
+            }
+              
+        },
+        error:function(data)
+        {
+            alert('mal');
+        }
+    });
 };
 
 function deleteEntry(id){

@@ -50,7 +50,7 @@ class System extends Model
 
     public function Utilities()
     {
-        return $this->belongsTo('App\Models\Utility', 'idSystem', 'idSystem');
+        return $this->hasMany('App\Models\Utility', 'idSystem', 'idSystem');
     }
 
     public function deleteUtilities()
@@ -59,5 +59,10 @@ class System extends Model
         $utilities->each(function($item, $key){
             $item->delete();
         });
+    }
+
+    public function FlowCash()
+    {
+        return $this->hasMany('App\Models\FlowCash', 'idSystem', 'idSystem');
     }
 }

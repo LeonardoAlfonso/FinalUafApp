@@ -91,6 +91,7 @@ function saveCost(){
         data: request,
         success:function(data)
         {   
+            console.log(data);
             var modalCost = data.modal;
             var tableCost = data.table;
             $("#costModal").html(modalCost);
@@ -288,3 +289,30 @@ function saveSystem() {
     });
 };
 
+function editCost(id){
+
+    var newRoute = routeCostEdit.replace('parameter',id);
+    var inputClose = document.getElementById("CloseCostModal");
+    var inputShow = document.getElementById("ShowCostModal");
+    console.log(newRoute);
+
+    $.ajax({
+          url: newRoute,
+          headers: {'X-CSRF-TOKEN': token},
+          type: 'GET',
+          datatype: 'json',
+          success:function(data)
+          {
+                console.log(data);
+                var modalCost = data.modal;
+                $("#costModal").html(modalCost);
+                inputClose.checked = false;
+                inputShow.checked = true; 
+          },
+          error:function(data)
+          {
+              alert('mal');
+          }
+      });
+};
+editCost

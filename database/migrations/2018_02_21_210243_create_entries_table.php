@@ -18,7 +18,6 @@ class CreateEntriesTable extends Migration
               $table->string('datePriceSource')->nullable();
               $table->integer('quantity')->nullable();
               $table->integer('period')->nullable();
-              $table->boolean('integralIndicator')->nullable();
               $table->double('total');
               $table->timestamps();
 

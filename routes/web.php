@@ -69,6 +69,7 @@ Route::get('/expert/calculate/Indicators','AppControllers\systemController@calcu
 Route::get('/expert/deleteSystem/system/operation/{idSystem}','AppControllers\systemController@deleteSystem')->name('systemDelete');
 Route::get('/expert/validateExistence/Indicators','AppControllers\systemController@validateIfIndicators')->name('validateIfIndicators');
 Route::get('/expert/validateExistence/Calculations','AppControllers\systemController@validateCalculate')->name('validateCalculate');
+Route::get('/expert/editCost/cost/operation/{idCost}','AppControllers\systemController@editCost')->name('costEdit');
 
 Route::get('test/modal','AppControllers\systemController@getTest')->name('getTest');
 

@@ -13,6 +13,7 @@ use App\Models\Cost;
 use App\Models\Entry;
 use App\Models\System;
 use App\Models\Utility;
+use App\Models\FLowCash;
 use App\Models\UafParameter;
 use App\Models\Zone;
 use App\Models\Virtuals\CostVirtual;
@@ -54,16 +55,17 @@ class SystemTools
         else
         {
             $costs = collect([]);
-        }
+        };
 
         $index = $costs->count();
         $loadScript = true;
+        $idCost = $request->input('idCost');
 
         $optionsGroup = $this->getGroup();
 
         $newCost = new CostVirtual;
         $cleanCost = new CostVirtual();
-            $newCost->id = $index;
+            $newCost->id = is_null($idCost) ? $index : $idCost;
             $newCost->detail = $request->input('detail');
             $newCost->group = $request->input('listGroup');
             $newCost->subGroup = $request->input('listSubGroup');
@@ -122,7 +124,24 @@ class SystemTools
         else
         {
             $optionsSubGroup = $this->getSubGroup($cleanCost->group);
-            $costs->push($newCost);
+
+                if(is_null($idCost))
+                {
+                    $costs->push($newCost);
+
+                }
+                else
+                {
+                    $costs->each(function($item, $key) use($idCost, &$costs, $newCost) {
+                        if($item->id == $idCost)
+                        {
+                            $costs->pull($key);
+                            $costs->put($key, $newCost);
+                            return false;
+                        }
+                    });
+                }
+            
             $request->session()->put('costs', $costs);
 
             $tableView = view('app.partials.expert.tableCosts')
@@ -141,6 +160,34 @@ class SystemTools
             return collect(['modal' => $modalCostView, 'table' => $tableCostsView, 
                             'validation' => $validations->fails()]);
         }
+    }
+
+    public function editCost(Request $request, $idCost)
+    {
+        $costs = $request->session()->get('costs');
+        $editCost = "";
+        $validations = collect([]);
+        $optionsGroup = $this->getGroup();
+        $loadScript = true;
+        
+        $costs->each(function($item, $key) use($idCost, $costs, &$editCost) {
+            if($item->id == $idCost)
+            {
+                $editCost = $costs->get($key);
+                return false;
+            }
+        });
+
+        $optionsSubGroup = $this->getSubGroup($editCost->group);
+        $modalView = view('app.partials.expert.modals.costModal')
+                        ->with('modalCost', $editCost)
+                        ->with('optionsGroup', $optionsGroup)
+                        ->with('optionsSubGroup',$optionsSubGroup)
+                        ->with('loadScript', $loadScript)
+                        ->withErrors($validations);
+        $modalCostView = $modalView->render();
+
+        return $modalCostView;
     }
 
     public function showEntries(Request $request)
@@ -368,6 +415,38 @@ class SystemTools
 
             $request->session()->put('utilities', $utilities);
             $request->session()->put('futureUtilities', $futureUtilities);
+        }
+    }
+
+    public function calculateFlowCash(Request $request)
+    {
+        $costs = $request->session()->get('realCosts');
+        $entries = $request->session()->get('realEntries');
+
+        $reInvertionRate = UafParameter::where('nameParameter', 'PorcentajeReinversion')->first();
+        $reInvertionRate = $reInvertionRate->valueParameter/100;
+
+        $flowsCash = collect([]);
+
+        $initialInvertion = $costs->where('period', 0)->sum('total');
+        
+        for($i=1; $i <= 12; $i++)
+        {
+            $cashAvaliable = ($i == 1) ?  $initialInvertion*1.05
+                                       :  $flowsCash->get($i-1)->finalCash * $reInvertionRate;
+            
+            $finalEntryPeriod = $entries->where('period', $i)->sum('total') + $cashAvaliable;
+
+            $finalCostsPeriod = $costs->where('period', $i)->sum('total') + $initialInvertion;
+            
+            $finalCashPeriod = $finalEntryPeriod - $finalCostsPeriod; 
+
+            $flowCash = new FLowCash();
+                $flowCash->finalCash = $finalCashPeriod;
+                $flowCash->period = $i;
+
+            $flowsCash->push($flowCash);
+            $request->session()->put('flowCash', $flowCash);
         }
     }
 
@@ -636,6 +715,7 @@ class SystemTools
         $request->session()->forget('anualSalary25VPN');
         $request->session()->forget('utilities');
         $request->session()->forget('indicators');
+        $request->session()->forget('flowCash');
     }
 
     public function loadCost(Request $request, $system)

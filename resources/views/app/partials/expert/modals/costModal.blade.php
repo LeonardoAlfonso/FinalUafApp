@@ -1,5 +1,6 @@
 <form id="newCost" name="newCost" class="newCost">  
 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+<input type="hidden" name="idCost" value="{{ $modalCost->id }}">
   <div class="col-xl-4"></div>
   <div class="col-xl-4 modalCard">
       <div class="modalCardtitle col-xl-12">

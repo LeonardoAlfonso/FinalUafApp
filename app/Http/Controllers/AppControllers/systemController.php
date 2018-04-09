@@ -136,6 +136,7 @@ class systemController extends Controller
     {
         $request->session()->forget('utilities');
         $request->session()->forget('indicators');
+        $request->session()->forget('flowCash');
         $systemTools = new SystemTools();
 
         $table = $systemTools->showCosts($request);
@@ -149,7 +150,6 @@ class systemController extends Controller
       }
     }
 
-    // public function deleteCost($id)
     public function deleteCost(Request $request, $idCost)
     {
         $costs = $request->session()->get('costs');
@@ -175,6 +175,7 @@ class systemController extends Controller
     {
         $request->session()->forget('utilities');
         $request->session()->forget('indicators');
+        $request->session()->forget('flowCash');
 
         $systemTools = new SystemTools();
         $table = $systemTools->showEntries($request);
@@ -223,7 +224,6 @@ class systemController extends Controller
         $systemTools->reconstructItems($request);
         $systemTools->calculateSalaries($request);
         $systemTools->calculateUtilities($request);
-        // dd($systemTools->calculateTIR($request));
         $systemTools->createUpdateIndicator($request, "VPN", $systemTools->calculateVPN($request));
         $systemTools->createUpdateIndicator($request, "TIR", $systemTools->calculateTIR($request));
         $systemTools->calculateIPA($request);
@@ -327,6 +327,19 @@ class systemController extends Controller
             return response()->json(["validation" => $response]);
         }   
     }
+
+    public function editCost(Request $request, $idCost)
+    {
+        $systemTools = new SystemTools();
+        $modal = $systemTools->editCost($request, $idCost);
+
+        if($request->ajax())
+        {
+              return response()->json(["modal"=>$modal]);
+        }
+    }
+    
+
 
     public function getTest()
     {
