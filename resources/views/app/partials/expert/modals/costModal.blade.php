@@ -93,7 +93,7 @@
               </li>
             @endif
             <li>
-              <input type="text" name="unitaryCost" value="{{ $modalCost->unitaryCost }}" placeholder="Costo unitario actual">
+              <input id="unitaryCost" type="text" name="unitaryCost" value="{{ $modalCost->unitaryCost }}" placeholder="Costo unitario actual">
             </li>
             @if($errors->has('quantity0'))
               <li>
@@ -159,4 +159,7 @@
   </div>
   <div class="col-xl-4"></div>
   </form>
-  <script type="text/javascript" src="{{ asset('js/app/systemApp.js') }}"></script>
+  @if($loadScript)
+    <script type="text/javascript" src="{{ asset('js/app/costsEntries.js') }}"></script>
+  @endif
+  

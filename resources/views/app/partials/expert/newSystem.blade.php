@@ -1,4 +1,4 @@
-<form class="formRegister" action="{{ route('saveSystem') }}" method="post" enctype="multipart/form-data">
+<form id="formNewSystem" class="formRegister" action="{{ route('saveSystem') }}" method="post" enctype="multipart/form-data">
   {{ csrf_field() }}
   <input type="hidden" name="idZone" value="{{ $zone->idZone }}">
   <input type="hidden" name="idSystem" value="{{ $system->idSystem }}">
@@ -24,9 +24,8 @@
           </div>
         </div>
         <div class="col-xl-2">
-          <button type="submit" class="saveInput">
-              Guardar
-          </button>
+          <button id="SaveSystemButton" type="button" class="saveInput" onclick="saveSystem()">Guardar</button>
+          <button type="submit" id="SubmmitSystemButton"></button>
         </div>
         <div class="col-xl-1"></div>
 
@@ -39,47 +38,9 @@
 <div class="col-xl-12">
   <div class="col-xl-10">
       <div class="col-xl-12">
-          <div class="col-xl-6">
-            <div class="col-xl-12">
-              <div class="col-xl-1"></div>
-              <div id="generalData" class="col-xl-11">
-                <div class="col-xl-12">
-                    <div class="systemContent col-xl-4">
-                        <label for="">Nombre</label>
-                    </div>
-                    <div class="systemInput col-xl-8">
-                        <input type="text" name="nameSystem" value="{{ $system->nameSystem }}">
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-12">
-              <div class="col-xl-1"></div>
-              <div id="generalData" class="col-xl-11">
-                <div class="col-xl-12">
-                    <div class="systemContent col-xl-4">
-                        <label for="">Autor</label>
-                    </div>
-                    <div class="systemInput col-xl-8">
-                        <input type="text" name="authorSystem" value="{{ $system->autor }}">
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-12">
-              <div class="col-xl-1"></div>
-              <div id="generalData" class="col-xl-11">
-                <div class="col-xl-12">
-                    <div class="systemContent col-xl-4">
-                        <label for="">Valor Jornal</label>
-                    </div>
-                    <div class="systemInput col-xl-8">
-                        <input type="text" name="jornalSystem" value="{{ $system->jornalValue }}">
-                    </div>
-                </div>
-              </div>
-            </div>
-        </div>
+          <div class="col-xl-6" id="SystemMainData">    
+            @include('app.partials.expert.generalDataSystem')
+          </div>
           </form>
         <div class="col-xl-6">
           <div class="col-xl-12">

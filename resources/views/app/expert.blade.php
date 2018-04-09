@@ -12,6 +12,8 @@
       var routeDeleteEntry = '{{ route('entryDelete', ['idEntry' => 'parameter'])  }}';
       var routeCalculateIndicators = '{{ route('calculateIndicators') }}';
       var routeDeleteSystem = '{{ route('systemDelete', ['idSystem' => 'parameter'])  }}';
+      var routeValidateIfIndicators = '{{ route('validateIfIndicators') }}';
+      var routevalidateCalculate = '{{ route('validateCalculate') }}';
   </script>
   <script type="text/javascript" src="{{ asset('js/app/systemApp.js') }}"></script>
 @stop

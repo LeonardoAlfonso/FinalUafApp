@@ -86,9 +86,16 @@ class systemController extends Controller
         $optionsGroup = $systemTools->getGroup();
         $optionsSubGroup = collect([]);
         $systemTools->createUpdateIndicator($request);
-        $indicators = $request->session()->get('indicators');
+        $indicators = is_null($idSystem) ? $request->session()->get('indicators') 
+                                         : $systemTools->loadIndicators($request, $system);
+                                        
+        if(!is_null($idSystem))
+        {
+            $systemTools->loadUtilities($request, $system);
+        }
 
         $option = 'configSystem';
+        $loadScript = false;
         $modalCost = new CostVirtual();
         $modalEntry = new EntryVirtual();
 
@@ -99,6 +106,7 @@ class systemController extends Controller
                   ->with('option', $option)
                   ->with('optionsGroup',$optionsGroup)
                   ->with('optionsSubGroup', $optionsSubGroup)
+                  ->with('loadScript', $loadScript)
                   ->with('system', $system)
                   ->with('zone', $zone)
                   ->with('indicators',$indicators)
@@ -126,6 +134,8 @@ class systemController extends Controller
 
     public function storageCost(Request $request)
     {
+        $request->session()->forget('utilities');
+        $request->session()->forget('indicators');
         $systemTools = new SystemTools();
 
         $table = $systemTools->showCosts($request);
@@ -163,6 +173,9 @@ class systemController extends Controller
 
     public function storageEntry(Request $request)
     {
+        $request->session()->forget('utilities');
+        $request->session()->forget('indicators');
+
         $systemTools = new SystemTools();
         $table = $systemTools->showEntries($request);
 
@@ -234,6 +247,7 @@ class systemController extends Controller
     
     public function saveSystem(Request $request)
     {
+        dd($request);
         $systemTools = new SystemTools();
         $system = is_null($request->idSystem) ? new System(): System::find($request->idSystem); 
             $system->nameSystem = $request->nameSystem;
@@ -268,7 +282,6 @@ class systemController extends Controller
         });
 
         //Save Indicators
-        $system->deleteIndicators();
         $indicators = $request->session()->get('indicators');
         $indicators->each(function($item, $key) use($system){
             $item->idSystem = $system->idSystem;
@@ -286,6 +299,33 @@ class systemController extends Controller
         $system->delete();
         
         return $systemTools->getSystemList($request, $idZone);
+    }
+
+    public function validateIfIndicators(Request $request)
+    {
+        $systemTools = new SystemTools();
+        $response = $systemTools->validationSaveSystem($request);
+        $formValidation = $response->get('formValidation');
+        $calculateValidation = $response->get('calculateValidation');
+        $view = $response->get('view');
+
+        if($request->ajax())
+        {
+            return response()->json(["formValidation" => $formValidation, 
+                                    "calculateValidation" => $calculateValidation, 
+                                    "view" => $view]);
+        }
+    }
+
+    public function validateCalculate(Request $request)
+    {
+        $systemTools = new SystemTools();
+        $response = $systemTools->validationCalculateData($request);
+
+        if($request->ajax())
+        {
+            return response()->json(["validation" => $response]);
+        }   
     }
 
     public function getTest()

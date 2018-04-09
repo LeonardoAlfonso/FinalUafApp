@@ -11,6 +11,10 @@ button#SaveCost{
     display:none;
 }
 
+#SubmmitSystemButton{
+    display:none;
+}
+
 .errorMessage
 {
     color: red;

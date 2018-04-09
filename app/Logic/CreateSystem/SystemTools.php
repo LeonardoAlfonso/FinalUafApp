@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 use App\Logic\CreateSystem\SystemTools;
 use App\Models\Cost;
 use App\Models\Entry;
+use App\Models\System;
 use App\Models\Utility;
 use App\Models\UafParameter;
 use App\Models\Zone;
@@ -56,6 +57,7 @@ class SystemTools
         }
 
         $index = $costs->count();
+        $loadScript = true;
 
         $optionsGroup = $this->getGroup();
 
@@ -110,6 +112,7 @@ class SystemTools
                             ->with('modalCost', $newCost)
                             ->with('optionsGroup', $optionsGroup)
                             ->with('optionsSubGroup',$optionsSubGroup)
+                            ->with('loadScript', $loadScript)
                             ->withErrors($validations);
             $modalCostView = $modalView->render();
             
@@ -131,6 +134,7 @@ class SystemTools
                             ->with('modalCost', $cleanCost)
                             ->with('optionsGroup', $optionsGroup)
                             ->with('optionsSubGroup',$optionsSubGroup)
+                            ->with('loadScript', $loadScript)
                             ->withErrors($validations);
             $modalCostView = $modalView->render();
 
@@ -627,10 +631,10 @@ class SystemTools
         $request->session()->forget('entries');
         $request->session()->forget('realCosts');
         $request->session()->forget('realEntries');
-        $request->session()->forget('utilities');
         $request->session()->forget('anualSalaries');
         $request->session()->forget('anualSalaries25');
         $request->session()->forget('anualSalary25VPN');
+        $request->session()->forget('utilities');
         $request->session()->forget('indicators');
     }
 
@@ -679,6 +683,19 @@ class SystemTools
         return $costs;
     }
 
+    public function loadIndicators(Request $request, $system)
+    {
+        $indicators = $system->Indicators()->get();
+        $request->session()->put('indicators', $indicators);
+        return $indicators;
+    }
+
+    public function loadUtilities(Request $request, $system)
+    {
+        $utilities = $system->Utilities()->get();
+        $request->session()->put('utilities', $utilities);
+    }
+
     public function validateCost($newCost)
     {
         $input = $newCost->toArray();
@@ -719,6 +736,56 @@ class SystemTools
         return Validator::make($input, $rules, $messages);
 
     }
+
+    public function validationCalculateData($request)
+    {
+        $response = $request->session()->has('costs') &&
+                    $request->session()->has('entries');
+
+        return $response;
+    }
+
+    public function validationSaveSystem($request)
+    {
+        $input = $request->input();
+        // $input = ['nameSystem' => 'Pepo', 'authorSystem' => 'Agdas','jornalSystem' => '40000'];
+
+        $rules = [
+            'nameSystem' => 'required|min:6|max:20',
+            'authorSystem' => 'required|min:6', 
+            'jornalSystem' => 'required|numeric|max:999999999', 
+          ];
+
+          $messages = [
+            'required' => 'Campo Obligatorio',
+            'numeric' => 'Campo Numérico',
+            'max'=>[
+                    'string' => 'El campo debe tener máximo 20 caracteres',
+                    'numeric' => 'Excede el valor permitido'
+            ],
+            'min'=>[
+                    'string' => 'El campo debe tener mínimo 6 caracteres'
+            ]
+        ];
+
+        $validateForm = Validator::make($input, $rules, $messages);
+
+        $system = new System();
+            $system->nameSystem = $request->input('nameSystem');
+            $system->autor = $request->input('authorSystem');
+            $system->jornalValue = $request->input('jornalSystem');
+
+        $generalData = view('app.partials.expert.generalDataSystem')
+                            ->with('system', $system)
+                            ->withErrors($validateForm);
+
+        $generalDataView = $generalData->render();
+
+        return collect(['formValidation' => $validateForm->fails(), 
+                        'calculateValidation' => $request->session()->has('utilities'),
+                        'view' => $generalDataView]);
+    }
+    
 
 
 

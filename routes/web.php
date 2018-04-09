@@ -67,7 +67,8 @@ Route::post('/expert/system/entry/saveEntry', 'AppControllers\systemController@s
 Route::get('/expert/deleteEntry/entry/operation/{idEntry}','AppControllers\systemController@deleteEntry')->name('entryDelete');
 Route::get('/expert/calculate/Indicators','AppControllers\systemController@calculateIndicators')->name('calculateIndicators');
 Route::get('/expert/deleteSystem/system/operation/{idSystem}','AppControllers\systemController@deleteSystem')->name('systemDelete');
-
+Route::get('/expert/validateExistence/Indicators','AppControllers\systemController@validateIfIndicators')->name('validateIfIndicators');
+Route::get('/expert/validateExistence/Calculations','AppControllers\systemController@validateCalculate')->name('validateCalculate');
 
 Route::get('test/modal','AppControllers\systemController@getTest')->name('getTest');
 
