@@ -249,7 +249,7 @@ class systemController extends Controller
     
     public function saveSystem(Request $request)
     {
-        dd($request);
+        // dd($request);
         $systemTools = new SystemTools();
         $system = is_null($request->idSystem) ? new System(): System::find($request->idSystem); 
             $system->nameSystem = $request->nameSystem;
