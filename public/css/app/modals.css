@@ -9,9 +9,9 @@ div.systemModal{
      z-index: 20;
  }
 
- /* input#ShowCostModal{
+ input#ShowCostModal{
      display: none;
- } */
+ }
 
  input#ShowEntryModal { 
     display: none;
@@ -141,9 +141,9 @@ div.modalCard hr#ModalHr{
       margin-left: 10px;
  }
 
- /* input#CloseCostModal{
+ input#CloseCostModal{
     display: none;
- } */
+ }
 
  input#CloseEntryModal{
     display: none;

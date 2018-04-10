@@ -15,6 +15,7 @@
       var routeValidateIfIndicators = '{{ route('validateIfIndicators') }}';
       var routevalidateCalculate = '{{ route('validateCalculate') }}';
       var routeCostEdit = '{{ route('costEdit', ['idCost' => 'parameter'])  }}';
+      var routeEntryEdit = '{{ route('editEntry', ['idEntry' => 'parameter'])  }}';
   </script>
   <script type="text/javascript" src="{{ asset('js/app/systemApp.js') }}"></script>
 @stop

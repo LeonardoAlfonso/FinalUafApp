@@ -115,9 +115,13 @@
         <div class="col-xl-3 ButtonTable">
             <input id="ShowEntryModal" class="inputModal" name="entryModal" type="radio">
             <label for="ShowEntryModal" class="systemComponents">Nuevo Ingreso</label>
-            @include('app.partials.expert.modals.entryModal')
-        <div class="col-xl-1"></div>
+            <input id="CloseEntryModal" class="inputModal" name="entryModal" type="radio">
+
+            <div id="entryModal" class="col-xl-12 systemModal">
+                @include('app.partials.expert.modals.entryModal')
+            </div>
         </div>
+        <div class="col-xl-1"></div>
       </div>
 
         <div class="col-xl-12">

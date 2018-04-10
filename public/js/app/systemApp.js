@@ -75,13 +75,11 @@ $(document).ready(function(){
 
 function saveCost(){
     var request = $("#newCost").serializeArray();
-    var test = $("#detailTest").val();
     var token = $("#token").val();
     var inputClose = document.getElementById("CloseCostModal");
     var inputShow = document.getElementById("ShowCostModal");
 
     console.log(request);
-    console.log(test);
 
     $.ajax({
         url: routeStorageCost,
@@ -141,6 +139,8 @@ function deleteCost(id){
 function saveEntry(){
     var request = $("#newEntry").serializeArray();
     var token = $("#token").val();
+    var inputClose = document.getElementById("CloseEntryModal");
+    var inputShow = document.getElementById("ShowEntryModal");
     console.log(request);
 
         $.ajax({
@@ -151,8 +151,22 @@ function saveEntry(){
             data: request,
             success:function(data)
             {
-                var entries = data.html;
-                $("#BodyEntryTable").html(entries);
+                console.log(data);
+                var modalEntry = data.modal;
+                var tableEntry = data.table;
+                $("#entryModal").html(modalEntry);
+                
+                if(data.validation)
+                {
+                    inputClose.checked = false;
+                    inputShow.checked = true;        
+                }
+                else
+                {
+                    inputClose.checked = true;
+                    inputShow.checked = false;
+                    $("#BodyEntryTable").html(tableEntry);
+                }
             },
             error:function(data)
             {
@@ -315,4 +329,30 @@ function editCost(id){
           }
       });
 };
-editCost
+
+function editEntry(id){
+
+    var newRoute = routeEntryEdit.replace('parameter',id);
+    var inputClose = document.getElementById("CloseEntryModal");
+    var inputShow = document.getElementById("ShowEntryModal");
+    console.log(newRoute);
+
+    $.ajax({
+          url: newRoute,
+          headers: {'X-CSRF-TOKEN': token},
+          type: 'GET',
+          datatype: 'json',
+          success:function(data)
+          {
+                console.log(data);
+                var modalEntry = data.modal;
+                $("#entryModal").html(modalEntry);
+                inputClose.checked = false;
+                inputShow.checked = true; 
+          },
+          error:function(data)
+          {
+              alert('mal');
+          }
+      });
+};

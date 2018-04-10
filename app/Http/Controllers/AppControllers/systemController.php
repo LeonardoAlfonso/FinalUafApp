@@ -92,6 +92,7 @@ class systemController extends Controller
         if(!is_null($idSystem))
         {
             $systemTools->loadUtilities($request, $system);
+            $systemTools->loadFlowCash($request, $system);
         }
 
         $option = 'configSystem';
@@ -100,7 +101,7 @@ class systemController extends Controller
         $modalEntry = new EntryVirtual();
 
         $listCosts = is_null($idSystem) ? collect([]) : $systemTools->loadCost($request, $system);
-        $listEntries = collect([]);
+        $listEntries = is_null($idSystem) ? collect([]) : $systemTools->loadEntry($request, $system);
 
           return view('app.expert')
                   ->with('option', $option)
@@ -146,7 +147,7 @@ class systemController extends Controller
       if($request->ajax())
       {
             return response()->json(["modal"=>$modal, "table" => $tableView,  
-                                    "validation"=>$table->get('validation')]);
+                                     "validation"=>$table->get('validation')]);
       }
     }
 
@@ -179,13 +180,14 @@ class systemController extends Controller
 
         $systemTools = new SystemTools();
         $table = $systemTools->showEntries($request);
+        $modal = $table->get('modal');
+        $tableView = $table->get('table');
 
         if($request->ajax())
         {
-            $view = view('app.partials.expert.tableEntries')
-                        ->with('listEntries', $table);
-            $newView = $view->render();
-                return response()->json(["html"=>$newView]);
+            // return response()->json(["modal"=>$table]);
+            return response()->json(["modal"=>$modal, "table" => $tableView,  
+                                     "validation"=>$table->get('validation')]);
         }
     }
 
@@ -281,6 +283,14 @@ class systemController extends Controller
             $item->save();
         });
 
+        //Save FlowCash
+        $system->deleteFlowCash();
+        $flowCash = $request->session()->get('flowCash');
+        $flowCash->each(function($item, $key) use($system){
+            $item->idSystem = $system->idSystem;
+            $item->save();
+        });
+
         //Save Indicators
         $indicators = $request->session()->get('indicators');
         $indicators->each(function($item, $key) use($system){
@@ -338,48 +348,57 @@ class systemController extends Controller
               return response()->json(["modal"=>$modal]);
         }
     }
+
+    public function editEntry(Request $request, $idEntry)
+    {
+        $systemTools = new SystemTools();
+        $modal = $systemTools->editEntry($request, $idEntry);
+
+        if($request->ajax())
+        {
+              return response()->json(["modal"=>$modal]);
+        }
+    }
     
 
 
-    public function getTest()
+    public function getTest(Request $request)
     {
+        $entries = $request->session()->get('entries');
 
         $systemTools = new SystemTools();
 
-        $newCost = new CostVirtual;
-            $newCost->id = NULL;
-            $newCost->detail = "2";
-            $newCost->group = NULL;
-            $newCost->subGroup = NULL;
-            $newCost->unitaryCost = "98";
+        $newEntry = new EntryVirtual();
+            $newEntry->id = 1;
+            $newEntry->name = "pruebaManual";
+            $newEntry->unitaryPrice = 52;
+            $newEntry->measureUnity = "Kg";
+            $newEntry->priceSource = "yoina";
+            $newEntry->datePriceSource = "ayer";
 
-            $newCost->quantity0 = NULL;
-            $newCost->quantity1 = NULL;
-            $newCost->quantity2 = NULL;
-            $newCost->quantity3 = NULL;
-            $newCost->quantity4 = NULL;
-            $newCost->quantity5 = NULL;
-            $newCost->quantity6 = NULL;
-            $newCost->quantity7 = NULL;
-            $newCost->quantity8 = "popo";
-            $newCost->quantity9 = "so";
-            $newCost->quantity10 = "98";
-            $newCost->quantity11 = NULL;
-            $newCost->quantity12 = 88;
+            $newEntry->quantity1 = 1;
+            $newEntry->quantity2 = 1;
+            $newEntry->quantity3 = 1;
+            $newEntry->quantity4 = 1;
+            $newEntry->quantity5 = 1;
+            $newEntry->quantity6 = 1;
+            $newEntry->quantity7 = 1;
+            $newEntry->quantity8 = 1;
+            $newEntry->quantity9 = 1;
+            $newEntry->quantity10 = 1;
+            $newEntry->quantity11 = 1;
+            $newEntry->quantity12 = 1;
 
-            $validations = $systemTools->validateCost($newCost);
-            $optionsGroup = $systemTools->getGroup();
-            $optionsSubGroup = $systemTools->getSubGroup($newCost->group);
-            dd($optionsSubGroup);
+            $validations = $systemTools->validateEntry($newEntry);
 
-            $modalView = view('app.partials.expert.modals.costModal')
-                            ->with('modalCost', $newCost)
-                            ->with('optionsGroup', $optionsGroup)
-                            ->with('optionsSubGroup', $optionsSubGroup)
-                            ->withErrors($validations);
-            $modalCostView = $modalView->render();
+            $entries->push($newEntry);
 
-            dd($modalCostView);
+            $tableView = view('app.partials.expert.tableEntries')
+                                ->with('listEntries', $entries);
+
+            $tableEntriesView = $tableView->render();
+
+            dd($tableEntriesView);
                         
     }
 }

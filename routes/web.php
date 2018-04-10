@@ -70,6 +70,7 @@ Route::get('/expert/deleteSystem/system/operation/{idSystem}','AppControllers\sy
 Route::get('/expert/validateExistence/Indicators','AppControllers\systemController@validateIfIndicators')->name('validateIfIndicators');
 Route::get('/expert/validateExistence/Calculations','AppControllers\systemController@validateCalculate')->name('validateCalculate');
 Route::get('/expert/editCost/cost/operation/{idCost}','AppControllers\systemController@editCost')->name('costEdit');
+Route::get('/expert/editEntry/entry/operation/{idEntry}','AppControllers\systemController@editEntry')->name('editEntry');
 
 Route::get('test/modal','AppControllers\systemController@getTest')->name('getTest');
 

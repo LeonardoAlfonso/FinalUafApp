@@ -63,7 +63,7 @@ class SystemTools
 
         $optionsGroup = $this->getGroup();
 
-        $newCost = new CostVirtual;
+        $newCost = new CostVirtual();
         $cleanCost = new CostVirtual();
             $newCost->id = is_null($idCost) ? $index : $idCost;
             $newCost->detail = $request->input('detail');
@@ -202,9 +202,12 @@ class SystemTools
         }
 
         $index = $entries->count();
+        $loadScript = true;
+        $idEntry = $request->input('idEntry');
 
-        $newEntry = new EntryVirtual;
-            $newEntry->id = $index;
+        $newEntry = new EntryVirtual();
+        $cleanEntry = new EntryVirtual();
+            $newEntry->id = is_null($idEntry) ? $index : $idEntry;
             $newEntry->name = $request->input('concept');
             $newEntry->unitaryPrice = $request->input('unitaryPrice');
             $newEntry->measureUnity = $request->input('measureUnity');
@@ -223,11 +226,102 @@ class SystemTools
             $newEntry->quantity10 = $request->input('quantity10');
             $newEntry->quantity11 = $request->input('quantity11');
             $newEntry->quantity12 = $request->input('quantity12');
-    
-        $entries->push($newEntry);
-        $request->session()->put('entries', $entries);
 
-        return $entries;
+            $cleanEntry->id = "";
+            $cleanEntry->name = "";
+            $cleanEntry->unitaryPrice = "";
+            $cleanEntry->measureUnity = "";
+            $cleanEntry->priceSource = "";
+            $cleanEntry->datePriceSource = "";
+
+            $cleanEntry->quantity1 = "";
+            $cleanEntry->quantity2 = "";
+            $cleanEntry->quantity3 = "";
+            $cleanEntry->quantity4 = "";
+            $cleanEntry->quantity5 = "";
+            $cleanEntry->quantity6 = "";
+            $cleanEntry->quantity7 = "";
+            $cleanEntry->quantity8 = "";
+            $cleanEntry->quantity9 = "";
+            $cleanEntry->quantity10 = "";
+            $cleanEntry->quantity11 = "";
+            $cleanEntry->quantity12 = "";
+        
+        $validations = $this->validateEntry($newEntry);
+
+        if($validations->fails())
+        {
+            $modalView = view('app.partials.expert.modals.entryModal')
+                            ->with('modalEntry', $newEntry)
+                            ->with('loadScript', $loadScript)
+                            ->withErrors($validations);
+            $modalEntryView = $modalView->render();
+
+            return collect(['modal' => $modalEntryView, 'table' => "", 
+                            'validation' => $validations->fails()]);
+        }
+        else
+        {
+                if(is_null($idEntry))
+                {
+                    $entries->push($newEntry);
+
+                }
+                else
+                {
+                    $entries->each(function($item, $key) use($idEntry, &$entries, $newEntry) {
+                        if($item->id == $idEntry)
+                        {
+                            $entries->pull($key);
+                            $entries->put($key, $newEntry);
+                            return false;
+                        }
+                    });
+                }
+            
+            $request->session()->put('entries', $entries);
+
+            $tableView = view('app.partials.expert.tableEntries')
+                                ->with('listEntries', $entries);
+
+            $modalView = view('app.partials.expert.modals.entryModal')
+                            ->with('modalEntry', $newEntry)
+                            ->with('loadScript', $loadScript)
+                            ->withErrors($validations);
+
+            $modalEntryView = $modalView->render();
+            $tableEntriesView = $tableView->render();
+
+            $response = collect(['modal' => $modalEntryView, 'table' => $tableEntriesView, 
+                                    'validation' => $validations->fails()]);
+
+            return $response;
+        }
+    }
+
+    public function editEntry(Request $request, $idEntry)
+    {
+        $entries = $request->session()->get('entries');
+        $editEntry = "";
+        $validations = collect([]);
+        $loadScript = true;
+        
+        $entries->each(function($item, $key) use($idEntry, $entries, &$editEntry) {
+            if($item->id == $idEntry)
+            {
+                $editEntry = $entries->get($key);
+                return false;
+            }
+        });
+
+        $modalView = view('app.partials.expert.modals.entryModal')
+                    ->with('modalEntry', $editEntry)
+                    ->with('loadScript', $loadScript)
+                    ->withErrors($validations);
+
+        $modalEntryView = $modalView->render();
+
+        return $modalEntryView;
     }
 
     public function reconstructItems(Request $request)
@@ -763,6 +857,50 @@ class SystemTools
         return $costs;
     }
 
+    public function loadEntry(Request $request, $system)
+    {
+        $entries = $system->Entries()->get();
+        $partialEntries = $entries->groupBy('name');
+        $index = 0;
+
+        $partialEntries->each(function($item, $key) use(&$entry, &$index, &$entries, &$request) {
+
+            $entry = new EntryVirtual();
+
+            if($request->session()->has('entries'))
+            {
+                $entries = $request->session()->get('entries');
+            }
+            else
+            {
+                $entries = collect([]);
+            }
+            
+            $item->each(function($item, $key) use($index, &$entry){
+                
+                $quantity = 'quantity'.($key+1);
+
+                if($key == 0)
+                {
+                    $entry->id = $index;
+                    $entry->name = $item->name;
+                    $entry->unitaryPrice = $item->unitaryPrice;
+                    $entry->measureUnity = $item->measureUnity;
+                    $entry->priceSource = $item->priceSource;
+                    $entry->datePriceSource = $item->datePriceSource;
+                }
+
+                $entry->$quantity = $item->quantity;
+            });
+
+            $index++;
+            $entries->push($entry);  
+            $request->session()->put('entries', $entries);
+        });
+
+        return $entries;
+    }
+
     public function loadIndicators(Request $request, $system)
     {
         $indicators = $system->Indicators()->get();
@@ -776,28 +914,34 @@ class SystemTools
         $request->session()->put('utilities', $utilities);
     }
 
+    public function loadFlowCash(Request $request, $system)
+    {
+        $flowCash = $system->FlowCash()->get();
+        $request->session()->put('flowCash', $flowCash);
+    }
+
     public function validateCost($newCost)
     {
         $input = $newCost->toArray();
 
         $rules = [
-            'detail' => 'required|min:6|max:40',
+            'detail' => 'required|min:6|max:20',
             'group' => 'required', 
             'subGroup' => 'required', 
-            'unitaryCost' => 'numeric|max:999999999', 
-            'quantity0' => 'numeric|max:999999999', 
-            'quantity1' => 'numeric|max:999999999', 
-            'quantity2' => 'numeric|max:999999999', 
-            'quantity3' => 'numeric|max:999999999', 
-            'quantity4' => 'numeric|max:999999999', 
-            'quantity5' => 'numeric|max:999999999', 
-            'quantity6' => 'numeric|max:999999999', 
-            'quantity7' => 'numeric|max:999999999', 
-            'quantity8' => 'numeric|max:999999999', 
-            'quantity9' => 'numeric|max:999999999', 
-            'quantity10' => 'numeric|max:999999999', 
-            'quantity11' => 'numeric|max:999999999', 
-            'quantity12' => 'numeric|max:999999999', 
+            'unitaryCost' => 'required|numeric|max:999999999', 
+            'quantity0' => 'required|numeric|max:999999999', 
+            'quantity1' => 'required|numeric|max:999999999', 
+            'quantity2' => 'required|numeric|max:999999999', 
+            'quantity3' => 'required|numeric|max:999999999', 
+            'quantity4' => 'required|numeric|max:999999999', 
+            'quantity5' => 'required|numeric|max:999999999', 
+            'quantity6' => 'required|numeric|max:999999999', 
+            'quantity7' => 'required|numeric|max:999999999', 
+            'quantity8' => 'required|numeric|max:999999999', 
+            'quantity9' => 'required|numeric|max:999999999', 
+            'quantity10' => 'required|numeric|max:999999999', 
+            'quantity11' => 'required|numeric|max:999999999', 
+            'quantity12' => 'required|numeric|max:999999999', 
 
           ];
 
@@ -805,7 +949,48 @@ class SystemTools
             'required' => 'Campo Obligatorio',
             'numeric' => 'Campo Numérico',
             'max'=>[
-                    'string' => 'El campo debe tener máximo 40 caracteres',
+                    'string' => 'El campo debe tener máximo 20 caracteres',
+                    'numeric' => 'Excede el valor permitido'
+            ],
+            'min'=>[
+                    'string' => 'El campo debe tener mínimo 6 caracteres'
+            ]
+        ];
+
+        return Validator::make($input, $rules, $messages);
+
+    }
+
+    public function validateEntry($newEntry)
+    {
+        $input = $newEntry->toArray();
+
+        $rules = [
+            'name' => 'required|min:6|max:20',
+            'unitaryPrice' => 'required|numeric|max:999999999', 
+            'measureUnity' => 'required|max:20', 
+            'priceSource' => 'required|max:20', 
+            'datePriceSource' => 'required|max:20', 
+            'quantity1' => 'required|numeric|max:999999999', 
+            'quantity2' => 'required|numeric|max:999999999', 
+            'quantity3' => 'required|numeric|max:999999999', 
+            'quantity4' => 'required|numeric|max:999999999', 
+            'quantity5' => 'required|numeric|max:999999999', 
+            'quantity6' => 'required|numeric|max:999999999', 
+            'quantity7' => 'required|numeric|max:999999999', 
+            'quantity8' => 'required|numeric|max:999999999', 
+            'quantity9' => 'required|numeric|max:999999999', 
+            'quantity10' => 'required|numeric|max:999999999', 
+            'quantity11' => 'required|numeric|max:999999999', 
+            'quantity12' => 'required|numeric|max:999999999', 
+
+          ];
+
+        $messages = [
+            'required' => 'Campo Obligatorio',
+            'numeric' => 'Campo Numérico',
+            'max'=>[
+                    'string' => 'El campo debe tener máximo 20 caracteres',
                     'numeric' => 'Excede el valor permitido'
             ],
             'min'=>[

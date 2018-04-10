@@ -17,7 +17,7 @@
         <td>{{ $entry->quantity10 }}</td>
         <td>{{ $entry->quantity11 }}</td>
         <td>{{ $entry->quantity12 }}</td>
-        <td id="{{ $entry->id }}"><a href="#"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
+        <td id="{{ $entry->id }}" onclick="editEntry(this.id)"><a href="#"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
         <td id="{{ $entry->id }}" onclick="deleteEntry(this.id)"><a href="#"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
     </tr>
 @endforeach

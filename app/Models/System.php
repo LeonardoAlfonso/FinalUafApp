@@ -65,4 +65,12 @@ class System extends Model
     {
         return $this->hasMany('App\Models\FlowCash', 'idSystem', 'idSystem');
     }
+
+    public function deleteFlowCash()
+    {
+        $flowCash = $this->belongsTo('App\Models\FlowCash', 'idSystem', 'idSystem');
+        $flowCash->each(function($item, $key){
+            $item->delete();
+        });
+    }
 }
