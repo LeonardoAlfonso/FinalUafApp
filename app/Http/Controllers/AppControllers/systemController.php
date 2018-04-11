@@ -143,11 +143,13 @@ class systemController extends Controller
         $table = $systemTools->showCosts($request);
         $modal = $table->get('modal');
         $tableView = $table->get('table');
+        $test = $table->get('test');
 
       if($request->ajax())
       {
             return response()->json(["modal"=>$modal, "table" => $tableView,  
-                                     "validation"=>$table->get('validation')]);
+                                     "validation"=>$table->get('validation'), 
+                                     'test' => $test]);
       }
     }
 
@@ -182,12 +184,14 @@ class systemController extends Controller
         $table = $systemTools->showEntries($request);
         $modal = $table->get('modal');
         $tableView = $table->get('table');
+        $test = $table->get('test');
 
         if($request->ajax())
         {
             // return response()->json(["modal"=>$table]);
             return response()->json(["modal"=>$modal, "table" => $tableView,  
-                                     "validation"=>$table->get('validation')]);
+                                     "validation"=>$table->get('validation'), 
+                                     'test' => $test]);
         }
     }
 
@@ -284,12 +288,12 @@ class systemController extends Controller
         });
 
         //Save FlowCash
-        $system->deleteFlowCash();
-        $flowCash = $request->session()->get('flowCash');
-        $flowCash->each(function($item, $key) use($system){
-            $item->idSystem = $system->idSystem;
-            $item->save();
-        });
+        // $system->deleteFlowCash();
+        // $flowCash = $request->session()->get('flowCash');
+        // $flowCash->each(function($item, $key) use($system){
+        //     $item->idSystem = $system->idSystem;
+        //     $item->save();
+        // });
 
         //Save Indicators
         $indicators = $request->session()->get('indicators');

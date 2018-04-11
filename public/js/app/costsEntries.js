@@ -50,13 +50,11 @@ $(document).ready(function(){
 
 function saveCost(){
     var request = $("#newCost").serializeArray();
-    var test = $("#detailTest").val();
     var token = $("#token").val();
     var inputClose = document.getElementById("CloseCostModal");
     var inputShow = document.getElementById("ShowCostModal");
 
     console.log(request);
-    console.log(test);
 
     $.ajax({
         url: routeStorageCost,
@@ -66,6 +64,7 @@ function saveCost(){
         data: request,
         success:function(data)
         {   
+            console.log(data.test);
             var modalCost = data.modal;
             var tableCost = data.table;
             $("#costModal").html(modalCost);
@@ -112,47 +111,43 @@ function deleteCost(id){
       });
 };
 
-function saveCost(){
-    var request = $("#newCost").serializeArray();
-    var test = $("#detailTest").val();
+function saveEntry(){
+    var request = $("#newEntry").serializeArray();
     var token = $("#token").val();
-    var inputClose = document.getElementById("CloseCostModal");
-    var inputShow = document.getElementById("ShowCostModal");
-
+    var inputClose = document.getElementById("CloseEntryModal");
+    var inputShow = document.getElementById("ShowEntryModal");
     console.log(request);
-    console.log(test);
 
-    $.ajax({
-        url: routeStorageCost,
-        headers: {'X-CSRF-TOKEN': token},
-        type: 'GET',
-        datatype: 'json',
-        data: request,
-        success:function(data)
-        {   
-            console.log(data);
-            var modalCost = data.modal;
-            var tableCost = data.table;
-            $("#costModal").html(modalCost);
-            
-            if(data.validation)
+        $.ajax({
+            url: routeStorageEntry,
+            headers: {'X-CSRF-TOKEN': token},
+            type: 'POST',
+            datatype: 'json',
+            data: request,
+            success:function(data)
             {
-                inputClose.checked = false;
-                inputShow.checked = true;        
-            }
-            else
+                console.log(data.test);
+                var modalEntry = data.modal;
+                var tableEntry = data.table;
+                $("#entryModal").html(modalEntry);
+                
+                if(data.validation)
+                {
+                    inputClose.checked = false;
+                    inputShow.checked = true;        
+                }
+                else
+                {
+                    inputClose.checked = true;
+                    inputShow.checked = false;
+                    $("#BodyEntryTable").html(tableEntry);
+                }
+            },
+            error:function(data)
             {
-                inputClose.checked = true;
-                inputShow.checked = false;
-                $("#BodyCostTable").html(tableCost);
+                alert('mal');
             }
-              
-        },
-        error:function(data)
-        {
-            alert('mal');
-        }
-    });
+        });
 };
 
 function deleteEntry(id){
@@ -169,6 +164,60 @@ function deleteEntry(id){
           {
                 var entries = data.html;
                 $("#BodyEntryTable").html(entries);
+          },
+          error:function(data)
+          {
+              alert('mal');
+          }
+      });
+};
+
+function editCost(id){
+
+    var newRoute = routeCostEdit.replace('parameter',id);
+    var inputClose = document.getElementById("CloseCostModal");
+    var inputShow = document.getElementById("ShowCostModal");
+    console.log(newRoute);
+
+    $.ajax({
+          url: newRoute,
+          headers: {'X-CSRF-TOKEN': token},
+          type: 'GET',
+          datatype: 'json',
+          success:function(data)
+          {
+                console.log(data);
+                var modalCost = data.modal;
+                $("#costModal").html(modalCost);
+                inputClose.checked = false;
+                inputShow.checked = true; 
+          },
+          error:function(data)
+          {
+              alert('mal');
+          }
+      });
+};
+
+function editEntry(id){
+
+    var newRoute = routeEntryEdit.replace('parameter',id);
+    var inputClose = document.getElementById("CloseEntryModal");
+    var inputShow = document.getElementById("ShowEntryModal");
+    console.log(newRoute);
+
+    $.ajax({
+          url: newRoute,
+          headers: {'X-CSRF-TOKEN': token},
+          type: 'GET',
+          datatype: 'json',
+          success:function(data)
+          {
+                console.log(data);
+                var modalEntry = data.modal;
+                $("#entryModal").html(modalEntry);
+                inputClose.checked = false;
+                inputShow.checked = true; 
           },
           error:function(data)
           {

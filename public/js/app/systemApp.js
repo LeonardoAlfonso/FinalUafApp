@@ -89,7 +89,7 @@ function saveCost(){
         data: request,
         success:function(data)
         {   
-            console.log(data);
+            console.log(data.test);
             var modalCost = data.modal;
             var tableCost = data.table;
             $("#costModal").html(modalCost);
@@ -151,7 +151,7 @@ function saveEntry(){
             data: request,
             success:function(data)
             {
-                console.log(data);
+                console.log(data.test);
                 var modalEntry = data.modal;
                 var tableEntry = data.table;
                 $("#entryModal").html(modalEntry);

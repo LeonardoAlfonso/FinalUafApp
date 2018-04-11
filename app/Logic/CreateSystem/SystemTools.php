@@ -85,7 +85,7 @@ class SystemTools
             $newCost->quantity11 = $request->input('quantity11');
             $newCost->quantity12 = $request->input('quantity12');
            
-            $cleanCost->id = "";
+            $cleanCost->id = NULL;
             $cleanCost->detail = "";
             $cleanCost->group = NULL;
             $cleanCost->subGroup = NULL;
@@ -109,6 +109,7 @@ class SystemTools
 
         if($validations->fails())
         {
+            $newCost->id = NULL;
             $optionsSubGroup = $this->getSubGroup($newCost->group);
             $modalView = view('app.partials.expert.modals.costModal')
                             ->with('modalCost', $newCost)
@@ -128,14 +129,12 @@ class SystemTools
                 if(is_null($idCost))
                 {
                     $costs->push($newCost);
-
                 }
                 else
                 {
                     $costs->each(function($item, $key) use($idCost, &$costs, $newCost) {
                         if($item->id == $idCost)
                         {
-                            $costs->pull($key);
                             $costs->put($key, $newCost);
                             return false;
                         }
@@ -143,6 +142,7 @@ class SystemTools
                 }
             
             $request->session()->put('costs', $costs);
+            $test = $request->session()->get('costs');
 
             $tableView = view('app.partials.expert.tableCosts')
                             ->with('listCosts',$costs);
@@ -158,7 +158,7 @@ class SystemTools
             $modalCostView = $modalView->render();
 
             return collect(['modal' => $modalCostView, 'table' => $tableCostsView, 
-                            'validation' => $validations->fails()]);
+                            'validation' => $validations->fails(), 'test' => $idCost]);
         }
     }
 
@@ -227,7 +227,7 @@ class SystemTools
             $newEntry->quantity11 = $request->input('quantity11');
             $newEntry->quantity12 = $request->input('quantity12');
 
-            $cleanEntry->id = "";
+            $cleanEntry->id = NULL;
             $cleanEntry->name = "";
             $cleanEntry->unitaryPrice = "";
             $cleanEntry->measureUnity = "";
@@ -251,6 +251,7 @@ class SystemTools
 
         if($validations->fails())
         {
+            $newEntry->id = NULL;
             $modalView = view('app.partials.expert.modals.entryModal')
                             ->with('modalEntry', $newEntry)
                             ->with('loadScript', $loadScript)
@@ -272,7 +273,6 @@ class SystemTools
                     $entries->each(function($item, $key) use($idEntry, &$entries, $newEntry) {
                         if($item->id == $idEntry)
                         {
-                            $entries->pull($key);
                             $entries->put($key, $newEntry);
                             return false;
                         }
@@ -280,12 +280,13 @@ class SystemTools
                 }
             
             $request->session()->put('entries', $entries);
+            $test = $request->session()->get('entries');
 
             $tableView = view('app.partials.expert.tableEntries')
                                 ->with('listEntries', $entries);
 
             $modalView = view('app.partials.expert.modals.entryModal')
-                            ->with('modalEntry', $newEntry)
+                            ->with('modalEntry', $cleanEntry)
                             ->with('loadScript', $loadScript)
                             ->withErrors($validations);
 
@@ -293,7 +294,7 @@ class SystemTools
             $tableEntriesView = $tableView->render();
 
             $response = collect(['modal' => $modalEntryView, 'table' => $tableEntriesView, 
-                                    'validation' => $validations->fails()]);
+                                    'validation' => $validations->fails(), 'test' => $index]);
 
             return $response;
         }
@@ -403,7 +404,6 @@ class SystemTools
                     $entry->measureUnity = $item->measureUnity;
                     $entry->priceSource = $item->priceSource;
                     $entry->datePriceSource = $item->datePriceSource;
-                    $entry->integralIndicator = "0";
                     $entry->quantity = $item->$quantity;
                     $entry->period = $i;
 
@@ -411,7 +411,6 @@ class SystemTools
                     $futureEntry->measureUnity = $item->measureUnity;
                     $futureEntry->priceSource = $item->priceSource;
                     $futureEntry->datePriceSource = $item->datePriceSource;
-                    $futureEntry->integralIndicator = "0";
                     $futureEntry->quantity = $item->$quantity;
                     $futureEntry->period = $i;
 
@@ -925,7 +924,7 @@ class SystemTools
         $input = $newCost->toArray();
 
         $rules = [
-            'detail' => 'required|min:6|max:20',
+            'detail' => 'required|min:6|max:100',
             'group' => 'required', 
             'subGroup' => 'required', 
             'unitaryCost' => 'required|numeric|max:999999999', 
@@ -966,11 +965,11 @@ class SystemTools
         $input = $newEntry->toArray();
 
         $rules = [
-            'name' => 'required|min:6|max:20',
+            'name' => 'required|min:6|max:100',
             'unitaryPrice' => 'required|numeric|max:999999999', 
-            'measureUnity' => 'required|max:20', 
-            'priceSource' => 'required|max:20', 
-            'datePriceSource' => 'required|max:20', 
+            'measureUnity' => 'required|max:100', 
+            'priceSource' => 'required|max:100', 
+            'datePriceSource' => 'required|max:100', 
             'quantity1' => 'required|numeric|max:999999999', 
             'quantity2' => 'required|numeric|max:999999999', 
             'quantity3' => 'required|numeric|max:999999999', 
@@ -990,7 +989,7 @@ class SystemTools
             'required' => 'Campo Obligatorio',
             'numeric' => 'Campo Numérico',
             'max'=>[
-                    'string' => 'El campo debe tener máximo 20 caracteres',
+                    'string' => 'El campo debe tener máximo 100 caracteres',
                     'numeric' => 'Excede el valor permitido'
             ],
             'min'=>[
