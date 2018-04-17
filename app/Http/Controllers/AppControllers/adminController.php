@@ -130,6 +130,7 @@ class adminController extends Controller
     {
         $createUser = new UserTools();
         $createUser->deleteUser($idUser);
+        Session::flash('Message','Usuario Eliminado!');
         return redirect()->route('admin');
     }
 

@@ -15,7 +15,18 @@
   <div class="col-xl-6">
     <div class="col-xl-12">
 
-      <div class="col-xl-8"></div>
+      <div class="col-xl-5"></div>
+
+        <div class="col-xl-3">
+          <div id="options">
+            <a href="{{ route('admin') }}">
+              <label id="CancelUser" class="standardButton" onclick="confirmCancel()">
+                  Cancelar
+              </label>
+            </a>
+          </div>
+        </div>
+
       <div class="col-xl-3 ">
 
         <div id="options">

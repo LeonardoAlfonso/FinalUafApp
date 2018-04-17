@@ -73,6 +73,22 @@ $(document).ready(function(){
 
 });
 
+function confirmDeleteSystem(){
+    var deleteSystemConfirm = confirm("Está seguro de eliminar el sistema?");
+    if (deleteSystemConfirm == false)
+    {
+        event.preventDefault();
+    }  
+}
+
+function itemSystemDelete(){
+    var deleteItemSystemConfirm = confirm("Está seguro de eliminar el item?");
+    if (deleteItemSystemConfirm == false)
+    {
+        event.preventDefault();
+    }  
+}
+
 function saveCost(){
     var request = $("#newCost").serializeArray();
     var token = $("#token").val();

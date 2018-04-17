@@ -25,7 +25,7 @@
 
 <hr/>
 
-@include('app.partials.admin.adminMessages')
+  @include('app.partials.admin.adminMessages')
 
 <div id="Searcher" class="col-xl-12">
   <div class="col-xl-6">

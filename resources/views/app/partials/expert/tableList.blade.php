@@ -15,7 +15,7 @@
         <td>{{ $system->autor }}</td>
         <td>{{ $system->created_at }}</td>
         <td><a href="{{ route('getSystem', ['idZone' => $selectZone->idZone, 'idSystem' => $system->idSystem ]) }}"><img src="{{ asset('images/app/editIcon.png') }}"></a></td>
-        <td><a href="{{ route('systemDelete', ['idSystem' => $system->idSystem] ) }}"><img src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
+        <td><a href="{{ route('systemDelete', ['idSystem' => $system->idSystem] ) }}"><img onclick="confirmDeleteSystem()" src="{{ asset('images/app/deleteIcon.png') }}"></a></td>
       </tr>
     @endforeach
   </tbody>

@@ -52,7 +52,11 @@ Route::get('/cartographer/zone/back', 'AppControllers\cartographerController@ret
   //ajax
   Route::get('/cartographer/saveMunicipality/{nameMunicipality}', 'AppControllers\cartographerController@saveMunicipality')->name('saveMunicipality');
   Route::get('/cartographer/deleteMunicipality/{idMunicipality}', 'AppControllers\cartographerController@deleteMunicipality')->name('deleteMunicipality');
+  Route::get('/cartographer/Municipality/showVillages/{idMunicipality}', 'AppControllers\cartographerController@showVillages')->name('showVillages');
+  Route::get('/cartographer/Municipality/saveVillage/{nameMunicipality}', 'AppControllers\cartographerController@saveVillage')->name('saveVillage');
+  Route::get('/cartographer/Municipality/deleteVillage/{nameMunicipality}', 'AppControllers\cartographerController@deleteVillage')->name('deleteVillage');
 
+  
 
 //Routes for systemController
 Route::get('/expert', 'AppControllers\systemController@expertPanel')->middleware('auth')->name('expert');

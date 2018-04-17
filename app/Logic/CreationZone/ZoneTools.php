@@ -85,7 +85,7 @@ class ZoneTools
 
         //Extra Rules
         $rules = array_merge($rules, array('fileState' => array('required')));
-        $rules = array_merge($rules, array('miniMapFile' => array('image','max:1024')));
+        $rules = array_merge($rules, array('miniMapFile' => array('image','max:10240')));
         $rules = array_merge($rules, array('nameZone' => array('required','max:40')));
 
         $messages = [
@@ -93,7 +93,7 @@ class ZoneTools
           'numeric' => 'Campo Numérico',
           'image' => 'Debe ser imagen (png, jpg)',
           'max'=>[
-                'file' => 'Peso Máximo: 1MB',
+                'file' => 'Peso Máximo: 10 MB',
                 'string' => 'El campo debe tener máximo 40 caracteres',
                 'numeric' => 'Porcentaje entre 0 y 100'
           ],
@@ -118,6 +118,10 @@ class ZoneTools
                     $zone->miniMapPath = url(Storage::putFileAs(
                         'miniMaps', $request->file('miniMapFile'), $request->nameZone.".png"
                     ));
+                }
+                else if($request->session()->has('routeMiniMap'))
+                {
+                    $zone->miniMapPath = $request->session()->get('routeMiniMap');
                 }
 
             $zone->idDepartament = $request->idDepartament;
@@ -160,6 +164,16 @@ class ZoneTools
                     $zoneMunicipality->idZone = $zone->idZone;
                 
                 $zoneMunicipality->save();
+            }    
+        }
+
+        if($request->session()->has('villages') && empty($request->idZone))
+        {
+            $villages = $request->session()->get('villages');
+
+            foreach($villages as $village)
+            {
+                $village->save();
             }    
         }
     }
@@ -206,7 +220,7 @@ class ZoneTools
 
             $municipalities->push($Municipality->idMunicipality);
             $request->session()->put('lastList', $municipalities);
-            return Municipality::with('Villages')->whereIn('idMunicipality', $municipalities)->get();
+            return Municipality::whereIn('idMunicipality', $municipalities)->get();
         }
         else
         {
@@ -217,7 +231,7 @@ class ZoneTools
 
             $municipalitiesZone = Zone::find($idZone)->Municipalities;
             $municipalitiesZone = $this->getIds($municipalitiesZone);
-            $municipalitiesZone = Municipality::with('Villages')->whereIn('idMunicipality', $municipalitiesZone)->get();
+            $municipalitiesZone = Municipality::whereIn('idMunicipality', $municipalitiesZone)->get();
             return $municipalitiesZone;
         }
     }

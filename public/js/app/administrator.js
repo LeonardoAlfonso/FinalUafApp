@@ -6,6 +6,14 @@ function deleteUserConfirm(){
         }  
 }
 
+function confirmCancel(){
+    var cancelConfirm = confirm("Está seguro de cancelar? Se perderan los cambios ");
+        if (cancelConfirm == false)
+        {
+            event.preventDefault();
+        }  
+}
+
 
 function searchWord(){
 

@@ -2,13 +2,12 @@
 	{
 		"divipolaCod" :"05",
 		"name" : "Antioquia",
-		"municipalities":["Abejorral","Abriaquí","Alejandría","Amagá","Amalfi","Andes","Angelópolis","Angostura","Anorí","Anza","Apartadó","Arboletes","Argelia","Armenia","Barbosa","Bello","Belmira","Betania","Betulia","Briceño","Buriticá","Cáceres","Caicedo","Caldas","Campamento","Cañasgordas","Caracolí","Caramanta","Carepa","Carolina","Caucasia","Chigorodó","Cisneros","Ciudad Bolívar","Cocorná","Concepción","Concordia","Copacabana","Dabeiba","Don Matías","Ebéjico","El Bagre","El Carmen de Viboral","El Santuario","Entrerrios","Envigado","Fredonia","Frontino","Giraldo","Girardota","Gómez Plata","Granada","Guadalupe","Guarne","Guatapé","Heliconia","Hispania","Itagui","Ituango","Jardín","Jericó","La Ceja","La Estrella","La Pintada","La Unión","Liborina","Maceo","Marinilla","Medellín","Montebello","Murindó","Mutatá","Nariño","Nechí","Necoclí","Olaya","Peñol","Peque","Pueblorrico","Puerto Berrío","Puerto Nare","Puerto Triunfo","Remedios","Retiro","Rionegro","Sabanalarga","Sabaneta","Salgar","San Andrés de Cuerquía","San Carlos","San Francisco","San Jerónimo","San José de La Montaña","San Juan de Urabá","San Luis","San Pedro","San Pedro de Uraba","San Rafael","San Roque","San Vicente","Santa Bárbara","Santa Rosa de Osos","Santafé de Antioquia","Santo Domingo","Segovia","Sonsón","Sopetrán","Támesis","Tarazá","Tarso","Titiribí","Toledo","Turbo","Uramita","Urrao","Valdivia","Valparaíso","Vegachí","Venecia","Vigía del Fuerte","Yalí","Yarumal","Yolombó","Yondó","Zaragoza"]
+		"municipalities":["Medellín","Abejorral","Abriaquí","Alejandría","Amagá","Amalfi","Andes","Angelópolis","Angostura","Anorí","Santa fé de antioquia","Anzá","Apartadó","Arboletes","Argelia","Armenia","Barbosa","Belmira","Bello","Betania","Betulia","Ciudad bolívar","Briceño","Buriticá","Cáceres","Caicedo","Caldas","Campamento","Cañasgordas","Caracolí","Caramanta","Carepa","El carmen de viboral","Carolina","Caucasia","Chigorodó","Cisneros","Cocorná","Concepción","Concordia","Copacabana","Dabeiba","Donmatías","Ebéjico","El bagre","Entrerríos","Envigado","Fredonia","Frontino","Giraldo","Girardota","Gómez plata","Granada","Guadalupe","Guarne","Guatapé","Heliconia","Hispania","Itagüí","Ituango","Jardín","Jericó","La ceja","La estrella","La pintada","La unión","Liborina","Maceo","Marinilla","Montebello","Murindó","Mutatá","Nariño","Necoclí","Nechí","Olaya","Peñol","Peque","Pueblorrico","Puerto berrío","Puerto nare","Puerto triunfo","Remedios","Retiro","Rionegro","Sabanalarga","Sabaneta","Salgar","San andrés de cuerquía","San carlos","San francisco","San jerónimo","San josé de la montaña","San juan de urabá","San luis","San pedro de los milagros","San pedro de urabá","San rafael","San roque","San vicente ferrer","Santa bárbara","Santa rosa de osos","Santo domingo","El santuario","Segovia","Sonsón","Sopetrán","Támesis","Tarazá","Tarso","Titiribí","Toledo","Turbo","Uramita","Urrao","Valdivia","Valparaíso","Vegachí","Venecia","Vigía del fuerte","Yalí","Yarumal","Yolombó","Yondó","Zaragoza"]
 	},
 	{
 		"divipolaCod" :"08",
 		"name" : "Atlántico",
-		"municipalities":["Baranoa","Barranquilla","Campo de La Cruz","Candelaria","Galapa","Juan de Acosta","Luruaco","Malambo","Manatí","Palmar de Varela","Piojó","Polonuevo","Ponedera","Puerto Colombia","Repelón","Sabanagrande","Sabanalarga","Santa Lucía","Santo Tomás","Soledad","Suan","Tubará","Usiacurí"]
-		
+		"municipalities":["Barranquilla","Baranoa","Campo de la cruz","Candelaria","Galapa","Juan de acosta","Luruaco","Malambo","Manatí","Palmar de varela","Piojó","Polonuevo","Ponedera","Puerto colombia","Repelón","Sabanagrande","Sabanalarga","Santa lucía","Santo tomás","Soledad","Suan","Tubará","Usiacurí"]
 	},
 	{
 		"divipolaCod" :"11",
@@ -18,151 +17,151 @@
 	{
 		"divipolaCod" :"13",
 		"name" : "Bolívar",
-		"municipalities":["Achí","Altos del Rosario","Arenal","Arjona","Arroyohondo","Barranco de Loba","Calamar","Cantagallo","Cartagena","Cicuco","Clemencia","Córdoba","El Carmen de Bolívar","El Guamo","El Peñón","Hatillo de Loba","Magangué","Mahates","Margarita","María la Baja","Mompós","Montecristo","Morales","Norosí","Pinillos","Regidor","Río Viejo","San Cristóbal","San Estanislao","San Fernando","San Jacinto","San Jacinto del Cauca","San Juan Nepomuceno","San Martín de Loba","San Pablo de Borbur","Santa Catalina","Santa Rosa","Santa Rosa del Sur","Simití","Soplaviento","Talaigua Nuevo","Tiquisio","Turbaco","Turbaná","Villanueva","Zambrano"]
+		"municipalities":["Cartagena de indias","Achí","Altos del rosario","Arenal","Arjona","Arroyohondo","Barranco de loba","Calamar","Cantagallo","Cicuco","Córdoba","Clemencia","El carmen de bolívar","El guamo","El peñón","Hatillo de loba","Magangué","Mahates","Margarita","María la baja","Montecristo","Mompós","Morales","Norosí","Pinillos","Regidor","Río viejo","San cristóbal","San estanislao","San fernando","San jacinto","San jacinto del cauca","San juan nepomuceno","San martín de loba","San pablo","Santa catalina","Santa rosa","Santa rosa del sur","Simití","Soplaviento","Talaigua nuevo","Tiquisio","Turbaco","Turbaná","Villanueva","Zambrano"]
 	},
 	{
 		"divipolaCod" :"15",
 		"name" : "Boyacá",
-		"municipalities":["Almeida","Aquitania","Arcabuco","Belén","Berbeo","Betéitiva","Boavita","Boyacá","Briceño","Buena Vista","Busbanzá","Caldas","Campohermoso","Cerinza","Chinavita","Chiquinquirá","Chíquiza","Chiscas","Chita","Chitaraque","Chivatá","Chivor","Ciénega","Cómbita","Coper","Corrales","Covarachía","Cubará","Cucaita","Cuítiva","Duitama","El Cocuy","El Espino","Firavitoba","Floresta","Gachantivá","Gameza","Garagoa","Guacamayas","Guateque","Guayatá","Güicán","Iza","Jenesano","Jericó","La Capilla","La Uvita","La Victoria","Labranzagrande","Macanal","Maripí","Miraflores","Mongua","Monguí","Moniquirá","Motavita","Muzo","Nobsa","Nuevo Colón","Oicatá","Otanche","Pachavita","Páez","Paipa","Pajarito","Panqueba","Pauna","Paya","Paz de Río","Pesca","Pisba","Puerto Boyacá","Quípama","Ramiriquí","Ráquira","Rondón","Saboyá","Sáchica","Samacá","San Eduardo","San José de Pare","San Luis de Gaceno","San Mateo","San Miguel de Sema","San Pablo de Borbur","Santa María","Santa Rosa de Viterbo","Santa Sofía","Santana","Sativanorte","Sativasur","Siachoque","Soatá","Socha","Socotá","Sogamoso","Somondoco","Sora","Soracá","Sotaquirá","Susacón","Sutamarchán","Sutatenza","Tasco","Tenza","Tibaná","Tibasosa","Tinjacá","Tipacoque","Toca","Togüí","Tópaga","Tota","Tunja","Tununguá","Turmequé","Tuta","Tutazá","Umbita","Ventaquemada","Villa de Leyva","Viracachá","Zetaquira"]
+		"municipalities":["Tunja","Almeida","Aquitania","Arcabuco","Belén","Berbeo","Betéitiva","Boavita","Boyacá","Briceño","Buenavista","Busbanzá","Caldas","Campohermoso","Cerinza","Chinavita","Chiquinquirá","Chiscas","Chita","Chitaraque","Chivatá","Ciénega","Cómbita","Coper","Corrales","Covarachía","Cubará","Cucaita","Cuítiva","Chíquiza","Chivor","Duitama","El cocuy","El espino","Firavitoba","Floresta","Gachantivá","Gámeza","Garagoa","Guacamayas","Guateque","Guayatá","Güicán","Iza","Jenesano","Jericó","Labranzagrande","La capilla","La victoria","La uvita","Villa de leyva","Macanal","Maripí","Miraflores","Mongua","Monguí","Moniquirá","Motavita","Muzo","Nobsa","Nuevo colón","Oicatá","Otanche","Pachavita","Páez","Paipa","Pajarito","Panqueba","Pauna","Paya","Paz de río","Pesca","Pisba","Puerto boyacá","Quípama","Ramiriquí","Ráquira","Rondón","Saboyá","Sáchica","Samacá","San eduardo","San josé de pare","San luis de gaceno","San mateo","San miguel de sema","San pablo de borbur","Santana","Santa maría","Santa rosa de viterbo","Santa sofía","Sativanorte","Sativasur","Siachoque","Soatá","Socotá","Socha","Sogamoso","Somondoco","Sora","Sotaquirá","Soracá","Susacón","Sutamarchán","Sutatenza","Tasco","Tenza","Tibaná","Tibasosa","Tinjacá","Tipacoque","Toca","Togüí","Tópaga","Tota","Tununguá","Turmequé","Tuta","Tutazá","Úmbita","Ventaquemada","Viracachá","Zetaquira"]
 	},
 	{
 		"divipolaCod" :"17",
 		"name" : "Caldas",
-		"municipalities":["Aguadas","Anserma","Aranzazu","Belalcázar","Chinchiná","Filadelfia","La Dorada","La Merced","Manizales","Manzanares","Marmato","Marquetalia","Marulanda","Neira","Norcasia","Pácora","Palestina","Pensilvania","Riosucio","Risaralda","Salamina","Samaná","San José","Supía","Victoria","Villamaría","Viterbo"]
+		"municipalities":["Manizales","Aguadas","Anserma","Aranzazu","Belalcázar","Chinchiná","Filadelfia","La dorada","La merced","Manzanares","Marmato","Marquetalia","Marulanda","Neira","Norcasia","Pácora","Palestina","Pensilvania","Riosucio","Risaralda","Salamina","Samaná","San josé","Supía","Victoria","Villamaría","Viterbo"]
 	},
 	{
 		"divipolaCod" :"18",
 		"name" : "Caquetá",
-		"municipalities":["Albania","Belén de Los Andaquies","Cartagena del Chairá","Curillo","El Doncello","El Paujil","Florencia","La Montañita","Milán","Morelia","Puerto Rico","San José del Fragua","San Vicente del Caguán","Solano","Solita","Valparaíso"]
+		"municipalities":["Florencia","Albania","Belén de los andaquíes","Cartagena del chairá","Curillo","El doncello","El paujíl","La montañita","Milán","Morelia","Puerto rico","San josé del fragua","San vicente del caguán","Solano","Solita","Valparaíso"]
 	},
 	{
 		"divipolaCod" :"19",
 		"name" : "Cauca",
-		"municipalities":["Almaguer","Argelia","Balboa","Bolívar","Buenos Aires","Cajibío","Caldono","Caloto","Corinto","El Tambo","Florencia","Guachené","Guapi","Inzá","Jambaló","La Sierra","La Vega","López","Mercaderes","Miranda","Morales","Padilla","Páez","Patía","Piamonte","Piendamó","Popayán","Puerto Tejada","Puracé","Rosas","San Sebastián","Santa Rosa","Santander de Quilichao","Silvia","Sotara","Suárez","Sucre","Timbío","Timbiquí","Toribio","Totoró","Villa Rica"]
+		"municipalities":["Popayán","Almaguer","Argelia","Balboa","Bolívar","Buenos aires","Cajibío","Caldono","Caloto","Corinto","El tambo","Florencia","Guachené","Guapí","Inzá","Jambaló","La sierra","La vega","López de micay","Mercaderes","Miranda","Morales","Padilla","Páez","Patía","Piamonte","Piendamó","Puerto tejada","Puracé","Rosas","San sebastián","Santander de quilichao","Santa rosa","Silvia","Sotara","Suárez","Sucre","Timbío","Timbiquí","Toribío","Totoró","Villa rica"]
 	},
 	{
 		"divipolaCod" :"20",
 		"name" : "Cesar",
-		"municipalities":["Aguachica","Agustín Codazzi","Astrea","Becerril","Bosconia","Chimichagua","Chiriguaná","Curumaní","El Copey","El Paso","Gamarra","González","La Gloria","La Jagua de Ibirico","La Paz","Manaure","Pailitas","Pelaya","Pueblo Bello","Río de Oro","San Alberto","San Diego","San Martín","Tamalameque","Valledupar"]
+		"municipalities":["Valledupar","Aguachica","Agustín codazzi","Astrea","Becerril","Bosconia","Chimichagua","Chiriguaná","Curumaní","El copey","El paso","Gamarra","González","La gloria","La jagua de ibirico","Manaure balcón del cesar","Pailitas","Pelaya","Pueblo bello","Río de oro","La paz","San alberto","San diego","San martín","Tamalameque"]
 	},
 	{
 		"divipolaCod" :"23",
 		"name" : "Córdoba",
-		"municipalities":["Ayapel","Buenavista","Canalete","Cereté","Chimá","Chinú","Ciénaga de Oro","Cotorra","La Apartada","Lorica","Los Córdobas","Momil","Montelíbano","Montería","Moñitos","Planeta Rica","Pueblo Nuevo","Puerto Escondido","Puerto Libertador","Purísima","Sahagún","San Andrés Sotavento","San Antero","San Bernardo del Viento","San Carlos","San José de Uré","San Pelayo","Tierralta","Tuchín","Valencia"]
+		"municipalities":["Montería","Ayapel","Buenavista","Canalete","Cereté","Chimá","Chinú","Ciénaga de oro","Cotorra","La apartada","Lorica","Los córdobas","Momil","Montelíbano","Moñitos","Planeta rica","Pueblo nuevo","Puerto escondido","Puerto libertador","Purísima de la concepción","Sahagún","San andrés de sotavento","San antero","San bernardo del viento","San carlos","San josé de uré","San pelayo","Tierralta","Tuchín","Valencia"]
 	},
 	{
 		"divipolaCod" :"25",
 		"name" : "Cundinamarca",
-		"municipalities":["Agua de Dios","Albán","Anapoima","Anolaima","Apulo","Arbeláez","Beltrán","Bituima","Bojacá","Cabrera","Cachipay","Cajicá","Caparrapí","Caqueza","Carmen de Carupa","Chaguaní","Chía","Chipaque","Choachí","Chocontá","Cogua","Cota","Cucunubá","El Colegio","El Peñón","El Rosal","Facatativá","Fomeque","Fosca","Funza","Fúquene","Fusagasugá","Gachala","Gachancipá","Gachetá","Gama","Girardot","Granada","Guachetá","Guaduas","Guasca","Guataquí","Guatavita","Guayabal de Siquima","Guayabetal","Gutiérrez","Jerusalén","Junín","La Calera","La Mesa","La Palma","La Peña","La Vega","Lenguazaque","Macheta","Madrid","Manta","Medina","Mosquera","Nariño","Nemocón","Nilo","Nimaima","Nocaima","Pacho","Paime","Pandi","Paratebueno","Pasca","Puerto Salgar","Pulí","Quebradanegra","Quetame","Quipile","Ricaurte","San Antonio del Tequendama","San Bernardo","San Cayetano","San Francisco","San Juan de Río Seco","Sasaima","Sesquilé","Sibaté","Silvania","Simijaca","Soacha","Sopó","Subachoque","Suesca","Supatá","Susa","Sutatausa","Tabio","Tausa","Tena","Tenjo","Tibacuy","Tibirita","Tocaima","Tocancipá","Topaipí","Ubalá","Ubaque","Une","Útica","Venecia","Vergara","Vianí","Villa de San Diego de Ubate","Villagómez","Villapinzón","Villeta","Viotá","Yacopí","Zipacón","Zipaquirá"]
+		"municipalities":["Agua de dios","Albán","Anapoima","Anolaima","Arbeláez","Beltrán","Bituima","Bojacá","Cabrera","Cachipay","Cajicá","Caparrapí","Cáqueza","Carmen de carupa","Chaguaní","Chía","Chipaque","Choachí","Chocontá","Cogua","Cota","Cucunubá","El colegio","El peñón","El rosal","Facatativá","Fómeque","Fosca","Funza","Fúquene","Fusagasugá","Gachalá","Gachancipá","Gachetá","Gama","Girardot","Granada","Guachetá","Guaduas","Guasca","Guataquí","Guatavita","Guayabal de síquima","Guayabetal","Gutiérrez","Jerusalén","Junín","La calera","La mesa","La palma","La peña","La vega","Lenguazaque","Machetá","Madrid","Manta","Medina","Mosquera","Nariño","Nemocón","Nilo","Nimaima","Nocaima","Venecia","Pacho","Paime","Pandi","Paratebueno","Pasca","Puerto salgar","Pulí","Quebradanegra","Quetame","Quipile","Apulo","Ricaurte","San antonio del tequendama","San bernardo","San cayetano","San francisco","San juan de rioseco","Sasaima","Sesquilé","Sibaté","Silvania","Simijaca","Soacha","Sopó","Subachoque","Suesca","Supatá","Susa","Sutatausa","Tabio","Tausa","Tena","Tenjo","Tibacuy","Tibirita","Tocaima","Tocancipá","Topaipí","Ubalá","Ubaque","Villa de san diego de ubaté","Une","Útica","Vergara","Vianí","Villagómez","Villapinzón","Villeta","Viotá","Yacopí","Zipacón","Zipaquirá"]
 	},
 	{
 		"divipolaCod" :"27",
 		"name" : "Chocó",
-		"municipalities":["Acandí","Alto Baudo","Atrato","Bagadó","Bahía Solano","Bajo Baudó","Belén de Bajira","Bojaya","Carmen del Darien","Cértegui","Condoto","El Cantón del San Pablo","El Carmen de Atrato","El Litoral del San Juan","Istmina","Juradó","Lloró","Medio Atrato","Medio Baudó","Medio San Juan","Nóvita","Nuquí","Quibdó","Río Iro","Río Quito","Riosucio","San José del Palmar","Sipí","Tadó","Unguía","Unión Panamericana"]
+		"municipalities":["Quibdó","Acandí","Alto baudó","Atrato","Bagadó","Bahía solano","Bajo baudó","Bojayá","El cantón del san pablo","Carmen del darién","Cértegui","Condoto","El carmen de atrato","El litoral del san juan","Istmina","Juradó","Lloró","Medio atrato","Medio baudó","Medio san juan","Nóvita","Nuquí","Río iró","Río quito","Riosucio","San josé del palmar","Sipí","Tadó","Unguía","Unión panamericana"]
 	},
 	{
 		"divipolaCod" :"41",
 		"name" : "Huila",
-		"municipalities":["Acevedo","Agrado","Aipe","Algeciras","Altamira","Baraya","Campoalegre","Colombia","Elías","Garzón","Gigante","Guadalupe","Hobo","Iquira","Isnos","La Argentina","La Plata","Nátaga","Neiva","Oporapa","Paicol","Palermo","Palestina","Pital","Pitalito","Rivera","Saladoblanco","San Agustín","Santa María","Suaza","Tarqui","Tello","Teruel","Tesalia","Timaná","Villavieja","Yaguará"]
+		"municipalities":["Neiva","Acevedo","Agrado","Aipe","Algeciras","Altamira","Baraya","Campoalegre","Colombia","Elías","Garzón","Gigante","Guadalupe","Hobo","Íquira","Isnos","La argentina","La plata","Nátaga","Oporapa","Paicol","Palermo","Palestina","Pital","Pitalito","Rivera","Saladoblanco","San agustín","Santa maría","Suaza","Tarqui","Tesalia","Tello","Teruel","Timaná","Villavieja","Yaguará"]
 	},
 	{
 		"divipolaCod" :"44",
 		"name" : "Guajira",
-		"municipalities":["Albania","Barrancas","Dibula","Distracción","El Molino","Fonseca","Hatonuevo","La Jagua del Pilar","Maicao","Manaure","Riohacha","San Juan del Cesar","Uribia","Urumita","Villanueva"]
+		"municipalities":["Riohacha","Albania","Barrancas","Dibulla","Distracción","El molino","Fonseca","Hatonuevo","La jagua del pilar","Maicao","Manaure","San juan del cesar","Uribia","Urumita","Villanueva"]
 	},
 	{
 		"divipolaCod" :"47",
 		"name" : "Magdalena",
-		"municipalities":["Algarrobo","Aracataca","Ariguaní","Cerro San Antonio","Chivolo","Ciénaga","Concordia","El Banco","El Piñon","El Retén","Fundación","Guamal","Nueva Granada","Pedraza","Pijiño del Carmen","Pivijay","Plato","Pueblo Viejo","Remolino","Sabanas de San Angel","Salamina","San Sebastián de Buenavista","San Zenón","Santa Ana","Santa Bárbara de Pinto","Santa Marta","Sitionuevo","Tenerife","Zapayán","Zona Bananera"]
+		"municipalities":["Santa marta","Algarrobo","Aracataca","Ariguaní","Cerro de san antonio","Chivolo","Ciénaga","Concordia","El banco","El piñón","El retén","Fundación","Guamal","Nueva granada","Pedraza","Pijiño del carmen","Pivijay","Plato","Puebloviejo","Remolino","Sabanas de san ángel","Salamina","San sebastián de buenavista","San zenón","Santa ana","Santa bárbara de pinto","Sitionuevo","Tenerife","Zapayán","Zona bananera"]
 	},
 	{
 		"divipolaCod" :"50",
 		"name" : "Meta",
-		"municipalities":["Acacias","Barranca de Upía","Cabuyaro","Castilla la Nueva","Cubarral","Cumaral","El Calvario","El Castillo","El Dorado","Fuente de Oro","Granada","Guamal","La Macarena","Lejanías","Mapiripán","Mesetas","Puerto Concordia","Puerto Gaitán","Puerto Lleras","Puerto López","Puerto Rico","Restrepo","San Carlos de Guaroa","San Juan de Arama","San Juanito","San Martín","Uribe","Villavicencio","Vista Hermosa"]
+		"municipalities":["Villavicencio","Acacías","Barranca de upía","Cabuyaro","Castilla la nueva","San luis de cubarral","Cumaral","El calvario","El castillo","El dorado","Fuente de oro","Granada","Guamal","Mapiripán","Mesetas","La macarena","Uribe","Lejanías","Puerto concordia","Puerto gaitán","Puerto lópez","Puerto lleras","Puerto rico","Restrepo","San carlos de guaroa","San juan de arama","San juanito","San martín","Vistahermosa"]
 	},
 	{
 		"divipolaCod" :"52",
 		"name" : "Nariño",
-		"municipalities":["Albán","Aldana","Ancuyá","Arboleda","Barbacoas","Belén","Buesaco","Chachagüí","Colón","Consaca","Contadero","Córdoba","Cuaspud","Cumbal","Cumbitara","El Charco","El Peñol","El Rosario","El Tablón de Gómez","El Tambo","Francisco Pizarro","Funes","Guachucal","Guaitarilla","Gualmatán","Iles","Imués","Ipiales","La Cruz","La Florida","La Llanada","La Tola","La Unión","Leiva","Linares","Los Andes","Magüí","Mallama","Mosquera","Nariño","Olaya Herrera","Ospina","Pasto","Policarpa","Potosí","Providencia","Puerres","Pupiales","Ricaurte","Roberto Payán","Samaniego","San Andrés de Tumaco","San Bernardo","San Lorenzo","San Pablo","San Pedro de Cartago","Sandoná","Santa Bárbara","Santacruz","Sapuyes","Taminango","Tangua","Túquerres","Yacuanquer"]
+		"municipalities":["Pasto","Albán","Aldana","Ancuyá","Arboleda","Barbacoas","Belén","Buesaco","Colón","Consacá","Contadero","Córdoba","Cuaspúd","Cumbal","Cumbitara","Chachagüí","El charco","El peñol","El rosario","El tablón de gómez","El tambo","Funes","Guachucal","Guaitarilla","Gualmatán","Iles","Imués","Ipiales","La cruz","La florida","La llanada","La tola","La unión","Leiva","Linares","Los andes","Magüí","Mallama","Mosquera","Nariño","Olaya herrera","Ospina","Francisco pizarro","Policarpa","Potosí","Providencia","Puerres","Pupiales","Ricaurte","Roberto payán","Samaniego","Sandoná","San bernardo","San lorenzo","San pablo","San pedro de cartago","Santa bárbara","Santacruz","Sapuyes","Taminango","Tangua","San andrés de tumaco","Túquerres","Yacuanquer"]
 	},
 	{
 		"divipolaCod" :"54",
 		"name" : "Norte de Santander",
-		"municipalities":["Abrego","Arboledas","Bochalema","Bucarasica","Cachirá","Cácota","Chinácota","Chitagá","Convención","Cúcuta","Cucutilla","Durania","El Carmen","El Tarra","El Zulia","Gramalote","Hacarí","Herrán","La Esperanza","La Playa","Labateca","Los Patios","Lourdes","Mutiscua","Ocaña","Pamplona","Pamplonita","Puerto Santander","Ragonvalia","Salazar","San Calixto","San Cayetano","Santiago","Sardinata","Silos","Teorama","Tibú","Toledo","Villa Caro","Villa del Rosario"]
+		"municipalities":["Cúcuta","Ábrego","Arboledas","Bochalema","Bucarasica","Cácota","Cáchira","Chinácota","Chitagá","Convención","Cucutilla","Durania","El carmen","El tarra","El zulia","Gramalote","Hacarí","Herrán","Labateca","La esperanza","La playa","Los patios","Lourdes","Mutiscua","Ocaña","Pamplona","Pamplonita","Puerto santander","Ragonvalia","Salazar","San calixto","San cayetano","Santiago","Sardinata","Silos","Teorama","Tibú","Toledo","Villa caro","Villa del rosario"]
 	},
 	{
 		"divipolaCod" :"63",
 		"name" : "Quindio",
-		"municipalities":["Armenia","Buenavista","Calarcá","Circasia","Córdoba","Filandia","Génova","La Tebaida","Montenegro","Pijao","Quimbaya","Salento"]
+		"municipalities":["Armenia","Buenavista","Calarcá","Circasia","Córdoba","Filandia","Génova","La tebaida","Montenegro","Pijao","Quimbaya","Salento"]
 	},
 	{
 		"divipolaCod" :"66",
 		"name" : "Risaralda",
-		"municipalities":["Apía","Balboa","Belén de Umbría","Dosquebradas","Guática","La Celia","La Virginia","Marsella","Mistrató","Pereira","Pueblo Rico","Quinchía","Santa Rosa de Cabal","Santuario"]
+		"municipalities":["Pereira","Apía","Balboa","Belén de umbría","Dosquebradas","Guática","La celia","La virginia","Marsella","Mistrató","Pueblo rico","Quinchía","Santa rosa de cabal","Santuario"]
 	},
 	{
 		"divipolaCod" :"68",
 		"name" : "Santander",
-		"municipalities":["Aguada","Albania","Aratoca","Barbosa","Barichara","Barrancabermeja","Betulia","Bolívar","Bucaramanga","Cabrera","California","Capitanejo","Carcasí","Cepitá","Cerrito","Charalá","Charta","Chimá","Chipatá","Cimitarra","Concepción","Confines","Contratación","Coromoro","Curití","El Carmen de Chucurí","El Guacamayo","El Peñón","El Playón","Encino","Enciso","Florián","Floridablanca","Galán","Gambita","Girón","Guaca","Guadalupe","Guapotá","Guavatá","Güepsa","Hato","Jesús María","Jordán","La Belleza","La Paz","Landázuri","Lebríja","Los Santos","Macaravita","Málaga","Matanza","Mogotes","Molagavita","Ocamonte","Oiba","Onzaga","Palmar","Palmas del Socorro","Páramo","Piedecuesta","Pinchote","Puente Nacional","Puerto Parra","Puerto Wilches","Rionegro","Sabana de Torres","San Andrés","San Benito","San Gil","San Joaquín","San José de Miranda","San Miguel","San Vicente de Chucurí","Santa Bárbara","Santa Helena del Opón","Simacota","Socorro","Suaita","Sucre","Suratá","Tona","Valle de San José","Vélez","Vetas","Villanueva","Zapatoca"]
+		"municipalities":["Bucaramanga","Aguada","Albania","Aratoca","Barbosa","Barichara","Barrancabermeja","Betulia","Bolívar","Cabrera","California","Capitanejo","Carcasí","Cepitá","Cerrito","Charalá","Charta","Chima","Chipatá","Cimitarra","Concepción","Confines","Contratación","Coromoro","Curití","El carmen de chucurí","El guacamayo","El peñón","El playón","Encino","Enciso","Florián","Floridablanca","Galán","Gámbita","Girón","Guaca","Guadalupe","Guapotá","Guavatá","Güepsa","Hato","Jesús maría","Jordán","La belleza","Landázuri","La paz","Lebrija","Los santos","Macaravita","Málaga","Matanza","Mogotes","Molagavita","Ocamonte","Oiba","Onzaga","Palmar","Palmas del socorro","Páramo","Piedecuesta","Pinchote","Puente nacional","Puerto parra","Puerto wilches","Rionegro","Sabana de torres","San andrés","San benito","San gil","San joaquín","San josé de miranda","San miguel","San vicente de chucurí","Santa bárbara","Santa helena del opón","Simacota","Socorro","Suaita","Sucre","Suratá","Tona","Valle de san josé","Vélez","Vetas","Villanueva","Zapatoca"]
 	},
 	{
 		"divipolaCod" :"70",
 		"name" : "Sucre",
-		"municipalities":["Buenavista","Caimito","Chalán","Coloso","Corozal","Coveñas","El Roble","Galeras","Guaranda","La Unión","Los Palmitos","Majagual","Morroa","Ovejas","Palmito","Sampués","San Benito Abad","San Juan de Betulia","San Luis de Sincé","San Marcos","San Onofre","San Pedro","Santiago de Tolú","Sincelejo","Sucre","Tolú Viejo"]
+		"municipalities":["Sincelejo","Buenavista","Caimito","Coloso","Corozal","Coveñas","Chalán","El roble","Galeras","Guaranda","La unión","Los palmitos","Majagual","Morroa","Ovejas","Palmito","Sampués","San benito abad","San juan de betulia","San marcos","San onofre","San pedro","San luis de sincé","Sucre","Santiago de tolú","Tolú viejo"]
 	},
 	{
 		"divipolaCod" :"73",
 		"name" : "Tolima",
-		"municipalities":["Alpujarra","Alvarado","Ambalema","Anzoátegui","Armero","Ataco","Cajamarca","Carmen de Apicala","Casabianca","Chaparral","Coello","Coyaima","Cunday","Dolores","Espinal","Falan","Flandes","Fresno","Guamo","Herveo","Honda","Ibagué","Icononzo","Lérida","Líbano","Mariquita","Melgar","Murillo","Natagaima","Ortega","Palocabildo","Piedras","Planadas","Prado","Purificación","Rio Blanco","Roncesvalles","Rovira","Saldaña","San Antonio","San Luis","Santa Isabel","Suárez","Valle de San Juan","Venadillo","Villahermosa","Villarrica"]
+		"municipalities":["Ibagué","Alpujarra","Alvarado","Ambalema","Anzoátegui","Armero guayabal","Ataco","Cajamarca","Carmen de apicalá","Casabianca","Chaparral","Coello","Coyaima","Cunday","Dolores","Espinal","Falan","Flandes","Fresno","Guamo","Herveo","Honda","Icononzo","Lérida","Líbano","San sebastián de mariquita","Melgar","Murillo","Natagaima","Ortega","Palocabildo","Piedras","Planadas","Prado","Purificación","Rioblanco","Roncesvalles","Rovira","Saldaña","San antonio","San luis","Santa isabel","Suárez","Valle de san juan","Venadillo","Villahermosa","Villarrica"]
 	},
 	{
 		"divipolaCod" :"76",
 		"name" : "Valle del Cauca",
-		"municipalities":["Alcalá","Andalucía","Ansermanuevo","Argelia","Bolívar","Buenaventura","Bugalagrande","Caicedonia","Cali","Calima","Candelaria","Cartago","Dagua","El Águila","El Cairo","El Cerrito","El Dovio","Florida","Ginebra","Guacarí","Guadalajara de Buga","Jamundí","La Cumbre","La Unión","La Victoria","Obando","Palmira","Pradera","Restrepo","Riofrío","Roldanillo","San Pedro","Sevilla","Toro","Trujillo","Tuluá","Ulloa","Versalles","Vijes","Yotoco","Yumbo","Zarzal"]
+		"municipalities":["Cali","Alcalá","Andalucía","Ansermanuevo","Argelia","Bolívar","Buenaventura","Guadalajara de buga","Bugalagrande","Caicedonia","Calima","Candelaria","Cartago","Dagua","El águila","El cairo","El cerrito","El dovio","Florida","Ginebra","Guacarí","Jamundí","La cumbre","La unión","La victoria","Obando","Palmira","Pradera","Restrepo","Riofrío","Roldanillo","San pedro","Sevilla","Toro","Trujillo","Tuluá","Ulloa","Versalles","Vijes","Yotoco","Yumbo","Zarzal"]
 	},
 	{
 		"divipolaCod" :"81",
 		"name" : "Arauca",
-		"municipalities":["Arauca","Arauquita","Cravo Norte","Fortul","Puerto Rondón","Saravena","Tame"]
+		"municipalities":["Arauca","Arauquita","Cravo norte","Fortul","Puerto rondón","Saravena","Tame"]
 	},
 	{
 		"divipolaCod" :"85",
 		"name" : "Casanare",
-		"municipalities":["Aguazul","Chámeza","Hato Corozal","La Salina","Maní","Monterrey","Nunchía","Orocué","Paz de Ariporo","Pore","Recetor","Sabanalarga","Sácama","San Luis de Gaceno","Támara","Tauramena","Trinidad","Villanueva","Yopal"]
+		"municipalities":["Yopal","Aguazul","Chámeza","Hato corozal","La salina","Maní","Monterrey","Nunchía","Orocué","Paz de ariporo","Pore","Recetor","Sabanalarga","Sácama","San luis de palenque","Támara","Tauramena","Trinidad","Villanueva"]
 	},
 	{
 		"divipolaCod" :"86",
 		"name" : "Putumayo",
-		"municipalities":["Colón","Leguízamo","Mocoa","Orito","Puerto Asís","Puerto Caicedo","Puerto Guzmán","San Francisco","San Miguel","Santiago","Sibundoy","Valle de Guamez","Villagarzón"]
+		"municipalities":["Mocoa","Colón","Orito","Puerto asís","Puerto caicedo","Puerto guzmán","Puerto leguízamo","Sibundoy","San francisco","San miguel","Santiago","Valle del guamuez","Villagarzón"]
 	},
 	{
 		"divipolaCod" :"88",
 		"name" : "San Andrés, Providencia y Santa Catalina",
-		"municipalities":["Providencia","San Andrés"]
+		"municipalities":["San andrés","Providencia"]
 	},
 	{
 		"divipolaCod" :"91",
 		"name" : "Amazonas",
-		"municipalities":["El Encanto","La Chorrera","La Pedrera","La Victoria","Leticia","Miriti Paraná","Puerto Alegría","Puerto Arica","Puerto Nariño","Puerto Santander","Tarapacá"]
+		"municipalities":["Leticia","El encanto","La chorrera","La pedrera","La victoria","Mirití - paraná","Puerto alegría","Puerto arica","Puerto nariño","Puerto santander","Tarapacá"]
 	},
 	{
 		"divipolaCod" :"94",
 		"name" : "Guainia",
-		"municipalities":["Barranco Minas","Cacahual","Inírida","La Guadalupe","Mapiripana","Morichal","Pana Pana","Puerto Colombia","San Felipe"]
+		"municipalities":["Inírida","Barranco minas","Mapiripana","San felipe","Puerto colombia","La guadalupe","Cacahual","Pana pana","Morichal"]
 	},
 	{
 		"divipolaCod" :"95",
 		"name" : "Guaviare",
-		"municipalities":["Calamar","El Retorno","Miraflores","San José del Guaviare"]
+		"municipalities":["San josé del guaviare","Calamar","El retorno","Miraflores"]
 	},
 	{
 		"divipolaCod" :"97",
 		"name" : "Vaupés",
-		"municipalities":["Caruru","Mitú","Pacoa","Papunaua","Taraira","Yavaraté"]
+		"municipalities":["Mitú","Carurú","Pacoa","Taraira","Papunaua","Yavaraté"]
 	},
 	{
 		"divipolaCod" :"99",
 		"name" : "Vichada",
-		"municipalities":["Cumaribo","La Primavera","Puerto Carreño","Santa Rosalía"]
+		"municipalities":["Puerto carreño","La primavera","Santa rosalía","Cumaribo"]
 	}
 ]

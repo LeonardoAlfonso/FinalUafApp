@@ -17,13 +17,13 @@ class Municipality extends Model
           return $this->belongsTo('App\Models\Departament', 'idDepartament', 'idDepartament');
       }
 
-      public function Villages()
-      {
-          return $this->hasMany('App\Models\Village', 'idMunicipality', 'idMunicipality');
-      }
-
       public function Zones()
       {
           return $this->belongsToMany('App\Models\Zones', 'zonesMunicipalities', 'idMunicipality', 'idZone');
+      }
+
+      public function Villages()
+      {
+          return $this->hasMany('App\Models\Village', 'idMunicipality', 'idMunicipality');
       }
 }

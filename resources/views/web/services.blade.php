@@ -38,13 +38,5 @@
     </div>
     </form>
 
-    <div class="row">
-      <div id="mapDescription" class="col-xl-12">
-      <div class="col-xl-1"></div>
-      <article id="map" class="col-xl-10">
-          <iframe width="100%" height="700px" src="http://labsistemas.javerianacali.edu.co:8000/calculouaf" frameborder="0" allowfullscreen></iframe>
-      </article>
-      <div class="col-xl-1"></div>
-    </div>
-  </div>
+
 @stop

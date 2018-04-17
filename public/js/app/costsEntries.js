@@ -48,6 +48,14 @@ $(document).ready(function(){
 
 });
 
+function itemSystemDelete(){
+    var deleteItemSystemConfirm = confirm("Está seguro de eliminar el item?");
+    if (deleteItemSystemConfirm == false)
+    {
+        event.preventDefault();
+    }  
+}
+
 function saveCost(){
     var request = $("#newCost").serializeArray();
     var token = $("#token").val();

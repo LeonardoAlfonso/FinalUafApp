@@ -8,11 +8,11 @@ class Village extends Model
 {
 
     protected $table = "villages";
-    protected $fillable = ['namevillage', 'rememberToken', 'idMunicipality'];
+    protected $fillable = ['nameVillage', 'idMunicipality'];
     protected $primaryKey = 'idVillage';
 
     //Relations
-    public function Municipality()
+    public function Municipalities()
     {
         return $this->belongsTo('App\Models\Municipality', 'idMunicipality', 'idMunicipality');
     }

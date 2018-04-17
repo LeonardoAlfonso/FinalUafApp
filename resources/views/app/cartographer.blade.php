@@ -5,6 +5,9 @@
     <script type="text/javascript">
         var routeSaveMunicipality = '{{ route('saveMunicipality', ['' => 'parameter']) }}';
         var routedeleteMunicipality = '{{ route('deleteMunicipality', ['' => 'parameter']) }}';
+        var routeShowVillages = '{{ route('showVillages', ['idMunicipality' => 'parameter']) }}';
+        var routeSaveVillage = '{{ route('saveVillage', ['nameMunicipality' => 'parameter']) }}';
+        var routeDeleteVillage = '{{ route('deleteVillage', ['nameMunicipality' => 'parameter']) }}';
     </script>
     <script type="text/javascript" src="{{ asset('js/app/municipality.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/app/cartographer.js') }}"></script>

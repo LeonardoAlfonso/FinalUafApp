@@ -26,6 +26,7 @@
 </div>
 
   <hr/>
+  @include('app.partials.expert.expertMessages')
 
   <div class="col-xl-12">
     <div class="col-xl-6">

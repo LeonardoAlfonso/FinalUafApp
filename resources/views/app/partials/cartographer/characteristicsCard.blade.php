@@ -37,8 +37,9 @@
                 </div>
             @endif
         @else
-        <div class="climatics">
-            <input type="text" name="{{ $characteristic->name }}" value="{{ $characteristic->value}}">
+        <div id="climatics" class="climatics">
+            <input type="text" id="{{ $characteristic->name }}" 
+                   name="{{ $characteristic->name }}" value="{{ $characteristic->value}}">
             @if($errors->has($characteristic->name))
                 <div class="col-xl-12">
                     <strong>

@@ -36,7 +36,7 @@
             <h3>Municipio:</h3>
         </div>
         <div class="col-xl-4">
-          <div id="ClimaticSelectStyle" class="ClimaticSelectStyle">
+          <div id="addMunicipality" class="ClimaticSelectStyle">
             @include('app.partials.cartographer.listMunicipalities')
           </div>
         </div>
@@ -54,15 +54,15 @@
 
           <div class="col-xl-1"></div>
           <div class="col-xl-2">
-              <!-- <h3>Vereda:</h3> -->
+              <h3>Vereda:</h3>
+          </div>
+          <div id="nameVillage" class="col-xl-4">
+              @include('app.partials.cartographer.nameVillage')
           </div>
           <div class="col-xl-4">
-              <!-- <input class="names" type="text" name="" value=""> -->
-          </div>
-          <div class="col-xl-4">
-            <!-- <div id="newVillage">
-                <label id="addVillage" class="standardButton">Añadir Vereda</label>
-            </div> -->
+            <div id="newVillage">
+                <label id="addVillage" class="standardButton" onclick="saveVillage()">Añadir Vereda</label>
+            </div>
           </div>
           <div class="col-xl-1"></div>
 
@@ -91,16 +91,13 @@
       <div class="col-xl-12">
 
         <div class="col-xl-1"></div>
-          <!-- <div class="col-xl-10 card">
+          <div class="col-xl-10 card">
               <div class="titleCard col-xl-12">
                   <p>Veredas</p>
               </div>
-              <div class="titleBody col-xl-12">
-                <div class="col-xl-2"></div>
-                <div id="Villages" class="col-xl-12">
-                </div>
+              <div id="tableVilages"class="titleBody col-xl-12">
               </div>
-          </div> -->
+          </div>
         <div class="col-xl-1"></div>
 
       </div>

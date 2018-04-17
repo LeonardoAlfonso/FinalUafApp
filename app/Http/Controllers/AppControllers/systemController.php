@@ -230,6 +230,7 @@ class systemController extends Controller
         $systemTools->reconstructItems($request);
         $systemTools->calculateSalaries($request);
         $systemTools->calculateUtilities($request);
+        $systemTools->calculateFlowCash($request);
         $systemTools->createUpdateIndicator($request, "VPN", $systemTools->calculateVPN($request));
         $systemTools->createUpdateIndicator($request, "TIR", $systemTools->calculateTIR($request));
         $systemTools->calculateIPA($request);
@@ -302,6 +303,8 @@ class systemController extends Controller
             $item->save();
         });
 
+        Session::flash('Message','Sistema Guardado!');
+
         return $systemTools->getSystemList($request, $system->idZone);
     }
 
@@ -311,6 +314,8 @@ class systemController extends Controller
         $system = System::find($idSystem);
         $idZone = $system->idZone;
         $system->delete();
+
+        Session::flash('Message','Sistema Eliminado!');
         
         return $systemTools->getSystemList($request, $idZone);
     }

@@ -82,9 +82,12 @@ class systemController extends Controller
                       ->with('idZone',$zone->idZone);
       }
 
-      public function getCharacteristicsEntry(Request $request, $idEntry)
+      public function getCharacteristicsEntry(Request $request, $idSystem)
       {
-            $entries = Entry::with('Characteristics')->where('idEntry',$idEntry)->first();
+            $entries = Entry::where([
+                          ['idSystem','=',$idSystem],
+                          ['period','=','1'],
+              ])->get();
 
             if($request->ajax())
             {
@@ -98,11 +101,11 @@ class systemController extends Controller
 
       public function getCosts(Request $request, $idSystem)
       {
-            // $cost = Cost::where([
-            //               ['idSystem','=',$idSystem],
-            //               ['period','=','0'],
-            //   ])->get();
-            $costs = Cost::where('idSystem',$idSystem)->get();
+            $costs = Cost::where([
+                          ['idSystem','=',$idSystem],
+                          ['period','=','0'],
+              ])->get();
+            // $costs = Cost::where('idSystem',$idSystem)->get();
             $totalCost = $costs->sum('total');
 
             if($request->ajax())

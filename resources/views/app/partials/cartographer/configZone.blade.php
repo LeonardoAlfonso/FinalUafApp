@@ -13,7 +13,7 @@
           @endif
             
             <input type="hidden" id="fileState" name="fileState" value="{{ $zone->file_name }}">
-            <input type="hidden" name="idDepartament" value="{{ $currentDepartament->idDepartament }}">
+            <input type="hidden" id="idDepartament" name="idDepartament" value="{{ $currentDepartament->idDepartament }}">
             <input type="hidden" name="idZone" value="{{ $zone->idZone }}">
         </div>
         <div class="col-xl-4"></div>
@@ -22,7 +22,14 @@
   </div>
   <div class="col-xl-6">
     <div class="col-xl-12">
-        <div class="col-xl-8"></div>
+        <div class="col-xl-5"></div>
+        <div class="col-xl-3">
+          <div id="options">
+              <a id="CancelButton" href="{{ route('listZones', ['idDepartament' => $currentDepartament->idDepartament]) }}">
+                  <label id="Cancel" class="zoneButtons">Cancelar</label>  
+              </a>     
+          </div>
+        </div>
         <div class="col-xl-3">
           <div id="options">
               <label id="addZone" for="saveZone" class="zoneButtons">Guardar</label>
@@ -45,7 +52,7 @@
             <h3>Nombre</h3>
         </div>
         <div class="col-xl-7">
-            <input type="text" name="nameZone" value="{{ $zone->nameZone }}">
+            <input type="text"  id="nameZone" name="nameZone" value="{{ $zone->nameZone }}">
             @if($errors->has('nameZone'))
               <div class="col-xl-12">
                   <strong>

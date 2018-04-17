@@ -7,7 +7,15 @@ $(document).ready(function(){
         $("#addMap").html(name);
         $("#fileState").val(name);
     });
-    
+
+    $("#Temperatura").click(function() {
+        $("#Temperatura").val('');
+    });
+
+    $("#Altitud").click(function() {
+        $("#Altitud").val('');
+    });
+
     $("#IPAP").click(function() {
         $("#IPAP").val('');
     });
@@ -15,7 +23,7 @@ $(document).ready(function(){
     $("#IPAP").keyup(function(event) {
         var IPAP = document.getElementById('IPAP').value;
         var IPS = document.getElementById('IPS').value;
-        var IVPR = parseInt(IPAP) + parseInt(IPS);
+        var IVPR = (parseInt(IPAP) + parseInt(IPS))/2;
         $("#IVPR").val(IVPR);
 
         console.log(IVPR);
@@ -28,8 +36,25 @@ $(document).ready(function(){
     $("#IPS").keyup(function(event) {
         var IPAP = document.getElementById('IPAP').value;
         var IPS = document.getElementById('IPS').value;
-        var IVPR = parseInt(IPAP) + parseInt(IPS);
+        var IVPR = (parseInt(IPAP) + parseInt(IPS))/2;
         console.log(IVPR);
         $("#IVPR").val(IVPR);
     });
+
+    $('#CancelButton').click(function(event){
+        var cancelConfirm = confirm("Está seguro de Cancelar? Perderá todos los cambios");
+            if (cancelConfirm == false)
+            {
+                event.preventDefault();
+            }  
+    });
+
 });
+
+function deleteZoneConfirm(){
+    var deleteConfirm = confirm("Está seguro de borrar la Zona?");
+        if (cancelConfirm == false)
+        {
+            event.preventDefault();
+        }  
+};

@@ -12,10 +12,13 @@ use App\Logic\CreationZone\ZoneTools;
 use App\Models\Departament;
 use App\Models\CharacteristicZone;
 use App\Models\ZoneMunicipality;
+use App\Models\ZoneMunicipalityVillage;
 use App\Models\IndicatorZone;
 use App\Models\Zone;
 use App\Models\Municipality;
+use App\Models\Village;
 use App\User;
+use Session;
 
 class cartographerController extends Controller
 {
@@ -49,6 +52,8 @@ class cartographerController extends Controller
     {
         $request->session()->forget('sessionZone');
         $request->session()->forget('lastList');
+        $request->session()->forget('routeMiniMap');
+        $request->session()->forget('villages');
 
         $idUser = Auth::user()->idUser;
         $departaments = User::find($idUser)->departaments;
@@ -65,6 +70,17 @@ class cartographerController extends Controller
 
     public function getZone(Request $request, $idDepartament, $idZone = NULL, $validations = NULL)
     {
+        if(!is_null($idZone))
+        {
+            $zone = Zone::find($idZone);
+
+            if ($zone->autor !== Auth::user()->full_name)
+            {
+                Session::flash('Message','No Autorizado!');
+                return redirect()->route('listZones', ['idDepartament' => $idDepartament]);
+            }
+        }
+
         //Objects and Resources
           $tools = new ZoneTools();
           $idUser = Auth::user()->idUser;
@@ -72,7 +88,7 @@ class cartographerController extends Controller
           $currentDepartament = Departament::find($idDepartament);
 
         //Assignments
-          $climaticOptions = array('Cálido','Templado','Frio','Paramuno');
+          $climaticOptions = array('Cálido','Templado','Frio','Extremadamente frío');
           $option = 'configZone';
 
         //Actions
@@ -114,6 +130,12 @@ class cartographerController extends Controller
             {
                 $characteristics = $this->characteristicsFileGlobal;
                 $indicators = $this->indicatorsFileGlobal;
+                $zone->nameZone = "ZRH".$idDepartament;
+            }
+
+            if($request->session()->has('routeMiniMap'))
+            {
+                $zone->miniMapPath = $request->session()->get('routeMiniMap');
             }
         }
 
@@ -146,11 +168,21 @@ class cartographerController extends Controller
             else
             {
                 $tools->createUpdateZone($request);
+                Session::flash('Message','Zona Guardada!');
                 return redirect()->route('listZones',['idDepartament' => $request->idDepartament]);
             }
         }
         else if(isset($_POST['addMunicipality']))
         {
+            if(!empty($request->file('miniMapFile')))
+            {
+                $name = $request->file('miniMapFile');
+                $routeMiniMap = url(Storage::putFileAs(
+                    'miniMaps', $request->file('miniMapFile'), $name->getClientOriginalName().".png"
+                ));
+                $request->session()->put('routeMiniMap', $routeMiniMap);
+            }
+
             $sessionZone = $request->all();
             unset($sessionZone['miniMapFile']);
             $request->session()->put('sessionZone', $sessionZone);
@@ -160,8 +192,18 @@ class cartographerController extends Controller
 
     public function deleteZone($idZone, $idDepartament)
     {
+        $user = Auth::user();
         $zone = Zone::find($idZone);
-        $zone->delete();
+        if ($zone->autor == $user->full_name)
+        {
+            $zone->delete();
+            Session::flash('Message','Zona Eliminada!');
+        }
+        else
+        {
+            Session::flash('Message','No Autorizado!');
+        }
+
         return redirect()->route('listZones', ['idDepartament' => $idDepartament]);
     }
 
@@ -215,14 +257,15 @@ class cartographerController extends Controller
                   ->with('municipalities', $municipalitiesZone)
                   ->with('listMunicipalities', $listMunicipalities)
                   ->with('currentDepartament', $currentDepartament)
-                  ->with('currentZone', $currentZone);
+                  ->with('currentZone', $currentZone)
+                  ->with('readonly', true);
     }
 
     public function saveMunicipality(Request $request, $nameMunicipality)
     {
         
         $tools = new ZoneTools();
-        $municipalities = $tools->saveAjaxMunicipality($request,$nameMunicipality);
+        $municipalities = $tools->saveAjaxMunicipality($request, $nameMunicipality);
         $session = $request->session()->get('sessionZone');
         $idDepartament = array_get($session, 'idDepartament');
         $listMunicipalities = Municipality::where('idDepartament', $idDepartament)->get();
@@ -252,6 +295,7 @@ class cartographerController extends Controller
         $idZone = array_get($session, 'idZone');
         $tools = new ZoneTools();
         $listMunicipalities = Municipality::where('idDepartament', array_get($session, 'idDepartament'))->get();
+        $villages = NULL;
 
         if(!is_null($idZone))
         {
@@ -268,6 +312,17 @@ class cartographerController extends Controller
         else
         {
             $list = $request->session()->get('lastList');
+            if($request->session()->has('villages'))
+            {
+                $villages = $request->session()->get('villages');
+                $villages->each(function($item, $key) use(&$villages, $idMunicipality){
+                    if($item->idMunicipality == $idMunicipality)
+                    {
+                        $villages->pull($key);
+                    }
+                });
+            }
+            
             // dd($list);
             $list = array_diff($list->toArray(), array($idMunicipality));  
             $request->session()->put('lastList', collect($list));
@@ -275,7 +330,7 @@ class cartographerController extends Controller
             $listMunicipalities = $tools->getIds($listMunicipalities)->diff($list);
             $listMunicipalities = Municipality::whereIn('idMunicipality', $listMunicipalities->all())->get();
             
-            $municipalities = Municipality::with('Villages')->whereIn('idMunicipality', $list)->get();
+            $municipalities = Municipality::whereIn('idMunicipality', $list)->get();
         }
 
         if($request->ajax())
@@ -286,48 +341,134 @@ class cartographerController extends Controller
             $viewList = view('app.partials.cartographer.listMunicipalities')
                         ->with('listMunicipalities', $listMunicipalities);
 
+            $tableVillages = view('app.partials.cartographer.tableVillages')
+                                ->with('villages', collect([]))
+                                ->with('idMunicipality', NULL);
+            $nameVillage = view('app.partials.cartographer.nameVillage')
+                                ->with('readonly', true);
+
             $newViewTable = $viewTable->render();
             $newViewList = $viewList->render();
+            $newTableVillages = $tableVillages->render();
+            $newNameVillage = $nameVillage->render();
 
-            return response()->json(["viewTable"=>$newViewTable, "viewList" => $newViewList]);
+            return response()->json(["viewTable"=>$newViewTable, "viewList" => $newViewList,
+                                     "tableVillage"=>$newTableVillages, "nameVillage" => $newNameVillage]);
         }
-
     }
 
-    // public function returnMunicipalityZone(Request $request)
-    // {
-    //     $idUser = Auth::user()->idUser;
-    //     $departaments = User::find($idUser)->departaments;
-    //     $departaments = $departaments->sortBy('departamentName');
+    public function showVillages(Request $request, $idMunicipality)
+    {
+        //Resources
+        $session = $request->session()->get('sessionZone');
+        $idUser = Auth::user()->idUser;
+        $idZone = array_get($session, 'idZone');
 
-    //     $option = 'configZone';
-    //     $session = $request->session()->get('sessionZone');
-    //     $token = array_get($session, 'tokenZone');
-    //     $idDepartament = array_get($session, 'idDepartament');
-    //     $idZone = array_get($session, 'idZone');
+        if(empty($idZone))
+        {
+            if($request->session()->has('villages'))
+            {
+                $villagesSession = $request->session()->get('villages');
+                $villages = $villagesSession->where('idMunicipality',$idMunicipality);
+            }
+            else
+            {
+                $villages = collect([]);
+            }
+        }
+        else
+        {
+            $villages = Village::where('idMunicipality',$idMunicipality)->get();
+        }
 
-    //     $characteristics = CharacteristicZone::where('rememberToken',$token)->get();
-    //     $indicators = IndicatorZone::where('rememberToken',$token)->get();
+        $table = view('app.partials.cartographer.tableVillages')
+                    ->with('villages', $villages)
+                    ->with('idMunicipality', $idMunicipality);
+        $nameVillage = view('app.partials.cartographer.nameVillage')
+                            ->with('readonly', false);
 
-    //     if(is_null($idZone))
-    //     {
-    //         $zone = new Zone();
-    //     }
-    //     else
-    //     {
-    //         $zone = Zone::find($idZone);
-    //     }
+        $newTable = $table->render();
+        $newNameVillage = $nameVillage->render();
 
-    //     $zone->nameZone = array_get($session, 'nameZone');
+        if($request->ajax())
+        {
+            return response()->json(["viewTable"=>$newTable, "inputName"=>$newNameVillage]);
+        }
+    }
 
-    //     return view('app.cartographer')
-    //             ->with('departaments', $departaments)
-    //             ->with('option', $option)
-    //             ->with('characteristics', $characteristics)
-    //             ->with('indicators', $indicators)
-    //             ->with('token', $token)
-    //             ->with('idDepartament', $idDepartament)
-    //             ->with('zone', $zone);
-    // }
+    public function saveVillage(Request $request, $nameVillage)
+    {
+        //Resources
+        $session = $request->session()->get('sessionZone');
+        $idUser = Auth::user()->idUser;
+        $idZone = array_get($session, 'idZone');
+        $idMunicipality = $request->input('idMunicipality');
+        
+        if(empty($idZone))
+        {
+            if($request->session()->has('villages'))
+            {
+                $villages = $request->session()->get('villages');
+            }
+            else
+            {   
+                $villages = collect([]);
+            }
+
+            $village = new Village();
+                $village->nameVillage = $nameVillage;
+                $village->idMunicipality = $idMunicipality;
+            
+            $villages->push($village);
+            $request->session()->put('villages', $villages);
+
+        }
+        else
+        {
+            $village = new Village();
+                $village->nameVillage = $nameVillage;
+                $village->idMunicipality = $idMunicipality;
+            $village->save();
+
+            $villages = Village::where('idMunicipality',$idMunicipality)->get();
+        }
+
+        return redirect()->route('showVillages',['idMunicipality' => $idMunicipality]);
+    }
+
+    public function deleteVillage(Request $request, $nameVillage)
+    {
+        $session = $request->session()->get('sessionZone');
+        $idUser = Auth::user()->idUser;
+        $idZone = array_get($session, 'idZone');
+        $idMunicipality = $request->input('idMunicipality');
+
+        if(empty($idZone))
+        {
+            $villages = $request->session()->get('villages');
+            $villages->each(function($item, $key) 
+                                use($nameVillage, $idMunicipality, &$deleteItem, &$villages){
+                if(($item->nameVillage == $nameVillage) && ($item->idMunicipality == $idMunicipality))
+                {
+                    $villages->pull($key);
+                }
+            });
+
+            $request->session()->put('villages', $villages);
+        }
+        else
+        {
+            $village = Village::where([
+                        ['nameVillage','=', $nameVillage],
+                        ['idMunicipality','=', $idMunicipality],
+                        // ['idMunicipality','=', 1049],
+            ])->get();
+            $village->each(function($item, $key){
+                $item->delete();
+            });
+        }
+
+        return redirect()->route('showVillages',['idMunicipality' => $idMunicipality]);
+    }
 
 }

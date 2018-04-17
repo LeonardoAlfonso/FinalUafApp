@@ -63,6 +63,7 @@ class UserTools
               if(!is_null($request->idUser))
               {
                   $user = User::find($request->idUser);
+                  $userDepartament = UserDepartament::where('idUser', $request->idUser)->delete();
               }
               else
               {
@@ -77,7 +78,7 @@ class UserTools
 
           $user->save();
 
-          $departaments = Departament::all();
+          $departaments = Departament::all(); 
 
           foreach ($departaments as $departament)
           {
