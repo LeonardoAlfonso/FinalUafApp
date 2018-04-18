@@ -48,6 +48,14 @@ class System extends Model
         return $this->hasMany('App\Models\SystemIndicator', 'idSystem', 'idSystem');
     }
 
+    public function deleteIndicators()
+    {
+        $indicators = $this->belongsTo('App\Models\SystemIndicator', 'idSystem', 'idSystem');
+        $indicators->each(function($item, $key){
+            $item->delete();
+        });
+    }
+
     public function Utilities()
     {
         return $this->hasMany('App\Models\Utility', 'idSystem', 'idSystem');

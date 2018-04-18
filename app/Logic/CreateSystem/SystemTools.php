@@ -3,6 +3,7 @@
 namespace App\Logic\CreateSystem;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
@@ -526,7 +527,8 @@ class SystemTools
         for($i=1; $i <= 12; $i++)
         {
             $cashAvaliable = ($i == 1) ?  $initialInvertion*1.05
-                                       :  $flowsCash->get($i-1)->finalCash * $reInvertionRate;
+                                       : $flowsCash->get($i-2)->finalCash * $reInvertionRate;
+                                    //    dd($i-1)$flowsCash->get($i-1)->finalCash * $reInvertionRate;
             
             $finalEntryPeriod = $entries->where('period', $i)->sum('total') + $cashAvaliable;
 
@@ -539,7 +541,7 @@ class SystemTools
                 $flowCash->period = $i;
 
             $flowsCash->push($flowCash);
-            $request->session()->put('flowCash', $flowCash);
+            $request->session()->put('flowCash', $flowsCash);
         }
     }
 
@@ -548,8 +550,9 @@ class SystemTools
         $discountRate = UafParameter::where('nameParameter', 'TasaDescuento')->first();
         $discountRate = $discountRate->valueParameter/100;
         $utilities = $request->session()->get('utilities');
+        dd($utilities);
+
         $add = 0;
-        
         $VPN = 0;
 
         $utilities->each(function($item, $key) use(&$VPN, $discountRate, &$add){
@@ -564,7 +567,6 @@ class SystemTools
         });
 
         $VPN = $VPN + $add;
-
         return $VPN;
     }
 
@@ -699,9 +701,6 @@ class SystemTools
     }
 
 
-
-
-
     ////////////////////////////Auxiliars////////////////////////////////
     private function calculateUnitaryCost($initialCost, $period)
     {
@@ -809,6 +808,8 @@ class SystemTools
         $request->session()->forget('utilities');
         $request->session()->forget('indicators');
         $request->session()->forget('flowCash');
+        $request->session()->forget('errors');
+        $request->session()->forget('warnings');
     }
 
     public function loadCost(Request $request, $system)
@@ -1044,153 +1045,57 @@ class SystemTools
                             ->withErrors($validateForm);
 
         $generalDataView = $generalData->render();
+        // $errorsCount = $request->session()->get('errors');
+        // $errorsIndicators = $errorsCount->count() > 0 ? true : false;
 
         return collect(['formValidation' => $validateForm->fails(), 
                         'calculateValidation' => $request->session()->has('utilities'),
                         'view' => $generalDataView]);
-    }
-    
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function saveCost(Request $request)
-    {
-        if($request->session()->has('costs'))
-        {
-            $costs = $request->session()->get('costs');
-        }
-        else
-        {
-            $costs = collect([]);
-        }
-
-        for($i=0; $i<=12; $i++)
-        {
-            $cost = new Cost();
-            $quantity = 'quantity'.$i;
-              //Attributes
-                $cost->detail = $request->input('detail');
-                $cost->group = $request->input('listGroup');
-                $cost->subGroup = $request->input('listSubGroup');
-                $cost->quantity = $request->input($quantity);
-                $cost->period = $i;
-
-              if($i == 0 || $i == 1)
-              {
-                  $cost->unitaryCost = $request->input('unitaryCost');
-              }
-              else
-              {
-                  $initialCost = $request->input('unitaryCost');
-                  $cost->unitaryCost = $this->calculateUnitaryCost($initialCost, $i);
-              }
-
-              $cost->total = $cost->unitaryCost * $cost->quantity;
-              $costs->push($cost);
-        }        
-
-        $request->session()->put('costs', $costs);
+                        //, 'errors' => $errorsIndicators
     }
 
-
-
-
-
-
-
-/*-/////////Entries//////////////////*/
-    public function saveEntry($request)
+    public function calculateRecomendations(Request $request)
     {
-        for($i=1; $i<=12; $i++)
-        {
-            $entry = new Entry();
-            $quantity = 'quantity'.$i;
+        $errors = collect([]);
+        $recomendations = collect([]);
+        $indicators = $request->session()->get('indicators');
+        $utilities = $request->session()->get('utilities');
+        $flowsCash = $request->session()->get('flowCash');
 
-            //Attributes
-                $entry->name = $request->input('concept');
-                $entry->measureUnity = $request->input('measureUnity');
-                $entry->priceSource = $request->input('source');
-                $entry->datePriceSource = $request->input('sourceDate');
-                $entry->integralIndicator = "0";
-                $entry->quantity = $request->input($quantity);
-                $entry->period = $i;
-
-                $entry->rememberToken = $request->input('tokenSystem');
-
-
-            if($i == 1)
+        $indicators->each(function($item, $key) use(&$errors){
+            if(($item->valueIndicator <= 0) || (is_null($item->valueIndicator)))
             {
-                $entry->unitaryPrice = $request->input('unitaryPrice');
-                // $entry->unitaryPrice = "2";
+                $message = "Error indicador ".$item->showIndicator;
+                $errors->push($message);
             }
-            else
+        });
+
+        $utilities->each(function($item, $key) use(&$recomendations){
+            if($key > 0)
             {
-                $initialEntry = $request->input('unitaryPrice');
-                // $initialEntry = "2";
-                $entry->unitaryPrice = $this->calculateUnitaryEntry($initialEntry, $i);
-            }
-
-            $entry->total = $entry->unitaryPrice * $entry->quantity;
-            $entry->save();
-        }        
-    }
-
-
-
-    public function showEntries2($token)
-    {
-        $entries = Entry::select('name')->where('rememberToken', $token)->distinct('name')->get();
-        $listEntries = array();
-
-        if($entries->count() > 0)
-        {
-            foreach($entries as $entry)
-            {
-                $newEntry = new EntryVirtual;
-                $completeEntry = Entry::where('name', $entry->name)->where('period',1)->first();
-    
-                    $newEntry->id = $completeEntry->idEntry;
-                    $newEntry->name = $completeEntry->name;
-                    $newEntry->unitaryPrice = $completeEntry->unitaryPrice;
-                    $newEntry->measureUnity = $completeEntry->measureUnity;
-                    $newEntry->priceSource = $completeEntry->priceSource;
-                    $newEntry->datePriceSource = $completeEntry->datePriceSource;
-
-                for($i=1; $i <= 12; $i++)
+                if(($item->utility <= 0) || (is_null($item->utility)))
                 {
-                    $quantityPeriod = 'quantity'.$i;
-                    $auxEntry = Entry::where('name', $entry->name)->where('period',$i)->first();
-                    $newEntry->$quantityPeriod = $auxEntry->quantity;
+                    $message = "Verificar Utilidad del Periodo ".$item->period;
+                    $recomendations->push($message);
                 }
-    
-                $listEntries = array_merge($listEntries, array($newEntry));
             }
-        }
+        });
 
-        return $listEntries;
+        $flowsCash->each(function($item, $key) use(&$recomendations){
+            if(($item->finalCash <= 0) || (is_null($item->finalCash)))
+            {
+                $message = "Verificar Flujo de caja del Periodo ".$item->period;
+                $recomendations->push($message);
+            }
+        });
+
+        $request->session()->put('errors', $errors);
+        $request->session()->put('warnings', $recomendations);
     }
 
+    public function pagination($collection, $perPage)
+    {
+        $input = $collection;
+        return new Paginator($input, $perPage);
+    }
 }

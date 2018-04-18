@@ -57,7 +57,6 @@ Route::get('/cartographer/zone/back', 'AppControllers\cartographerController@ret
   Route::get('/cartographer/Municipality/deleteVillage/{nameMunicipality}', 'AppControllers\cartographerController@deleteVillage')->name('deleteVillage');
 
   
-
 //Routes for systemController
 Route::get('/expert', 'AppControllers\systemController@expertPanel')->middleware('auth')->name('expert');
 Route::get('/expert/{nameDepartament}', 'AppControllers\systemController@getZonesList')->name('zonesList');
@@ -76,42 +75,6 @@ Route::get('/expert/validateExistence/Calculations','AppControllers\systemContro
 Route::get('/expert/editCost/cost/operation/{idCost}','AppControllers\systemController@editCost')->name('costEdit');
 Route::get('/expert/editEntry/entry/operation/{idEntry}','AppControllers\systemController@editEntry')->name('editEntry');
 
-Route::get('test/modal','AppControllers\systemController@getTest')->name('getTest');
-
-//localhost/uafApp/public/System/Indicators/339
-
-//Routes for admin
-
-// Route::get('/indicators', function () {
-//     return view('app.replics.admin.indicators');
-// })->name('userIndicators');
-//
-// // Route::get('/newUser', function () {
-// //     return view('app.replics.admin.adminNewUser');
-// // })->name('newUser');
-//
-// Route::get('expert', function () {
-//     return view('app.expert');
-// });
-//
-// Route::get('systemList', function () {
-//     return view('web.listProductiveSystems');
-// });
-
-// Route::get('system', function () {
-//     return view('web.system');
-// });
-
-
-
-// Route::get('/services/zones/{name}', 'WebControllers\servicesController@getZones')->name('test');
-
-// Route::get('/cartographer', function () {
-//     return view('cartographer');
-// })->name('cartographerView');
-
-
+Route::get('test/modal','AppControllers\systemController@calculateRecomendations')->name('calculateRecomendations');
 
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

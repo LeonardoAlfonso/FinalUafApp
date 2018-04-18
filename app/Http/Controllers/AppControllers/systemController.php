@@ -17,6 +17,7 @@ use App\Models\Entry;
 use App\Models\System;
 use App\SystemIndicator;
 use App\User;
+use Session;
 
 
 class systemController extends Controller
@@ -114,7 +115,9 @@ class systemController extends Controller
                   ->with('modalCost', $modalCost)
                   ->with('modalEntry',$modalEntry)
                   ->with('listCosts',$listCosts)
-                  ->with('listEntries',$listEntries);
+                  ->with('listEntries',$listEntries)
+                  ->with('errors', collect([]))
+                  ->with('warnings', collect([]));
     }
 
     public function getSubGroup(Request $request, $group)
@@ -239,15 +242,21 @@ class systemController extends Controller
                         $systemTools->calculateIPA($request)/$systemTools->calculateUNPA($request));
         $systemTools->createUpdateIndicator($request, "UAFX", 
                         $systemTools->calculateIPA($request)/$systemTools->calculateUNPAMax($request));
-                        
+        // $systemTools->calculateRecomendations($request);
         $indicators = $request->session()->get('indicators');
 
         if($request->ajax())
         {
             $view = view('app.partials.expert.systemIndicators')
                         ->with('indicators',$indicators);
-            $newView = $view->render();
+            // $recomendations = view('app.partials.expert.recomendationsCard')
+            //                      ->with('errors', $request->session()->get('errors'))
+            //                      ->with('warnings', $request->session()->get('warnings'));
 
+            $newView = $view->render();
+            // $recomendationsViews = $recomendations->render();
+
+            // return response()->json(["html"=>$newView, "recomendations" => $recomendationsViews]);
             return response()->json(["html"=>$newView]);
         }
     }
@@ -289,14 +298,15 @@ class systemController extends Controller
         });
 
         //Save FlowCash
-        // $system->deleteFlowCash();
-        // $flowCash = $request->session()->get('flowCash');
-        // $flowCash->each(function($item, $key) use($system){
-        //     $item->idSystem = $system->idSystem;
-        //     $item->save();
-        // });
+        $system->deleteFlowCash();
+        $flowCash = $request->session()->get('flowCash');
+        $flowCash->each(function($item, $key) use($system){
+            $item->idSystem = $system->idSystem;
+            $item->save();
+        });
 
         //Save Indicators
+        $system->deleteIndicators();
         $indicators = $request->session()->get('indicators');
         $indicators->each(function($item, $key) use($system){
             $item->idSystem = $system->idSystem;
@@ -324,6 +334,7 @@ class systemController extends Controller
     {
         $systemTools = new SystemTools();
         $response = $systemTools->validationSaveSystem($request);
+        $errors = $response->get('errors');
         $formValidation = $response->get('formValidation');
         $calculateValidation = $response->get('calculateValidation');
         $view = $response->get('view');
@@ -332,7 +343,7 @@ class systemController extends Controller
         {
             return response()->json(["formValidation" => $formValidation, 
                                     "calculateValidation" => $calculateValidation, 
-                                    "view" => $view]);
+                                    "view" => $view, 'errors' => $errors]);
         }
     }
 
@@ -367,47 +378,5 @@ class systemController extends Controller
         {
               return response()->json(["modal"=>$modal]);
         }
-    }
-    
-
-
-    public function getTest(Request $request)
-    {
-        $entries = $request->session()->get('entries');
-
-        $systemTools = new SystemTools();
-
-        $newEntry = new EntryVirtual();
-            $newEntry->id = 1;
-            $newEntry->name = "pruebaManual";
-            $newEntry->unitaryPrice = 52;
-            $newEntry->measureUnity = "Kg";
-            $newEntry->priceSource = "yoina";
-            $newEntry->datePriceSource = "ayer";
-
-            $newEntry->quantity1 = 1;
-            $newEntry->quantity2 = 1;
-            $newEntry->quantity3 = 1;
-            $newEntry->quantity4 = 1;
-            $newEntry->quantity5 = 1;
-            $newEntry->quantity6 = 1;
-            $newEntry->quantity7 = 1;
-            $newEntry->quantity8 = 1;
-            $newEntry->quantity9 = 1;
-            $newEntry->quantity10 = 1;
-            $newEntry->quantity11 = 1;
-            $newEntry->quantity12 = 1;
-
-            $validations = $systemTools->validateEntry($newEntry);
-
-            $entries->push($newEntry);
-
-            $tableView = view('app.partials.expert.tableEntries')
-                                ->with('listEntries', $entries);
-
-            $tableEntriesView = $tableView->render();
-
-            dd($tableEntriesView);
-                        
     }
 }

@@ -194,8 +194,36 @@ div.recomendationCard{
     padding: 10px;
 }
 
-div.recomendationCard label{
-    font-size: 18px;
+div.titleCard{
+    border-radius: 7px;
+    background-color: rgb(79,88,92);
+    color: #FFFFFF;
+    text-align: center;
+    padding: 5px;
+}
+
+div.titleCard p{
+    position: relative;
+      color: #FFFFFF;
+      font-size: 24px;
+  }
+
+div.bodyCard{
+    background-color: #E5E5E5;
+    overflow-y: scroll;
+    max-height: 95px;
+}
+
+div.bodyCard ul li p{
+    display: inline;
+}
+
+.error{
+    color: #8e1a1a;
+}
+
+.warn{
+    color: #c66e17;
 }
 
 /*  Indicators Cards*/

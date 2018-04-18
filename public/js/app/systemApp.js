@@ -264,7 +264,9 @@ function sendCalculations()
         {
               console.log(data);
               var indicators = data.html;
+            //   var recomendations = data.recomendations;
               $("#systemIndicators").html(indicators);
+            //   $('#recomendationCard').html(recomendations);
         },
         error:function(data)
         {
@@ -282,7 +284,7 @@ function saveSystem() {
     var nameSystem = $('#nameSystem').val();
     var authorSystem = $('#authorSystem').val();
     var jornalSystem = $('#jornalSystem').val();
-    var data = {"nameSystem":nameSystem ,"authorSystem":authorSystem , "jornalSystem":jornalSystem};
+    var data = {"nameSystem":nameSystem, "authorSystem":authorSystem, "jornalSystem":jornalSystem};
 
     $.ajax({
         url: routeValidateIfIndicators,
@@ -297,13 +299,16 @@ function saveSystem() {
             var view = data.view;
             if(data.formValidation)
             {
-                console.log("comomomocso");
                 $('#SystemMainData').html(view);
             }
+            // else if (data.errors)
+            // {
+            //     alert('Corregir Errores antes de salvar el sistema');
+            //     $('#SystemMainData').html(view);
+            // }
             else if(!data.calculateValidation)
             {
                 alert('Por favor Calcular Indicadores antes de Guardar');
-
                 $('#SystemMainData').html(view);
             }
             else

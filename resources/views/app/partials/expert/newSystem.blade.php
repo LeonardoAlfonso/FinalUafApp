@@ -45,8 +45,8 @@
         <div class="col-xl-6">
           <div class="col-xl-12">
             <div class="col-xl-2"></div>
-            <div class=" recomendationCard col-xl-9">
-                <label for="">Recomendaciones:</label>
+            <div id="recomendationCard" class="recomendationCard col-xl-9">
+                @include('app.partials.expert.recomendationsCard')
             </div>
             <div class="col-xl-1"></div>
           </div>
