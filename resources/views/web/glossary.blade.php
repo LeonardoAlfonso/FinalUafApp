@@ -6,14 +6,14 @@
 @stop
 
 @section('viewContent')
-  <img id="backImage" src="images/web/BackImage1.jpg" alt="">
+  <img id="backImage" src="{{ asset('images/web/BackImage1.jpg') }}" alt="">
 
   <aside id="glossaryDescription" class="col-xl-3">
     <div class="col-xl-3"></div>
     <div class="col-xl-9">
       <h2><b>Glosario</b></h2>
       <p>
-            El glosario contiene la descripción de los términos que se han usado en el modelamiento productivo y el cálculo de UAF.
+           El glosario contiene la descripción de los términos que se han usado en el modelamiento productivo y el cálculo de UAF.
       </p>
     </div>
   </aside>

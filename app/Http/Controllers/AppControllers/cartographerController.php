@@ -174,14 +174,16 @@ class cartographerController extends Controller
         }
         else if(isset($_POST['addMunicipality']))
         {
-            if(!empty($request->file('miniMapFile')))
+            /*if(!empty($request->file('miniMapFile')))
             {
+                dd($request->file('miniMapFile')->getRealPath());
                 $name = $request->file('miniMapFile');
                 $routeMiniMap = url(Storage::putFileAs(
                     'miniMaps', $request->file('miniMapFile'), $name->getClientOriginalName().".png"
                 ));
+                dd($routeMiniMap);
                 $request->session()->put('routeMiniMap', $routeMiniMap);
-            }
+            }*/
 
             $sessionZone = $request->all();
             unset($sessionZone['miniMapFile']);

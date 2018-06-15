@@ -5,7 +5,7 @@
 @stop
 
 @section('viewContent')
-  <img id="backImage" src="images/web/BackImage1.jpg" alt="">
+  <img id="backImage" src="{{ asset('images/web/BackImage1.jpg') }}" alt="">
 <div id="content">
 
   <div id="description" class="col-xl-9">

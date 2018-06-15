@@ -14,7 +14,7 @@ class CreateZonesTable extends Migration
               $table->increments('idZone');
               $table->string('nameZone',100);
               $table->string('autor',100);
-              $table->string('miniMapPath',100);
+              $table->string('miniMapPath',100)->nullable();
               $table->timestamps();
 
               $table->integer('idDepartament')->unsigned()->nullable();
