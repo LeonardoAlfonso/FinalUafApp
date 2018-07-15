@@ -32,7 +32,7 @@ class UserTools
             'min' => 'El campo debe contener mínimo 6 caracteres',
             'max' => 'El campo debe contener máximo 40 caracteres',
             'between' => 'La contraseña debe contener entre 8 y 15 dígitos',
-            'regex' => 'La contraseña debe contener l'
+            'regex' => 'La contraseña debe contener al menos una Mayúscula, una minuscúla, 1 digito y un caractér especial'
           ];
 
           return Validator::make($input, $rules, $messages);
