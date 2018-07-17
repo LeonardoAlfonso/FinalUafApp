@@ -1,0 +1,34 @@
+Seguimiento 1 (Junio 15/2018)
+
+Errores:
+
+- Error home con fondos
+- Fondo pantalla Glosario
+- Mensajes de error personalizados al momento de crear usuarios (Solucionado)
+- Errores visuales en indicadores de Zona
+- Mejoras visuales pantalla municipios
+- Unidades para características y indicadores de Zona
+- Corrección Visual Cargar Minimapa
+- Error con la carga de un archivo
+- Nombre Zona Concatenando DepartamentoID
+- IVPR de últimas
+- Mensaje de error password al crear usuario.
+- Encriptar Password al crear usuario. (Solucionado)
+- Autorizaciones Dobles
+- Mapas ZRH (Revisar Arcgis API - Version 3.24) developers.arcgis.com
+- Visitante. Sistemas productivos vacios.
+- Problemas de resolución.
+- Error Json Costs (Solucionado)
+
+Seguimiento 2 ()
+
+Errores:
+
+- Se Guardan usuarios sin rol
+
+Soluciones:
+
+- Mensajes de error personalizados al momento de crear usuarios (Solucionado)
+- Encriptar Password al crear usuario. (Solucionado)
+- Error Json Costs (Solucionado)
+
