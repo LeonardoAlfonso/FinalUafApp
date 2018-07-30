@@ -5,12 +5,12 @@ Errores:
 - Error home con fondos
 - Fondo pantalla Glosario
 - Mensajes de error personalizados al momento de crear usuarios (Solucionado)
-- Errores visuales en indicadores de Zona
+- Errores visuales en indicadores de Zona (Solucionado)
 - Mejoras visuales pantalla municipios
 - Unidades para características y indicadores de Zona
-- Corrección Visual Cargar Minimapa
-- Error con la carga de un archivo
-- Nombre Zona Concatenando DepartamentoID
+- Corrección Visual Cargar Minimapa (Solucionado)
+- No valida si el archivo se carga al momento de la creación de la zona (Solucionado)
+- Nombre Zona Concatenando DepartamentoID (Solucionado)
 - IVPR de últimas
 - Mensaje de error password al crear usuario.
 - Encriptar Password al crear usuario. (Solucionado)
@@ -20,7 +20,7 @@ Errores:
 - Problemas de resolución.
 - Error Json Costs (Solucionado)
 
-Seguimiento 2 ()
+Seguimiento 2 (Julio 17/2018)
 
 Errores:
 
@@ -31,4 +31,12 @@ Soluciones:
 - Mensajes de error personalizados al momento de crear usuarios (Solucionado)
 - Encriptar Password al crear usuario. (Solucionado)
 - Error Json Costs (Solucionado)
+
+Seguimiento 3 (Julio 30/2018)
+
+Soluciones:
+- Se asignan automáticamente los nombres de las Zonas
+- En la parte de consulta, se cargan correctamente los mapas de las zonas recientemente creadas.
+- Se agregan las reglas de validación al crear una zona.
+- Se agregan algunas mejoras visuales en la parte de los indicadores 
 

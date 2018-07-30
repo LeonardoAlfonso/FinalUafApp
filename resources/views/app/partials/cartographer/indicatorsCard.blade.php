@@ -14,6 +14,7 @@
         @foreach($indicators as $indicator)
         <li class="items">
         @if($indicator->show == 'IVPR')
+        <div class="socieconomics">
             <input type="text" id="{{ $indicator->show }}" name="{{ $indicator->show }}" value="{{ $indicator->value }}" readonly= "readonly">
                 @if($errors->has($indicator->show))
                     <div class="col-xl-12">
@@ -24,6 +25,7 @@
                         </strong>
                     </div>
                 @endif
+        </div>
         @else
         <div class="socieconomics">
             <input type="text" id="{{ $indicator->show }}" name="{{ $indicator->show }}" value="{{ $indicator->value }}">

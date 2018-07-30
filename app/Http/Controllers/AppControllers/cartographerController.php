@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Logic\CreationZone\ZoneTools;
 use App\Models\Departament;
@@ -130,7 +131,12 @@ class cartographerController extends Controller
             {
                 $characteristics = $this->characteristicsFileGlobal;
                 $indicators = $this->indicatorsFileGlobal;
-                $zone->nameZone = "ZRH".$idDepartament;
+                $lastZone = DB::table('zones')
+                                ->orderBy('idZone', 'desc')
+                                ->first();
+                $lastZone = $lastZone->idZone + 1;                
+
+                $zone->nameZone = "ZRH".$idDepartament.'-'.$lastZone;
             }
 
             if($request->session()->has('routeMiniMap'))

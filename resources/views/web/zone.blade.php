@@ -16,7 +16,8 @@
 @section('viewContent')
 
 <img id="backImage" src="{{ asset('images/web/BackImage1.jpg') }}" alt="">
-<div id="content">
+<div id="content">/
+
 
 <div id="description" class="col-xl-9">
   @if($option === 0)

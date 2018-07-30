@@ -52,7 +52,7 @@
             <h3>Nombre</h3>
         </div>
         <div class="col-xl-7">
-            <input type="text"  id="nameZone" name="nameZone" value="{{ $zone->nameZone }}">
+            <input type="text"  id="nameZone" name="nameZone" value="{{ $zone->nameZone }}" readonly>
             @if($errors->has('nameZone'))
               <div class="col-xl-12">
                   <strong>

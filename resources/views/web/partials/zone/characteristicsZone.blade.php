@@ -4,7 +4,7 @@
   <div class="col-xl-5">
     <figure id="miniMap">
 
-      <img src="{{ asset('images/web/miniMapsZones/minimapCauca.png') }}" alt="">
+      <img src="{{ asset('storage/miniMaps/'.$zone->nameZone.'.png') }}" alt="{{ asset('storage/miniMaps/'.$zone->nameZone.'.jpeg') }}">
     </figure>
   </div>
   <div class="col-xl-7">

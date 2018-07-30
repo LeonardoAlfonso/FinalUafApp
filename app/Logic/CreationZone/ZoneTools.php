@@ -84,14 +84,14 @@ class ZoneTools
         }
 
         //Extra Rules
-        //$rules = array_merge($rules, array('fileState' => array('required')));
-        //$rules = array_merge($rules, array('miniMapFile' => array('image','max:10240')));
+        $rules = array_merge($rules, array('fileState' => array('required')));
+        $rules = array_merge($rules, array('miniMapFile' => array('image','max:10240')));
         $rules = array_merge($rules, array('nameZone' => array('required','max:40')));
 
         $messages = [
           'required' => 'Campo Obligatorio',
           'numeric' => 'Campo Numérico',
-          'image' => 'Debe ser imagen (png, jpg)',
+          'image' => 'Debe ser imagen (png, jpeg)',
           'max'=>[
                 'file' => 'Peso Máximo: 10 MB',
                 'string' => 'El campo debe tener máximo 40 caracteres',

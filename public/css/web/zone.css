@@ -16,7 +16,7 @@
 
 #structure figure#miniMap img{
     width: 100%;
-    height: auto;
+    max-height: 500px;
 }
 
 #structure table.tableStyle{
