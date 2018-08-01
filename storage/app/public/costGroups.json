@@ -1,0 +1,26 @@
+[
+    {
+			"group" :"Mano de Obra",
+			"subGroup":["Deshierba","Siembra","Fertilización","Cosecha","Postcosecha","Poda","Trazada","Hoyada","Embolsado","Deshoje","Deshije","Control de plagas y enfermedades","Manejo pecuario","Alimentación","Embarque de ganado","Ordeño"]
+    },
+    {
+			"group" :"Herramientas y equipos",
+			"subGroup":["Bomba de espalda","Guadaña","Cerca eléctrica","Motosierra","Tractor","Equipo de ordeño","Picapasto","Secador","Molino","Despulpadora","Cosechadora","Sembradora","Sistema eléctrico","Herramientas manuales"]
+    },
+    {
+			"group" :"Materiales",
+			"subGroup":["Material vegetal","Pie de cría","Materiales para cercos","Materiales de riego","Materiales de construcción","Material de tutorado","Empaques","Bebederos","Saladeros","Comederos"]
+    },
+    {
+			"group" :"Insumos",
+			"subGroup":["Herbicidas","Insecticida","Fungicidas","Fertilizantes","Concentrados","Medicamentos","Suplementos nutricionales","Pajillas","Desinfectantes","Enmiendas","Acondicionantes"]
+    },
+    {
+			"group" :"Infraestructura",
+			"subGroup":["Galpones","Corrales","Jaulas","Bodega","Sala de ordeño","Beneficiadero"]
+    },
+    {
+			"group" :"Transporte",
+			"subGroup":["Transporte de animales","Transporte de productos agrícolas"]
+	}
+]

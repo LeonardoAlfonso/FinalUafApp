@@ -1,0 +1,44 @@
+[
+	{
+		"name" :"Inflacion",
+		"show" : "Inflacion",
+		"value" : "3.5",
+		"rules":"required|Percentage|numeric"
+	},
+	{
+		"name" :"SMMLV",
+		"show" : "SMMLV",
+		"value" : "737717",
+		"rules":"required|numeric|max:100000000"
+	},
+	{
+		"name" :"TasaDescuento",
+		"show" : "Tasa de descuento",
+		"value" : "9.597",
+		"rules":"required|Percentage|numeric"
+	},
+	{
+		"name" :"TasaEfectiva",
+		"show" : "Tasa Efectiva",
+		"value" : "11.5",
+		"rules":"required|Percentage|numeric"
+	},
+	{
+		"name" :"PeriodosFinanciacion",
+		"show" : "Número Periodos Plan Financiación",
+		"value" : "144",
+		"rules":"required|numeric|max:200"
+	},
+	{
+		"name" :"PorcentajeReinversión",
+		"show" : "Porcentaje de reinversión",
+		"value" : "75",
+		"rules":"required|Percentage|numeric"
+	},
+	{
+		"name" :"IVP",
+		"show" : "IVP",
+		"value" : "6.44",
+		"rules":"required|Percentage|numeric"
+	}
+]

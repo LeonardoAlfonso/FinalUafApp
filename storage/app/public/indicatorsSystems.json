@@ -1,0 +1,37 @@
+[
+	{
+        "name" :"TIR",
+        "show": "TIR",
+		"value" : "0"
+	},
+	{
+        "name" :"VPN",
+        "show": "VPN",
+		"value" : "0"
+	},
+	{
+        "name" :"FIUS",
+        "show": "FIUS",
+		"value" : "0"
+	},
+	{
+        "name" :"UAFM",
+        "show": "Uaf Mínima",
+		"value" : "0"
+	},
+	{
+        "name" :"UAFMI",
+        "show": "Uaf Mínima Integral",
+		"value" : "0"
+	},
+	{
+        "name" :"UAFX",
+        "show": "Uaf Máxima",
+		"value" : "0"
+	},
+	{
+        "name" :"UAFXI",
+        "show": "Uaf Máxima Integral",
+		"value" : "0"
+	}
+]

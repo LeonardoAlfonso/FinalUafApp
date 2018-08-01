@@ -1,0 +1,26 @@
+[
+	{
+		"name" :"ZonaClimatica",
+		"show" : "Zona climática",
+		"value" : "0",
+		"rules" : "required"
+	},
+	{
+		"name" :"Temperatura",
+		"show" : "Temperatura",
+		"value" : "0",
+		"rules" : "required|numeric"
+	},
+	{
+		"name" :"Pendiente",
+		"show" : "Pendiente",
+		"value" : "0",
+		"rules" : "required|numeric"
+	},
+	{
+		"name" :"Altitud",
+		"show" : "Altitud",
+		"value" : "0",
+		"rules" : "required|numeric"
+	}
+]
