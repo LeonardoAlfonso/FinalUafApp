@@ -40,3 +40,11 @@ Soluciones:
 - Se agregan las reglas de validación al crear una zona.
 - Se agregan algunas mejoras visuales en la parte de los indicadores 
 
+Seguimiento 4 (Agosto 1/2018)
+
+Errores:
+- No se puede crear sistemas (Error del JSON) (Solucionado)
+
+Soluciones:
+- Se realiza la validación sobre el JSON y se sube al repositorio.
+- Se realizan correcciones correspondientes a la creación de sistemas.

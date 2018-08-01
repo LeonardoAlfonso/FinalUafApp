@@ -14,7 +14,7 @@ use App\Models\Cost;
 use App\Models\Entry;
 use App\Models\System;
 use App\Models\Utility;
-use App\Models\FLowCash;
+use App\Models\FlowCash;
 use App\Models\UafParameter;
 use App\Models\Zone;
 use App\Models\Virtuals\CostVirtual;
@@ -536,7 +536,7 @@ class SystemTools
             
             $finalCashPeriod = $finalEntryPeriod - $finalCostsPeriod; 
 
-            $flowCash = new FLowCash();
+            $flowCash = new FlowCash();
                 $flowCash->finalCash = $finalCashPeriod;
                 $flowCash->period = $i;
 
@@ -550,7 +550,6 @@ class SystemTools
         $discountRate = UafParameter::where('nameParameter', 'TasaDescuento')->first();
         $discountRate = $discountRate->valueParameter/100;
         $utilities = $request->session()->get('utilities');
-        dd($utilities);
 
         $add = 0;
         $VPN = 0;
