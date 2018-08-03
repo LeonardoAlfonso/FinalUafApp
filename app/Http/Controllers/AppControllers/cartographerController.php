@@ -134,7 +134,7 @@ class cartographerController extends Controller
                 $lastZone = DB::table('zones')
                                 ->orderBy('idZone', 'desc')
                                 ->first();
-                $lastZone = $lastZone->idZone + 1;                
+                $lastZone = is_null($lastZone) ? 1: $lastZone->idZone + 1;              
 
                 $zone->nameZone = "ZRH".$idDepartament.'-'.$lastZone;
             }
