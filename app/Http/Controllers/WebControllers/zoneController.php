@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\WebControllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use App\Models\Departament;
 use App\Models\Zone;
@@ -19,6 +20,8 @@ class zoneController extends Controller
                         ['idDepartament','=',$departament->idDepartament],
                         ['nameZone','=',$request->Zone],
             ])->first();
+
+        $systems = $zone->Systems()->get();
 
           $elements = $this->showCrumb($request);
 
@@ -39,7 +42,8 @@ class zoneController extends Controller
                       ->with('characteristics',$characteristics)
                       ->with('municipalities',$municipalities)
                       ->with('option', $this->option)
-                      ->with('departamentName', $departament->departamentName);
+                      ->with('departamentName', $departament->departamentName)
+                      ->with('withZone', $systems->isEmpty());
       }
 
       public function getClimaticElements(Request $request, $id)
@@ -88,6 +92,7 @@ class zoneController extends Controller
 
           $zone = Zone::where('nameZone',$name)->first();
           $departament = $zone->Departament()->first();
+          $systems = $zone->Systems()->get();
 
           $requestCrumb = Request::create(
                   '/zone/prevZone/', 'GET', array(
@@ -113,6 +118,7 @@ class zoneController extends Controller
                       ->with('characteristics',$characteristics)
                       ->with('municipalities',$municipalities)
                       ->with('option', $this->option)
-                      ->with('departamentName', $departament->departamentName);
+                      ->with('departamentName', $departament->departamentName)
+                      ->with('withZone', $systems->isEmpty());
       }
 }

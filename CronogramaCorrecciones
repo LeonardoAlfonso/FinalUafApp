@@ -6,15 +6,15 @@ Errores:
 - Fondo pantalla Glosario
 - Mensajes de error personalizados al momento de crear usuarios (Solucionado)
 - Errores visuales en indicadores de Zona (Solucionado)
-- Mejoras visuales pantalla municipios
+- Mejoras visuales pantalla municipios (Solucionado)
 - Unidades para características y indicadores de Zona
 - Corrección Visual Cargar Minimapa (Solucionado)
 - No valida si el archivo se carga al momento de la creación de la zona (Solucionado)
 - Nombre Zona Concatenando DepartamentoID (Solucionado)
-- IVPR de últimas
-- Mensaje de error password al crear usuario.
+- IVPR de últimas (Solucionado)
+- Mensaje de error password al crear usuario. (Solucionado)
 - Encriptar Password al crear usuario. (Solucionado)
-- Autorizaciones Dobles
+- Autorizaciones Dobles (Solucionado)
 - Mapas ZRH (Revisar Arcgis API - Version 3.24) developers.arcgis.com
 - Visitante. Sistemas productivos vacios.
 - Problemas de resolución.
@@ -24,7 +24,7 @@ Seguimiento 2 (Julio 17/2018)
 
 Errores:
 
-- Se Guardan usuarios sin rol
+- Se Guardan usuarios sin rol (Solucionado)
 
 Soluciones:
 
@@ -48,3 +48,14 @@ Errores:
 Soluciones:
 - Se realiza la validación sobre el JSON y se sube al repositorio.
 - Se realizan correcciones correspondientes a la creación de sistemas.
+
+Seguimiento 5 (Agosto 6/2018)
+
+Errores:
+- Al seleccionar sistemas productivos en una zona sin sistemas sale error (Visitante) (Solucionado)
+
+Soluciones:
+- Mejoras visuales pantalla municipios
+- IVPR de últimas
+- Se Guardan usuarios sin rol
+- Al seleccionar sistemas productivos en una zona sin sistemas sale error (Visitante)

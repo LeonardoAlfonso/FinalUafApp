@@ -15,7 +15,8 @@
         <li class="items">
         @if($indicator->show == 'IVPR')
         <div class="socieconomics">
-            <input type="text" id="{{ $indicator->show }}" name="{{ $indicator->show }}" value="{{ $indicator->value }}" readonly= "readonly">
+            <input type="text" id="{{ $indicator->show }}" name="{{ $indicator->show }}" value="{{ $indicator->value }}" readonly= "readonly"
+                        style="background-color: #E3E3E3;">
                 @if($errors->has($indicator->show))
                     <div class="col-xl-12">
                         <strong>

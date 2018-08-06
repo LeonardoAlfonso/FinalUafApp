@@ -16,7 +16,7 @@
 @section('viewContent')
 
 <img id="backImage" src="{{ asset('images/web/BackImage1.jpg') }}" alt="">
-<div id="content">/
+<div id="content">
 
 
 <div id="description" class="col-xl-9">
@@ -33,19 +33,23 @@
   <div class="col-xl-2"></div>
   <ul class="col-xl-7 buttonlist">
     <li id="{{ $zone->idZone }}" class="col-xl-12" onclick="zoneElements(this.id)">
-        <label for="" class="col-xl-12">Elementos Climáticos</label>
+        <label for="" class="col-xl-12 enabled">Elementos Climáticos</label>
     </li>
     <li id="{{ $zone->idZone }}" class="col-xl-12" onclick="SocioeconomicCharacteristics(this.id)">
-        <label for="" class="col-xl-12">Caracts. Socioeconómicas</label>
+        <label for="" class="col-xl-12 enabled">Caracts. Socioeconómicas</label>
     </li>
     <li class="col-xl-12">
-        <a href="{{ route('listSystem', ['idZone' => $zone->idZone]) }}">
-          <label for="" class="col-xl-12">Sistemas Productivos</label>
-        </a>
+        @if($withZone)
+            <label for="" class="col-xl-12 disabled">Sistemas Productivos</label>
+        @else
+            <a href="{{ route('listSystem', ['idZone' => $zone->idZone]) }}">
+                <label for="" class="col-xl-12 enabled">Sistemas Productivos</label>
+            </a> 
+        @endif
     </li>
     <li class="col-xl-12">
       <a href="{{ route('prevDepartament', ['name' => $departamentName]) }}">
-          <label for="" class="col-xl-12">Regresar a Departameto</label>
+          <label for="" class="col-xl-12 enabled">Regresar a Departamento</label>
       </a>
     </li>
   </ul>

@@ -121,7 +121,7 @@ section#content article div#map{
     float: right;
     border-radius : 10px;
     height : 27px;
-    width: 120%;
+    width: 100%;
     vertical-align: top;
     background: #FFFFFF url(../../images/web/IconSelectBox.png) no-repeat;
     color: #014C35;
@@ -133,7 +133,7 @@ section#content article div#map{
     border-radius : 10px;
     border: 1px solid #014C35;
     height : 27px;
-    padding-left: 10px;
+    /*padding-left: 10px;*/
     width: 100%;
     background: transparent;
     appearance:none;
@@ -330,7 +330,7 @@ div.titleBody ul li input{
     background-color: white;
     color: #014C35;
     padding-left: 10px;
-    /* width: 60%; */
+    width: 100%;
 }
 
 label.formButton{

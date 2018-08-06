@@ -21,7 +21,8 @@ class UserTools
             'email' => 'required|email',
             'password' => array('required', 
                     'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ])/',
-                    'between:8,15')
+                    'between:8,15'),
+            'role' => 'required'
           ];
             
 
@@ -45,13 +46,13 @@ class UserTools
             'firstName' => 'required|min:6|max:40',
             'lastName' => 'required|min:6|max:40',
             'email' => 'required|email',
-            'role' => 'required',
+            'role' => 'required'
           ];
           $messages = [
             'required' => 'Campo Obligatorio',
             'email' => 'Correo Incorrecto',
             'min' => 'El campo debe contener mínimo 6 caracteres',
-            'max' => 'El campo debe contener máximo 40 caracteres',
+            'max' => 'El campo debe contener máximo 40 caracteres'
           ];
 
           return Validator::make($input, $rules, $messages);

@@ -144,7 +144,13 @@
               <label class="generalLabels">Rol</label>
           </div>
           <div class="col-xl-8">
-
+                @if($errors->has('role'))
+                  <strong>
+                    <span class="error">
+                          {{ $errors->first('role') }}
+                    </span>
+                  </strong>
+                @endif
               <div class="select-style">
                 <select id="optionsRoles" class="select" name="role">
                   @if(empty($user->role))
@@ -158,13 +164,6 @@
                       @endif
                     @endforeach
                 </select>
-                @if($errors->has('role'))
-                  <strong>
-                    <span class="error">
-                          {{ $errors->first('role') }}
-                    </span>
-                  </strong>
-                @endif
               </div>
 
           </div>

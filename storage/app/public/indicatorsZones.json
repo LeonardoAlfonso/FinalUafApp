@@ -1,7 +1,7 @@
 [
 	{
-		"name" :"Índice de Vulnerabilidad Productiva Rural - IVPR",
-		"show" : "IVPR",
+		"name" :"Índice de vulnerabilidad social - IPS",
+		"show" : "IPS",
 		"value" : "0",
 		"rules" : "required|numeric|max:100|min:0"
 	},
@@ -12,8 +12,9 @@
 		"rules" : "required|numeric|max:100|min:0"
 	},
 	{
-		"name" :"Índice de vulnerabilidad social - IPS",
-		"show" : "IPS",
+
+		"name" :"Índice de Vulnerabilidad Productiva Rural - IVPR",
+		"show" : "IVPR",
 		"value" : "0",
 		"rules" : "required|numeric|max:100|min:0"
 	}

@@ -74,6 +74,7 @@ function showVillages(id)
             console.log(data);
             $("#tableVilages").html(data.viewTable);
             $("#nameVillage").html(data.inputName);
+            $("#titleMunicipality").html(data.titleMunicipality);
         },
         error:function(data)
         {

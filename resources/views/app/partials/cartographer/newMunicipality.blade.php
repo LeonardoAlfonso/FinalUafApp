@@ -92,8 +92,8 @@
 
         <div class="col-xl-1"></div>
           <div class="col-xl-10 card">
-              <div class="titleCard col-xl-12">
-                  <p>Veredas</p>
+              <div id="titleMunicipality" class="titleCard col-xl-12">
+                @include('app.partials.cartographer.villageTitle')
               </div>
               <div id="tableVilages"class="titleBody col-xl-12">
               </div>

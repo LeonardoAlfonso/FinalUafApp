@@ -180,16 +180,14 @@ class cartographerController extends Controller
         }
         else if(isset($_POST['addMunicipality']))
         {
-            /*if(!empty($request->file('miniMapFile')))
+            if(!empty($request->file('miniMapFile')))
             {
-                dd($request->file('miniMapFile')->getRealPath());
-                $name = $request->file('miniMapFile');
+                //dd($request->file('miniMapFile'));
                 $routeMiniMap = url(Storage::putFileAs(
-                    'miniMaps', $request->file('miniMapFile'), $name->getClientOriginalName().".png"
+                    'miniMaps', $request->file('miniMapFile'), $request->nameZone.".png"
                 ));
-                dd($routeMiniMap);
                 $request->session()->put('routeMiniMap', $routeMiniMap);
-            }*/
+            }
 
             $sessionZone = $request->all();
             unset($sessionZone['miniMapFile']);
@@ -266,7 +264,8 @@ class cartographerController extends Controller
                   ->with('listMunicipalities', $listMunicipalities)
                   ->with('currentDepartament', $currentDepartament)
                   ->with('currentZone', $currentZone)
-                  ->with('readonly', true);
+                  ->with('readonly', true)
+                  ->with('nameMunicipality', '');
     }
 
     public function saveMunicipality(Request $request, $nameMunicipality)
@@ -389,18 +388,23 @@ class cartographerController extends Controller
             $villages = Village::where('idMunicipality',$idMunicipality)->get();
         }
 
+        $municipalityName = Municipality::where('idMunicipality',$idMunicipality)->first()->nameMunicipality;
+
         $table = view('app.partials.cartographer.tableVillages')
                     ->with('villages', $villages)
                     ->with('idMunicipality', $idMunicipality);
         $nameVillage = view('app.partials.cartographer.nameVillage')
                             ->with('readonly', false);
+        $titleVillage = view('app.partials.cartographer.villageTitle')
+                            ->with('nameMunicipality', $municipalityName);
 
         $newTable = $table->render();
         $newNameVillage = $nameVillage->render();
+        $newTitleVillage = $titleVillage->render();
 
         if($request->ajax())
         {
-            return response()->json(["viewTable"=>$newTable, "inputName"=>$newNameVillage]);
+            return response()->json(["viewTable"=>$newTable, "inputName"=>$newNameVillage, "titleMunicipality"=>$newTitleVillage]);
         }
     }
 
