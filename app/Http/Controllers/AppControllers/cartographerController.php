@@ -60,6 +60,11 @@ class cartographerController extends Controller
         $departaments = User::find($idUser)->departaments;
         $departaments = $departaments->sortBy('departamentName');
         $currentDepartament = Departament::with('Zones')->where('idDepartament',$idDepartament)->first();
+        
+        // if(!is_null($nameZone))
+        // {
+        //     Storage::disk('public')->delete('miniMaps/'.$nameZone.'.png');
+        // }
 
         $option = 'listZones';
 
@@ -144,7 +149,7 @@ class cartographerController extends Controller
                 $zone->miniMapPath = $request->session()->get('routeMiniMap');
             }
         }
-
+        
         $view = view('app.cartographer')
                     ->with('departaments', $departaments)
                     ->with('option', $option)
@@ -155,7 +160,6 @@ class cartographerController extends Controller
                     ->with('climaticOptions', $climaticOptions)
                     ->withErrors($validations);
 
-        // dd($zone->miniMapPath);
          return $view;
     }
 
@@ -182,7 +186,6 @@ class cartographerController extends Controller
         {
             if(!empty($request->file('miniMapFile')))
             {
-                //dd($request->file('miniMapFile'));
                 $routeMiniMap = url(Storage::putFileAs(
                     'miniMaps', $request->file('miniMapFile'), $request->nameZone.".png"
                 ));
@@ -202,6 +205,7 @@ class cartographerController extends Controller
         $zone = Zone::find($idZone);
         if ($zone->autor == $user->full_name)
         {
+            Storage::disk('public')->delete('miniMaps/'.$zone->nameZone.'.png');
             $zone->delete();
             Session::flash('Message','Zona Eliminada!');
         }
@@ -307,7 +311,7 @@ class cartographerController extends Controller
         if(!is_null($idZone))
         {
             $municipalities = Zone::find($idZone)->Municipalities;
-            // dd($municipalities);
+
             $zoneMunicipality = ZoneMunicipality::where([
                 ['idZone', '=', $idZone],
                 ['idMunicipality', '=', $idMunicipality],
@@ -330,7 +334,6 @@ class cartographerController extends Controller
                 });
             }
             
-            // dd($list);
             $list = array_diff($list->toArray(), array($idMunicipality));  
             $request->session()->put('lastList', collect($list));
 

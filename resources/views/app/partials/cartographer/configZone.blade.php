@@ -25,7 +25,7 @@
         <div class="col-xl-5"></div>
         <div class="col-xl-3">
           <div id="options">
-              <a id="CancelButton" href="{{ route('listZones', ['idDepartament' => $currentDepartament->idDepartament]) }}">
+              <a id="CancelButton" href="{{ route('listZones', ['idDepartament' => $currentDepartament->idDepartament, 'nameZone' => $zone->nameZone]) }}">
                   <label id="Cancel" class="zoneButtons">Cancelar</label>  
               </a>     
           </div>
